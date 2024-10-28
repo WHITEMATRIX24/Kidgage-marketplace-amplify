@@ -570,21 +570,32 @@ const Calendar = ({ providerName, courseName }) => {
     const options = { day: 'numeric', month: 'long', year: 'numeric' }; // "October 1, 2024"
     return date.toLocaleDateString(undefined, options);
   };
-  const handleBookNow = () => {
+  const handleBookNow = async () => {
+    try {
+      await fetch('https://kidgage-hosted-marketplace.onrender.com/api/leads/track', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Failed to update lead count:', error);
+    }
+
     if (selectedDate && selectedTime) {
       const formattedDate = formatDate(selectedDate);
       const timeSlot = courseDetails.timeSlots.find(slot => slot._id === selectedTime);
       const url = window.location.href;
       const message = `I would like to book the course "${courseName}" offered by ${providerName}. 
 
-      The course is scheduled for ${formattedDate} during the time slot of 
-      ${convertTo12HourFormat(timeSlot.from)} to ${convertTo12HourFormat(timeSlot.to)}. 
-      
-      The fee is QAR. ${courseDetails.feeAmount} (${formatted(courseDetails.feeType)}). 
-      
-      For more details, please visit ${url}.`;
+        The course is scheduled for ${formattedDate} during the time slot of 
+        ${convertTo12HourFormat(timeSlot.from)} to ${convertTo12HourFormat(timeSlot.to)}. 
+        
+        The fee is QAR. ${courseDetails.feeAmount} (${formatted(courseDetails.feeType)}). 
+        
+        For more details, please visit ${url}.`;
 
-      const phoneNumber = '97477940018'; // Your phone number
+      const phoneNumber = '97477940018';
       const encodedMessage = encodeURIComponent(message);
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
       window.open(whatsappURL, '_blank');
@@ -592,6 +603,7 @@ const Calendar = ({ providerName, courseName }) => {
       alert("Please select both a date and a time slot.");
     }
   };
+
   return (
     <CustomDatePickerWrapper>
       <div className="calendar-row">

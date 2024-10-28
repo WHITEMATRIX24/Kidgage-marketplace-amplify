@@ -669,7 +669,19 @@ const Activities = () => {
                                                         <button
                                                             className="book-now"
                                                             style={{ backgroundColor: '#5EA858' }}
-                                                            onClick={() => {
+                                                            onClick={async () => {
+                                                                try {
+                                                                    await fetch('http://localhost:5000/api/leads/track', {
+                                                                        method: 'POST',
+                                                                        headers: {
+                                                                            'Content-Type': 'application/json',
+                                                                        },
+                                                                    });
+                                                                } catch (error) {
+                                                                    console.error('Failed to update lead count:', error);
+                                                                }
+
+                                                                // Continue to send the message on WhatsApp
                                                                 const provider = providers[course.providerId];
                                                                 const providerName = provider ? provider.username : 'Unknown Provider';
                                                                 sendMessage(course.name, providerName, course._id, course.feeAmount, formatFeeType(course.feeType));
