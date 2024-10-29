@@ -194,11 +194,20 @@ const BusinessSignUp = () => {
           </div>
 
           <div className='side-by-side1'>
+            <label className='sign-in-label' htmlFor="adress">Address
+            </label>
+            <input type="text" name="address" placeholder="Academy Address" onChange={handleChange} required />
+          </div>
+          <div className='side-by-side1'>
+            <label className='sign-in-label' htmlFor="crNumber">CR Number
+            </label>
+            <input type="text" name="licenseNo" placeholder="CR Number" onChange={handleChange} required />
+          </div>
+          <div className='side-by-side1'>
             <label className='sign-in-label' htmlFor="crFile">CR Doc[file size upto 1MB in pdf format]{fileError && <p className="error-message">{fileError}</p>}
             </label>
             <input type="file" name="crFile" onChange={handleFileChange} accept=".pdf" required />
           </div>
-
           <div className='side-by-side1' >
             <label className='sign-in-label'>Full Name</label>
             <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full name" required />

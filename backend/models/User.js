@@ -17,14 +17,15 @@ const userSchema = new mongoose.Schema({
   designation: { type: String, required: true },
   description: { type: String, required: true },
   location: { type: String, required: true },
+  address: { type: String, required: true },
   website: { type: String }, // Optional field
   instaId: { type: String }, // Optional field
   crFile: { type: String }, // Stores file path or link to the CR document
   agreeTerms: { type: Boolean, required: true, default: true },
-  verificationStatus: { type: String, default: 'meeting-scheduled' },
+  verificationStatus: { type: String, default: 'pending' },
   academyImg: { type: String, default: null }, // Optional, to be updated later
   logo: { type: String, default: null }, // Optional, to be updated later
-  licenseNo: { type: String, default: "cr005" }, // Optional, to be updated later
+  licenseNo: { type: String, default: null }, // Optional, to be updated later
   noOfCourses: { type: Number, default: 5 },
   meetingScheduleDate: { type: Date, default: Date.now() },
   requestFiledDate: { type: Date, default: Date.now() },

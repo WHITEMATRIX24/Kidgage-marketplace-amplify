@@ -24,7 +24,7 @@ router.post('/signup', upload.fields([
   { name: 'crFile', maxCount: 1 },
 ]), async (req, res) => {
   try {
-    
+
     const {
       username,
       email,
@@ -35,6 +35,8 @@ router.post('/signup', upload.fields([
       location,
       website,
       instaId,
+      licenseNo,
+      address,
       agreeTerms,
     } = req.body;
 
@@ -45,7 +47,7 @@ router.post('/signup', upload.fields([
 
     const files = req.files;
     const fileBase64 = {};
-  
+
     if (files) {
       if (files.crFile) fileBase64.crFile = files.crFile[0].buffer.toString('base64');
     }
@@ -61,6 +63,8 @@ router.post('/signup', upload.fields([
       website: website || null, // Optional
       instaId: instaId || null, // Optional
       crFile: fileBase64.crFile,
+      licenseNo,
+      address,
       agreeTerms,
     });
     const existingUser = await User.findOne({ $or: [{ email }, { phoneNumber }] });
@@ -88,7 +92,6 @@ Below are your registration details:
 - Location:  ${location}
 - Website:  ${website ? website : 'N/A'}
 - Instagram ID:  ${instaId ? instaId : 'N/A'}
-- CR File:  ${req.file ? req.file : 'No CR file uploaded'}
 
 Your account is under verification.
 
