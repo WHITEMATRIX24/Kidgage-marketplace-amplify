@@ -71,12 +71,29 @@
 .sign-in-label {
   margin-left: 10px;
   color: #373737;
+  /* width: 50%; */
 }
 
 .side-by-side {
-  display: flex;
+  display: block;
   gap: 10px;
 }
+
+.main-user-info{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.side-by-side1 {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 15px;
+  width: 50%;
+padding: 5px;
+}
+
 
 .signup-form h2,
 .signup-form-bs h2 {
@@ -285,6 +302,9 @@
   .signup-form-bs textarea {
     width: 100%;
     /* Ensure each input takes full width */
+  }
+  .side-by-side1{
+   width: 100%;
   }
 }
 

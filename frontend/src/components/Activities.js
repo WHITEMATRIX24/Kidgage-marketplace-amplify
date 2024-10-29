@@ -671,7 +671,7 @@ const Activities = () => {
                                                             style={{ backgroundColor: '#5EA858' }}
                                                             onClick={async () => {
                                                                 try {
-                                                                    await fetch('http://localhost:5000/api/leads/track', {
+                                                                    await fetch('https://kidgage-hosted-marketplace.onrender.com/api/leads/track', {
                                                                         method: 'POST',
                                                                         headers: {
                                                                             'Content-Type': 'application/json',

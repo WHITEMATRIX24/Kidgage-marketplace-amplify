@@ -170,44 +170,48 @@ const BusinessSignUp = () => {
             />
           </div>
         </div>
-        <div className='side-by-side' style={{ gap: '36%' }}>
-          <label className='sign-in-label'>Website (Optional)</label>
-          <label className='sign-in-label'>Instagram ID (Optional)</label>
+
+
+
+        <div className='main-user-info'>
+          <div className='side-by-side1'>
+            <label className='sign-in-label'>Website (Optional)</label>
+            <input type="url" name="website" value={formData.website} onChange={handleChange} placeholder="Enter website link" />
+          </div>
+          <div className='side-by-side1' >
+            <label className='sign-in-label'>Instagram ID (Optional)</label>
+            <input type="text" name="instaId" value={formData.instaId} onChange={handleChange} placeholder="Enter Instagram ID" />
+          </div>
+
+          <div className='side-by-side1' >
+            <label className='sign-in-label'>Location</label>
+            <select name="location" value={formData.location} onChange={handleChange} required>
+              <option value="" disabled>Select your city</option>
+              {cities.map((city) => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className='side-by-side1'>
+            <label className='sign-in-label' htmlFor="crFile">CR Doc[file size upto 1MB in pdf format]{fileError && <p className="error-message">{fileError}</p>}
+            </label>
+            <input type="file" name="crFile" onChange={handleFileChange} accept=".pdf" required />
+          </div>
+
+          <div className='side-by-side1' >
+            <label className='sign-in-label'>Full Name</label>
+            <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full name" required />
+          </div>
+
+          <div className='side-by-side1' >
+            <label className='sign-in-label'>Designation</label>
+            <input type="text" name="designation" value={formData.designation} onChange={handleChange} placeholder="Designation" required />
+          </div>
 
         </div>
 
-        <div className='side-by-side'>
-          <input type="url" name="website" value={formData.website} onChange={handleChange} placeholder="Enter website link" />
-          <input type="text" name="instaId" value={formData.instaId} onChange={handleChange} placeholder="Enter Instagram ID" />
 
-        </div>
-
-        <div className='side-by-side' style={{ gap: '44%' }}>
-
-          <label className='sign-in-label'>Location</label>
-          <label className='sign-in-label' htmlFor="crFile">CR Doc[file size upto 1MB in pdf format]{fileError && <p className="error-message">{fileError}</p>}
-          </label>
-        </div>
-
-        <div className='side-by-side'>
-
-          <select name="location" value={formData.location} onChange={handleChange} required>
-            <option value="" disabled>Select your city</option>
-            {cities.map((city) => (
-              <option key={city} value={city}>{city}</option>
-            ))}
-          </select>
-          <input type="file" name="crFile" onChange={handleFileChange} accept=".pdf" required />
-        </div>
-        <div className='side-by-side' style={{ marginTop: '20px', gap: '42%' }}>
-          <label className='sign-in-label'>Full Name</label>
-          <label className='sign-in-label'>Designation</label>
-        </div>
-
-        <div className='side-by-side'>
-          <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full name" required />
-          <input type="text" name="designation" value={formData.designation} onChange={handleChange} placeholder="Designation" required />
-        </div>
 
         <div className="terms-container" style={{ marginTop: '10px' }}>
           <input type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} required />
