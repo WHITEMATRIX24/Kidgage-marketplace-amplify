@@ -16,6 +16,8 @@ const BusinessSignUp = () => {
     location: '',
     website: '',
     instaId: '',
+    licenseNo: '',
+    address: '',
     agreeTerms: false,
   };
 
