@@ -522,7 +522,7 @@ const Calendar = ({ providerName, courseName }) => {
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
-        const response = await axios.get(`https://kidgage-hosted-marketplace.onrender.com/api/courses/course/${courseId}`);
+        const response = await axios.get(`https://kidgage-marketplace-amplify-1.onrender.com/api/courses/course/${courseId}`);
         const courseData = response.data;
 
         setCourseDetails(courseData);
@@ -572,7 +572,7 @@ const Calendar = ({ providerName, courseName }) => {
   };
   const handleBookNow = async () => {
     try {
-      await fetch('https://kidgage-hosted-marketplace.onrender.com/api/leads/track', {
+      await fetch('https://kidgage-marketplace-amplify-1.onrender.com/api/leads/track', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

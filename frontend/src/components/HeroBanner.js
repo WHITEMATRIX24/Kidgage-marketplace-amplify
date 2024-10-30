@@ -10,7 +10,7 @@ const HeroBanner = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await axios.get('https://kidgage-hosted-marketplace.onrender.com/api/banners');
+        const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/banners');
         console.log('Fetched banners:', response.data);
         setSlides(response.data);
         setLoading(false);

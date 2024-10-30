@@ -146,7 +146,7 @@ const Activities = () => {
 
         try {
             const response = await axios.get(
-                'https://kidgage-hosted-marketplace.onrender.com/api/courses/by-course-type',
+                'https://kidgage-marketplace-amplify-1.onrender.com/api/courses/by-course-type',
                 {
                     params: { courseType: category },
                 }
@@ -162,7 +162,7 @@ const Activities = () => {
                     if (course.providerId) {
                         try {
                             const providerResponse = await axios.get(
-                                `https://kidgage-hosted-marketplace.onrender.com/api/users/provider/${course.providerId}`
+                                `https://kidgage-marketplace-amplify-1.onrender.com/api/users/provider/${course.providerId}`
                             );
                             console.log(`Provider Response for course ${course._id}:`, providerResponse.data);
 
@@ -273,7 +273,7 @@ const Activities = () => {
     };
     const fetchAdvertisements = async () => {
         try {
-            const response = await axios.get('https://kidgage-hosted-marketplace.onrender.com/api/advertisement');
+            const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/advertisement');
             setAdvertisements(response.data);
             setLoadinga(false);
         } catch (error) {
@@ -671,7 +671,7 @@ const Activities = () => {
                                                             style={{ backgroundColor: '#5EA858' }}
                                                             onClick={async () => {
                                                                 try {
-                                                                    await fetch('https://kidgage-hosted-marketplace.onrender.com/api/leads/track', {
+                                                                    await fetch('https://kidgage-marketplace-amplify-1.onrender.com/api/leads/track', {
                                                                         method: 'POST',
                                                                         headers: {
                                                                             'Content-Type': 'application/json',

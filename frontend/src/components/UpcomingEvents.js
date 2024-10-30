@@ -21,7 +21,7 @@ const UpcomingEvents = () => {
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const response = await fetch('https://kidgage-hosted-marketplace.onrender.com/api/posters');
+        const response = await fetch('https://kidgage-marketplace-amplify-1.onrender.com/api/posters');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

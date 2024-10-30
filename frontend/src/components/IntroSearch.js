@@ -39,7 +39,7 @@ const IntroSearch = () => {
   useEffect(() => {
     const fetchCourseTypes = async () => {
       try {
-        const response = await axios.get('https://kidgage-hosted-marketplace.onrender.com/api/course-category/categories');
+        const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/course-category/categories');
         // Assuming the response is an array of objects and each object has a 'name' property for the category
         const categoryNames = response.data.map((category) => category.name);
         setCourseTypes(categoryNames);
