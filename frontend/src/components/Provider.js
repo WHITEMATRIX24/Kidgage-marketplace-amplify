@@ -19,6 +19,7 @@ const ProviderInfo = () => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
 
+
     // Fetch courses by providerId
     useEffect(() => {
         if (provider && provider._id) {
@@ -291,6 +292,9 @@ const ProviderInfo = () => {
     };
 
     const navigate = useNavigate();
+    const handleLogoClick = () => {
+        navigate('/home');
+    };
 
     const handleClick = (courseId) => {
         navigate(`/activity-info/${courseId}`, { state: { id: courseId } });
@@ -301,7 +305,7 @@ const ProviderInfo = () => {
             <div className="activity-info-content">
                 <div className="activity-info-breadcrumb">
                     <div className='activity-info-path'>
-                        <FontAwesomeIcon icon={faHome} />
+                        <FontAwesomeIcon icon={faHome} onClick={handleLogoClick} cursor={"pointer"} />
                         <FontAwesomeIcon icon={faChevronRight} />
                         Provider
                     </div>
