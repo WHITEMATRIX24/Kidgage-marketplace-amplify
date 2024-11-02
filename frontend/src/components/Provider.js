@@ -322,7 +322,7 @@ const ProviderInfo = () => {
 
                             </div>
                             <img
-                                src={`data:image/jpeg;base64,${provider.logo}`}
+                                src={provider.logo}
                                 alt="Provider"
                                 className="pro-logoimage"
                             />
@@ -361,7 +361,7 @@ const ProviderInfo = () => {
                                             <div className="pr-activity-image" onClick={() => handleClick(course._id)}>
                                                 {/* Display image if available */}
                                                 {course.images && course.images.length > 0 ? (
-                                                    <img src={`data:image/png;base64,${course.images[0]}`} alt="Course Image" />
+                                                    <img src={course.images[0]} alt="Course Image" />
                                                 ) : (
                                                     <img src={placeholder} alt="Course Image" />
                                                 )}

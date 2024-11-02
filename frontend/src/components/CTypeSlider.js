@@ -154,7 +154,7 @@ const CTypeSlider = ({ viewAll }) => {
                 {categories.length > 0 ? (
                   categories.map((category, index) => (
                     <div key={index} className="drawer-item" onClick={() => handleSlideClick(category.name)}>
-                      <img src={`data:image/jpeg;base64,${category.image}`} alt={category.name} className="drawer-image" />
+                      <img src={category.image} alt={category.name} className="drawer-image" />
                       <div className="drawer-text">
                         <div className='slide-overlay-text'>
                           <h2 className="product-name">{category.name}</h2>
