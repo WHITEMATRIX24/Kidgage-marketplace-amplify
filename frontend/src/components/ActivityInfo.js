@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import './ActivityInfo.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationArrow, faBookmark, faHome, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,7 @@ const ActivityInfo = () => {
     const [course, setCourse] = useState(null);
     const [provider, setProvider] = useState(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);  // State to track the current image index
-
+    const navigate = useNavigate();
     useEffect(() => {
         if (!courseId) {
             console.error('No course ID provided');
@@ -47,7 +47,9 @@ const ActivityInfo = () => {
 
     // Function to decode and format base64 images
     const getBase64ImageSrc = (base64String) => `data:image/jpeg;base64,${base64String}`;
-
+    const handleLogoClick = () => {
+        navigate('/home');
+    };
     // Slideshow effect for images
     useEffect(() => {
         if (course && course.images && course.images.length > 1) {
@@ -99,9 +101,9 @@ const ActivityInfo = () => {
             <Header />
             <div className="activity-info-content">
                 <div className="activity-info-breadcrumb">
-                    <div className='activity-info-path'>
-                        <FontAwesomeIcon icon={faHome} />
-                        <FontAwesomeIcon icon={faChevronRight} />
+                    <div className='activity-info-path' >
+                        <FontAwesomeIcon icon={faHome} onClick={handleLogoClick} cursor="pointer" />
+                        <FontAwesomeIcon icon={faChevronRight} onClick={handleLogoClick} cursor="pointer" />
                         Activity
                     </div>
                     <div className="activity-info-actions">
@@ -136,7 +138,7 @@ const ActivityInfo = () => {
             <div className="activity-info-content">
                 <div className="activity-info-breadcrumb">
                     <div className='activity-info-path'>
-                        <FontAwesomeIcon icon={faHome} />
+                        <FontAwesomeIcon icon={faHome} onClick={handleLogoClick} cursor="pointer" />
                         <FontAwesomeIcon icon={faChevronRight} />
                         Activity
                     </div>

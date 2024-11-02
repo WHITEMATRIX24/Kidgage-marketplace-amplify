@@ -33,7 +33,7 @@ const Header = () => {
 
     // Handle logo click navigation
     const handleLogoClick = () => {
-        navigate('/');
+        navigate('/home');
     };
     const handleClick = () => {
         navigate('/shops');
