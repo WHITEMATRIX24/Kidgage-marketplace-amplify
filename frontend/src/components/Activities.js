@@ -30,7 +30,59 @@ const Activities = () => {
     const [ageRange, setAgeRange] = useState({});
     const [providers, setProviders] = useState({}); // Change to an object to map providerId to provider details
     const [searchParams, setSearchParams] = useState(initialCategory || null); // Initialize with location category or null
+    const [desktopBanners, setDesktopBanners] = useState([]);
+    const [mobileBanners, setMobileBanners] = useState([]);
+    const [currentDesktopIndex, setCurrentDesktopIndex] = useState(0);
+    const [currentMobileIndex, setCurrentMobileIndex] = useState(0);
+    useEffect(() => {
+        const fetchBanners = async () => {
+            try {
+                const [desktopResponse, mobileResponse] = await Promise.all([
+                    axios.get("https://kidgage-marketplace-amplify-1.onrender.com/api/desktop-banners/"),
+                    axios.get("https://kidgage-marketplace-amplify-1.onrender.com/api/mobile-banners/"),
+                ]);
+                setDesktopBanners(desktopResponse.data);
+                setMobileBanners(mobileResponse.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching banners:", error);
+            }
+        };
 
+        fetchBanners();
+
+        // Handle screen size changes
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 1025);
+        };
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    // Rotate banners every 3 seconds
+    useEffect(() => {
+        const desktopInterval = setInterval(() => {
+            setCurrentDesktopIndex((prevIndex) => (prevIndex + 1) % desktopBanners.length);
+        }, 3000);
+
+        const mobileInterval = setInterval(() => {
+            setCurrentMobileIndex((prevIndex) => (prevIndex + 1) % mobileBanners.length);
+        }, 3000);
+
+        return () => {
+            clearInterval(desktopInterval);
+            clearInterval(mobileInterval);
+        };
+    }, [desktopBanners.length, mobileBanners.length]);
+
+
+
+    const getCurrentDesktopImage = () =>
+        desktopBanners.length > 0 ? desktopBanners[currentDesktopIndex] : null;
+
+    const getCurrentMobileImage = () =>
+        mobileBanners.length > 0 ? mobileBanners[currentMobileIndex] : null;
     useEffect(() => {
         // Update initialCategory whenever the URL or state changes
         setInitialCategory(initialCategoryFromState || decodedName);
@@ -245,95 +297,72 @@ const Activities = () => {
         }
     };
 
-    const [advertisements, setAdvertisements] = useState([]);
-    const [currentAdIndex, setCurrentAdIndex] = useState({ space1: 0, space2: 0 });
 
-    useEffect(() => {
-        fetchAdvertisements();
-    }, []);
-    const [wishlist, setWishlist] = useState([]);
-    const [showPopup, setShowPopup] = useState(false);
-    const addToWishlist = (event) => {
-        try {
-            // Get current wishlist from local storage
-            const storedWishlist = localStorage.getItem('wishlistEvents');
-            const currentWishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
 
-            // Add the event to the wishlist if it's not already in it
-            const isEventInWishlist = currentWishlist.some(wishlistEvent => wishlistEvent._id === event._id);
-            if (!isEventInWishlist) {
-                const updatedWishlist = [...currentWishlist, event];
-                localStorage.setItem('wishlistEvents', JSON.stringify(updatedWishlist));
-                setWishlist(updatedWishlist); // Update local wishlist state
-                setShowPopup(true); // Show popup on success
-            }
-        } catch (error) {
-            console.error('Error adding to wishlist:', error);
-        }
-    };
-    const fetchAdvertisements = async () => {
-        try {
-            const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/advertisement');
-            setAdvertisements(response.data);
-            setLoadinga(false);
-        } catch (error) {
-            console.error('Error fetching advertisements:', error);
-            setLoadinga(false);
-        }
-    };
-    const getAdsBySpace = (space) => {
-        return advertisements.filter(ad => ad.space === space);
-    };
-    const getMobileImages = () => {
-        const space1MobileImages = advertisements.filter(ad => ad.space === 1).map(ad => ad.mobileImage);
-        const space2MobileImages = advertisements.filter(ad => ad.space === 2).map(ad => ad.mobileImage);
-        return [...space1MobileImages, ...space2MobileImages]; // Merge mobile images from both spaces
-    };
-    const [currentMobileAdIndex, setCurrentMobileAdIndex] = useState(0)
+
+    // const fetchAdvertisements = async () => {
+    //     try {
+    //         const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/advertisement');
+    //         setAdvertisements(response.data);
+    //         setLoadinga(false);
+    //     } catch (error) {
+    //         console.error('Error fetching advertisements:', error);
+    //         setLoadinga(false);
+    //     }
+    // };
+    // const getAdsBySpace = (space) => {
+    //     return advertisements.filter(ad => ad.space === space);
+    // };
+    // const getMobileImages = () => {
+    //     const space1MobileImages = advertisements.filter(ad => ad.space === 1).map(ad => ad.mobileImage);
+    //     const space2MobileImages = advertisements.filter(ad => ad.space === 2).map(ad => ad.mobileImage);
+    //     return [...space1MobileImages, ...space2MobileImages]; // Merge mobile images from both spaces
+    // };
+    // const [currentMobileAdIndex, setCurrentMobileAdIndex] = useState(0)
     // Start interval for cycling through mobile ads
-    useEffect(() => {
-        if (isSmallScreen) { // Check if the screen is small
-            const mobileInterval = setInterval(() => {
-                setCurrentMobileAdIndex((prevIndex) => {
-                    const mobileAds = getMobileImages(); // Get combined mobile images
-                    if (mobileAds.length === 0) return prevIndex; // Skip if no ads available
-                    return (prevIndex + 1) % mobileAds.length; // Cycle through mobile ads
-                });
-            }, 3000);
+    // useEffect(() => {
+    //     if (isSmallScreen) { // Check if the screen is small
+    //         const mobileInterval = setInterval(() => {
+    //             setCurrentMobileAdIndex((prevIndex) => {
+    //                 const mobileAds = getMobileImages(); // Get combined mobile images
+    //                 if (mobileAds.length === 0) return prevIndex; // Skip if no ads available
+    //                 return (prevIndex + 1) % mobileAds.length; // Cycle through mobile ads
+    //             });
+    //         }, 3000);
 
-            return () => clearInterval(mobileInterval);
-        }
-    }, [advertisements, isSmallScreen]);
+    //         return () => clearInterval(mobileInterval);
+    //     }
+    // }, [advertisements, isSmallScreen]);
     // Start interval for space 1 ads
-    useEffect(() => {
-        const space1Interval = setInterval(() => {
-            setCurrentAdIndex((prevIndex) => {
-                const space1Ads = getAdsBySpace(1);
-                if (space1Ads.length === 0) return prevIndex; // Skip if no ads available
-                return {
-                    ...prevIndex,
-                    space1: (prevIndex.space1 + 1) % space1Ads.length,
-                };
-            });
-        }, 3000);
+    // useEffect(() => {
+    //     const space1Interval = setInterval(() => {
+    //         setCurrentAdIndex((prevIndex) => {
+    //             const space1Ads = getAdsBySpace(1);
+    //             if (space1Ads.length === 0) return prevIndex; // Skip if no ads available
+    //             return {
+    //                 ...prevIndex,
+    //                 space1: (prevIndex.space1 + 1) % space1Ads.length,
+    //             };
+    //         });
+    //     }, 3000);
 
-        return () => clearInterval(space1Interval);
-    }, [advertisements]);
+    //     return () => clearInterval(space1Interval);
+    // }, [advertisements]);
 
-    useEffect(() => {
-        const space2Interval = setInterval(() => {
-            setCurrentAdIndex((prevIndex) => {
-                const space2Ads = getAdsBySpace(2);
-                if (space2Ads.length === 0) return prevIndex; // Skip if no ads available
-                return {
-                    ...prevIndex,
-                    space2: (prevIndex.space2 + 1) % space2Ads.length,
-                };
-            });
-        }, 4000);
+    // useEffect(() => {
+    //     const space2Interval = setInterval(() => {
+    //         setCurrentAdIndex((prevIndex) => {
+    //             const space2Ads = getAdsBySpace(2);
+    //             if (space2Ads.length === 0) return prevIndex; // Skip if no ads available
+    //             return {
+    //                 ...prevIndex,
+    //                 space2: (prevIndex.space2 + 1) % space2Ads.length,
+    //             };
+    //         });
+    //     }, 4000);
 
-        return () => clearInterval(space2Interval);
-    }, [advertisements]);
+    //     return () => clearInterval(space2Interval);
+    // }, [advertisements]);
 
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -352,8 +381,7 @@ const Activities = () => {
         navigate(`/providerinfo`, { state: { provider } }); // Pass providerId in URL and provider object in state
     };
 
-    const space1Ads = getAdsBySpace(1);
-    const space2Ads = getAdsBySpace(2);
+
     const ageGroupMappings = {
         "0-2 years": { min: 0, max: 2 },
         "3-5 years": { min: 3, max: 5 },
@@ -695,7 +723,7 @@ const Activities = () => {
                                                             <i className="fa-solid fa-share"></i>
                                                             <span style={{ marginLeft: '5px', fontWeight: 'bold' }}> Share</span>
                                                         </button>
-                                                        <button className="save" style={{ backgroundColor: '#3880C4' }} onClick={() => addToWishlist(course)}>
+                                                        <button className="save" style={{ backgroundColor: '#3880C4' }} >
                                                             <i className="fa-regular fa-bookmark"></i>
                                                             <span style={{ marginLeft: '5px', fontWeight: 'bold' }}> Save</span>
                                                         </button>
@@ -709,7 +737,7 @@ const Activities = () => {
                                     ))
 
                             ) : (
-                                <p>No courses available for this category.</p>
+                                <p style={{ textAlign: "center" }}>No courses available for this category.</p>
                             )}
 
                             {searchInitiated && (
@@ -747,54 +775,56 @@ const Activities = () => {
                 {/* cards ends */}
 
                 {/* banner section starts*/}
-                <div className="banner-container">
-                    {loadinga ? (
-                        <div className="secloader-container">
-                            <div className="secloader"></div>
-                        </div>
-                    ) : (
-                        <>
-                            {isSmallScreen ? (
-                                // Display only mobile ads in circular manner for smaller screens
-                                <>
-                                    {getMobileImages().length > 0 && (
-                                        <div className="card single-mobile-space">
-                                            <img
-                                                src={getMobileImages()[currentMobileAdIndex]}
-                                                alt={`Mobile Ad`}
-                                            />
-                                        </div>
-                                    )}
-                                </>
-                            ) : (
-                                // Regular desktop view for larger screens
-                                <>
-                                    {space1Ads.length > 0 && (
-                                        <div className="card bcard1">
-                                            <img
-                                                src={space1Ads[currentAdIndex.space1].desktopImage}
-                                                alt={`Banner Space 1`}
-                                            />
-                                        </div>
-                                    )}
-                                    {space2Ads.length > 0 && (
-                                        <div className="card bcard2">
-                                            <img
-                                                src={space2Ads[currentAdIndex.space2].desktopImage}
-                                                alt={`Banner Space 2`}
-                                            />
-                                        </div>
-                                    )}
-                                </>
-                            )}
-                            {advertisements.length === 0 && <p>No advertisements found.</p>}
-                        </>
-                    )}
-                </div>
+                {courses.length > 0 && (
+                    <div className="banner-container">
+                        {loading ? (
+                            <div className="secloader-container">
+                                <div className="secloader"></div>
+                            </div>
+                        ) : (
+                            <>
+                                {isSmallScreen ? (
+                                    <>
+                                        {getCurrentMobileImage() && (
+                                            <div
+                                                className="card single-mobile-space"
+                                                onClick={() => handleClick(getCurrentMobileImage().bookingLink)}
+                                            >
+                                                <img
+                                                    src={getCurrentMobileImage().imageUrl}
+                                                    alt="Mobile Ad"
+                                                />
+                                            </div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <>
+                                        {getCurrentDesktopImage() && (
+                                            <div
+                                                className="card bcard1"
+                                                onClick={() => handleClick(getCurrentDesktopImage().bookingLink)}
+                                            >
+                                                <img
+                                                    src={getCurrentDesktopImage().imageUrl}
+                                                    alt="Desktop Banner"
+                                                />
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                                {desktopBanners.length === 0 && mobileBanners.length === 0 && (
+                                    <p>No advertisements found.</p>
+
+                                )}
+                            </>
+                        )}
+                    </div>
+                )}
                 {/* banner section ends */}
             </div>
 
             <div className='gapss'></div>
+            {courses.length === 0 && <div className="no-courses-gap"></div>}
 
 
             {/* Footer Section */}

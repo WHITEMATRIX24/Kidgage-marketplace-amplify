@@ -166,13 +166,13 @@ const SearchBar = ({ onSearch }) => {
           <div className='items'>
             <div className="item" onClick={() => handleOptionClick("location")}>
               <label className={getLabelClassName(selectedLocation, "Location")} style={{
-                color: missingSelection && selectedLocation === "Location" ? "red" : "#3880C4",
+                color: missingSelection && selectedLocation === "Location" ? "red" : "#3880C4", marginLeft: "10px",
               }}>
                 {selectedLocation}
                 <FontAwesomeIcon icon={faChevronDown} />
               </label>
               <span className="sub-label" style={{
-                color: missingSelection && selectedLocation === "Location" ? "red" : "inherit",
+                color: missingSelection && selectedLocation === "Location" ? "red" : "inherit", marginLeft: "10px",
               }}>Search activities near you</span>
               {showDropdown && (
                 <div className="dropdown-menu" ref={dropdownRef}>
@@ -191,13 +191,13 @@ const SearchBar = ({ onSearch }) => {
             <div className="dividers" />
             <div className="item" onClick={() => handleOptionClick("age")}>
               <label className={getLabelClassName(selectedDob, "Age")} style={{
-                color: missingSelection && selectedDob === "Age" ? "red" : "#3880C4",
+                color: missingSelection && selectedDob === "Age" ? "red" : "#3880C4", marginLeft: "10px",
               }}>
                 {selectedDob}
                 <FontAwesomeIcon icon={faChevronDown} />
               </label>
               <span className="sub-label" style={{
-                color: missingSelection && selectedDob === "Age" ? "red" : "inherit",
+                color: missingSelection && selectedDob === "Age" ? "red" : "inherit", marginLeft: "10px",
               }}>Select age range</span>
               {showDobDropdown && (
                 <div className="dropdown-menu">
@@ -216,13 +216,13 @@ const SearchBar = ({ onSearch }) => {
             <div className="dividers" />
             <div className="item" onClick={() => handleOptionClick("date")}>
               <label className={getLabelClassName(selectedDate, null)} style={{
-                color: missingSelection && !selectedDate ? "red" : "#3880C4",
+                color: missingSelection && !selectedDate ? "red" : "#3880C4", marginLeft: "10px",
               }}>
                 {selectedDate ? selectedDate.toLocaleDateString("en-GB") : "Date"}
                 <FontAwesomeIcon icon={faChevronDown} />
               </label>
               <span className="sub-label" style={{
-                color: missingSelection && !selectedDate ? "red" : "inherit",
+                color: missingSelection && !selectedDate ? "red" : "inherit", marginLeft: "10px",
               }}>All dates and days</span>
               {showCalendar && (
                 <div className="calendar-dropdowna">
@@ -238,13 +238,13 @@ const SearchBar = ({ onSearch }) => {
             <div className="dividers" />
             <div className="item" onClick={() => handleOptionClick("activity")}>
               <label className={getLabelClassName(selectedActivity, "Activity")} style={{
-                color: missingSelection && selectedActivity === "Activity" ? "red" : "#3880C4",
+                color: missingSelection && selectedActivity === "Activity" ? "red" : "#3880C4", marginLeft: "10px",
               }}>
                 {selectedActivity}
                 <FontAwesomeIcon icon={faChevronDown} />
               </label>
               <span className="sub-label" style={{
-                color: missingSelection && selectedActivity === "Activity" ? "red" : "inherit",
+                color: missingSelection && selectedActivity === "Activity" ? "red" : "inherit", marginLeft: "10px",
               }}>All activities</span>
               {showActivityDropdown && (
                 <div className="dropdown-menu" ref={activityDropdownRef}>

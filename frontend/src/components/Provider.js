@@ -325,11 +325,11 @@ const ProviderInfo = () => {
                                 <p>{provider.description}</p>
 
                             </div>
-                            <img
+                            {/* <img
                                 src={provider.logo}
                                 alt="Provider"
                                 className="pro-logoimage"
-                            />
+                            /> */}
                         </div>
                         <div className='verified-div' style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
                             <img src={verified} style={{ height: '20px', width: 'auto', marginRight: '5px' }}></img><p style={{ fontWeight: 'bold', color: 'darkblue' }}>Verified by Kidgage</p>
@@ -349,7 +349,7 @@ const ProviderInfo = () => {
                 {/* Display courses */}
                 <div className="provider-courses">
 
-                    <h2>Courses Offered by {provider.username}</h2>
+                    <h2 className="provider-courses-h2">Courses Offered by {provider.username}</h2>
                     {loading ? (<div className="prov-loading-dots">
                         <div className="loading-dots">
                             <span></span>

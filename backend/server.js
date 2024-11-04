@@ -12,6 +12,8 @@ const bannerRoutes = require('./routes/bannerRoutes'); // New routes for banners
 const posterRoutes = require('./routes/posterRoutes');
 const advertisementRoutes = require('./routes/advertisementRoutes');
 const leadsRoutes = require('./routes/leadsRoutes');
+const desktopBannerRoutes = require('./routes/desktopBanner');
+const mobileBannerRoutes = require('./routes/mobileBanner');
 
 
 const app = express();
@@ -35,6 +37,8 @@ app.use('/api/banners', bannerRoutes); // Add the banner routes here
 app.use('/api/posters', posterRoutes);
 app.use('/api/advertisement', advertisementRoutes);
 app.use('/api/leads', leadsRoutes);
+app.use('/api/desktop-banners', desktopBannerRoutes);
+app.use('/api/mobile-banners', mobileBannerRoutes);
 
 
 app.use((err, req, res, next) => {

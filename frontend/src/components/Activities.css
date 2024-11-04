@@ -2182,3 +2182,22 @@
   }
 
 } */
+.no-courses-gap {
+  width: 100%;
+  /* Default for larger screens */
+  height: 25vh;
+}
+
+/* Adjust gap for smaller screens */
+@media (max-width: 768px) {
+  .no-courses-gap {
+    height: 40vh;
+  }
+}
+
+@media (max-width: 1300px) {
+  .no-courses-gap {
+    height: 65vh;
+  }
+
+}

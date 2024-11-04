@@ -27,8 +27,15 @@ const userSchema = new mongoose.Schema({
   logo: { type: String, default: null }, // Optional, to be updated later
   licenseNo: { type: String, default: null }, // Optional, to be updated later
   noOfCourses: { type: Number, default: 5 },
-  meetingScheduleDate: { type: Date, default: Date.now() },
-  requestFiledDate: { type: Date, default: Date.now() },
+  meetingScheduleDate: { type: Date, default: Date.now },
+  requestFiledDate: { type: Date, default: Date.now },
+  expiryDate: {
+    type: Date,
+    default: () => {
+      const today = new Date();
+      return new Date(today.setFullYear(today.getFullYear() + 1));
+    },
+  },
 });
 
 const User = mongoose.model("User", userSchema);
