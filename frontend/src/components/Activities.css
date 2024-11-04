@@ -549,7 +549,7 @@
   .card-container {
     width: 68vw;
     padding: 0px;
-    max-height: 990px;
+    max-height: 660px;
 
   }
 
@@ -571,7 +571,7 @@
 
   .card-container {
     width: 78vw;
-    max-height: 680px;
+    max-height: 460px;
     overflow-y: scroll;
     margin-left: 0%;
     padding: 0px;
@@ -647,7 +647,8 @@
   .card-container {
     width: 80vw;
     padding: 0px;
-    max-height: 740px;
+    max-height: 500px;
+    margin-right: 20px;
 
   }
 
@@ -723,7 +724,7 @@
   .card-container {
     width: 80vw;
     padding: 0px;
-    max-height: 750px;
+    max-height: 510px;
 
   }
 
@@ -809,7 +810,7 @@
   .card-container {
     width: 100vw;
     padding: 0px;
-    max-height: 810px;
+    max-height: 550px;
   }
 
   .banner-container {
@@ -1537,7 +1538,7 @@
 
   .card-container {
     width: 63vw;
-    max-height: 1000px;
+    max-height: 684px;
     overflow-y: scroll;
     margin-left: 0%;
     padding: 0px;
@@ -1590,7 +1591,7 @@
 
   .card-container {
     width: 65vw;
-    max-height: 1080px;
+    max-height: 710px;
     overflow-y: scroll;
     margin-left: 0%;
     padding: 0px;
@@ -1686,7 +1687,7 @@
 
   .card-container {
     width: 66vw;
-    max-height: 1310px;
+    max-height: 870px;
     overflow-y: scroll;
     margin-left: 0%;
     padding: 0px;
@@ -1782,7 +1783,7 @@
 
   .card-container {
     width: 66vw;
-    max-height: 1310px;
+    max-height: 870px;
     overflow-y: scroll;
     margin-left: 0%;
     padding: 0px;
@@ -1864,7 +1865,7 @@
 
   .card-container {
     width: 66vw;
-    max-height: 1180px;
+    max-height: 785px;
     overflow-y: scroll;
     margin-left: 0%;
     padding: 0px;
