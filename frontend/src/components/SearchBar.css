@@ -6,7 +6,7 @@
 .content {
     background-color: #F5F5F5;
     margin: 0 8%;
-    width: 84%;
+    width: 85%;
     border-radius: 10px;
     align-items: center;
     height: 85px;
@@ -222,6 +222,7 @@
         left: -90%;
     }
 }
+
 @media (max-width: 1260px) {
     .content {
         width: 88.5%;
@@ -229,23 +230,26 @@
         margin: 0% 6%;
     }
 }
+
 @media (min-width: 1101px) and (max-width: 1260px) {
 
     .content {
         width: 84%;
         margin: 0% 8%;
     }
-    }
+}
+
 @media (min-width: 1261px) and (max-width: 1461px) {
 
-.content {
-    width: 88%;
-    margin: 0% 6%;
+    .content {
+        width: 88%;
+        margin: 0% 6%;
+    }
 }
-}
+
 @media (max-width: 1461px) {
 
-    .content{
+    .content {
         height: auto;
     }
 
@@ -321,12 +325,15 @@
         padding: 5px 5px;
         /* Adjust padding for smaller screens */
     }
-    .item span{
+
+    .item span {
         display: none;
     }
-    .item label{
+
+    .item label {
         font-size: 11px;
     }
+
     .sbutton {
         width: 50px;
         /* Further adjust width for very small screens */
@@ -335,11 +342,13 @@
         font-size: 20px;
         /* Further adjust font size for very small screens */
     }
-    .content{
+
+    .content {
         height: 50px;
         width: 80%;
         margin: 0 10%;
     }
+
     .dropdown-menu {
         position: absolute;
         top: 100%;
@@ -352,10 +361,11 @@
         padding: 10px 10px;
     }
 }
+
 @media (max-width:900px) {
     .item span {
-    font-size: 10px ;
-}
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 530px) {
@@ -407,6 +417,7 @@
         padding: 10px 10px;
     }
 }
+
 @media (max-width: 492px) {
 
     .content {
@@ -415,6 +426,7 @@
         height: 30%;
     }
 }
+
 @media (max-width:440px) {
     .item {
         padding: 5px 2px;
@@ -447,25 +459,30 @@
         height: 50px;
         /* Allow height to adjust automatically */
     }
-    .sbar .dividers{
+
+    .sbar .dividers {
         height: 30px;
     }
 }
 
 @media (min-width:1920px) {
-    .content{
+    .content {
         height: 120px;
     }
-    .sbar{
+
+    .sbar {
         height: 120px;
     }
-    .item label{
+
+    .item label {
         font-size: 24px;
     }
-    .item span{
+
+    .item span {
         font-size: 20px;
     }
-    .sbar .dividers{
+
+    .sbar .dividers {
         height: 90px;
     }
 }
