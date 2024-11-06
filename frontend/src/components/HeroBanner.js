@@ -12,7 +12,10 @@ const HeroBanner = () => {
       try {
         const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/banners');
         console.log('Fetched banners:', response.data);
-        setSlides(response.data);
+
+        // Filter banners with activeStatus set to true
+        const activeBanners = response.data.filter(banner => banner.status === true);
+        setSlides(activeBanners);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching banners:', error);
@@ -54,8 +57,11 @@ const HeroBanner = () => {
           <div className="hero-slider-container">
             {slides.length > 0 &&
               [...slides, slides[0]].map((slide, index) => (
-                <div
+                <a
                   key={`${slide._id || index}-${index}`}
+                  href={slide.bookingLink || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hero-slide"
                   style={getSlideStyle(index)}
                 >
@@ -64,7 +70,7 @@ const HeroBanner = () => {
                   ) : (
                     <div className="placeholder">Image not available</div>
                   )}
-                </div>
+                </a>
               ))}
           </div>
           <div className="hero-dots">

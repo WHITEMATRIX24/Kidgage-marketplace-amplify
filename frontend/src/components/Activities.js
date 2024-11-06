@@ -41,8 +41,13 @@ const Activities = () => {
                     axios.get("https://kidgage-marketplace-amplify-1.onrender.com/api/desktop-banners/"),
                     axios.get("https://kidgage-marketplace-amplify-1.onrender.com/api/mobile-banners/"),
                 ]);
-                setDesktopBanners(desktopResponse.data);
-                setMobileBanners(mobileResponse.data);
+
+                // Filter banners with activeStatus set to true
+                const activeDesktopBanners = desktopResponse.data.filter(banner => banner.status === true);
+                const activeMobileBanners = mobileResponse.data.filter(banner => banner.status === true);
+
+                setDesktopBanners(activeDesktopBanners);
+                setMobileBanners(activeMobileBanners);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching banners:", error);
