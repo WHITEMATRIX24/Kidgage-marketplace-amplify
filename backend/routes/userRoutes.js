@@ -186,7 +186,7 @@ router.get('/search', async (req, res) => {
 router.get('/all', async (req, res) => {
   try {
     // Fetch only verified users with the specified fields (username, logo)
-    const users = await User.find({ verificationStatus: 'verified' }, 'username logo');
+    const users = await User.find({ verificationStatus: 'accepted' }, 'username logo');
     console.log('Fetched Users:', users); // Debugging log
     res.status(200).json(users);
   } catch (error) {
