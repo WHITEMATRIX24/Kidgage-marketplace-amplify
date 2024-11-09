@@ -345,7 +345,7 @@ const ProviderInfo = () => {
           <div className="container">
             <div className="pro-image">
               <img
-                src={provider?.academyImg ? `data:image/jpeg;base64,${provider.academyImg}` : 'defaultImageUrl'}
+                src={provider?.academyImg ? provider.academyImg : 'defaultImageUrl'}
                 alt="Provider"
               />
 
