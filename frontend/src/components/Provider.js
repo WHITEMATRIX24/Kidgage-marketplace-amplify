@@ -30,7 +30,7 @@ const ProviderInfo = () => {
     if (provider && provider._id) {
       axios
         .get(
-          "http://54.169.210.228:5000/api/courses/by-providers",
+          "https://kidgage-marketplace-amplify-1.onrender.com/api/courses/by-providers",
           {
             params: {
               providerIds: [provider._id], // Sending providerId in query

@@ -10,7 +10,7 @@ const HeroBanner = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await axios.get('http://54.169.210.228:5000/api/banners');
+        const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/banners');
         console.log('Fetched banners:', response.data);
 
         // Filter banners with activeStatus set to true

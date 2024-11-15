@@ -15,7 +15,7 @@ const TopProviders = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const response = await axios.get('http://54.169.210.228:5000/api/users/all');
+        const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/users/all');
         setProviders(response.data);
         setLoading(false);
       } catch (error) {
