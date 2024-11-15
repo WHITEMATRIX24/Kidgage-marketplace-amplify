@@ -38,8 +38,8 @@ const Activities = () => {
         const fetchBanners = async () => {
             try {
                 const [desktopResponse, mobileResponse] = await Promise.all([
-                    axios.get("https://kidgage-marketplace-amplify-1.onrender.com/api/desktop-banners/"),
-                    axios.get("https://kidgage-marketplace-amplify-1.onrender.com/api/mobile-banners/"),
+                    axios.get("http://54.169.210.228:5000/api/desktop-banners/"),
+                    axios.get("http://54.169.210.228:5000/api/mobile-banners/"),
                 ]);
 
                 // Filter banners with activeStatus set to true
@@ -203,7 +203,7 @@ const Activities = () => {
 
         try {
             const response = await axios.get(
-                'https://kidgage-marketplace-amplify-1.onrender.com/api/courses/by-course-type',
+                'http://54.169.210.228:5000/api/courses/by-course-type',
                 {
                     params: { courseType: category },
                 }
@@ -219,7 +219,7 @@ const Activities = () => {
                     if (course.providerId) {
                         try {
                             const providerResponse = await axios.get(
-                                `https://kidgage-marketplace-amplify-1.onrender.com/api/users/provider/${course.providerId}`
+                                `http://54.169.210.228:5000/api/users/provider/${course.providerId}`
                             );
                             console.log(`Provider Response for course ${course._id}:`, providerResponse.data);
 
@@ -307,7 +307,7 @@ const Activities = () => {
 
     // const fetchAdvertisements = async () => {
     //     try {
-    //         const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/advertisement');
+    //         const response = await axios.get('http://54.169.210.228:5000/api/advertisement');
     //         setAdvertisements(response.data);
     //         setLoadinga(false);
     //     } catch (error) {
@@ -704,7 +704,7 @@ const Activities = () => {
                                                             style={{ backgroundColor: '#5EA858' }}
                                                             onClick={async () => {
                                                                 try {
-                                                                    await fetch('https://kidgage-marketplace-amplify-1.onrender.com/api/leads/track', {
+                                                                    await fetch('http://54.169.210.228:5000/api/leads/track', {
                                                                         method: 'POST',
                                                                         headers: {
                                                                             'Content-Type': 'application/json',

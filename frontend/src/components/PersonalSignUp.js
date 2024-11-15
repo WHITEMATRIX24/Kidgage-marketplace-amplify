@@ -38,7 +38,7 @@ const PersonalSignUp = ({ handleNavigation }) => {
     setError(''); // Clear any previous error
 
     try {
-      const response = await axios.post('https://kidgage-marketplace-amplify-1.onrender.com/api/personal/signup', formData);
+      const response = await axios.post('http://54.169.210.228:5000/api/personal/signup', formData);
       console.log('Form submitted:', response.data);
       setSuccess('Signed Up Successfully!');
       setFormData({

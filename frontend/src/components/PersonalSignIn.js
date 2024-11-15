@@ -23,7 +23,7 @@ const PersonalSignIn = () => {
     setSuccess('');
 
     try {
-      const response = await axios.post('https://kidgage-marketplace-amplify-1.onrender.com/api/personal/signin', formData);
+      const response = await axios.post('http://54.169.210.228:5000/api/personal/signin', formData);
       console.log('Sign-in successful:', response.data);
       setSuccess('Sign-in successful');
       setFormData({
