@@ -10,7 +10,7 @@ const HeroBanner = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await axios.get("https://16.171.204.252/api/banners");
+        const response = await axios.get("http://16.171.204.252/api/banners");
         console.log("Fetched banners:", response.data);
 
         // Filter banners with activeStatus set to true

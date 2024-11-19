@@ -39,7 +39,7 @@ const CTypeSlider = ({ viewAll }) => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "https://16.171.204.252/api/course-category/categories"
+          "http://16.171.204.252/api/course-category/categories"
         );
         const fetchedCategories = response.data;
         setCategories(fetchedCategories);
@@ -50,7 +50,7 @@ const CTypeSlider = ({ viewAll }) => {
           fetchedCategories.map(async (category) => {
             try {
               const feeResponse = await axios.get(
-                `https://16.171.204.252/api/courses/lowest-fee/${category.name}`
+                `http://16.171.204.252/api/courses/lowest-fee/${category.name}`
               );
               const minFee = feeResponse.data.minFee;
 

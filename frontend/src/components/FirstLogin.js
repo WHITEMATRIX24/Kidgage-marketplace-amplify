@@ -27,7 +27,7 @@ export default function FirstLogin() {
 
     try {
       const response = await fetch(
-        "https://16.171.204.252/api/users/send-email",
+        "http://16.171.204.252/api/users/send-email",
         {
           method: "POST",
           headers: {
@@ -229,7 +229,7 @@ export default function FirstLogin() {
               <h5 className="fw-bold">Follow us</h5>
               <p>
                 <a
-                  href="Instagram.com/mykidgage"
+                  href="http://Instagram.com/mykidgage"
                   className="text-decoration-none d-block text-dark"
                 >
                   Instagram

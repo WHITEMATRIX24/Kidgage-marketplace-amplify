@@ -24,7 +24,7 @@ const PersonalSignIn = () => {
 
     try {
       const response = await axios.post(
-        "https://16.171.204.252/api/personal/signin",
+        "http://16.171.204.252/api/personal/signin",
         formData
       );
       console.log("Sign-in successful:", response.data);

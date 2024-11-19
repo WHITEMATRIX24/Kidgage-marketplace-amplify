@@ -39,8 +39,8 @@ const Activities = () => {
     const fetchBanners = async () => {
       try {
         const [desktopResponse, mobileResponse] = await Promise.all([
-          axios.get("https://16.171.204.252/api/desktop-banners/"),
-          axios.get("https://16.171.204.252/api/mobile-banners/"),
+          axios.get("http://16.171.204.252/api/desktop-banners/"),
+          axios.get("http://16.171.204.252/api/mobile-banners/"),
         ]);
 
         // Filter banners with activeStatus set to true
@@ -216,7 +216,7 @@ const Activities = () => {
 
     try {
       const response = await axios.get(
-        "https://16.171.204.252/api/courses/by-course-type",
+        "http://16.171.204.252/api/courses/by-course-type",
         {
           params: { courseType: category },
         }
@@ -232,7 +232,7 @@ const Activities = () => {
           if (course.providerId) {
             try {
               const providerResponse = await axios.get(
-                `https://16.171.204.252/api/users/provider/${course.providerId}`
+                `http://16.171.204.252/api/users/provider/${course.providerId}`
               );
               console.log(
                 `Provider Response for course ${course._id}:`,
@@ -324,7 +324,7 @@ const Activities = () => {
 
   // const fetchAdvertisements = async () => {
   //     try {
-  //         const response = await axios.get('https://16.171.204.252/api/advertisement');
+  //         const response = await axios.get('http://16.171.204.252/api/advertisement');
   //         setAdvertisements(response.data);
   //         setLoadinga(false);
   //     } catch (error) {
@@ -792,7 +792,7 @@ const Activities = () => {
                             onClick={async () => {
                               try {
                                 await fetch(
-                                  "https://16.171.204.252/api/leads/track",
+                                  "http://16.171.204.252/api/leads/track",
                                   {
                                     method: "POST",
                                     headers: {

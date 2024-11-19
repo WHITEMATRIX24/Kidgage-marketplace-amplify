@@ -29,7 +29,7 @@ const ProviderInfo = () => {
   useEffect(() => {
     if (provider && provider._id) {
       axios
-        .get("https://16.171.204.252/api/courses/by-providers", {
+        .get("http://16.171.204.252/api/courses/by-providers", {
           params: {
             providerIds: [provider._id], // Sending providerId in query
           },

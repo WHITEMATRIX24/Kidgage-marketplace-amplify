@@ -15,9 +15,7 @@ const TopProviders = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const response = await axios.get(
-          "https://16.171.204.252/api/users/all"
-        );
+        const response = await axios.get("http://16.171.204.252/api/users/all");
         setProviders(response.data);
         setLoading(false);
       } catch (error) {
