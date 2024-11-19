@@ -29,14 +29,11 @@ const ProviderInfo = () => {
   useEffect(() => {
     if (provider && provider._id) {
       axios
-        .get(
-          "https://kidgage-marketplace-amplify-1.onrender.com/api/courses/by-providers",
-          {
-            params: {
-              providerIds: [provider._id], // Sending providerId in query
-            },
-          }
-        )
+        .get("https://51.20.119.151/api/courses/by-providers", {
+          params: {
+            providerIds: [provider._id], // Sending providerId in query
+          },
+        })
         .then((response) => {
           setCourses(response.data); // Set the courses to state
           setLoading(false);
@@ -324,7 +321,7 @@ const ProviderInfo = () => {
 
   const navigate = useNavigate();
   const handleLogoClick = () => {
-    navigate('/home');
+    navigate("/home");
   };
   const handleClick = (courseId) => {
     navigate(`/activity-info/${courseId}`, { state: { id: courseId } });
@@ -335,7 +332,11 @@ const ProviderInfo = () => {
       <div className="activity-info-content">
         <div className="activity-info-breadcrumb">
           <div className="activity-info-path">
-            <FontAwesomeIcon icon={faHome} onClick={handleLogoClick} cursor="pointer" />
+            <FontAwesomeIcon
+              icon={faHome}
+              onClick={handleLogoClick}
+              cursor="pointer"
+            />
             <FontAwesomeIcon icon={faChevronRight} />
             Provider
           </div>
@@ -345,10 +346,11 @@ const ProviderInfo = () => {
           <div className="container">
             <div className="pro-image">
               <img
-                src={provider?.academyImg ? provider.academyImg : 'defaultImageUrl'}
+                src={
+                  provider?.academyImg ? provider.academyImg : "defaultImageUrl"
+                }
                 alt="Provider"
               />
-
             </div>
             <div className="total-contain">
               <div className="logo-contain">
@@ -435,7 +437,7 @@ const ProviderInfo = () => {
                                 >
                                   {/* Display location if available */}
                                   {course.location &&
-                                    course.location.length > 0 ? (
+                                  course.location.length > 0 ? (
                                     course.location.map((loc, index) => (
                                       <div
                                         key={index}
@@ -472,7 +474,7 @@ const ProviderInfo = () => {
 
                                   <div className="age-group">
                                     {course.ageGroup &&
-                                      course.ageGroup.length > 0 ? (
+                                    course.ageGroup.length > 0 ? (
                                       <span className="age-text">
                                         {calculateAgeRange(
                                           course.ageGroup[0].ageStart,
@@ -505,10 +507,11 @@ const ProviderInfo = () => {
                                     {allDays.map((day) => (
                                       <span
                                         key={day}
-                                        className={`day ${course.days.includes(day)
-                                          ? "active"
-                                          : ""
-                                          }`}
+                                        className={`day ${
+                                          course.days.includes(day)
+                                            ? "active"
+                                            : ""
+                                        }`}
                                       >
                                         {day}
                                       </span>

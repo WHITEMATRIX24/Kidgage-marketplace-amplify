@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './HeroBanner.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./HeroBanner.css";
 
 const HeroBanner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -10,15 +10,17 @@ const HeroBanner = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/banners');
-        console.log('Fetched banners:', response.data);
+        const response = await axios.get("https://51.20.119.151/api/banners");
+        console.log("Fetched banners:", response.data);
 
         // Filter banners with activeStatus set to true
-        const activeBanners = response.data.filter(banner => banner.status === true);
+        const activeBanners = response.data.filter(
+          (banner) => banner.status === true
+        );
         setSlides(activeBanners);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching banners:', error);
+        console.error("Error fetching banners:", error);
         setLoading(false);
       }
     };
@@ -59,7 +61,7 @@ const HeroBanner = () => {
               [...slides, slides[0]].map((slide, index) => (
                 <a
                   key={`${slide._id || index}-${index}`}
-                  href={slide.bookingLink || '#'}
+                  href={slide.bookingLink || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hero-slide"
@@ -77,7 +79,7 @@ const HeroBanner = () => {
             {slides.map((_, index) => (
               <span
                 key={index}
-                className={`hero-dot ${index === currentSlide ? 'active' : ''}`}
+                className={`hero-dot ${index === currentSlide ? "active" : ""}`}
                 onClick={() => setCurrentSlide(index)}
               ></span>
             ))}

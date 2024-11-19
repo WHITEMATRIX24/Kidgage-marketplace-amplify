@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./TopProviders.css";
 
 const TopProviders = () => {
@@ -15,11 +15,11 @@ const TopProviders = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/users/all');
+        const response = await axios.get("https://51.20.119.151/api/users/all");
         setProviders(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching providers:', error);
+        console.error("Error fetching providers:", error);
         setLoading(false);
       }
     };
@@ -29,7 +29,7 @@ const TopProviders = () => {
 
   useEffect(() => {
     if (logoSliderRef.current && providers.length > 0) {
-      const slides = logoSliderRef.current.querySelectorAll('.logo-slide');
+      const slides = logoSliderRef.current.querySelectorAll(".logo-slide");
       if (slides.length > 0) {
         setImageWidth(slides[0].offsetWidth);
         const numSlides = providers.length;
@@ -62,14 +62,19 @@ const TopProviders = () => {
     return () => clearInterval(interval);
   }, [providers.length, imageWidth, sliderWidth]);
 
-  const activeDot = Math.floor(Math.abs(position + imageWidth / 2) / (imageWidth || 1));
+  const activeDot = Math.floor(
+    Math.abs(position + imageWidth / 2) / (imageWidth || 1)
+  );
   const dotCount = providers.length > 4 ? providers.length - 4 : 0;
 
   return (
     <div className="top-prov-body">
       <div className="top-providers">
         <h2>Top Providers</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas massa lacus.</p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+          massa lacus.
+        </p>
         {loading ? (
           <div className="loading-dots">
             <span></span>
@@ -86,7 +91,9 @@ const TopProviders = () => {
               >
                 {providers.map((provider, index) => (
                   <div key={index} className="logo-slide">
-                    {provider.logo && <img src={provider.logo} alt={provider.username} />}
+                    {provider.logo && (
+                      <img src={provider.logo} alt={provider.username} />
+                    )}
                   </div>
                 ))}
               </div>
@@ -96,7 +103,9 @@ const TopProviders = () => {
                 {[...Array(dotCount)].map((_, index) => (
                   <span
                     key={index}
-                    className={`provider-dot ${index === activeDot ? "active" : ""}`}
+                    className={`provider-dot ${
+                      index === activeDot ? "active" : ""
+                    }`}
                   ></span>
                 ))}
               </div>

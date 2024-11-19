@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./IntroSearch.css";
 import Calendar2 from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import axios from 'axios';
+import axios from "axios";
 
 const IntroSearch = () => {
   const [activeOption, setActiveOption] = useState(null);
@@ -14,7 +14,9 @@ const IntroSearch = () => {
   // const [selectedLocation, setSelectedLocation] = useState("Doha");
   const [selectedActivity, setSelectedActivity] = useState("Activity");
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [isActivityDropdownVisible, setIsActivityDropdownVisible] = useState(false);
+  const [isActivityDropdownVisible, setIsActivityDropdownVisible] = useState(
+    false
+  );
   const [missingSelection, setMissingSelection] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showSubDropdown, setShowSubDropdown] = useState(null); // To control sub-dropdown visibility
@@ -34,17 +36,25 @@ const IntroSearch = () => {
   //   "Mesaieed",
   // ];
 
-  const ageRanges = ["0-2 years", "3-5 years", "6-8 years", "9-12 years", "13-17 years"];
+  const ageRanges = [
+    "0-2 years",
+    "3-5 years",
+    "6-8 years",
+    "9-12 years",
+    "13-17 years",
+  ];
   const [activities, setCourseTypes] = useState([]);
   useEffect(() => {
     const fetchCourseTypes = async () => {
       try {
-        const response = await axios.get('https://kidgage-marketplace-amplify-1.onrender.com/api/course-category/categories');
+        const response = await axios.get(
+          "https://51.20.119.151/api/course-category/categories"
+        );
         // Assuming the response is an array of objects and each object has a 'name' property for the category
         const categoryNames = response.data.map((category) => category.name);
         setCourseTypes(categoryNames);
       } catch (error) {
-        console.error('Error fetching course types', error);
+        console.error("Error fetching course types", error);
       }
     };
 
@@ -52,7 +62,10 @@ const IntroSearch = () => {
   }, []);
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+      if (
+        searchBarRef.current &&
+        !searchBarRef.current.contains(event.target)
+      ) {
         setActiveOption(null);
         setShowCalendar(false);
         setShowDobCalendar(false);
@@ -125,7 +138,9 @@ const IntroSearch = () => {
       navigate("/activityinfo", {
         state: {
           dob: selectedDob,
-          ageRange: selectedDate ? selectedDate.toLocaleDateString("en-GB") : "",
+          ageRange: selectedDate
+            ? selectedDate.toLocaleDateString("en-GB")
+            : "",
           category: selectedActivity,
         },
       });
@@ -133,7 +148,6 @@ const IntroSearch = () => {
       setMissingSelection(true);
     }
   };
-
 
   const handleMobileMenuToggle = () => {
     setShowMobileMenu(!showMobileMenu);
@@ -148,14 +162,17 @@ const IntroSearch = () => {
       <div className="intro-content">
         <h1 className="intro-title">Find an activity your child will love</h1>
         <p className="intro-subtitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas massa lacus,
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+          massa lacus,
         </p>
       </div>
       <div className="search-container" ref={searchBarRef}>
         {/* Mobile View */}
         {window.innerWidth < 660 && (
           <div className="intro-search-bar">
-            <button onClick={handleMobileMenuToggle}>Search for Activities,Locations</button>
+            <button onClick={handleMobileMenuToggle}>
+              Search for Activities,Locations
+            </button>
 
             <i className="fas fa-chevron-down"></i>
             {showMobileMenu && (
@@ -194,7 +211,9 @@ const IntroSearch = () => {
                     )}
                   </li>
                   <li onClick={() => handleOptionClick("date")}>
-                    {selectedDate ? selectedDate.toLocaleDateString("en-GB") : "Date"}
+                    {selectedDate
+                      ? selectedDate.toLocaleDateString("en-GB")
+                      : "Date"}
                   </li>
                   <li onClick={() => toggleSubDropdown("activity")}>
                     {selectedActivity}
@@ -277,7 +296,10 @@ const IntroSearch = () => {
                     className={` ${activeOption === "age" ? "active" : ""}`}
                     onClick={() => handleOptionClick("age")}
                     style={{
-                      color: missingSelection && selectedDob === "Age" ? "red" : "#2e2d2d8a",
+                      color:
+                        missingSelection && selectedDob === "Age"
+                          ? "red"
+                          : "#2e2d2d8a",
                     }}
                   >
                     {selectedDob}
@@ -302,28 +324,36 @@ const IntroSearch = () => {
               <span className="separator-log">|</span>
 
               <h4
-                className={`search1-options ${activeOption === "date" ? "active" : ""}`}
+                className={`search1-options ${
+                  activeOption === "date" ? "active" : ""
+                }`}
                 onClick={() => handleOptionClick("date")}
                 style={{
-                  color: missingSelection && !selectedDate ? "red" : "#2e2d2d8a",
+                  color:
+                    missingSelection && !selectedDate ? "red" : "#2e2d2d8a",
                 }}
               >
-                {selectedDate ? selectedDate.toLocaleDateString("en-GB") : "Date"}
+                {selectedDate
+                  ? selectedDate.toLocaleDateString("en-GB")
+                  : "Date"}
               </h4>
 
               <span className="separator-log">|</span>
 
               <div
-                className={`search4-option ${activeOption === "activity" ? "active" : ""}`}
+                className={`search4-option ${
+                  activeOption === "activity" ? "active" : ""
+                }`}
                 onClick={() => handleOptionClick("activity")}
                 style={{
-                  color: missingSelection && selectedActivity === "Activity" ? "red" : "#2e2d2d8a",
+                  color:
+                    missingSelection && selectedActivity === "Activity"
+                      ? "red"
+                      : "#2e2d2d8a",
                 }}
               >
                 <div className="sss">
-                  <p>
-                    {selectedActivity}
-                  </p>
+                  <p>{selectedActivity}</p>
                 </div>
                 {isActivityDropdownVisible && (
                   <div className="dropdown">
@@ -360,7 +390,6 @@ const IntroSearch = () => {
             </button>
           </div>
         )}
-
 
         {showCalendar && (
           <div className="calendar-dropdown2">

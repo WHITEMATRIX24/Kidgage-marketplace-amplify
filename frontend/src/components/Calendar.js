@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import styled from 'styled-components';
-import 'react-datepicker/dist/react-datepicker.css';
-import { FaCalendarAlt, FaWhatsapp } from 'react-icons/fa';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import styled from "styled-components";
+import "react-datepicker/dist/react-datepicker.css";
+import { FaCalendarAlt, FaWhatsapp } from "react-icons/fa";
+import axios from "axios";
 
 const CustomDatePickerWrapper = styled.div`
    height:650px;
@@ -522,20 +522,30 @@ const Calendar = ({ providerName, courseName }) => {
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
-        const response = await axios.get(`https://kidgage-marketplace-amplify-1.onrender.com/api/courses/course/${courseId}`);
+        const response = await axios.get(
+          `https://51.20.119.151/api/courses/course/${courseId}`
+        );
         const courseData = response.data;
 
         setCourseDetails(courseData);
-        setAllowedDays(courseData.days.map(day => daysMapping[day]));
+        setAllowedDays(courseData.days.map((day) => daysMapping[day]));
       } catch (error) {
-        console.error('Error fetching course details:', error);
+        console.error("Error fetching course details:", error);
       }
     };
 
     fetchCourseDetails();
   }, [courseId]);
 
-  const daysMapping = { "Sun": 0, "Mon": 1, "Tue": 2, "Wed": 3, "Thu": 4, "Fri": 5, "Sat": 6 };
+  const daysMapping = {
+    Sun: 0,
+    Mon: 1,
+    Tue: 2,
+    Wed: 3,
+    Thu: 4,
+    Fri: 5,
+    Sat: 6,
+  };
 
   const filterDates = (date) => {
     const day = date.getDay();
@@ -545,60 +555,66 @@ const Calendar = ({ providerName, courseName }) => {
   };
   function convertTo12HourFormat(timeSlot) {
     // Split the time into hours and minutes
-    let [hours, minutes] = timeSlot.split(':').map(Number);
+    let [hours, minutes] = timeSlot.split(":").map(Number);
 
     // Determine AM or PM
-    let period = hours >= 12 ? 'PM' : 'AM';
+    let period = hours >= 12 ? "PM" : "AM";
 
     // Convert hours to 12-hour format
     hours = hours % 12 || 12;
 
     // Format minutes to always have two digits
-    minutes = minutes.toString().padStart(2, '0');
+    minutes = minutes.toString().padStart(2, "0");
 
     // Return the formatted time
     return `${hours}:${minutes} ${period}`;
   }
   const formatted = (feeType) => {
     return feeType
-      .split('_') // Split by underscore
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-      .join(' '); // Join them with a space
+      .split("_") // Split by underscore
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+      .join(" "); // Join them with a space
   };
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const options = { day: 'numeric', month: 'long', year: 'numeric' }; // "October 1, 2024"
+    const options = { day: "numeric", month: "long", year: "numeric" }; // "October 1, 2024"
     return date.toLocaleDateString(undefined, options);
   };
   const handleBookNow = async () => {
     try {
-      await fetch('https://kidgage-marketplace-amplify-1.onrender.com/api/leads/track', {
-        method: 'POST',
+      await fetch("https://51.20.119.151/api/leads/track", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
     } catch (error) {
-      console.error('Failed to update lead count:', error);
+      console.error("Failed to update lead count:", error);
     }
 
     if (selectedDate && selectedTime) {
       const formattedDate = formatDate(selectedDate);
-      const timeSlot = courseDetails.timeSlots.find(slot => slot._id === selectedTime);
+      const timeSlot = courseDetails.timeSlots.find(
+        (slot) => slot._id === selectedTime
+      );
       const url = window.location.href;
       const message = `I would like to book the course "${courseName}" offered by ${providerName}. 
 
         The course is scheduled for ${formattedDate} during the time slot of 
-        ${convertTo12HourFormat(timeSlot.from)} to ${convertTo12HourFormat(timeSlot.to)}. 
+        ${convertTo12HourFormat(timeSlot.from)} to ${convertTo12HourFormat(
+        timeSlot.to
+      )}. 
         
-        The fee is QAR. ${courseDetails.feeAmount} (${formatted(courseDetails.feeType)}). 
+        The fee is QAR. ${courseDetails.feeAmount} (${formatted(
+        courseDetails.feeType
+      )}). 
         
         For more details, please visit ${url}.`;
 
-      const phoneNumber = '97477940018';
+      const phoneNumber = "97477940018";
       const encodedMessage = encodeURIComponent(message);
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-      window.open(whatsappURL, '_blank');
+      window.open(whatsappURL, "_blank");
     } else {
       alert("Please select both a date and a time slot.");
     }
@@ -610,25 +626,31 @@ const Calendar = ({ providerName, courseName }) => {
         <FaCalendarAlt className="first-calender-icon" />
         {courseDetails && (
           <div className="date-line">
-            {formatDate(courseDetails.startDate)} - {formatDate(courseDetails.endDate)}
+            {formatDate(courseDetails.startDate)} -{" "}
+            {formatDate(courseDetails.endDate)}
           </div>
         )}
       </div>
 
       <div className="days-row">
         {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day, index) => (
-          <div key={day} className={`day ${allowedDays.includes(index) ? "highlighted-day" : ""}`}>
+          <div
+            key={day}
+            className={`day ${
+              allowedDays.includes(index) ? "highlighted-day" : ""
+            }`}
+          >
             {day}
           </div>
         ))}
       </div>
 
-      <div className='calendar-content'>
+      <div className="calendar-content">
         <div className="custom-date-header">
-          <FaCalendarAlt className='first-calender-icon' />
+          <FaCalendarAlt className="first-calender-icon" />
           Single <br />
         </div>
-        <div className='custom-date-header-time'>Select a date and time:</div>
+        <div className="custom-date-header-time">Select a date and time:</div>
 
         <DatePicker
           selected={selectedDate}
@@ -640,14 +662,21 @@ const Calendar = ({ providerName, courseName }) => {
         />
 
         <div className="calender-book-button">
-          <select value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)}>
-            <option value="" disabled>Select Timing</option>
+          <select
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(e.target.value)}
+          >
+            <option value="" disabled>
+              Select Timing
+            </option>
             {courseDetails?.timeSlots.map((slot, index) => (
-              <option key={index} value={slot._id}>{`${convertTo12HourFormat(slot.from)} - ${convertTo12HourFormat(slot.to)}`}</option>
+              <option key={index} value={slot._id}>{`${convertTo12HourFormat(
+                slot.from
+              )} - ${convertTo12HourFormat(slot.to)}`}</option>
             ))}
           </select>
           <button onClick={handleBookNow}>
-            <FaWhatsapp style={{ marginRight: '10px' }} /> Book Now
+            <FaWhatsapp style={{ marginRight: "10px" }} /> Book Now
           </button>
         </div>
       </div>
