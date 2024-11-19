@@ -523,7 +523,7 @@ const Calendar = ({ providerName, courseName }) => {
     const fetchCourseDetails = async () => {
       try {
         const response = await axios.get(
-          `https://https://16.171.204.252.252/api/courses/course/${courseId}`
+          `https://16.171.204.252/api/courses/course/${courseId}`
         );
         const courseData = response.data;
 
@@ -582,7 +582,7 @@ const Calendar = ({ providerName, courseName }) => {
   };
   const handleBookNow = async () => {
     try {
-      await fetch("https://https://16.171.204.252.252/api/leads/track", {
+      await fetch("https://16.171.204.252/api/leads/track", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

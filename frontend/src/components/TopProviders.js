@@ -16,7 +16,7 @@ const TopProviders = () => {
     const fetchProviders = async () => {
       try {
         const response = await axios.get(
-          "https://https://16.171.204.252.252/api/users/all"
+          "https://16.171.204.252/api/users/all"
         );
         setProviders(response.data);
         setLoading(false);
