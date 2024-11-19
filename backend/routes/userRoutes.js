@@ -239,4 +239,52 @@ router.get('/provider/:providerId', async (req, res) => {
   }
 });
 
+// <<<<<<>>>>>>
+router.post("/send-email", async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).send({ error: "Email is required" });
+  }
+
+  try {
+    // Configure Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail', // Use your email service
+      auth: {
+        user: 'whitematrix2024@gmail.com', // Replace with your email
+        pass: 'tkxj mgpk cewx crni', // Replace with your email password (use an app-specific password if 2FA is enabled)
+      },
+    });
+
+    // Email options
+    const mailOptions = {
+      from: `"Kidgage Support" <whitematrix2024@gmail.com>`, // Sender name and address
+      to: email,
+      subject: "Welcome to Kidgage!",
+      text: `Dear user,
+    
+    Welcome to Kidgage! We are thrilled to have you join our community.
+    
+    Here are your login details to get started:
+    Username: Kidgage@2024
+    Password: Kidgage@24user
+    
+    Thank you for choosing Kidgage. We look forward to serving you!
+    
+    Warm regards,
+    The Kidgage Team`,
+
+    };
+
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+    res.status(200).send({ message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).send({ error: "Failed to send email" });
+  }
+});
+
 module.exports = router;
