@@ -39,7 +39,7 @@ const PersonalSignUp = ({ handleNavigation }) => {
 
     try {
       const response = await axios.post(
-        "https://51.20.119.151/api/personal/signup",
+        "https://https://16.171.204.252.252/api/personal/signup",
         formData
       );
       console.log("Form submitted:", response.data);

@@ -48,7 +48,7 @@ const IntroSearch = () => {
     const fetchCourseTypes = async () => {
       try {
         const response = await axios.get(
-          "https://51.20.119.151/api/course-category/categories"
+          "https://https://16.171.204.252.252/api/course-category/categories"
         );
         // Assuming the response is an array of objects and each object has a 'name' property for the category
         const categoryNames = response.data.map((category) => category.name);

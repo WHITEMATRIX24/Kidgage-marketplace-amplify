@@ -30,13 +30,13 @@ const ActivityInfo = () => {
     const fetchCourseData = async () => {
       try {
         const courseResponse = await axios.get(
-          `https://51.20.119.151/api/courses/course/${courseId}`
+          `https://https://16.171.204.252.252/api/courses/course/${courseId}`
         );
         setCourse(courseResponse.data);
 
         if (courseResponse.data && courseResponse.data.providerId) {
           const providerResponse = await axios.get(
-            `https://51.20.119.151/api/users/provider/${courseResponse.data.providerId}`
+            `https://https://16.171.204.252.252/api/users/provider/${courseResponse.data.providerId}`
           );
           setProvider(providerResponse.data);
         } else {
