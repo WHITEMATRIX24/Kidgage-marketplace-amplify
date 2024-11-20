@@ -16,7 +16,7 @@ const TopProviders = () => {
     const fetchProviders = async () => {
       try {
         const response = await axios.get(
-          "https://16.171.204.252/api/users/all"
+          "https://www.kidgage.com/api/users/all"
         );
         setProviders(response.data);
         setLoading(false);

@@ -523,7 +523,7 @@ const Calendar = ({ providerName, courseName }) => {
     const fetchCourseDetails = async () => {
       try {
         const response = await axios.get(
-          `https://16.171.204.252/api/courses/course/${courseId}`
+          `https://www.kidgage.com/api/courses/course/${courseId}`
         );
         const courseData = response.data;
 
@@ -582,7 +582,7 @@ const Calendar = ({ providerName, courseName }) => {
   };
   const handleBookNow = async () => {
     try {
-      await fetch("https://16.171.204.252/api/leads/track", {
+      await fetch("https://www.kidgage.com/api/leads/track", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

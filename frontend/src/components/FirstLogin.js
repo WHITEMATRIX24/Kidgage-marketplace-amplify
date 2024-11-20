@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import logooo from "../components/assets/images/KIDGAGElogo.png";
@@ -11,7 +12,7 @@ export default function FirstLogin() {
   });
 
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // For showing/hiding loader
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -27,7 +28,7 @@ export default function FirstLogin() {
 
     try {
       const response = await fetch(
-        "https://16.171.204.252/api/users/send-email",
+        "https://www.kidgage.com/api/users/send-email",
         {
           method: "POST",
           headers: {
@@ -49,7 +50,6 @@ export default function FirstLogin() {
     }
   };
 
-  // Dummy credentials
   const dummyCredentials = {
     name: "Kidgage@2024",
     password: "Kidgage@24user",
@@ -63,92 +63,161 @@ export default function FirstLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true); // Start loader
+    setLoading(true);
 
-    // Simulate form validation with dummy data
     if (
       formData.name === dummyCredentials.name &&
       formData.password === dummyCredentials.password
     ) {
-      setLoading(false); // Stop loader
+      setLoading(false);
       navigate("/home");
     } else {
       setError("Invalid username or password");
-      setLoading(false); // Stop loader if there's an error
+      setLoading(false);
     }
   };
-  return (
-    <div
-      className="container-fluid px-3 px-md-5 mt-3 mt-md-5"
-      style={{ minHeight: "100vh" }}
-    >
-      {/* Main Row for Grid System */}
-      <div className="row">
-        {/* Empty Columns */}
-        <div className="col-12 col-md-1"></div>
 
-        {/* Content Section */}
-        <div className="col-12 col-md-10 px-3 px-md-0 ">
-          <div className="ms-3">
-            <div style={{ width: "auto" }} className="ms-4 ms-md-5 mb-0 mt-3">
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className="container-fluid px-5 px-md-6 mt-3 mt-md-5"
+      style={{
+        minHeight: "100vh",
+        fontFamily: "'Gilroy', sans-serif",
+        maxWidth: "1400px",
+        margin: "0 auto",
+      }}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <style>
+        {`
+          @import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+        `}
+      </style>
+      <motion.div className="row" variants={containerVariants}>
+        <div className="col-12 col-lg-10 mx-auto px-0 d-flex flex-column">
+          <motion.div className="ms-0 ms-md-3" variants={imageVariants}>
+            <div style={{ width: "auto" }} className="ms-0 ms-md-1 mb-0 mt-3">
               <img
                 src={logooo}
-                alt="Kid with tablet"
-                className="img-fluid rounded"
-                style={{ maxWidth: "15%" }}
+                alt="Kidgage Logo"
+                className="kidlogo img-fluid rounded"
+                style={{
+                  maxWidth: "10%",
+                  minWidth: "22%",
+                  height: "auto",
+                }}
               />
             </div>
-          </div>
-          <br></br>
-          {/* Top Section */}
-          <div
+          </motion.div>
+          <br />
+          <motion.div
             className="row align-items-center min-vh-75"
             style={{ minHeight: "75vh" }}
+            variants={containerVariants}
           >
-            {/* Left Section (Image) */}
-            <div className="col-12 me-0  col-lg-6 d-flex justify-content-center align-items-center mb-4 mb-lg-0">
-              <img
-                src={bannerimggg}
-                alt="Kid with tablet"
-                className="img-fluid rounded"
-                style={{ width: "130%", maxWidth: "120%" }}
-              />
-            </div>
-
-            {/* Right Section (Text and Email Input) */}
-            <div className="col-12 col-lg-6">
-              <h1
+            <motion.div
+              className="col-12 col-lg-6 d-flex justify-content-center align-items-center mb-4 mb-lg-0"
+              variants={imageVariants}
+            >
+              <div
+                className="position-relative"
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  paddingBottom: "66.67%",
+                }}
+              >
+                <img
+                  src={bannerimggg}
+                  alt="Kid with tablet"
+                  className="position-absolute top-0 start-0 w-100 h-100 rounded object-fit-cover"
+                />
+              </div>
+            </motion.div>
+            <motion.div
+              className="col-12 col-lg-6 ps-3 ps-lg-5"
+              variants={itemVariants}
+            >
+              <motion.h1
                 className="mb-4 mt-5 fw-bolder"
-                style={{ fontSize: "2.5rem", color: "#000" }}
+                style={{
+                  fontSize: "clamp(1.5rem, 5vw, 2.5rem)",
+                  color: "#000",
+                }}
+                variants={itemVariants}
               >
                 Kids Stuck to Screens?
                 <br />
-                Don't worry, We've <br></br> got an App for that
-              </h1>
-              <p
+                Don't worry, We've <br /> got an App for that
+              </motion.h1>
+              <motion.p
                 className="mb-5"
-                style={{ fontSize: "1.1rem", color: "#6c757d" }}
+                style={{
+                  fontSize: "clamp(0.9rem, 3vw, 1.1rem)",
+                  color: "#6c757d",
+                }}
+                variants={itemVariants}
               >
-                A smarter way to nurture your child's growth <br></br> and
-                well-being. Join us in this journey of play, <br></br> progress,
+                A smarter way to nurture your child's growth <br /> and
+                well-being. Join us in this journey of play, <br /> progress,
                 and purpose.
-              </p>
-              <div className="mb-5">
-                <h5
+              </motion.p>
+              <motion.div className="mb-5" variants={itemVariants}>
+                <motion.h5
                   className="mb-2 mt-2 fw-semibold"
                   style={{ fontSize: "1.5rem", color: "#000" }}
+                  variants={itemVariants}
                 >
                   Get Early Access
-                </h5>
-                <p className="mb-3" style={{ color: "#6c757d" }}>
-                  Be the first to know when we launch! Join <br></br> our
-                  exclusive waitlist to stay updated on <br></br> Kidgage and
-                  secure early access.
-                </p>
-                <div className="d-flex align-items-center">
+                </motion.h5>
+                <motion.p
+                  className="mb-3"
+                  style={{ color: "#6c757d" }}
+                  variants={itemVariants}
+                >
+                  Be the first to know when we launch! Join <br /> our exclusive
+                  waitlist to stay updated on <br /> Kidgage and secure early
+                  access.
+                </motion.p>
+                <div className="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center">
                   <input
                     type="email"
-                    className="form-control w-20 me-2"
+                    className="form-control mb-2 mb-sm-0 me-sm-2"
                     placeholder="Enter Your Email.."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -156,39 +225,54 @@ export default function FirstLogin() {
                       borderRadius: "10px",
                       border: "1px solid #ddd",
                       padding: "10px",
-                      width: "350px",
+                      width: "100%",
+                      maxWidth: "300px",
                     }}
                   />
                   <button
-                    className="btn text-white p-2 w-30"
-                    style={{ backgroundColor: "#ACC29E" }}
+                    className="btn text-white p-2 w-100 w-sm-auto"
+                    style={{
+                      backgroundColor: "#ACC29E",
+                      minWidth: "80px",
+                      maxWidth: "90px",
+                    }}
                     onClick={sendEmail}
                   >
-                    send
+                    Send
                   </button>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Section */}
-          <div className="row mt-0 ms-0 ms-md-5 gy-4 mb-5">
-            <div className="col-12 col-sm-6 col-lg-3">
+              </motion.div>
+            </motion.div>
+          </motion.div>
+          <motion.div
+            className="row mt-0 mx-0 mx-md-2 gy-4 mb-5"
+            variants={containerVariants}
+          >
+            <motion.div
+              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
+              variants={itemVariants}
+            >
               <h5 className="fw-bold">For Parents</h5>
               <p>
                 Discover creative ways to support your child's growth with a
                 platform where fun meets development – all in one place!
               </p>
-            </div>
-            <div className="col-12 col-sm-6 col-lg-3">
+            </motion.div>
+            <motion.div
+              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
+              variants={itemVariants}
+            >
               <h5 className="fw-bold">For Providers</h5>
               <p>
                 Partner with us to connect with families who value growth and
                 health. Together, let's inspire progress and create brighter
                 futures for the next generation!
               </p>
-            </div>
-            <div className="col-12 col-sm-6 col-lg-3">
+            </motion.div>
+            <motion.div
+              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
+              variants={itemVariants}
+            >
               <h5 className="fw-bold">Already Invited?</h5>
               <p>
                 Enter your email and password to help us test the platform in
@@ -223,9 +307,11 @@ export default function FirstLogin() {
               >
                 {loading ? "Logging in..." : "Login"}
               </button>
-            </div>
-
-            <div className="col-12 col-sm-6 col-lg-3">
+            </motion.div>
+            <motion.div
+              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
+              variants={itemVariants}
+            >
               <h5 className="fw-bold">Follow us</h5>
               <p>
                 <a
@@ -234,23 +320,23 @@ export default function FirstLogin() {
                 >
                   Instagram
                 </a>
-                <a href="#" className="text-decoration-none d-block text-dark">
+                {/* <a href="#" className="text-decoration-none d-block text-dark">
                   Facebook
-                </a>
-                <a href="#" className="text-decoration-none d-block text-dark">
+                </a> */}
+                <a
+                  href="https://www.linkedin.com/company/kidgage"
+                  className="text-decoration-none d-block text-dark"
+                >
                   LinkedIn
                 </a>
-                <a href="#" className="text-decoration-none d-block text-dark">
+                {/* <a href="#" className="text-decoration-none d-block text-dark">
                   WhatsApp
-                </a>
+                </a> */}
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-
-        {/* Empty Columns */}
-        <div className="col-12 col-md-1"></div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

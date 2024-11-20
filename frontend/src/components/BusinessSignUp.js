@@ -88,7 +88,7 @@ const BusinessSignUp = () => {
 
     try {
       const response = await axios.post(
-        "https://16.171.204.252/api/users/signup",
+        "https://www.kidgage.com/api/users/signup",
         data
       );
       setSuccess("Successfully sumitted for verification!");
