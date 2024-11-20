@@ -4,6 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import logooo from "../components/assets/images/KIDGAGElogo.png";
 import bannerimggg from "../components/assets/images/Kidgage_Landingpage_Prelaunch.png";
+import "./FirstLogin.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 
 export default function FirstLogin() {
   const [formData, setFormData] = useState({
@@ -136,18 +139,13 @@ export default function FirstLogin() {
                 src={logooo}
                 alt="Kidgage Logo"
                 className="kidlogo img-fluid rounded"
-                style={{
-                  maxWidth: "10%",
-                  minWidth: "22%",
-                  height: "auto",
-                }}
               />
             </div>
           </motion.div>
           <br />
           <motion.div
-            className="row align-items-center min-vh-75"
-            style={{ minHeight: "75vh" }}
+            className="row align-items-center"
+            // style={{ minHeight: "75vh" }}
             variants={containerVariants}
           >
             <motion.div
@@ -178,6 +176,7 @@ export default function FirstLogin() {
                 style={{
                   fontSize: "clamp(1.5rem, 5vw, 2.5rem)",
                   color: "#000",
+                  fontFamily: "gilroy-extrabold",
                 }}
                 variants={itemVariants}
               >
@@ -190,6 +189,7 @@ export default function FirstLogin() {
                 style={{
                   fontSize: "clamp(0.9rem, 3vw, 1.1rem)",
                   color: "#6c757d",
+                  fontFamily: "gilroy-regular",
                 }}
                 variants={itemVariants}
               >
@@ -200,14 +200,18 @@ export default function FirstLogin() {
               <motion.div className="mb-5" variants={itemVariants}>
                 <motion.h5
                   className="mb-2 mt-2 fw-semibold"
-                  style={{ fontSize: "1.5rem", color: "#000" }}
+                  style={{
+                    fontSize: "1.5rem",
+                    color: "#000",
+                    fontFamily: "gilroy-bold",
+                  }}
                   variants={itemVariants}
                 >
                   Get Early Access
                 </motion.h5>
                 <motion.p
                   className="mb-3"
-                  style={{ color: "#6c757d" }}
+                  style={{ color: "#6c757d", fontFamily: "gilroy-regular" }}
                   variants={itemVariants}
                 >
                   Be the first to know when we launch! Join <br /> our exclusive
@@ -238,7 +242,10 @@ export default function FirstLogin() {
                     }}
                     onClick={sendEmail}
                   >
-                    Send
+                    <span className="d-flex gap-3 align-items-center">
+                      Send
+                      <FontAwesomeIcon icon={faPaperPlane} />
+                    </span>
                   </button>
                 </div>
               </motion.div>
@@ -252,8 +259,10 @@ export default function FirstLogin() {
               className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
               variants={itemVariants}
             >
-              <h5 className="fw-bold">For Parents</h5>
-              <p>
+              <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
+                For Parents
+              </h5>
+              <p style={{ fontFamily: "gilroy-regular" }}>
                 Discover creative ways to support your child's growth with a
                 platform where fun meets development – all in one place!
               </p>
@@ -262,8 +271,10 @@ export default function FirstLogin() {
               className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
               variants={itemVariants}
             >
-              <h5 className="fw-bold">For Providers</h5>
-              <p>
+              <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
+                For Providers
+              </h5>
+              <p style={{ fontFamily: "gilroy-regular" }}>
                 Partner with us to connect with families who value growth and
                 health. Together, let's inspire progress and create brighter
                 futures for the next generation!
@@ -273,8 +284,10 @@ export default function FirstLogin() {
               className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
               variants={itemVariants}
             >
-              <h5 className="fw-bold">Already Invited?</h5>
-              <p>
+              <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
+                Already Invited?
+              </h5>
+              <p style={{ fontFamily: "gilroy-regular" }}>
                 Enter your email and password to help us test the platform in
                 closed beta.
               </p>
@@ -312,8 +325,10 @@ export default function FirstLogin() {
               className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
               variants={itemVariants}
             >
-              <h5 className="fw-bold">Follow us</h5>
-              <p>
+              <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
+                Follow us
+              </h5>
+              <p style={{ fontFamily: "gilroy-regular" }}>
                 <a
                   href="http://Instagram.com/mykidgage"
                   className="text-decoration-none d-block text-dark"

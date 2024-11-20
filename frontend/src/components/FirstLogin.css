@@ -1,0 +1,15 @@
+.kidlogo {
+  width: 12rem;
+}
+
+@media (max-width: 768px) {
+  .kidlogo {
+    width: 8rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .kidlogo {
+    width: 10rem;
+  }
+}
