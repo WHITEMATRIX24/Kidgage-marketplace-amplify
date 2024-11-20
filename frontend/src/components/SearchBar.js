@@ -46,7 +46,7 @@ const SearchBar = ({ onSearch }) => {
     const fetchCourseTypes = async () => {
       try {
         const response = await axios.get(
-          "http://16.171.204.252/api/course-category/categories"
+          "https://16.171.204.252/api/course-category/categories"
         );
         // Assuming the response is an array of objects and each object has a 'name' property for the category
         const categoryNames = response.data.map((category) => category.name);

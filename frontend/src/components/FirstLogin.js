@@ -27,7 +27,7 @@ export default function FirstLogin() {
 
     try {
       const response = await fetch(
-        "http://16.171.204.252/api/users/send-email",
+        "https://16.171.204.252/api/users/send-email",
         {
           method: "POST",
           headers: {

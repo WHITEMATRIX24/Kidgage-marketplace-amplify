@@ -34,7 +34,7 @@ const UpcomingEvents = () => {
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://16.171.204.252/api/posters");
+        const response = await fetch("https://16.171.204.252/api/posters");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
