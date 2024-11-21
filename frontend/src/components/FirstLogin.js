@@ -157,13 +157,13 @@ export default function FirstLogin() {
                 style={{
                   width: "100%",
                   maxWidth: "500px",
-                  paddingBottom: "66.67%",
+                  // paddingBottom: "66.67%",
                 }}
               >
                 <img
                   src={bannerimggg}
                   alt="Kid with tablet"
-                  className="position-absolute top-0 start-0 w-100 h-100 rounded object-fit-cover"
+                  className="w-75 h-75 rounded object-fit-contain"
                 />
               </div>
             </motion.div>
@@ -188,7 +188,6 @@ export default function FirstLogin() {
                 className="mb-5"
                 style={{
                   fontSize: "clamp(0.9rem, 3vw, 1.1rem)",
-                  color: "#6c757d",
                   fontFamily: "gilroy-regular",
                 }}
                 variants={itemVariants}
@@ -211,7 +210,7 @@ export default function FirstLogin() {
                 </motion.h5>
                 <motion.p
                   className="mb-3"
-                  style={{ color: "#6c757d", fontFamily: "gilroy-regular" }}
+                  style={{ fontFamily: "gilroy-regular" }}
                   variants={itemVariants}
                 >
                   Be the first to know when we launch! Join <br /> our exclusive
@@ -252,11 +251,11 @@ export default function FirstLogin() {
             </motion.div>
           </motion.div>
           <motion.div
-            className="row mt-0 mx-0 mx-md-2 gy-4 mb-5"
+            className="row mt-4 mx-0 mx-md-2 gy-4 mb-5"
             variants={containerVariants}
           >
             <motion.div
-              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
+              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0 pe-5"
               variants={itemVariants}
             >
               <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
@@ -269,6 +268,7 @@ export default function FirstLogin() {
             </motion.div>
             <motion.div
               className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
+              style={{ paddingRight: "4rem" }}
               variants={itemVariants}
             >
               <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
@@ -281,7 +281,7 @@ export default function FirstLogin() {
               </p>
             </motion.div>
             <motion.div
-              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
+              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0 pe-5"
               variants={itemVariants}
             >
               <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
