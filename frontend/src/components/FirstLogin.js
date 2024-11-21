@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import logooo from "../components/assets/images/KIDGAGElogo.png";
-import bannerimggg from "../components/assets/images/Kidgage_Landingpage_Prelaunch.png";
+import bannerimggg from "../components/assets/images/kid.jpg";
 import "./FirstLogin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
+import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function FirstLogin() {
   const [formData, setFormData] = useState({
@@ -133,13 +134,30 @@ export default function FirstLogin() {
       </style>
       <motion.div className="row" variants={containerVariants}>
         <div className="col-12 col-lg-10 mx-auto px-0 d-flex flex-column">
-          <motion.div className="ms-0 ms-md-3" variants={imageVariants}>
+          <motion.div
+            className="ms-0 d-flex align-items-center justify-content-between"
+            variants={imageVariants}
+          >
             <div style={{ width: "auto" }} className="ms-0 ms-md-1 mb-0 mt-3">
               <img
                 src={logooo}
                 alt="Kidgage Logo"
                 className="kidlogo img-fluid rounded"
               />
+            </div>
+            <div className="firstPageLogoContainer d-flex gap-3">
+              <a
+                href="http://Instagram.com/mykidgage"
+                className="text-decoration-none d-block text-dark"
+              >
+                <FontAwesomeIcon icon={faInstagram} size="2xl" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/kidgage"
+                className="text-decoration-none d-block text-dark"
+              >
+                <FontAwesomeIcon icon={faLinkedin} size="2xl" />
+              </a>
             </div>
           </motion.div>
           <br />
@@ -149,21 +167,21 @@ export default function FirstLogin() {
             variants={containerVariants}
           >
             <motion.div
-              className="col-12 col-lg-6 d-flex justify-content-center align-items-center mb-4 mb-lg-0"
+              className="col-12 col-lg-6 d-flex justify-content-start align-items-center mb-4 mb-lg-0"
               variants={imageVariants}
             >
               <div
-                className="position-relative"
-                style={{
-                  width: "100%",
-                  maxWidth: "500px",
-                  // paddingBottom: "66.67%",
-                }}
+                className="position-relative landingpageBannerContainer"
+                // style={{
+                //  width: "100%",
+                //  maxWidth: "500px",
+                // paddingBottom: "66.67%",
+                //}}
               >
                 <img
                   src={bannerimggg}
                   alt="Kid with tablet"
-                  className="w-75 h-75 rounded object-fit-contain"
+                  className="rounded object-fit-contain w-100 h-100"
                 />
               </div>
             </motion.div>
@@ -174,9 +192,9 @@ export default function FirstLogin() {
               <motion.h1
                 className="mb-4 mt-5 fw-bolder"
                 style={{
-                  fontSize: "clamp(1.5rem, 5vw, 2.5rem)",
+                  fontSize: "30px",
                   color: "#000",
-                  fontFamily: "gilroy-extrabold",
+                  fontFamily: "gilroy-bold",
                 }}
                 variants={itemVariants}
               >
@@ -187,7 +205,7 @@ export default function FirstLogin() {
               <motion.p
                 className="mb-5"
                 style={{
-                  fontSize: "clamp(0.9rem, 3vw, 1.1rem)",
+                  // fontSize: "clamp(0.9rem, 3vw, 1.1rem)",
                   fontFamily: "gilroy-regular",
                 }}
                 variants={itemVariants}
@@ -196,7 +214,7 @@ export default function FirstLogin() {
                 well-being. Join us in this journey of play, <br /> progress,
                 and purpose.
               </motion.p>
-              <motion.div className="mb-5" variants={itemVariants}>
+              <motion.div className="mb-md-5" variants={itemVariants}>
                 <motion.h5
                   className="mb-2 mt-2 fw-semibold"
                   style={{
@@ -251,11 +269,11 @@ export default function FirstLogin() {
             </motion.div>
           </motion.div>
           <motion.div
-            className="row mt-4 mx-0 mx-md-2 gy-4 mb-5"
+            className="row mt-4 mx-0 gy-4 mb-5"
             variants={containerVariants}
           >
             <motion.div
-              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0 pe-5"
+              className="col-12 col-sm-6 col-lg-3 ps-0 ps-lg-0 pe-5"
               variants={itemVariants}
             >
               <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
@@ -267,7 +285,7 @@ export default function FirstLogin() {
               </p>
             </motion.div>
             <motion.div
-              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
+              className="col-12 col-sm-6 col-lg-3 ps-0 ps-lg-0"
               style={{ paddingRight: "4rem" }}
               variants={itemVariants}
             >
@@ -281,7 +299,7 @@ export default function FirstLogin() {
               </p>
             </motion.div>
             <motion.div
-              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0 pe-5"
+              className="col-12 col-sm-6 col-lg-2 ps-0 ps-lg-0 pe-3"
               variants={itemVariants}
             >
               <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
@@ -291,6 +309,11 @@ export default function FirstLogin() {
                 Enter your email and password to help us test the platform in
                 closed beta.
               </p>
+            </motion.div>
+            <motion.div
+              className="col-12 col-sm-6 col-lg-4 ps-0 ps-lg-0"
+              variants={itemVariants}
+            >
               {error && (
                 <div className="alert alert-danger mt-3" role="alert">
                   {error}
@@ -299,7 +322,7 @@ export default function FirstLogin() {
               <input
                 name="name"
                 type="text"
-                className="form-control mb-2"
+                className="form-control mb-2 firstPageLoginUserName"
                 placeholder="Username"
                 onChange={handleChange}
                 value={formData.name}
@@ -307,25 +330,20 @@ export default function FirstLogin() {
               <input
                 name="password"
                 type="password"
-                className="form-control mb-2"
+                className="form-control mb-2 firstPageLoginPassword"
                 placeholder="Password"
                 onChange={handleChange}
                 value={formData.password}
               />
               <button
-                className="btn p-2 w-100 text-white"
+                className="btn p-2 text-white firstPageLoginButton"
                 style={{ backgroundColor: "#ACC29E" }}
                 onClick={handleSubmit}
                 disabled={loading}
               >
                 {loading ? "Logging in..." : "Login"}
               </button>
-            </motion.div>
-            <motion.div
-              className="col-12 col-sm-6 col-lg-3 ps-3 ps-lg-0"
-              variants={itemVariants}
-            >
-              <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
+              {/* <h5 className="fw-bold" style={{ fontFamily: "gilroy-bold" }}>
                 Follow us
               </h5>
               <p style={{ fontFamily: "gilroy-regular" }}>
@@ -335,19 +353,15 @@ export default function FirstLogin() {
                 >
                   Instagram
                 </a>
-                {/* <a href="#" className="text-decoration-none d-block text-dark">
-                  Facebook
-                </a> */}
+
                 <a
                   href="https://www.linkedin.com/company/kidgage"
                   className="text-decoration-none d-block text-dark"
                 >
                   LinkedIn
                 </a>
-                {/* <a href="#" className="text-decoration-none d-block text-dark">
-                  WhatsApp
-                </a> */}
-              </p>
+
+              </p> */}
             </motion.div>
           </motion.div>
         </div>

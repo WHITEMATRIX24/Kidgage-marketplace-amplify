@@ -1,11 +1,49 @@
 .kidlogo {
   width: 12rem;
 }
+.firstPageLoginUserName {
+  width: 18rem;
+}
+.firstPageLoginPassword {
+  width: 18rem;
+}
+.firstPageLoginButton {
+  width: 18rem;
+}
+
+.landingpageBannerContainer {
+  width: 70%;
+}
+
+.firstPageLogoContainer {
+  margin-right: 8.5rem;
+}
+
+@media (max-width: 1025px) {
+  .landingpageBannerContainer {
+    width: 100%;
+  }
+  .firstPageLogoContainer {
+    margin-right: 0px;
+  }
+}
 
 @media (max-width: 768px) {
   .kidlogo {
     width: 8rem;
   }
+  .firstPageLoginUserName {
+    width: 300px;
+  }
+  .firstPageLoginPassword {
+    width: 300px;
+  }
+  .firstPageLoginButton {
+    width: 300px;
+  }
+  /* .landingpageBannerContainer {
+    width: 100%;
+  } */
 }
 
 @media (min-width: 1400px) {
