@@ -20,6 +20,7 @@ export default function FirstLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [emailLoading, setEmailLoading] = useState(false);
 
   const sendEmail = async () => {
     setMessage("");
@@ -29,10 +30,11 @@ export default function FirstLogin() {
       setError("Email is required");
       return;
     }
+    setEmailLoading(true);
 
     try {
       const response = await fetch(
-        "https://www.kidgage.com/api/users/send-email",
+        "http://localhost:5000/api/users/send-email",
         {
           method: "POST",
           headers: {
@@ -41,6 +43,22 @@ export default function FirstLogin() {
           body: JSON.stringify({ email }),
         }
       );
+
+      const responseToKidgage = await fetch(
+        "http://localhost:5000/api/users/send-email-to",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      if (response.status === 200 && responseToKidgage.status === 200) {
+        setEmail("");
+        alert("Email sent successfully");
+      }
 
       if (response.ok) {
         setMessage("Email sent successfully!");
@@ -51,6 +69,8 @@ export default function FirstLogin() {
     } catch (error) {
       setError("An error occurred. Please try again.");
       console.error(error);
+    } finally {
+      setEmailLoading(false);
     }
   };
 
@@ -190,9 +210,8 @@ export default function FirstLogin() {
               variants={itemVariants}
             >
               <motion.h1
-                className="mb-4 mt-5 fw-bolder"
+                className="mb-4 mt-5 fw-bolder imageSideHeader"
                 style={{
-                  fontSize: "30px",
                   color: "#000",
                   fontFamily: "gilroy-bold",
                 }}
@@ -249,6 +268,7 @@ export default function FirstLogin() {
                       width: "100%",
                       maxWidth: "300px",
                     }}
+                    disabled={true}
                   />
                   <button
                     className="btn text-white p-2 w-100 w-sm-auto"
@@ -258,6 +278,7 @@ export default function FirstLogin() {
                       maxWidth: "90px",
                     }}
                     onClick={sendEmail}
+                    disabled={true}
                   >
                     <span className="d-flex gap-3 align-items-center">
                       Send
