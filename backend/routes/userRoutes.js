@@ -272,23 +272,17 @@ router.post("/send-email", async (req, res) => {
         pass: "t0zHp1RBgsmX", // Your Zoho Mail password or app password
       },
     });
-
     // Email options
     const mailOptions = {
       from: `"Kidgage Support" <hello@kidgage.com>`, // Sender name and address
       to: email,
       subject: "Welcome to Kidgage!",
       text: `Dear user,
-    
-    Welcome to Kidgage! We are thrilled to have you join our community.
-    
-    
-    Thank you for choosing Kidgage. We look forward to serving you!
-    
-    Warm regards,
-    The Kidgage Team`,
+      Welcome to Kidgage! We are thrilled to have you join our community.
+      Thank you for choosing Kidgage. We look forward to serving you!
+      Warm regards,
+      The Kidgage Team`,
     };
-
     // Send email
     await transporter.sendMail(mailOptions);
     res.status(200).send({ message: "Email sent successfully!" });
@@ -299,7 +293,14 @@ router.post("/send-email", async (req, res) => {
 });
 
 router.post("/send-email-to", async (req, res) => {
-  const { email } = req.body;
+  const {
+    email,
+    parentName,
+    kidsAge,
+    location,
+    noOfChild,
+    kigageGoalsArray,
+  } = req.body;
 
   if (!email) {
     return res.status(400).send({ error: "Email is required" });
@@ -316,18 +317,24 @@ router.post("/send-email-to", async (req, res) => {
         pass: "t0zHp1RBgsmX", // Your Zoho Mail password or app password
       },
     });
-
     // Email options
     const mailOptions = {
       from: `"Kidgage Support" <hello@kidgage.com>`, // Sender name and address
       to: "hello@kidgage.com",
       subject: "New Enquiry",
       text: `Dear kidgage,
-      
-      New enquiry from email: ${email}
-   `,
-    };
 
+        New enquiry from email:  ${email} 
+
+        Enquiry Details: 
+        
+        ParentName: ${parentName},
+        No of kids: ${noOfChild},
+        Ages: ${kidsAge},
+        Location: ${location},
+        Kidgage goals: ${kigageGoalsArray}
+     `,
+    };
     // Send email
     await transporter.sendMail(mailOptions);
     res.status(200).send({ message: "Email sent successfully!" });
