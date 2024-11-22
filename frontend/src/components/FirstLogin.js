@@ -34,7 +34,7 @@ export default function FirstLogin() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/send-email",
+        "https://www.kidgage.com/api/users/send-email",
         {
           method: "POST",
           headers: {
@@ -45,7 +45,7 @@ export default function FirstLogin() {
       );
 
       const responseToKidgage = await fetch(
-        "http://localhost:5000/api/users/send-email-to",
+        "https://www.kidgage.com/api/users/send-email-to",
         {
           method: "POST",
           headers: {
