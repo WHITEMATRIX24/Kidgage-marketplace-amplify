@@ -1,0 +1,114 @@
+.bookingmodal {
+    position: relative;
+    background-color: #ffffff8a;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    /* For Safari support */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    width: 30%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.bookingmodal-overlay {
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Close button styles */
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.modal-close-button:hover {
+    color: #f44336;
+}
+
+.bookingmodal-form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.bookingmodal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.submit-button {
+    background-color: #99CC99;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width:1200px) {
+    .bookingmodal {
+        width: 65%;
+    }
+}
+
+@media (max-width:500px) {
+    .bookingmodal {
+        width: 80%;
+    }
+}

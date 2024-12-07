@@ -225,26 +225,36 @@ const Activities = () => {
       console.log("API Response:", response.data);
 
       if (response.data && Array.isArray(response.data)) {
-        setCourses(response.data); // Set courses in state
+        // Filter courses based on conditions: active is true, startDate < today, endDate > today
+        const today = new Date();
+        const filteredCourses = response.data.filter((course) => {
+          const startDate = new Date(course.startDate);
+          const endDate = new Date(course.endDate);
+          return (
+            course.active === "true" && startDate < today && endDate > today
+          );
+        });
 
-        // Fetch provider data for each course
-        const providerPromises = response.data.map(async (course) => {
+        setCourses(filteredCourses); // Set filtered courses in state
+
+        // Fetch provider data for each filtered course
+        const providerPromises = filteredCourses.map(async (course) => {
           if (course.providerId) {
             try {
-              const providerResponse = await axios.get(
-                `https://www.kidgage.com/api/users/provider/${course.providerId}`
-              );
-              console.log(
-                `Provider Response for course ${course._id}:`,
+              const providerResponse = await axios.get(`
+                https://www.kidgage.com/api/users/provider/${course.providerId}
+              `);
+              console.log(`
+                Provider Response for course ${course._id}:,
                 providerResponse.data
-              );
+              `);
 
               return { [course.providerId]: providerResponse.data }; // Return provider data mapped by providerId
             } catch (providerError) {
-              console.error(
-                `Error fetching provider for course ${course._id}:`,
+              console.error(`
+                Error fetching provider for course ${course._id}:,
                 providerError
-              );
+              `);
               return null;
             }
           } else {
@@ -592,9 +602,9 @@ const Activities = () => {
                         const ageRange =
                           course.ageGroup && course.ageGroup.length > 0
                             ? calculateAgeRange(
-                                course.ageGroup[0].ageStart,
-                                course.ageGroup[0].ageEnd
-                              )
+                              course.ageGroup[0].ageStart,
+                              course.ageGroup[0].ageEnd
+                            )
                             : "Unavailable";
                         return isAgeGroupMatch(ageRange, selectedDob); // Filter based on age group
                       }
@@ -624,9 +634,9 @@ const Activities = () => {
                         const ageRange =
                           course.ageGroup && course.ageGroup.length > 0
                             ? calculateAgeRange(
-                                course.ageGroup[0].ageStart,
-                                course.ageGroup[0].ageEnd
-                              )
+                              course.ageGroup[0].ageStart,
+                              course.ageGroup[0].ageEnd
+                            )
                             : "Unavailable";
                         return isAgeGroupMatch(ageRange, selectedDob);
                       }
@@ -634,10 +644,7 @@ const Activities = () => {
                     }),
                 ].map((course) => (
                   <div className="activity-card cards" key={course._id}>
-                    <div
-                      className="activity-image"
-                      onClick={() => handleClick(course._id)}
-                    >
+                    <div className="activity-image">
                       {/* Display image if available */}
                       {course.images && course.images.length > 0 ? (
                         <img src={course.images[0]} alt="Course Image" />
@@ -651,118 +658,110 @@ const Activities = () => {
                       )}
                     </div>
                     <div className="activity-details">
-                      <div
-                        className="activity-card-in"
-                        onClick={() => handleClick(course._id)}
-                      >
+                      <div className="activity-card-in">
                         <div className="info-with-img">
                           <div className="descp">
-                            <h3>{course.name}</h3>
+                            <div className="card-details-container">
+                              <h3>{course.name}</h3>
 
-                            <div className="act-location">
-                              {/* <i className="fa-solid fa-location-dot"></i> */}
-                              <div
-                                style={{ display: "flex", marginLeft: "5px" }}
-                              >
-                                {/* Display location if available */}
-                                {course.location &&
-                                course.location.length > 0 ? (
-                                  course.location.map((loc, index) => (
-                                    <div
-                                      key={index}
-                                      className="activity-location"
-                                    >
-                                      <p style={{ marginRight: "8px" }}>
-                                        <i
-                                          className="fa-solid fa-location-dot"
-                                          style={{ marginRight: "5px" }}
-                                        ></i>
-                                        {loc.address}
-                                      </p>
-                                    </div>
-                                  ))
-                                ) : (
-                                  <p>No locations available</p>
-                                )}
-                              </div>
-                            </div>
-                            <span
-                              style={{ color: "#5EA858", fontWeight: "bold" }}
-                            >
-                              QAR.{" "}
-                              {`${course.feeAmount} (${formatFeeType(
-                                course.feeType
-                              )})`}
-                            </span>
-                            <div className="info-row">
-                              {/* Display age range if applicable */}
-                              <img
-                                src={getGenderImage(course.preferredGender)}
-                                alt="gender"
-                                style={{
-                                  width: "5%",
-                                  height: "auto",
-                                  marginTop: "-1%",
-                                  marginRight: "10px",
-                                }}
-                              />
-                              <div className="age-group">
-                                {course.ageGroup &&
-                                course.ageGroup.length > 0 ? (
-                                  <span className="age-text">
-                                    {calculateAgeRange(
-                                      course.ageGroup[0].ageStart,
-                                      course.ageGroup[0].ageEnd
-                                    )}
-                                  </span>
-                                ) : (
-                                  <span className="age-text">Unavailable</span>
-                                )}
-                              </div>
-                              <img
-                                src={calendar}
-                                alt="calendar"
-                                style={{
-                                  width: "5%",
-                                  height: "auto",
-                                  marginTop: "-2%",
-                                }}
-                              />
-                              <div className="day-selector">
-                                {allDays.map((day) => (
-                                  <span
-                                    key={day}
-                                    className={`day ${
-                                      course.days.includes(day) ? "active" : ""
-                                    }`}
-                                  >
-                                    {day}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                            {/* Flex container for description and logo image */}
-                            <div className="description-logo-container">
-                              <p className="activity-description">
-                                {course.description ||
-                                  "No description available"}
-                              </p>
-                              <div className="additional-info">
-                                <div className="info-image">
-                                  {/* Display additional info image if available */}
-                                  {providers[course.providerId] &&
-                                  providers[course.providerId].logo ? (
-                                    <img
-                                      src={providers[course.providerId].logo}
-                                      alt="Provider"
-                                    />
+                              <div className="act-location">
+                                {/* <i className="fa-solid fa-location-dot"></i> */}
+                                <div
+                                  style={{ display: "flex", marginLeft: "5px" }}
+                                >
+                                  {/* Display location if available */}
+                                  {course.location &&
+                                    course.location.length > 0 ? (
+                                    course.location.map((loc, index) => (
+                                      <div
+                                        key={index}
+                                        className="activity-location"
+                                      >
+                                        <p style={{ marginRight: "8px" }}>
+                                          <i
+                                            className="fa-solid fa-location-dot"
+                                            style={{ marginRight: "5px" }}
+                                          ></i>
+                                          {loc.address}
+                                        </p>
+                                      </div>
+                                    ))
                                   ) : (
-                                    <img
-                                      src={placeholderLogo}
-                                      alt="Placeholder Provider"
-                                    />
+                                    <p>No locations available</p>
                                   )}
                                 </div>
+                              </div>
+                              <span
+                                style={{ color: "#5EA858", fontWeight: "bold" }}
+                              >
+                                QAR.{" "}
+                                {`${course.feeAmount} (${formatFeeType(
+                                  course.feeType
+                                )})`}
+                              </span>
+                              <div className="info-row">
+                                {/* Display age range if applicable */}
+                                <div className="card-age-container">
+                                  <img
+                                    src={getGenderImage(course.preferredGender)}
+                                    alt="gender"
+                                  />
+                                  <div className="age-group">
+                                    {course.ageGroup &&
+                                      course.ageGroup.length > 0 ? (
+                                      <span className="age-text">
+                                        {calculateAgeRange(
+                                          course.ageGroup[0].ageStart,
+                                          course.ageGroup[0].ageEnd
+                                        )}
+                                      </span>
+                                    ) : (
+                                      <span className="age-text">
+                                        Unavailable
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="card-week-container">
+                                  <img src={calendar} alt="calendar" />
+                                  <div className="day-selector">
+                                    {allDays.map((day) => (
+                                      <span
+                                        key={day}
+                                        className={`day ${course.days.includes(day)
+                                          ? "active"
+                                          : ""
+                                          }`}
+                                      >
+                                        {day}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                              {/* Flex container for description and logo image */}
+                              <div className="description-logo-container">
+                                <p className="activity-description">
+                                  {course.description ||
+                                    "No description available"}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="additional-info">
+                              <div className="info-image">
+                                {/* Display additional info image if available */}
+                                {providers[course.providerId] &&
+                                  providers[course.providerId].logo ? (
+                                  <img
+                                    src={providers[course.providerId].logo}
+                                    alt="Provider"
+                                  />
+                                ) : (
+                                  <img
+                                    src={placeholderLogo}
+                                    alt="Placeholder Provider"
+                                  />
+                                )}
                               </div>
                             </div>
                           </div>
@@ -781,12 +780,11 @@ const Activities = () => {
 
                       {/* Activity Actions Section */}
                       <div
-                        className={`activity-actions ${
-                          isExpanded ? "visible" : "hidden"
-                        }`}
+                        className={`activity-actions ${isExpanded ? "visible" : "hidden"
+                          }`}
                       >
                         <div className="activity-buttons">
-                          <button
+                          {/* <button
                             className="book-now"
                             style={{ backgroundColor: "#5EA858" }}
                             onClick={async () => {
@@ -827,7 +825,7 @@ const Activities = () => {
                             >
                               Book Now
                             </span>
-                          </button>
+                          </button> */}
 
                           <button
                             className="share"
@@ -845,13 +843,13 @@ const Activities = () => {
                           <button
                             className="save"
                             style={{ backgroundColor: "#3880C4" }}
+                            onClick={() => handleClick(course._id)}
                           >
-                            <i className="fa-regular fa-bookmark"></i>
                             <span
                               style={{ marginLeft: "5px", fontWeight: "bold" }}
                             >
                               {" "}
-                              Save
+                              View more
                             </span>
                           </button>
                         </div>
@@ -897,16 +895,16 @@ const Activities = () => {
                       const ageRange =
                         course.ageGroup && course.ageGroup.length > 0
                           ? calculateAgeRange(
-                              course.ageGroup[0].ageStart,
-                              course.ageGroup[0].ageEnd
-                            )
+                            course.ageGroup[0].ageStart,
+                            course.ageGroup[0].ageEnd
+                          )
                           : "Unavailable";
                       return isAgeGroupMatch(ageRange, selectedDob); // Filter based on age group
                     }).length === 0 && (
-                    <p>
-                      There are no courses available under the selections made.
-                    </p>
-                  )}
+                      <p>
+                        There are no courses available under the selections made.
+                      </p>
+                    )}
                 </>
               )}
             </div>

@@ -137,12 +137,12 @@ const ActivityInfo = () => {
               >
                 <FontAwesomeIcon icon={faLocationArrow} /> Share
               </button>
-              <button
+              {/* <button
                 className="activity-info-action-btn"
                 onClick={() => addToWishlist(course)}
               >
                 <FontAwesomeIcon icon={faBookmark} /> Save
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="info-loading-dots">
@@ -181,12 +181,12 @@ const ActivityInfo = () => {
             <button className="activity-info-action-btn" onClick={handleShare}>
               <FontAwesomeIcon icon={faLocationArrow} /> Share
             </button>
-            <button
+            {/* <button
               className="activity-info-action-btn"
               onClick={() => addToWishlist(course)}
             >
               <FontAwesomeIcon icon={faBookmark} /> Save
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -211,6 +211,7 @@ const ActivityInfo = () => {
           <div className="activity-info-right-section">
             <Calendar
               providerName={provider.username}
+              providerEmail={provider.email}
               courseName={course.name}
               url={window.location.href} // Pass the current URL
               feeAmount={course.feeAmount} // Pass the fee amount
