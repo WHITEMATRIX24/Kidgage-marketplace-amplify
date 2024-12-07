@@ -52,10 +52,10 @@ router.post("/send-booking-emails", async (req, res) => {
     try {
         // Path to the footer image
         // const footerImagePath = path.join(__dirname, "footer-image.jpg"); // Replace with your image path
-        const footerImagePath = path.join(
-            __dirname,
-            "../assets/E_sign-12.png"
-        );
+        // const footerImagePath = path.join(
+        //     __dirname,
+        //     "../assets/E_sign-12.png"
+        // );
 
         // Parent Email Content
         const parentEmailContent = `
@@ -74,7 +74,7 @@ router.post("/send-booking-emails", async (req, res) => {
         </ul>
         <p>The provider will contact you directly to confirm the booking or share further details.</p>
         <br/>
-        <img src="cid:footerImage" alt="Footer Image" style="width: 100%; max-width: 600px;" />
+        
       `;
 
         // Provider Email Content
@@ -93,7 +93,7 @@ router.post("/send-booking-emails", async (req, res) => {
         </ul>
         <p>Please contact the parent directly at ${parentPhone} to confirm the booking or discuss further details.</p>
         <br/>
-        <img src="cid:footerImage" alt="Footer Image" style="width: 100%; max-width: 600px;" />
+        
       `;
 
         // Sending email to Parent
@@ -102,13 +102,13 @@ router.post("/send-booking-emails", async (req, res) => {
             to: parentEmail, // Parent's email
             subject: "Your Kidgage Booking Request", // Subject line
             html: parentEmailContent, // HTML body
-            attachments: [
-                {
-                    filename: "footer-image.jpg", // File name
-                    path: footerImagePath, // Image path
-                    cid: "footerImage", // Content-ID for inline embedding
-                },
-            ],
+            // attachments: [
+            //     {
+            //         filename: "footer-image.jpg", // File name
+            //         path: footerImagePath, // Image path
+            //         cid: "footerImage", // Content-ID for inline embedding
+            //     },
+            // ],
         });
 
         // Sending email to Provider
@@ -117,13 +117,13 @@ router.post("/send-booking-emails", async (req, res) => {
             to: providerEmail, // Provider's email
             subject: "New Booking Request", // Subject line
             html: providerEmailContent, // HTML body
-            attachments: [
-                {
-                    filename: "footer-image.jpg", // File name
-                    path: footerImagePath, // Image path
-                    cid: "footerImage", // Content-ID for inline embedding
-                },
-            ],
+            // attachments: [
+            //     {
+            //         filename: "footer-image.jpg", // File name
+            //         path: footerImagePath, // Image path
+            //         cid: "footerImage", // Content-ID for inline embedding
+            //     },
+            // ],
         });
 
         res.status(200).json({ message: "Emails sent successfully!" });
