@@ -82,13 +82,14 @@ const CTypeSlider = ({ viewAll }) => {
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 5,
-    // autoplay: true,
-    // autoplaySpeed: 5000,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     pauseOnHover: true,
     cssEase: "ease-in-out",
+    rtl: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -124,9 +125,8 @@ const CTypeSlider = ({ viewAll }) => {
   return (
     <div className="slider-container">
       <h2 className="slider-title">Top Activities</h2>
-      <p className="slider-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas massa
-        lacus.
+      <p className="slider-description" style={{ padding: "10px" }}>
+        Fun that shapes the future.
       </p>
       {loading ? (
         <div className="loading-dots1">
