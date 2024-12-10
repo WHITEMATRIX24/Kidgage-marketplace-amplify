@@ -1,5 +1,5 @@
 .footer {
-  background-color: #99CC99;
+  background-color: #acc29e;
   color: #ffffff;
   padding: 100px 80px 80px 80px;
   font-family: 'Playfair Display', serif;
@@ -56,7 +56,7 @@
 
 @media (max-width: 1150px) {
   .footer {
-    background-color: #99CC99;
+    background-color: #acc29e;
     color: #ffffff;
     padding: 50px 30px 50px 30px;
     font-family: 'Playfair Display', serif;
