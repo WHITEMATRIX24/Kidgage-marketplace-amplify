@@ -15,6 +15,7 @@ import Activities from "./components/Activities";
 import ProviderInfo from "./components/Provider";
 import AdminSignIn from "./components/FirstLogin";
 import "share-api-polyfill";
+import RouteProtector from "./components/RouteProtector";
 
 function App() {
   return (
@@ -29,19 +30,21 @@ function AppContent() {
     <ScrollToTop>
       <Routes>
         <Route path="/" element={<AdminSignIn />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Login />} />
-        <Route path="/personal-signup" element={<PersonalSignUp />} />
-        <Route path="/business-signup" element={<BusinessSignUp />} />
-        <Route path="/personal-signin" element={<PersonalSignIn />} />{" "}
-        {/* Personal sign-in route */}
-        <Route path="/business-signin" element={<BusinessSignIn />} />
-        <Route path="/chatbotpage" element={<ChatbotPage />} />
-        <Route path="/wishlist" element={<WishlistPage />} />
-        <Route path="/shops" element={<Shops />} />
-        <Route path="/activity-info/:id" element={<ActivityInfo />} />
-        <Route path="/activityinfo/:id/:name" element={<Activities />} />
-        <Route path="/providerinfo" element={<ProviderInfo />} />
+        <Route element={<RouteProtector />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Login />} />
+          <Route path="/personal-signup" element={<PersonalSignUp />} />
+          <Route path="/business-signup" element={<BusinessSignUp />} />
+          <Route path="/personal-signin" element={<PersonalSignIn />} />{" "}
+          {/* Personal sign-in route */}
+          <Route path="/business-signin" element={<BusinessSignIn />} />
+          <Route path="/chatbotpage" element={<ChatbotPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/shops" element={<Shops />} />
+          <Route path="/activity-info/:id" element={<ActivityInfo />} />
+          <Route path="/activityinfo/:id/:name" element={<Activities />} />
+          <Route path="/providerinfo" element={<ProviderInfo />} />
+        </Route>
       </Routes>
     </ScrollToTop>
   );

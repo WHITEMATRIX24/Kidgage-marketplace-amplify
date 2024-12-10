@@ -217,6 +217,10 @@ export default function FirstLogin() {
     ) {
       setLoading(false);
       navigate("/home");
+      sessionStorage.setItem(
+        "checkIsLogged",
+        JSON.stringify({ isLogged: true })
+      );
     } else {
       setError("Invalid username or password");
       setLoading(false);

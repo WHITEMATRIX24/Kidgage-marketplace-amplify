@@ -210,6 +210,7 @@ const ActivityInfo = () => {
           </div>
           <div className="activity-info-right-section">
             <Calendar
+              providerId={provider._id}
               providerName={provider.username}
               providerEmail={provider.email}
               courseName={course.name}

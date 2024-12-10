@@ -6,7 +6,7 @@ import Modal from "react-modal";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt, FaWhatsapp } from "react-icons/fa";
 import axios from "axios";
-import './Calendar.css';
+import "./Calendar.css";
 const CustomDatePickerWrapper = styled.div`
    height:650px;
   width: 450px;
@@ -512,7 +512,7 @@ const CustomDatePickerWrapper = styled.div`
   }
 `;
 
-const Calendar = ({ providerName, providerEmail, courseName }) => {
+const Calendar = ({ providerName, providerEmail, courseName, providerId }) => {
   const location = useLocation();
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState("");
@@ -589,7 +589,6 @@ const Calendar = ({ providerName, providerEmail, courseName }) => {
     return date.toLocaleDateString(undefined, options);
   };
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -597,12 +596,21 @@ const Calendar = ({ providerName, providerEmail, courseName }) => {
 
   const handleModalSubmit = async () => {
     try {
-      await fetch("https://www.kidgage.com/api/leads/track", {
+      const res = await fetch("https://www.kidgage.com/api/leads/track", {
         method: "POST",
+        body: JSON.stringify({ ...formData, providerId, courseId }),
         headers: {
           "Content-Type": "application/json",
         },
       });
+      if (res.status === 200) {
+        setFormData({
+          parentName: "",
+          parentEmail: "",
+          parentPhone: "",
+          childAge: "",
+        });
+      }
     } catch (error) {
       console.error("Failed to update lead count:", error);
     }
@@ -612,18 +620,23 @@ const Calendar = ({ providerName, providerEmail, courseName }) => {
         (slot) => slot._id === selectedTime
       );
       try {
-        await axios.post("https://www.kidgage.com/api/leads/send-booking-emails", {
-          parentName: formData.parentName,
-          parentEmail: formData.parentEmail,
-          parentPhone: formData.parentPhone,
-          childAge: formData.childAge,
-          courseName,
-          providerName,
-          selectedDate: formatDate(selectedDate),
-          selectedTime: `${convertTo12HourFormat(timeSlot.from)} to ${convertTo12HourFormat(timeSlot.to)}`,
+        await axios.post(
+          "https://www.kidgage.com/api/leads/send-booking-emails",
+          {
+            parentName: formData.parentName,
+            parentEmail: formData.parentEmail,
+            parentPhone: formData.parentPhone,
+            childAge: formData.childAge,
+            courseName,
+            providerName,
+            selectedDate: formatDate(selectedDate),
+            selectedTime: `${convertTo12HourFormat(
+              timeSlot.from
+            )} to ${convertTo12HourFormat(timeSlot.to)}`,
 
-          providerEmail, // Ensure this field is available
-        });
+            providerEmail, // Ensure this field is available
+          }
+        );
 
         alert("Booking request sent successfully!");
         setIsModalOpen(false);
@@ -639,7 +652,9 @@ const Calendar = ({ providerName, providerEmail, courseName }) => {
         
         Date: ${formattedDate}
         
-        Time: ${convertTo12HourFormat(timeSlot.from)} - ${convertTo12HourFormat(timeSlot.to)}
+        Time: ${convertTo12HourFormat(timeSlot.from)} - ${convertTo12HourFormat(
+          timeSlot.to
+        )}
         
         Parent Name: ${formData.parentName}
 
@@ -659,17 +674,14 @@ const Calendar = ({ providerName, providerEmail, courseName }) => {
         const encodedMessage = encodeURIComponent(message);
         const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         window.open(whatsappURL, "_blank");
-
       } catch (error) {
         console.error("Error sending booking request:", error);
         alert("Failed to send booking request.");
       }
-    }
-    else {
+    } else {
       alert("Please select both a date and a time slot.");
     }
   };
-
 
   const handleBookNow = async () => {
     try {
@@ -700,7 +712,9 @@ Provider: ${providerName}
 
 Date: ${formattedDate}
 
-Time: ${convertTo12HourFormat(timeSlot.from)} - ${convertTo12HourFormat(timeSlot.to)}
+Time: ${convertTo12HourFormat(timeSlot.from)} - ${convertTo12HourFormat(
+        timeSlot.to
+      )}
 
 Parent Name: ${formData.parentName}
 
@@ -739,8 +753,9 @@ ${formData.parentName}
         {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day, index) => (
           <div
             key={day}
-            className={`day ${allowedDays.includes(index) ? "highlighted-day" : ""
-              }`}
+            className={`day ${
+              allowedDays.includes(index) ? "highlighted-day" : ""
+            }`}
           >
             {day}
           </div>
@@ -854,7 +869,6 @@ ${formData.parentName}
           </div>
         </form>
       </Modal>
-
     </CustomDatePickerWrapper>
   );
 };
