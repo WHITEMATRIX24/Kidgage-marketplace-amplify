@@ -39,7 +39,7 @@
   border: none;
   width: 120px;
   padding: 8px 20px;
-  border-radius: 16px;
+  border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -52,12 +52,14 @@
 .activity-info-heading {
   font-size: 34px;
   margin-bottom: 30px;
+  font-weight: bold;
+  width: 50%;
 }
 
 .activity-info-main {
   display: flex;
   gap: 30px;
-  max-height: 100vh;
+  /* max-height: 100vh; */
   margin-bottom: 50px;
 }
 
@@ -65,17 +67,31 @@
   flex: 2;
 }
 
+.activity-info-left-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.activity-info-left-image-container {
+  height: 38rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
 .activity-info-right-section {
   flex: 1;
   height: 100%;
   width: 100%;
   min-width: 400px;
+  margin-top: 69px;
 }
 
 .activity-info-image {
   width: 100%;
-  max-width: 750px;
-  max-height: 50%;
+  height: 100%;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -88,12 +104,20 @@
 
 .activity-info-locations {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   /* Align items to the left */
   align-items: flex-start;
   gap: 20%;
   /* Set a fixed gap of 30px */
   margin-bottom: 20px;
+}
+
+.activity-info-locations-container {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .activity-info-location {
@@ -107,7 +131,6 @@
   margin-bottom: 5px;
 }
 
-
 .provider-trainer-container {
   display: flex;
   justify-content: space-between;
@@ -118,7 +141,9 @@
 }
 
 .activity-info-provider {
-  flex: 1;
+  display: flex;
+  gap: 10px;
+  /* flex: 1; */
   max-width: 45%;
 }
 
@@ -140,11 +165,9 @@
 }
 
 .activity-info-provider-image {
-  width: 100%;
-  max-width: 184px;
-  max-height: 184px;
+  width: 5rem;
+  height: 5rem;
   object-fit: cover;
-  margin-top: 10px;
 }
 
 .activity-info-trainer-images {
@@ -162,15 +185,21 @@
   object-fit: cover;
 }
 
+.activity-info-provider-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 /* Large screens (2560x1440 and above) */
 @media (min-width: 1500px) {
   .activity-info-content {
     min-width: 1200px;
   }
 
-  .activity-info-main {
+  /* .activity-info-main {
     max-height: 45vw;
-  }
+  } */
 
   .activity-info-heading {
     font-size: 2rem;
@@ -224,11 +253,6 @@
     font-size: 2rem;
   }
 
-  .activity-info-image {
-    max-width: 750px;
-    min-height: 400px;
-  }
-
   .activity-info-description {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -264,24 +288,9 @@
   }
 }
 
-@media (min-width: 1500px) {
-  .activity-info-image {
-    max-width: 750px;
-    min-height: 500px;
-  }
-}
-
 @media (min-width: 1750px) {
-  .activity-info-image {
-    max-width: 750px;
-    min-height: 550px;
-  }
-}
-
-@media (min-width: 2000px) {
-  .activity-info-image {
-    max-width: 750px;
-    min-height: 600px;
+  .activity-info-left-image-container {
+    height: 60rem;
   }
 }
 
@@ -292,11 +301,6 @@
 
   .activity-info-heading {
     font-size: 48px;
-  }
-
-  .activity-info-image {
-    max-width: 1200px;
-    min-height: 35vw;
   }
 
   .activity-info-description {
@@ -360,12 +364,6 @@
     max-width: 750px;
   }
 
-  .activity-info-image {
-    max-width: 750px;
-    max-height: 50%;
-    height: 65vw;
-  }
-
   .provider-trainer-container {
     flex-direction: column;
   }
@@ -378,6 +376,13 @@
   .activity-info-locations {
     margin-bottom: 20px;
     margin-top: 100px;
+  }
+
+  .activity-info-heading {
+    margin-bottom: 0;
+  }
+  .activity-info-right-section {
+    margin-top: 0;
   }
 }
 
@@ -396,6 +401,9 @@
 @media (max-width: 640px) {
   .activity-info-main {
     min-height: 1150px;
+  }
+  .activity-info-left-image-container {
+    height: 20rem;
   }
 }
 
@@ -457,11 +465,18 @@
   .activity-info-main {
     min-height: 1050px;
   }
+  .activity-info-left-header-container {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+  }
+  .activity-info-heading {
+    width: 100%;
+  }
 }
 
 /* Very small screens */
-@media (max-width: 450px) {
+/* @media (max-width: 450px) {
   .activity-info-main {
     min-height: 1100px;
   }
-}
+} */

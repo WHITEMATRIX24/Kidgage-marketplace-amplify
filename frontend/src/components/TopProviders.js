@@ -30,7 +30,7 @@ const TopProviders = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: providers.length > 5 ? 5 : providers.length,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -65,9 +65,7 @@ const TopProviders = () => {
     <div className="top-prov-body">
       <div className="top-providers">
         <h2>Top Providers</h2>
-        <p style={{ padding: "10px" }}>
-          Partners in your child’s journey
-        </p>
+        <p style={{ padding: "10px" }}>Partners in your child’s journey</p>
         {loading ? (
           <div className="loading-dots">
             <span></span>

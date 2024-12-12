@@ -190,19 +190,38 @@ const ActivityInfo = () => {
           </div>
         </div>
 
-        <h1 className="activity-info-heading">{course.name}</h1>
         <div className="activity-info-main">
           <div className="activity-info-left-section">
+            <div className="activity-info-left-header-container">
+              <h1 className="activity-info-heading">{course.name}</h1>
+              <div className="activity-info-provider">
+                <img
+                  src={provider.logo}
+                  alt="Provider"
+                  className="activity-info-provider-image"
+                />
+                <div className="activity-info-provider-details">
+                  <p style={{ marginBottom: "0px" }}>
+                    PROVIDED BY: {provider.username}
+                  </p>
+                  <p style={{ marginBottom: "0px" }}>
+                    CR NO: {provider.licenseNo}
+                  </p>
+                </div>
+              </div>
+            </div>
             {/* Display the current image in the slideshow */}
-            {course.images && course.images.length > 0 ? (
-              <img
-                src={course.images[currentImageIndex]}
-                alt={`activity-${currentImageIndex}`}
-                className="activity-info-image"
-              />
-            ) : (
-              <img src={placeholder} alt="Placeholder" />
-            )}
+            <div className="activity-info-left-image-container">
+              {course.images && course.images.length > 0 ? (
+                <img
+                  src={course.images[currentImageIndex]}
+                  alt={`activity-${currentImageIndex}`}
+                  className="activity-info-image"
+                />
+              ) : (
+                <img src={placeholder} alt="Placeholder" />
+              )}
+            </div>
             <h4 style={{ color: "darkblue" }}>
               QAR. {course.feeAmount} ({formatFeeType(course.feeType)})
             </h4>
@@ -223,40 +242,33 @@ const ActivityInfo = () => {
 
         {/* Display course locations dynamically if available */}
         <div className="activity-info-locations">
-          {course.location && course.location.length > 0 ? (
-            course.location.map((loc, index) => (
-              <div key={index} className="activity-info-location">
-                <h3>Location {index + 1}</h3>
-                <p>{loc.address}</p>
-                <p> {loc.city}</p>
-                <p>{loc.phoneNumber}</p>
-                <a href={loc.link}>View Location</a>
-              </div>
-            ))
-          ) : (
-            <p>No locations available</p>
-          )}
-        </div>
-        <div className="provider-trainer-container">
-          <div className="activity-info-provider">
-            <h2>Activity provided by</h2>
-            <p>{provider.username}</p>
-            <p>Commercial Registration: {provider.licenseNo}</p>
-            <img
-              src={provider.logo}
-              alt="Provider"
-              className="activity-info-provider-image"
-            />
+          <h3>Our Locations</h3>
+          <div className="activity-info-locations-container">
+            {course.location && course.location.length > 0 ? (
+              course.location.map((loc, index) => (
+                <div key={index} className="activity-info-location">
+                  <p>Area: {loc.address}</p>
+                  <p>Municipality: {loc.city}</p>
+                  <p>Contact No: {loc.phoneNumber}</p>
+                  <a href={loc.link}>View Map</a>
+                </div>
+              ))
+            ) : (
+              <p>No locations available</p>
+            )}
           </div>
-          {/* <div className="activity-info-trainers">
+        </div>
+        {/* <div className="provider-trainer-container">
+
+          <div className="activity-info-trainers">
                         <h2>Trainers</h2>
                         <div className="activity-info-trainer-images">
                             {[...Array(12)].map((_, index) => (
                                 <img key={index} src={placeholder} alt={`trainer-${index + 1}`} className="activity-info-trainer-image" />
                             ))}
                         </div>
-                    </div> */}
-        </div>
+                    </div>
+        </div> */}
       </div>
       <Footer />
     </div>

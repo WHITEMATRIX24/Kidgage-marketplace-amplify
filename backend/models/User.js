@@ -23,8 +23,8 @@ const userSchema = new mongoose.Schema({
   crFile: { type: String }, // Stores file path or link to the CR document
   agreeTerms: { type: Boolean, required: true, default: true },
   verificationStatus: { type: String, default: 'pending' },
-  academyImg: { type: String, default: "https://kidgage.s3.eu-north-1.amazonaws.com/MARTIAL+ART+ACADEMY.png" }, // Optional, to be updated later
-  logo: { type: String, default: "https://kidgage.s3.eu-north-1.amazonaws.com/MARTIAL+ART+ACADEMY.png" }, // Optional, to be updated later
+  academyImg: { type: String, default: null }, // Optional, to be updated later
+  logo: { type: String, default: null }, // Optional, to be updated later
   licenseNo: { type: String, default: null }, // Optional, to be updated later
   noOfCourses: { type: Number, default: 5 },
   meetingScheduleDate: { type: Date, default: Date.now },
@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema({
       return new Date(today.setFullYear(today.getFullYear() + 1));
     },
   },
+  promoted: { type: Boolean, required: true, default: false },
 });
 
 const User = mongoose.model("User", userSchema);

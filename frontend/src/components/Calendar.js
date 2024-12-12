@@ -168,7 +168,7 @@ const CustomDatePickerWrapper = styled.div`
     button {
       background-color: #16d298;
       color: white;
-      border-radius: 25px;
+      border-radius: 5px;
       padding: 5px 20px;
       border: none;
       display: flex;
@@ -286,7 +286,6 @@ const CustomDatePickerWrapper = styled.div`
     button {
       background-color: #16d298;
       color: white;
-      border-radius: 25px;
       padding: 5px 10px;
       border: none;
       display: flex;
@@ -738,7 +737,7 @@ ${formData.parentName}
   };
 
   return (
-    <CustomDatePickerWrapper>
+    <CustomDatePickerWrapper style={{ height: "fit-content" }}>
       <div className="calendar-row">
         <FaCalendarAlt className="first-calender-icon" />
         {courseDetails && (
