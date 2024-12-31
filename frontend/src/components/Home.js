@@ -18,7 +18,7 @@ const Home = () => {
       <TopActivities />
       {/* <BlogSection /> */}
       <TopProviders />
-      {/* <UpcomingEvents /> */}
+      <UpcomingEvents />
       <Footer />
     </div>
   );
