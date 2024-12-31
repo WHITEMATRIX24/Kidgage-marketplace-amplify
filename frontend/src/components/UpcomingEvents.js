@@ -170,9 +170,8 @@ const UpcomingEvents = () => {
             <div className="custom-dropdown" onClick={toggleDropdown}>
               <span className="dropdown-selected">{selectedMonth}</span>
               <i
-                className={`fa-solid fa-caret-down event-drop-down ${
-                  showDropdown ? "rotate" : ""
-                }`}
+                className={`fa-solid fa-caret-down event-drop-down ${showDropdown ? "rotate" : ""
+                  }`}
               ></i>
             </div>
             {showDropdown && (
@@ -215,13 +214,13 @@ const UpcomingEvents = () => {
                     );
                     return (
                       <div key={event._id} className="event-card">
-                        <img src={imageUrl} alt={event.name} />
-                        <button
+                        <img src={event.image} alt={event.name} />
+                        {/* <button
                           id="wishlist"
                           onClick={() => addToWishlist(event)}
                         >
                           <i className="fa-solid fa-heart-circle-plus"></i>
-                        </button>
+                        </button> */}
                         <p className={status === "Upcoming" ? "upcoming" : ""}>
                           {status}
                         </p>
@@ -235,9 +234,11 @@ const UpcomingEvents = () => {
                         </span>
                         <a href={event.location}>VENUE</a>
 
-                        <button id="book-now" onClick={() => bookNow(event)}>
+                        <button id="book-now" onClick={() => window.location.href = event.link}>
+
                           <i className="fas fa-arrow-right"></i>BOOK NOW
                         </button>
+                        {/* <a href={event.link} id="book-now">BOOK NOW</a> */}
                       </div>
                     );
                   })}
