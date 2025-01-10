@@ -5,7 +5,7 @@ import TopActivites from "../../components/landing/topActivites";
 
 const Landing = () => {
   return (
-    <div>
+    <div className="d-flex flex-column gap-5 pb-5">
       <Search />
       <Banner />
       <TopActivites />
