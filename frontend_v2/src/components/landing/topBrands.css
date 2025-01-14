@@ -1,0 +1,36 @@
+.topBrands-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 1rem 2rem;
+}
+.topBrands-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.topBrands-header h5 {
+  font-size: 1.9rem;
+  font-weight: bold;
+}
+.topBarands-content-container {
+  padding: 2rem 0px;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.topBrands-brand {
+  flex: 0 1 calc(20% - 1rem);
+}
+.topBrands-brand h6 {
+  font-size: 2rem;
+}
+
+/* mobile view */
+/* @media (max-width: 770px) {
+  .topBarands-content-container {
+    justify-content: space-evenly;
+  }
+} */

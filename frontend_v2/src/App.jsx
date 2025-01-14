@@ -1,13 +1,18 @@
 import "./App.css";
+import ActivityPage from "./pages/Activity/Activity";
 import Landing from "./pages/landing/landing";
 import MainLayout from "./utils/mainLayout";
+import { Routes, Route } from "react-router";
 
 function App() {
   return (
     <>
-      <MainLayout>
-        <Landing />
-      </MainLayout>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Landing />} />
+          <Route path="/activites" element={<ActivityPage />} />
+        </Route>
+      </Routes>
     </>
   );
 }

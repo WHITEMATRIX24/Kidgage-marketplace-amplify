@@ -2,6 +2,9 @@ import React from "react";
 import Search from "../../components/common/search/search";
 import Banner from "../../components/common/banner/banner";
 import TopActivites from "../../components/landing/topActivites";
+import TopBarands from "../../components/landing/topBarands";
+import News from "../../components/landing/news";
+import RecentEvents from "../../components/landing/recentEvents";
 
 const Landing = () => {
   return (
@@ -9,6 +12,9 @@ const Landing = () => {
       <Search />
       <Banner />
       <TopActivites />
+      <TopBarands />
+      <News />
+      <RecentEvents />
     </div>
   );
 };

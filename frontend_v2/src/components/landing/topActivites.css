@@ -1,5 +1,9 @@
 .cards-container {
   display: flex;
+  width: 100%;
+}
+.cards-content-wrapper {
+  display: flex;
   gap: 1rem;
   width: 100%;
 }
@@ -30,14 +34,18 @@
 }
 
 /* mobile view */
-@media (max-width: 770px) {
+@media (max-width: 1024px) {
   .cards-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+  }
+  .cards-content-wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .card-box {
     width: 160px;
     height: 200px;
-    place-self: center;
+    flex-basis: 160px;
+    box-sizing: border-box;
   }
 }
