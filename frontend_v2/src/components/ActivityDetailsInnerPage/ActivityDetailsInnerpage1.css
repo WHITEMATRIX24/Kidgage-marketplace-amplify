@@ -1,0 +1,219 @@
+.share-text {
+  display: inline-block;
+}
+.share-container {
+  background-color: #F5A691;
+  /* Correct syntax */
+}
+.age-container {
+  width: 100%;
+}
+.card-fnt-wt {
+  font-weight: 500;
+}
+.activity-heading {
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+.activity-heading h2 {
+  font-size: 38px;
+}
+.activity-heading h6 {
+  font-size: 18px;
+}
+.card-container .card3 {
+  width: 130px;
+  height: 150px;
+}
+.map-box,
+.age-box {
+  margin: 0.5rem 1.5rem 0rem 3rem;
+}
+.age-box {
+  margin-bottom: 2rem;
+}
+.map-btn,
+.card-btn {
+  background-color: #ACC29E;
+  color: #ffff;
+}
+.ctn-btn {
+  background-color: #D0D0D0;
+}
+.card-btn {
+  /* style={{ border: 'none', width: '120px', height: '40px' }} */
+  border: none;
+  width: 120px;
+  height: 40px;
+  margin-top: 5px;
+}
+.age-box,
+.map-btn {
+  max-width: 500px;
+  max-height: 50px;
+}
+.age-box-content {
+  line-height: 0.3;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: 2px;
+}
+.custom-btn {
+  margin-top: -2px;
+}
+.cutom-arrow {
+  margin-top: 18px;
+  margin-left: 10px;
+}
+.map-arrow {
+  margin-top: 9px;
+}
+.card-container {
+  margin: 0rem 2rem 0rem 2rem;
+}
+.share-icon {
+  display: none;
+  /* Hide the icon by default */
+}
+.card1,
+.card2 {
+  width: 130px;
+  height: 150px;
+}
+@media (max-width: 768px) {
+  .share-text {
+    display: none;
+    /* Hide the text on mobile */
+  }
+
+  .share-container {
+    background-color: transparent;
+  }
+
+  .share-icon {
+    font-size: 25px;
+    margin-top: 20px;
+    display: inline-block;
+    /* Show the icon on mobile */
+  }
+
+  .activity-heading {
+    margin-left: 25px;
+  }
+
+  .activity-heading h2 {
+    font-size: 24px;
+  }
+
+  .activity-heading h6 {
+    font-size: 14px;
+  }
+
+  .card-container {
+    margin: 0%;
+  }
+
+  .card-container .card3 {
+    margin: auto;
+    width: 80%;
+    /* Adjust width to take full width of its parent */
+    /* Add any other styles you want */
+    height: auto;
+    /* Set height to auto if you want dynamic resizing */
+  }
+
+  .custom-btn {
+    display: flex;
+  }
+
+  .cutom-arrow {
+    transform: rotate(-38deg);
+    /* Rotate the right arrow to up */
+    margin-top: 20px;
+
+  }
+
+  .map-box,
+  .age-box {
+    margin: 0rem 0rem 0rem 0.7rem;
+    width: 93%;
+  }
+
+  .map-btn,
+  .card-btn {
+    background-color: black;
+  }
+
+  .card-btn {
+    margin-top: 20px;
+  }
+
+  .age-container {
+    border-radius: 20px 20px 0px 0px;
+    padding: 10px;
+    width: 100% !important;
+    ;
+    border: solid 1px black;
+    z-index: 10;
+    margin-left: -2px;
+    background-color: white;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  .age-box {
+    z-index: 20;
+    width: 101%;
+    margin-left: -2px;
+  }
+
+  .card1,
+  .card2 {
+    width: 150px;
+    height: 170px;
+  }
+
+  .map-arrow {
+    margin-top: 9px;
+  }
+
+}
+
+
+
+/* @media (max-width: 1024px) and (min-width: 768px) {
+    .activity-heading h2{
+      font-size: 25px;
+   }
+   .activity-heading h6{
+       font-size: 15px;
+    }
+    .card1, .card2{
+      width:120px;
+      height:130px;
+    }
+    .card-container .card3{
+      width:120px;
+      height:130px;
+     
+    }
+    .custom-btn {
+      text-align: center;
+      width: 110px;
+      height: 100px;
+    }
+    
+    .card-container {
+      margin-top: -2rem;
+      
+    }
+     .card-btn {
+      width: 79px;
+      height: 26px;
+  }
+  .map-box,.age-box {
+    margin: 0rem 1rem 3rem 1rem;
+}
+  } */
+   

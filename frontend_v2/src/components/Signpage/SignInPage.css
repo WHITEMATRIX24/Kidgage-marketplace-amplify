@@ -1,0 +1,10 @@
+.line-seperator {
+    width: 150px;
+    height: 2px;
+    background-color: rgba(209, 206, 206, 0.929);
+}
+
+.signin-btn,
+.signup-btn-container {
+    margin-bottom: 10px;
+}

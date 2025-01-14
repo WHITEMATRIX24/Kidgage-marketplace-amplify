@@ -1,0 +1,43 @@
+.Header-container {
+    width: 100%;
+    height: 70px;
+    background-color: #ACC29E;
+    overflow: hidden;
+
+
+}
+
+.header-content {
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    width: 160px;
+    height: 50px;
+    align-self: center;
+}
+
+.header-login {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+@media(max-width: 590px) {
+    .Header-container {
+        height: 56px;
+    }
+
+    .header-logo {
+        width: 116px;
+        height: 38px;
+    }
+}

@@ -1,0 +1,169 @@
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+p {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.navbar {
+  background-color: white;
+  color: black;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+
+}
+
+.navText h1 {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.navText h3 {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.content h5 {
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 10px;
+}
+
+.content {
+  padding: 20px;
+  height: auto;
+}
+
+ul {
+  list-style-type: none;
+  /* Removes the default bullet points */
+}
+
+.listWithHiphen li {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.FAQ h6 {
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 0px;
+}
+
+.FAQ p {
+  line-height: 3px;
+}
+
+.mapBorder {
+  border-radius: 10px;
+}
+
+.downArrowButton {
+  position: absolute;
+  bottom: 2px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: -1px;
+  z-index: 5;
+  background-color: #FDD687;
+  padding: 15px 15px;
+  border: none;
+  border-radius: 0px 15px 0px 15px;
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ff0000;
+}
+
+
+@media only screen and (max-width: 375px) {
+
+  .popup-content {
+    margin-left: 15px;
+    padding: 0px !important;
+    width: 80%;
+    overflow-y: auto !important;
+
+  }
+
+  .downArrowButton {
+    position: absolute;
+    top: 550px !important;
+  }
+
+  p {
+    font-size: 12px !important;
+  }
+
+}
+
+@media only screen and (max-width: 430px) {
+  .popup-content {
+    width: 85% !important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .downArrowButton {
+    position: absolute;
+    top: 620px !important;
+  }
+}
+
+@media only screen and (max-width: 912px) {
+  .popup-content {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-height: 1000px) {
+  .popup-content {
+    height: auto !important;
+  }
+
+  .downArrowButton {
+    display: none !important;
+  }
+}

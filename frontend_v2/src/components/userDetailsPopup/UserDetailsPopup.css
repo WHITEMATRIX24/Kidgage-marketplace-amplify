@@ -1,0 +1,87 @@
+.header-popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.header-popup-content {
+    width: 340px;
+    height: 430px;
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+    align-self: center;
+    border-radius: 15px;
+
+}
+
+.profile-container {
+    margin: 5px;
+    height: 180px;
+    padding: 20px;
+    background-color: #181818;
+    border-radius: 15px;
+}
+
+.header-h2 h2 {
+    font-size: 24px;
+    color: white;
+    padding-bottom: 20px;
+    font-weight: bold;
+
+}
+
+.profile-details,
+.booking-details {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-name,
+.my-booking {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}
+
+.profile-email {
+    margin: 0;
+    color: white;
+}
+
+.bussiness-header-h2 h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin: 30px;
+
+}
+
+.hr-popup {
+    color: white;
+    width: 75%;
+    border: 2px solid white;
+}
+
+@media(max-width:590px) {
+    .header-popup-content {
+        width: 250px;
+    }
+
+    .hr-popup {
+
+        width: 100%;
+
+    }
+}
