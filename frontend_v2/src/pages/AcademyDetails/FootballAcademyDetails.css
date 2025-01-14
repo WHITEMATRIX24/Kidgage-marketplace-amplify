@@ -1,0 +1,260 @@
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+p {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+}
+
+.academeyPopup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  height: 80%;
+  width: 60%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.navbar {
+  background-color: white;
+  color: black;
+  padding: 5px;
+  text-align: center;
+  border-radius: 15px;
+
+}
+
+.academyLogo {
+  width: 60px;
+  height: 60px;
+}
+
+.navText h1 {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.navText h3 {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.content {
+  padding: 20px;
+}
+
+.blackImage {
+  background-color: black;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.certificateBoxes {
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.academyDownArrowButton {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: black !important;
+  color: white !important;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 5;
+  background-color: #FDD687;
+  padding: 15px 15px;
+  border: none;
+  border-radius: 0px 15px 0px 15px;
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ff0000;
+}
+
+@media only screen and (max-width: 912px) {
+  .socialMediaIcon {
+    display: none;
+  }
+
+  .navText h1 {
+    font-size: 24px !important;
+    font-weight: 700;
+    line-height: 30px;
+  }
+
+  .navText h3 {
+    font-size: 15px !important;
+    font-weight: 500;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 0px;
+    right: 6px;
+    z-index: 5;
+    background-color: #FDD687;
+    padding: 15px 15px;
+    border: none;
+    border-radius: 0px 15px 0px 15px;
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+  }
+
+  .highlightIcon {
+    font-size: 20px;
+  }
+
+  .contentText {
+    text-align: justify;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .academeyPopup-content {
+    width: 90%;
+  }
+
+  .academyDownArrowButton {
+    position: absolute;
+    top: 500px !important;
+
+  }
+}
+
+@media only screen and (max-width: 365px) {
+  .academeyPopup-content {
+    width: 90%;
+  }
+
+  .academyDownArrowButton {
+    position: absolute;
+    top: 550px !important;
+
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .academeyPopup-content {
+    width: 90%;
+  }
+
+  .academyDownArrowButton {
+    position: absolute;
+    top: 750px;
+
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .academyDownArrowButton {
+    position: absolute;
+    top: 620px;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .academeyPopup-content {
+    width: 90%;
+  }
+
+  .academyDownArrowButton {
+    position: absolute;
+    top: 690px;
+
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .academyDownArrowButton {
+    position: absolute;
+    top: 660px;
+
+  }
+}
+
+@media only screen and (max-width: 344px) {
+  .academyDownArrowButton {
+    position: absolute;
+    top: 650px;
+
+  }
+}
+
+@media only screen and (max-width: 412px) {
+  .academyDownArrowButton {
+    position: absolute;
+    top: 650px;
+
+  }
+}
+
+@media only screen and (max-width: 1024px) and (min-width:1000px) {
+  .academyDownArrowButton {
+    position: absolute;
+    top: 450px;
+
+  }
+
+  .navbar h3 {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 2500px) {
+  .blackImage {
+    width: 50% !important;
+    height: 70% !important;
+  }
+}
+
+@media only screen and (min-height: 1000px) {
+  .academyDownArrowButton {
+    display: none !important;
+    /* position: absolute;
+      top: 700px; */
+
+  }
+
+  .academeyPopup-content {
+    height: auto;
+    width: 60%;
+  }
+}

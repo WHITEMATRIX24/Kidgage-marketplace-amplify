@@ -1,0 +1,98 @@
+.image1 {
+    border-radius: 15px;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.activity-button {
+    background-color: #ffffff;
+    color: black;
+    margin-top: 1rem;
+    max-width: 500px;
+    max-height: 60px;
+    margin-left: -35px;
+    border-width: 1px;
+
+    /* Increase the border thickness */
+    border-style: solid;
+    /* Ensure it's a solid border */
+    border-color: black;
+    /* Change border color if needed */
+
+}
+
+.icon-arrow {
+    color: #0f0101;
+    font-size: 25px;
+    float: right;
+    margin-left: -50px;
+    margin-top: 12px;
+
+}
+
+.activity-img-container,
+.right-section {
+    margin-top: 170px;
+    width: 100%;
+
+}
+
+.activity-btn-container {
+    margin-top: 10px;
+    position: relative;
+    margin-bottom: 230px;
+    width: 100%;
+}
+
+.right-section {
+    max-width: 500px;
+    max-height: 589px;
+    border-width: 1px;
+    /* Increase the border thickness */
+    border-style: solid;
+    /* Ensure it's a solid border */
+    border-color: black;
+    /* Change border color if needed */
+
+
+
+}
+
+/* Button color change for mobile screens */
+@media (max-width: 768px) {
+    .activity-button {
+        background-color: #D0D0D0;
+        /* new background color for mobile */
+        color: #ffffff;
+        /* text color for mobile */
+        width: 90%;
+        font-size: 20px;
+    }
+
+    .activity-button-hover {
+        background-color: #D0D0D0;
+    }
+
+    .image1 {
+        width: 90%;
+        height: fit-content;
+    }
+
+    .icon-arrow {
+        transform: rotate(-38deg);
+        /* Rotate the right arrow to up */
+        color: #ffffff;
+    }
+
+    .right-section {
+        width: 91%;
+        margin-top: 0px;
+        margin-left: 15px;
+    }
+
+    .activity-btn-container {
+        margin-bottom: 20px;
+        width: 89%;
+        margin-left: 1rem;
+    }
+}
