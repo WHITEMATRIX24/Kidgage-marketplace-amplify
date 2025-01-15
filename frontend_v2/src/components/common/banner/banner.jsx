@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./banner.css";
+import { getAllBannersApi } from "../../../services/allApis";
 
 const Banner = () => {
+  const [bannerData, setBannerData] = useState({
+    isLoading: true,
+    banners: [],
+  });
+
+  // initial data fetching
+  const getBannerInitialData = async () => {
+    const data = await getAllBannersApi();
+    if (data) {
+      return setBannerData({ banners: data, isLoading: false });
+    }
+    setBannerData({ isLoading: false, banners: [] });
+  };
+  useEffect(() => {
+    getBannerInitialData();
+  }, []);
+
   return (
     <div className="banner-container">
-      <img
-        src="https://s3-alpha-sig.figma.com/img/109a/5d7a/c33ca70b22b65e1e6a9d48f55afafaea?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W1025qT9Okozs8CPmde5iwiT1FUhIQsDOJdO6SCHPFiUsSmzp6c4RYx2ZDP~ASjUr75~V92KjLMlNeW0IG9nyTQPhE5BHVtDr2dQWveQ8Z04MmnPjWJYzdsWf~IIl8qycJdHXbSSmRfp4nHyT1pAvnwfQ9cULPnaI6dxCmqHEnt7U-XFzUofg6skXNxIlefVU4v9urjbd9XOAAl~Gdl9UR6jY7nEG3phdp5mjGawSgfTgmlR5E6-GyYbNLKdvmrouCBPcq1wLVQKu~~1MKaig7Ljh9145zFhEQ7nwK0Tkh-arr~xuVJPAj-JCK8NSA91m7vmQxdfIwWsTNM6zhXj1Q__"
-        alt=""
-      />
+      {bannerData.isLoading ? (
+        <p>Loading....</p>
+      ) : bannerData.banners.length > 0 ? (
+        <img src={bannerData.banners[0].imageUrl} alt="" />
+      ) : (
+        <p>no Banner</p>
+      )}
     </div>
   );
 };

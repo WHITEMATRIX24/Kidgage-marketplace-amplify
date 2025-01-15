@@ -14,22 +14,22 @@ const Search = () => {
       <div className="search-comp-container">
         <div className="search-select-container">
           <div className="select-layout select-location">
-            <select>
-              <option disabled selected value="">
+            <select defaultValue="default">
+              <option disabled value="default">
                 Location
               </option>
             </select>
           </div>
           <div className="select-layout select-gender">
-            <select>
-              <option selected disabled value="">
+            <select defaultValue="default">
+              <option disabled value="default">
                 Men
               </option>
             </select>
           </div>
           <div className="select-layout select-age">
-            <select>
-              <option selected disabled value="">
+            <select defaultValue="default">
+              <option disabled value="default">
                 Age
               </option>
             </select>

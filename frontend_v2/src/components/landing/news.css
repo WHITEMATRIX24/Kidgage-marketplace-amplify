@@ -42,6 +42,7 @@
   flex-grow: 1;
   flex-basis: calc(50% - 1rem);
   background-color: #acc29e;
+  /* border: 1px solid; */
   border-radius: 15px;
   height: 260px;
   padding: 10px;

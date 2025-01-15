@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
   return (
-    <Row className="footer-section">
+    <Row className="footer-section mx-0">
       <Col md={2}></Col>
       <Col md={8} className="footer-container">
         <div className="footer-row-one">
