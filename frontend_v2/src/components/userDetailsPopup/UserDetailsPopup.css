@@ -1,26 +1,67 @@
-.header-popup-container {
+.popup {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto;
+    z-index: 100;
+    /* overflow-y: hidden; */
+    /* position: absolute; */
 }
 
+.close-button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 5;
+    background-color: #FDD687;
+    padding: 15px 15px;
+    border: none;
+    border-radius: 0px 15px 0px 15px;
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+}
+
+/* .header-popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Darker backdrop for better visibility */
+/* display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000; */
+/* Ensure popup appears above other content 
+}
+
+*/
 .header-popup-content {
     width: 340px;
     height: 430px;
     background-color: black;
-    position: relative;
-    overflow: hidden;
-    align-self: center;
     border-radius: 15px;
-
+    position: relative;
+    z-index: 1010;
+    /* Higher than backdrop */
+    overflow: hidden;
 }
+
+/* .profile-container {
+    margin: 5px;
+    height: auto;
+    padding: 20px;
+    background-color: #181818;
+    border-radius: 15px;
+}
+ */
 
 .profile-container {
     margin: 5px;
@@ -33,7 +74,7 @@
 .header-h2 h2 {
     font-size: 24px;
     color: white;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     font-weight: bold;
 
 }
@@ -57,6 +98,7 @@
 
 .profile-email {
     margin: 0;
+    font-size: 12px;
     color: white;
 }
 
@@ -65,7 +107,6 @@
     font-weight: bold;
     color: white;
     margin: 30px;
-
 }
 
 .hr-popup {
@@ -77,11 +118,16 @@
 @media(max-width:590px) {
     .header-popup-content {
         width: 250px;
+        height: 440px;
     }
 
     .hr-popup {
 
         width: 100%;
 
+    }
+
+    .profile-email {
+        font-size: 12px;
     }
 }

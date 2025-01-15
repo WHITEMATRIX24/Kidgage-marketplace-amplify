@@ -1,16 +1,12 @@
-import React from 'react'
-import '../ActivityDetailsInnerPage/ActivityDetailsInnerpage1.css'
-import './SignInPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import './SignInOtp.css'
+import '../Signpage/SignInPage.css'
+import '../../pages/ActivityDetails/ActivityDetails.css'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-
-
-
-
-function SignInPage() {
+function SignInOtp() {
   return (
     <>
-
       <div className="activity-details-row">
         <div className="col-md-6 col-sm-12 col-lg-6 ">
           <div className='hide-on-mobile'>
@@ -26,37 +22,50 @@ function SignInPage() {
         </div>
         <div className="col-md-6 col-sm-12 col-lg-6 ">
           <div className='rounded-4 right-section-signUp ' >
-            <div className='mt-5 w-100'>
-              <div className='signIn-heading fw-bold'>
+            <div className='mt-4'>
+              <div className='signIn-Otp-heading fw-bold '>
                 <h2>Sign In</h2>
-                <h6>Enter your email</h6>
-              </div>
-              <div className='mt-3 mb-3   w-100 d-flex align-items-center justify-content-center input-container'>
-                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 ' style={{ width: '400px', height: '60px' }} ></input>
+                <h6>Enter the OTP</h6>
               </div>
 
-              <div className='d-flex justify-content-center align-items-center'>
-                <div className=' border rounded-4 d-flex align-items-center justify-content-between sign-up-btn-container' style={{ width: '400px', height: '60px' }}>
-                  <button className=' m-1 fw-bold sign-up-btn'>
-                    Sign Up
-                    <FontAwesomeIcon icon={faArrowRight} style={{ color: "#ffff" }} className='ms-3' />
+              <div className='mb-2  w-100 d-flex align-items-center justify-content-evenly otp-container'>
+                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 m-2' style={{ width: '60px', height: '60px' }} ></input>
+                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 ' style={{ width: '60px', height: '60px' }} ></input>
+                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 ' style={{ width: '60px', height: '60px' }} ></input>
+                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 ' style={{ width: '60px', height: '60px' }} ></input>
+              </div>
+              <div className='d-flex justify-content-center align-items-center '>
+                <div className=' mx-4 border rounded-4 d-flex align-items-center justify-content-between sign-up-btn-container' style={{ width: '400px', height: '60px' }}>
+                  <button style={{ backgroundColor: '#D0D0D0', color: '#ffff', width: '150px', height: '50px', fontSize: '18px', fontWeight: '700' }} className=' btn m-1 fw-bold'>
+                    OTP In 4.23
                   </button>
                   <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className='btn w-50 m-1 fw-bold rounded-3'>Continue</button>
                 </div>
+                {/* <Link>Use a differnt email</Link> */}
               </div>
-
-              {/* <SignInOtp/> */}
+              <div className='mt-2 ms-5 link-container' > <a href=''>Use a different email </a></div>
+              {/* <div className=''>
+          <div className='d-flex justify-content-between align-items-center px-5 mt-4'>
+            <div className='line-seperator'></div>
+            <p>or Sign in with</p>
+            <div className='line-seperator'></div>
+          </div>
+          <div className='mx-4 mt-2 d-flex align-items-center justify-content-center flex-column '>
+            <button style={{ backgroundColor: '#D0D0D0' }} className='signin-btn border rounded-5 w-75  fw-bold  bg-transparent'><img src="https://img.icons8.com/?size=48&id=17949&format=png" alt="" className='me-3' />Continue with Google</button>
+            <button style={{ backgroundColor: '#D0D0D0' }} className='border signin-btn rounded-5 w-75 mb-5 fw-bold bg-transparent'><img src="https://img.icons8.com/?size=50&id=30840&format=png" alt="" className='me-3' />Continue with Apple</button>
+          </div>
+        </div> */}
               <div className='mt-3'>
                 <div className='d-flex justify-content-between align-items-center  line-seperator-container mt-5'>
                   <div className='line-seperator'></div>
                   <p>or Sign in with</p>
                   <div className='line-seperator'></div>
                 </div>
-                <div className=' mt-2 d-flex align-items-center justify-content-center flex-column mb-1 signin-btn-container'>
+                <div className=' mt-2 d-flex align-items-center justify-content-center flex-column  signin-btn-container mb-4'>
                   <button style={{ backgroundColor: '#D0D0D0' }} className='signin-btn border rounded-5 w-75  fw-bold  bg-transparent hide-on-mobile'><img src="https://img.icons8.com/?size=48&id=17949&format=png" alt="" className='me-3 google-icon' />Continue with Google</button>
                   <button className='signin-btn border  w-100  fw-bold hide-on-large-screen mt-3'><img src="https://img.icons8.com/?size=48&id=17949&format=png" alt="" className='me-3 google-icon' />Continue with Google</button>
-                  <p className='hide-on-large-screen mt-3 mb-4 ms-3'>By sigining in, you agree to our <span className='text-primary'>Terms of Service </span>and<span className='text-primary'>Privacy policy </span></p>
-                  <button style={{ backgroundColor: '#D0D0D0' }} className='border signin-btn rounded-5 w-75 mb-5 fw-bold bg-transparent hide-on-mobile'><img src="https://img.icons8.com/?size=50&id=30840&format=png" alt="" className='me-3 apple-icon' />Continue with Apple</button>
+                  <p className='hide-on-large-screen mt-3 mb-5 ms-3'>By sigining in, you agree to our <span className='text-primary'>Terms of Service </span>and<span className='text-primary'>Privacy policy </span></p>
+                  <button style={{ backgroundColor: '#D0D0D0' }} className='border signin-btn rounded-5 w-75 mb-2 fw-bold bg-transparent hide-on-mobile'><img src="https://img.icons8.com/?size=50&id=30840&format=png" alt="" className='me-3 apple-icon' />Continue with Apple</button>
                 </div>
               </div>
               <div className='checkout-container'>
@@ -68,15 +77,12 @@ function SignInPage() {
                   <button className=' rounded-4 ctn-btn border-0 w-50 m-1 fw-bold' style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }}>Checkout</button>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
-
-
     </>
   )
 }
 
-export default SignInPage
+export default SignInOtp

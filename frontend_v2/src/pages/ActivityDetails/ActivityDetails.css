@@ -1,10 +1,9 @@
-.image1 {
-    border-radius: 15px;
-    max-width: 500px;
-    max-height: 500px;
-}
+/* .activity-details-container {
+    display: flex;
+    flex-direction: row;
+} */
 
-.activity-button {
+/* .activity-button {
     background-color: #ffffff;
     color: black;
     margin-top: 1rem;
@@ -13,11 +12,11 @@
     margin-left: -35px;
     border-width: 1px;
 
-    /* Increase the border thickness */
+     Increase the border thickness 
     border-style: solid;
-    /* Ensure it's a solid border */
+    Ensure it's a solid border 
     border-color: black;
-    /* Change border color if needed */
+    /* Change border color if needed 
 
 }
 
@@ -48,51 +47,204 @@
     max-width: 500px;
     max-height: 589px;
     border-width: 1px;
-    /* Increase the border thickness */
+    /* Increase the border thickness 
     border-style: solid;
-    /* Ensure it's a solid border */
+    /* Ensure it's a solid border 
     border-color: black;
-    /* Change border color if needed */
+    /* Change border color if needed 
 
 
+
+} */
+
+/* Layout */
+.activity-details-row {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.activity-details-left,
+.activity-details-right {
+    /* flex: 1; */
+    max-width: 100%;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.activity-details-left {
+    text-align: center;
+}
+
+/* Image Container */
+/* .activity-img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    height: 500px;
+    width: 500px;
+    overflow: hidden;
+    /* Ensures image doesn't overflow the container 
+border-radius: 15px;
+}
+
+.activity-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures the image covers the entire container while maintaining aspect ratio 
+border-radius: 15px;
+}
+
+*/
+.activity-img-container {
+    /* display: flex;
+    align-items: center;
+    justify-content: flex-start; */
+    margin-bottom: 1rem;
+    min-height: 500px;
+    /* margin-top: 100px; */
+    max-width: 500px;
+    overflow: hidden;
+    /* Ensures image doesn't overflow the container */
+    border-radius: 15px;
+}
+
+.activity-image {
+    max-width: 500px;
+    min-height: 500px;
+    object-fit: cover;
+    /* Ensures the image covers the entire container while maintaining aspect ratio */
+    border-radius: 15px;
+}
+
+/* Button Container */
+.activity-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    max-width: 500px;
+    border: 1px solid #000;
+    border-radius: 15px;
+}
+
+.activity-button {
+    text-align: left;
+    font-weight: 500px;
+    border-radius: 15px;
+    padding: 20px 30px;
+    background-color: white;
+    border: none;
+    color: #000000;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* .activity-button:hover {
+    background-color: #e9ecef;
+    color: #0056b3;
+} */
+.icon-arrow {
+    color: #0f0101;
+    font-size: 18px;
+    float: right;
+    padding: 20px;
 
 }
 
-/* Button color change for mobile screens */
-@media (max-width: 768px) {
+/* Content Section */
+.activity-content {
+    /* padding: 1.5rem; */
+    /* background-color: #f8f9fa; */
+    border-radius: 15px;
+    border: 1px solid #000;
+    min-width: 500px;
+    min-height: 600px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1366px) {
+
+    .activity-details-row {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .activity-content {
+        /* padding: 1.5rem; */
+        /* background-color: #f8f9fa; */
+        border-radius: 15px;
+        border: 1px solid #000;
+        min-width: 100%;
+        min-height: 600px;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media(max-width:766px) {
+    .activity-img-container {
+
+        margin-bottom: 1rem;
+        min-height: 350px;
+        max-width: 350px;
+
+    }
+
+    .activity-details-row {
+        gap: 20px;
+    }
+
+    .activity-details-left {
+        margin-bottom: 0;
+    }
+
+    .activity-image {
+        max-width: 350px;
+        min-height: 350px;
+        object-fit: cover;
+        /* Ensures the image covers the entire container while maintaining aspect ratio */
+        border-radius: 15px;
+    }
+
+    .activity-btn-container,
     .activity-button {
-        background-color: #D0D0D0;
-        /* new background color for mobile */
-        color: #ffffff;
-        /* text color for mobile */
-        width: 90%;
-        font-size: 20px;
-    }
-
-    .activity-button-hover {
-        background-color: #D0D0D0;
-    }
-
-    .image1 {
-        width: 90%;
-        height: fit-content;
+        background-color: rgba(208, 208, 208, 1);
+        color: white;
+        border: none;
     }
 
     .icon-arrow {
-        transform: rotate(-38deg);
-        /* Rotate the right arrow to up */
         color: #ffffff;
+        font-size: 18px;
+        transform: rotate(314.16deg);
     }
 
-    .right-section {
-        width: 91%;
-        margin-top: 0px;
-        margin-left: 15px;
+
+    .activity-content {
+        max-width: 350px;
+        min-height: 600px;
+
+    }
+}
+
+@media (max-width: 480px) {
+    .activity-button {
+        font-size: 0.9rem;
     }
 
-    .activity-btn-container {
-        margin-bottom: 20px;
-        width: 89%;
-        margin-left: 1rem;
+    .icon-arrow {
+        font-size: 1rem;
     }
 }

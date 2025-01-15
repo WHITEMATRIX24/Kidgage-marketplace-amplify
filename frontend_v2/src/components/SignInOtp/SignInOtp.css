@@ -1,0 +1,86 @@
+.signIn-Otp-heading {
+  margin-bottom: 40px;
+  margin-left: 50px;
+}
+
+.otp-container {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.right-section-signUp {
+  max-width: 500px;
+  min-height: 589px;
+  border-width: 1px;
+  /* Increase the border thickness */
+  border-style: solid;
+  /* Ensure it's a solid border */
+  border-color: black;
+  /* Change border color if needed */
+  /* margin-top: 100px; */
+}
+
+@media (max-width: 768px) {
+
+  .otp-container {
+    padding-right: .5rem;
+    padding-left: .5rem;
+  }
+
+  .link-container {
+    display: none;
+  }
+
+  .signIn-Otp-heading {
+    margin-left: 10px;
+  }
+
+}
+
+
+
+/* General styles for smaller devices, including iPad Air */
+@media (min-width: 820px) and (max-width: 1180px) and (orientation: portrait) {
+
+  .col-md-6 {
+    /* Make columns stack one by one in portrait mode */
+    width: 100% !important;
+  }
+
+  .activity-btn-container {
+    margin-bottom: 0px !important;
+  }
+
+  .right-section-signUp {
+    margin-top: 20px !important;
+    margin-left: 0px !important;
+    margin-bottom: 10px !important;
+
+
+  }
+
+
+
+  /* Target the second column (col-md-6) specifically */
+
+
+}
+
+@media (min-width: 820px) {
+
+  .checkout-container {
+    display: none;
+  }
+
+  .hide-on-large-screen {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .checkout-container {
+    display: none;
+  }
+
+}

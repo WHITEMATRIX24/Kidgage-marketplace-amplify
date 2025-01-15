@@ -1,45 +1,87 @@
+.card-container-div {
+  margin-left: 45px;
+  margin-right: 45px;
+
+}
+
 .share-text {
   display: inline-block;
 }
+
 .share-container {
   background-color: #F5A691;
   /* Correct syntax */
 }
+
 .age-container {
   width: 100%;
 }
+
 .card-fnt-wt {
   font-weight: 500;
 }
+
 .activity-heading {
   margin-left: 50px;
   margin-bottom: 50px;
 }
+
 .activity-heading h2 {
   font-size: 38px;
+  margin-top: 50px;
 }
+
 .activity-heading h6 {
   font-size: 18px;
 }
-.card-container .card3 {
+
+.card-container-div .card3 {
   width: 130px;
   height: 150px;
 }
-.map-box,
-.age-box {
-  margin: 0.5rem 1.5rem 0rem 3rem;
+
+.map-box {
+  margin-left: 45px;
+  margin-right: 45px;
+  margin-top: 18px;
+  height: 110px;
+  border-radius: 15px !important;
 }
+
 .age-box {
-  margin-bottom: 2rem;
+  margin-left: 45px;
+  margin-right: 45px;
+
+  margin-bottom: 50px;
+  border-radius: 15px !important;
 }
-.map-btn,
+
+.map-btn {
+  background-color: #ACC29E;
+  color: #ffff;
+  border-radius: 10px;
+  padding-left: 20px;
+
+  max-width: 500px;
+  height: 50px;
+
+}
+
+.map-arrow {
+  margin-top: 16px;
+}
+
 .card-btn {
   background-color: #ACC29E;
   color: #ffff;
+  border-radius: 10px;
 }
+
 .ctn-btn {
   background-color: #D0D0D0;
+  border-radius: 10px;
 }
+
 .card-btn {
   /* style={{ border: 'none', width: '120px', height: '40px' }} */
   border: none;
@@ -47,40 +89,56 @@
   height: 40px;
   margin-top: 5px;
 }
-.age-box,
-.map-btn {
-  max-width: 500px;
-  max-height: 50px;
-}
+
+
+
+
 .age-box-content {
   line-height: 0.3;
   margin-top: 10px;
   margin-left: 20px;
   padding: 2px;
 }
+
 .custom-btn {
   margin-top: -2px;
 }
+
 .cutom-arrow {
   margin-top: 18px;
   margin-left: 10px;
 }
-.map-arrow {
-  margin-top: 9px;
-}
+
+
+
 .card-container {
   margin: 0rem 2rem 0rem 2rem;
 }
+
 .share-icon {
   display: none;
   /* Hide the icon by default */
 }
+
 .card1,
 .card2 {
   width: 130px;
   height: 150px;
 }
-@media (max-width: 768px) {
+
+@media (max-width: 1366px) {
+  .card-container-div {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 766px) {
+  .card-container-div {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
   .share-text {
     display: none;
     /* Hide the text on mobile */
@@ -113,11 +171,11 @@
     margin: 0%;
   }
 
-  .card-container .card3 {
-    margin: auto;
-    width: 80%;
-    /* Adjust width to take full width of its parent */
-    /* Add any other styles you want */
+  .card-container-div .card3 {
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 100%;
+    margin-top: 5px;
     height: auto;
     /* Set height to auto if you want dynamic resizing */
   }
@@ -133,7 +191,10 @@
 
   }
 
-  .map-box,
+  .map-box {
+    margin-bottom: 70px !important;
+  }
+
   .age-box {
     margin: 0rem 0rem 0rem 0.7rem;
     width: 93%;
@@ -166,12 +227,14 @@
     z-index: 20;
     width: 101%;
     margin-left: -2px;
+    border-radius: 15px !important;
   }
 
   .card1,
   .card2 {
     width: 150px;
     height: 170px;
+    margin-right: 10px;
   }
 
   .map-arrow {
@@ -216,4 +279,3 @@
     margin: 0rem 1rem 3rem 1rem;
 }
   } */
-   

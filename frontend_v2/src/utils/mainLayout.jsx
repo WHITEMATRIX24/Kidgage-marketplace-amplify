@@ -3,12 +3,17 @@ import { Row, Col } from "react-bootstrap";
 import "./mainLayout.css";
 import Header from "../components/common/header/Header";
 import Footer from "../components/common/footer/footer";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 
 const MainLayout = () => {
+  const location = useLocation();
+
+  // Exclude footer for the activity details page
+  const hideFooterRoutes = ["/activity-details"];
+
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Row className="m-0">
         <Col md={2} />
         <Col md={8} className="content-layout">
@@ -16,7 +21,7 @@ const MainLayout = () => {
         </Col>
         <Col md={2} />
       </Row>
-      {/* <Footer /> */}
+      {!hideFooterRoutes.includes(location.pathname) && <Footer />}
     </>
   );
 };
