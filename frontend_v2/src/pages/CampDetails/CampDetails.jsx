@@ -1,4 +1,4 @@
-import { faArrowDown, faX } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowRight, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import '../CampDetails/CampDetails.css'
@@ -56,7 +56,12 @@ function CampDetails() {
 
     return (
         <div>
-            <button onClick={openCampDetailsPopup}>Show Popup</button>
+            <div className="activity-btn-container" onClick={openCampDetailsPopup} style={{ cursor: "pointer" }}>
+                <button className="activity-button" >About This Activity</button>
+                <FontAwesomeIcon className="icon-arrow" icon={faArrowRight} />
+            </div>
+
+
 
             {/* Conditional rendering of the popup */}
             {isCampDetailsOpen && (
@@ -73,10 +78,10 @@ function CampDetails() {
 
                                 <div className='col-12 navText'>
                                     <div className='row  ps-0'>
-                                        <h1 className='text-start'>Football camp</h1>
+                                        <h1 className='text-start' style={{ color: "black" }}>Football camp</h1>
                                     </div>
                                     <div className="row d-flex w-100">
-                                        <div > <h3 className='text-start '>Agre Limt: 06 to 10</h3></div>
+                                        <div > <h3 className='text-start ' style={{ color: "black" }}>Agre Limt: 06 to 10</h3></div>
                                     </div>
                                 </div>
 
@@ -91,14 +96,14 @@ function CampDetails() {
                                 transition: 'margin-top 0.3s ease'
                             }}
                         >
-                            <h4>"Surprise! We’re back with a new location in Dubai</h4>
-                            <p className=''>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
+                            <h4 style={{ color: "black" }}>"Surprise! We’re back with a new location in Dubai</h4>
+                            <p className='' style={{ color: "black" }}>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
                                 Working in association with BFC Soccer Schools, our coaching philosophy targets the holistic development of the child while incorporating a true lifelong passion for the game. Our best players even get a chance win scholarships and scouted by the famous Bengaluru Football Club.</p>
-                            <p>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
+                            <p style={{ color: "black" }}>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
                                 Working in association with BFC Soccer Schools, our coaching philosophy targets the holistic development of the child while incorporating a true lifelong passion for the game. Our best players even get a chance win scholarships and scouted by the famous Bengaluru Football Club.</p>
                             {/* things to keep in mind section */}
                             <>
-                                <h5 className='mb-3'>Things to keep in mind:</h5>
+                                <h5 className='mb-3' style={{ color: "black" }}>Things to keep in mind:</h5>
                                 <div className='listWithHiphen '>
                                     <ul className='ps-0'>
                                         {items.map((item, index) => (
@@ -110,25 +115,25 @@ function CampDetails() {
                             </>
                             {/* FAQ's section */}
                             <div className='FAQ'>
-                                <h3 className='mt-2'>FAQs</h3>
+                                <h3 className='mt-2' style={{ color: "black" }}>FAQs</h3>
                                 <div className='row  '>
                                     <div className="col-md-6 mt-3">
-                                        <p>Does the registration guarantee my spot?</p>
-                                        <h6>Yes, whoever is registering will be given a spot. </h6>
+                                        <p style={{ color: "black" }}>Does the registration guarantee my spot?</p>
+                                        <h6 style={{ color: "black" }}>Yes, whoever is registering will be given a spot. </h6>
                                     </div>
                                     <div className="col-md-6 mt-3">
-                                        <p>Does the registration guarantee my spot?</p>
-                                        <h6>Yes, whoever is registering will be given a spot. </h6>
+                                        <p style={{ color: "black" }}>Does the registration guarantee my spot?</p>
+                                        <h6 style={{ color: "black" }}>Yes, whoever is registering will be given a spot. </h6>
                                     </div>
                                 </div>
                                 <div className='row  '>
                                     <div className="col-md-6 mt-3">
-                                        <p>Does the registration guarantee my spot?</p>
-                                        <h6>Yes, whoever is registering will be given a spot. </h6>
+                                        <p style={{ color: "black" }}>Does the registration guarantee my spot?</p>
+                                        <h6 style={{ color: "black" }}>Yes, whoever is registering will be given a spot. </h6>
                                     </div>
                                     <div className="col-md-6 mt-3">
-                                        <p>Does the registration guarantee my spot?</p>
-                                        <h6>Yes, whoever is registering will be given a spot. </h6>
+                                        <p style={{ color: "black" }}>Does the registration guarantee my spot?</p>
+                                        <h6 style={{ color: "black" }}>Yes, whoever is registering will be given a spot. </h6>
                                     </div>
                                 </div>
                             </div>

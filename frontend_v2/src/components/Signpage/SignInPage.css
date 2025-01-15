@@ -1,10 +1,311 @@
+/* Line separator style */
 .line-seperator {
-    width: 150px;
-    height: 2px;
-    background-color: rgba(209, 206, 206, 0.929);
+  width: 130px;
+  height: 2px;
+  background-color: rgba(209, 206, 206, 0.929);
 }
 
+.image1 {
+  border-radius: 15px;
+  max-width: 500px;
+  max-height: 500px;
+}
+
+
+/* Button styles (signin and signup) */
 .signin-btn,
 .signup-btn-container {
+  margin-bottom: 10px;
+}
+
+/* Icon styles for Google and Apple */
+.google-icon,
+.apple-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Sign-in page heading styling */
+.signIn-heading {
+  margin-left: 48px;
+  margin-bottom: 40px;
+}
+
+.input-container {
+  padding-right: .5rem;
+  padding-left: .5rem;
+}
+
+.sign-up-btn {
+  background-color: #ACC29E;
+  color: #ffff;
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+
+}
+
+.signin-btn-container {
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+
+}
+
+
+.right-section-signUp {
+  max-width: 500px;
+  max-height: 589px;
+  border-width: 1px;
+  /* Increase the border thickness */
+  border-style: solid;
+  /* Ensure it's a solid border */
+  border-color: black;
+  /* Change border color if needed */
+  /* margin-top: 100px; */
+}
+
+.sign-up-btn-container {
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.line-seperator-container {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.checkout-container {
+  border-radius: 20px 20px 0px 0px;
+  padding: 10px;
+  width: 101% !important;
+  ;
+  border: solid 1px black;
+  z-index: 10;
+  margin-left: -2px;
+  background-color: white;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+}
+
+.checkout-container {
+  width: 100%;
+}
+
+/* Media query to hide the image and activity button section on mobile devices */
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .input-container {
+    padding: 0rem .8rem .0rem .8rem;
+
+  }
+
+  .right-section-signUp {
+    margin-top: 30px;
+  }
+
+  .sign-up-btn-container,
+  .signin-btn-container {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .sign-up-btn {
+    background-color: black;
+  }
+
+  .line-seperator-container {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .signin-btn {
+    border-radius: 10px;
+  }
+
+  .line-seperator {
+    width: 100px;
+  }
+
+  .signIn-heading {
+    margin-left: 30px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+  }
+
+  .checkout-container {
+    margin-top: -20px;
+  }
+}
+
+
+
+@media (min-width: 992px) {
+  .hide-on-large-screen {
+    display: none;
+  }
+
+  .checkout-container {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .activity-img-container {
+    width: 100%
+  }
+
+  .line-seperator {
+    width: 100px;
+  }
+
+  .line-seperator-container {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+
+  .col-md-6 {
+    /* Make columns stack one by one in portrait mode */
+    width: 100% !important;
+  }
+
+  .activity-btn-container {
+    margin-bottom: 0px !important;
+  }
+
+  .right-section-signUp {
+    margin-top: 20px;
+    /* margin-left: 71px !important; */
+
+  }
+
+
+  /* Target the second column (col-md-6) specifically */
+
+
+}
+
+/* Media query for iPad Mini Portrait Mode */
+@media (max-width: 768px) and (orientation: portrait) {
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .input-container {
+    padding: 0rem .8rem .0rem .8rem;
+  }
+
+  .right-section-signUp {
+    margin-top: 30px;
+  }
+
+  .sign-up-btn-container,
+  .signin-btn-container {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .sign-up-btn {
+    background-color: black;
+  }
+
+  .line-seperator-container {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .signin-btn {
+    border-radius: 10px;
+  }
+
+  .line-seperator {
+    width: 100px;
+  }
+
+  .signIn-heading {
+    margin-left: 30px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+  }
+
+  .checkout-container {
+    margin-top: -20px;
+  }
+
+  /* Adjust column layout for portrait mode */
+  .col-md-6 {
+    width: 100% !important;
+    margin-bottom: 20px;
+    /* Adds space between columns */
+  }
+
+  .activity-btn-container {
     margin-bottom: 10px;
+  }
+
+  .right-section-signUp {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  /* Adjusting image size */
+  .activity-img-container img {
+    width: 90%;
+    height: auto;
+  }
+}
+
+/* Media query for iPad Mini Landscape Mode */
+@media (max-width: 1024px) and (orientation: landscape) {
+
+  /* Ensure the columns are displayed side by side */
+  .col-md-6 {
+    width: 50% !important;
+    /* Adjust to 50% so they stay side by side */
+    margin-bottom: 0;
+  }
+
+  /* Adjust image size for landscape */
+  .activity-img-container img {
+    width: 121%;
+    height: 443px;
+    margin-top: -37px;
+  }
+
+  /* Line separator width in landscape */
+  .line-seperator {
+    width: 100px;
+  }
+
+  /* Adjust padding for landscape */
+  .line-seperator-container {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .right-section-signUp {
+    margin-left: 20px;
+    margin-top: 131px;
+    width: 121%;
+  }
+
+  /* Adjust checkout container for landscape */
+  .checkout-container {
+    margin-top: -30px;
+    padding: 15px;
+  }
+
+  .activity-btn-container {
+    margin-bottom: 0px;
+  }
 }

@@ -18,7 +18,10 @@ function LocationDetails() {
   };
   return (
     <div>
-      <button onClick={openLocationDetailsPopup}>Show Map Popup</button>
+      <div className='d-flex align-items-centre' onClick={openLocationDetailsPopup}>
+        <button className='border-0 text-start py-2  w-100 map-btn' >Map View</button>
+        <FontAwesomeIcon className='fs-5 map-arrow' icon={faArrowRight} style={{ marginLeft: '-31px', color: '#ffff' }} />
+      </div>
 
       {/* Conditional rendering of the popup */}
       {isLocationDetailsOpen && (

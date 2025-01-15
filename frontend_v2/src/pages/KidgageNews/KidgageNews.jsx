@@ -8,10 +8,6 @@ import './KidgageNews.css';
 const KidgageNews = () => {
     return (
         <div className="justify-content-center w-100">
-            {/* Navbar */}
-            header
-
-            {/* Banner */}
             <div>
                 <Banner />
             </div>
@@ -23,7 +19,7 @@ const KidgageNews = () => {
                 <p className="tagline mb-4">Fun that shapes the future.</p>
 
                 {/* News Cards */}
-                <Row className="custom-row g-4 justify-content-center w-100">
+                <Row className="custom-row g-4  w-100">
 
                     {[1, 2, 3, 4].map((item, index) => (
                         <Col key={index} sm={12} md={12} lg={6} xl={6} className="d-flex justify-content-center">

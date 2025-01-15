@@ -5,6 +5,7 @@ import AcitivityImage1 from '../../assets/Activity1.png';
 import AcitivityImage4 from '../../assets/Activity4.png';
 import AcitivityImage2 from '../../assets/Activity2.png';
 import AcitivityImage3 from '../../assets/Activity3.png';
+import { Link } from "react-router";
 import { Col, Container, Row } from "react-bootstrap";
 import './Activity.css'
 function ActivityPage() {
@@ -18,13 +19,17 @@ function ActivityPage() {
                 <h5 className="pb-3">Fun That Shapes The Future</h5>
                 <div className="activity-grid-container">
                     <div className="activity-tile">
-                        <img src={AcitivityImage1} className="img-fluid" alt="Image 1" />
+                        <Link to={'/activity-details'}>
+                            <img src={AcitivityImage1} className="img-fluid" alt="Image 1" />
+                        </Link>
                         <h6 className="fw-bold pt-3 text-align-left">Football Camp Name</h6>
                         <p className="text-align-left" style={{ marginBottom: "0" }}>Location: City, Country</p>
                         <p>Available Dates: Jan 15 - Jan 20</p>
                     </div>
                     <div className="activity-tile">
-                        <img src={AcitivityImage2} className="img-fluid" alt="Image 2" />
+                        <Link to={'/activity-details'}>
+                            <img src={AcitivityImage2} className="img-fluid" alt="Image 2" />
+                        </Link >
                         <h6 className="fw-bold pt-3 text-align-left">Football Camp Name</h6>
                         <p className="text-align-left" style={{ marginBottom: "0" }}>Location: City, Country</p>
                         <p>Available Dates: Feb 5 - Feb 10</p>
