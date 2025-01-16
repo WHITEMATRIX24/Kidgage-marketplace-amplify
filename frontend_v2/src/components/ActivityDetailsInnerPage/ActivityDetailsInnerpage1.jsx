@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './ActivityDetailsInnerpage1.css'
@@ -6,10 +6,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faLocationDot, faShareAlt, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row } from 'react-bootstrap';
 import LocationDetails from '../../pages/LocationDetails/LocationDetails';
+import CalendarPopup from '../../pages/CalendarPopup/CalendarPoup';
+import { useNavigate } from 'react-router';
 
 
 
 function ActivityDetailsInnerpage1() {
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const openCalendar = () => setIsCalendarVisible(true);
+  const closeCalendar = () => setIsCalendarVisible(false);
+  const handleContinue = () => {
+    navigate('/signin')
+  }
   return (
     <>
 
@@ -60,7 +70,7 @@ function ActivityDetailsInnerpage1() {
             </Card>
           </Col>
           <Col xs={12} sm={4} md={4} lg={4} className='d-flex  mt-2'>
-            <Card className='d-flex card3 rounded-4'>
+            <Card className='d-flex card3 rounded-4' onClick={openCalendar}>
               <Card.Body className=' d-flex align-items-center justify-content-center flex-column border rounded-4 px-3  m-1 custom-btn' style={{ backgroundImage: 'linear-gradient(to bottom,#FDD687, #F5A691)' }}>
                 <div className='custom-btn'>
                   <div className=' d-flex-coloum'>
@@ -98,11 +108,14 @@ function ActivityDetailsInnerpage1() {
                   <p className='fw-bold' style={{ fontSize: '16px' }}>Age Limit:</p>
                   <p style={{ fontSize: '12px' }}>06 to 10</p>
                 </div>
-                <button className=' ctn-btn border-0 w-50 m-1 fw-bold'>Continue</button>
+                <button className=' ctn-btn border-0 w-50 m-1 fw-bold' onClick={handleContinue}>Continue</button>
               </div>
             </Col>
           </Row>
         </div>
+        {isCalendarVisible && (
+          <CalendarPopup isVisible={isCalendarVisible} onClose={closeCalendar} />
+        )}
       </div>
 
 

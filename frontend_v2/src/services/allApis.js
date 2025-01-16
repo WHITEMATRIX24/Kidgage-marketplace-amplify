@@ -56,3 +56,17 @@ export const getAllActivityByCategoryApi = async ({ category }) => {
     );
   }
 };
+
+//KidgageNews 
+export const getKidgageNewsApi = async () => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: "/news/kidgage-news",
+      apiMethod: "GET",
+    });
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(`error in fetching kidgage news, error: ${error}`);
+  }
+};

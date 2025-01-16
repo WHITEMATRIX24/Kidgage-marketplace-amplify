@@ -55,7 +55,7 @@
     flex: 1;
     padding: 10px;
     min-width: 190px;
-    max-height: 230px;
+    min-height: 230px;
     display: flex;
     justify-content: center;
     align-items: center;

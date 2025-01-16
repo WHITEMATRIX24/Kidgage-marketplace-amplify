@@ -3,11 +3,12 @@ import '../ActivityDetailsInnerPage/ActivityDetailsInnerpage1.css'
 import './SignInPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-
-
-
-
+import { useNavigate } from 'react-router'
 function SignInPage() {
+  const navigate = useNavigate();
+  const handleContinue = () => {
+    navigate('/signin-otp');
+  }
   return (
     <>
 
@@ -41,7 +42,7 @@ function SignInPage() {
                     Sign Up
                     <FontAwesomeIcon icon={faArrowRight} style={{ color: "#ffff" }} className='ms-3' />
                   </button>
-                  <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className='btn w-50 m-1 fw-bold rounded-3'>Continue</button>
+                  <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className='btn w-50 m-1 fw-bold rounded-3' onClick={handleContinue}>Continue</button>
                 </div>
               </div>
 

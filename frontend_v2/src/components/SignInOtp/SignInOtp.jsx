@@ -4,7 +4,12 @@ import './SignInOtp.css'
 import '../Signpage/SignInPage.css'
 import '../../pages/ActivityDetails/ActivityDetails.css'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router'
 function SignInOtp() {
+  const navigate = useNavigate();
+  const handleContinue = () => {
+    navigate("/signin-success")
+  }
   return (
     <>
       <div className="activity-details-row">
@@ -39,7 +44,7 @@ function SignInOtp() {
                   <button style={{ backgroundColor: '#D0D0D0', color: '#ffff', width: '150px', height: '50px', fontSize: '18px', fontWeight: '700' }} className=' btn m-1 fw-bold'>
                     OTP In 4.23
                   </button>
-                  <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className='btn w-50 m-1 fw-bold rounded-3'>Continue</button>
+                  <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className='btn w-50 m-1 fw-bold rounded-3 ' onClick={handleContinue}>Continue</button>
                 </div>
                 {/* <Link>Use a differnt email</Link> */}
               </div>
