@@ -1,130 +1,136 @@
-
 .PopupCalendar {
-   /*  position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto; */
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
 
-.calenderHeading h1{
-    font-size: 38px;
-    font-weight: 700;
-    line-height: 30px;
+.calenderHeading h1 {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 30px;
 }
-.calenderHeading h3{
-    font-size: 18px;
-    font-weight: 700;
+
+.calenderHeading h3 {
+  font-size: 18px;
+  font-weight: 700;
 }
-.monthName{
-    font-size: 16px;
-    font-weight: 800;
+
+.monthName {
+  font-size: 16px;
+  font-weight: 800;
 }
 
 
 .open-calendar-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .calendar-popup {
-    display: block;
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    border-radius: 15px;
-  }
-  
-  .calendar-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    border-radius: 10px;
-  }
-  
-  .month-arrow {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    margin: 0 10px;
-  }
-  .monthName{
-    font-size: 12px;
-    font-weight: 700;
-    
-  }
-  .package{
-    padding: '15px';
-    border-radius: '10px';
-    border: '1px solid black';
-    font-size: 12px;
-    width: 90%;
-    font-weight: 700;
-  }
-  .calendar-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap: 5px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  
-  .calendar-day {
-    text-align: center;
-    padding: 10px;
-    border: 0px solid #ddd;
-    cursor: pointer;
-  }
-  
-  .calendar-day.empty {
-    background-color: white;
-  }
-  
-  .calendar-day.disabled {
-    background-color: white;
-    color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .calendar-day.selected {
-    background-color: #FDD687;
-    border-radius: 10px;
-    color: white;
-  }
-  
-  .calendar-day.weekday {
-    background-color: white;
-    color: #333;
-    font-size: 14px;
-    font-weight: 700;
-  }
-  
-  .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap: 5px;
-  }
-  .cal-close{
-    position: absolute;
-    margin-right: -1px;
-    right: 0;
-    top: 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
+
+.calendar-popup {
+  display: block;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 15px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+.month-arrow {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.monthName {
+  font-size: 12px;
+  font-weight: 700;
+
+}
+
+.package {
+  padding: '15px';
+  border-radius: '10px';
+  border: '1px solid black';
+  font-size: 12px;
+  width: 90%;
+  font-weight: 700;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+
+.calendar-day {
+  text-align: center;
+  padding: 10px;
+  border: 0px solid #ddd;
+  cursor: pointer;
+}
+
+.calendar-day.empty {
+  background-color: white;
+}
+
+.calendar-day.disabled {
+  background-color: white;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.calendar-day.selected {
+  background-color: #FDD687;
+  border-radius: 10px;
+  color: white;
+}
+
+.calendar-day.weekday {
+  background-color: white;
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+}
+
+.cal-close {
+  position: absolute;
+  margin-right: -1px;
+  right: 0;
+  top: 0;
+}
+
 .cal-close-button {
   position: absolute;
   top: 0px;
@@ -133,101 +139,114 @@
   background-color: #FDD687;
   padding: 10px 15px;
   border: none;
-  border-radius:0px 15px 0px 15px ;
+  border-radius: 0px 15px 0px 15px;
   font-size: 14px;
   color: black;
   cursor: pointer;
 }
+
 .cal-close-button:hover {
   color: #ff0000;
 }
-  
-  .close-calendar-btn {
-    display: block;
-    margin-top: 10px;
-    padding: 8px 12px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .open-calendar-btn:hover,
-  .close-calendar-btn:hover,
-  .month-arrow:hover {
-    background-color: #f0f0f0;
-  }
-  .calendarButtons{
-    border: 1px solid #D0D0D0;
-  }
-  .CalContinueButton{
-    background-image: linear-gradient(to right, #FDD687 , #F5A691);
-    font-size: 16px;
-    line-height: 28px;
-    font-weight: 700;
-    padding: 5px;
-    border-radius: 10px;
-    border: none;
-    width: 100%;
-  }
-  .timeSlot{
-    border-radius: 10px;
-    appearance: none; /* Removes default dropdown arrow */
-    -webkit-appearance: none; /* For Safari */
-    width: 100%;
-    font-size: 12px;
-    font-weight: 600;
 
-  }
-  .timeslotDropDown{
-    position: relative;
-  }
-  .dropdown-arrow {
-    position: absolute;
-    right: 7px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    pointer-events: none; /* Prevents the arrow from blocking interaction with the dropdown */
-    color: #888;
-  }
+.close-calendar-btn {
+  display: block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.open-calendar-btn:hover,
+.close-calendar-btn:hover,
+.month-arrow:hover {
+  background-color: #f0f0f0;
+}
+
+.calendarButtons {
+  border: 1px solid #D0D0D0;
+}
+
+.CalContinueButton {
+  background-image: linear-gradient(to right, #FDD687, #F5A691);
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+}
+
+.timeSlot {
+  border-radius: 10px;
+  appearance: none;
+  /* Removes default dropdown arrow */
+  -webkit-appearance: none;
+  /* For Safari */
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+
+}
+
+.timeslotDropDown {
+  position: relative;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  pointer-events: none;
+  /* Prevents the arrow from blocking interaction with the dropdown */
+  color: #888;
+}
 
 
-  /* @media only screen and (max-width: 1400px) {
+/* @media only screen and (max-width: 1400px) {
     .PopupCalendar{
         background-color: transparent !important;
     }
   }
  */
-  @media only screen and (max-width: 375px) {
-    .calendar-popup{
-        width: 90%;
-    }
-    .calendar-popup h1{
-        font-size: 24px;
-        font-weight: 700;
-    }
-    .calendar-popup h3{
-        font-size: 14px;
-        font-weight: 700;
-    }
-    .calendar-day.weekday{
-        font-size: 12px;
-    }
-    .calendar-day{
-        font-size: 12px;
-    }
-    
-    .CalContinueButton{
-        font-size: 15px;
-        padding: 5px;
-    }
+@media only screen and (max-width: 375px) {
+  .calendar-popup {
+    width: 90%;
   }
-  @media only screen and (max-width: 430px) {
-   
+
+  .calendar-popup h1 {
+    font-size: 24px;
+    font-weight: 700;
   }
-  @media only screen and (min-width: 1500px) {
-    .calendar-popup{
-      width: 500px;
-      height: 600px;
-    }
-    
+
+  .calendar-popup h3 {
+    font-size: 14px;
+    font-weight: 700;
   }
+
+  .calendar-day.weekday {
+    font-size: 12px;
+  }
+
+  .calendar-day {
+    font-size: 12px;
+  }
+
+  .CalContinueButton {
+    font-size: 15px;
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width: 430px) {}
+
+@media only screen and (min-width: 1500px) {
+  .calendar-popup {
+    width: 500px;
+    height: 600px;
+  }
+
+}

@@ -57,7 +57,7 @@
 
 .right-section-signUp {
   max-width: 500px;
-  max-height: 589px;
+  min-height: 589px;
   border-width: 1px;
   /* Increase the border thickness */
   border-style: solid;
@@ -258,11 +258,10 @@
     margin-top: 10px;
   }
 
-  /* Adjusting image size */
-  .activity-img-container img {
+  /* Adjusting image size .activity-img-container img {
     width: 90%;
     height: auto;
-  }
+  } */
 }
 
 /* Media query for iPad Mini Landscape Mode */

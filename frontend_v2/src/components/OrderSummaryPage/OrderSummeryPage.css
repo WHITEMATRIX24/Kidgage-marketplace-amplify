@@ -1,0 +1,38 @@
+.order-checkbox {
+    width: 30px;
+    height: 30px;
+    background-color: #f0f0f0;
+    /* Light gray background */
+    border: 2px solid #ccc;
+    /* Border color */
+    border-radius: 4px;
+    /* Rounded corners */
+    appearance: none;
+    /* Remove default checkbox styling */
+    position: relative;
+}
+
+.order-checkbox:checked {
+    background-color: #ACC29E
+        /* Green background when checked */
+    ;
+    border-color: #ACC29E
+        /* Optional: Change border color when checked */
+}
+
+@media (max-width: 768px) {
+    .age-box {
+        display: none;
+    }
+
+    .mx-5 {
+        margin-right: 2rem !important;
+        margin-left: 2rem !important;
+    }
+
+    .map-box {
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+}
