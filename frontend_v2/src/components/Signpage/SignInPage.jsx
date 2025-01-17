@@ -46,8 +46,7 @@ function SignInPage() {
 
   return (
     <>
-
-      <div className="activity-details-row">
+  <div className="activity-details-row">
         <div className="col-md-6 col-sm-12 col-lg-6 ">
           <div className='hide-on-mobile'>
             <div className='activity-img-container'>
@@ -68,13 +67,12 @@ function SignInPage() {
                 <h6>Enter your email</h6>
               </div>
               <div className='mt-3 mb-3   w-100 d-flex align-items-center justify-content-center input-container'>
-                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 ' style={{ width: '400px', height: '60px' }} value={email}
-                  onChange={(e) => setEmail(e.target.value)}></input>
+                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 ' style={{ width: '400px', height: '60px' }} ></input>
               </div>
 
               <div className='d-flex justify-content-center align-items-center'>
                 <div className=' border rounded-4 d-flex align-items-center justify-content-between sign-up-btn-container' style={{ width: '400px', height: '60px' }}>
-                  <button className=' m-1 fw-bold sign-up-btn' onClick={sendOtp}>
+                  <button className=' m-1 fw-bold sign-up-btn'>
                     Sign Up
                     <FontAwesomeIcon icon={faArrowRight} style={{ color: "#ffff" }} className='ms-3' />
                   </button>
@@ -85,13 +83,13 @@ function SignInPage() {
               {/* <SignInOtp/> */}
               <div className='mt-3'>
                 <div className='d-flex justify-content-between align-items-center  line-seperator-container mt-5'>
-                  <div className='line-seperator'></div>
+                  <div className='line-seperator '></div>
                   <p>or Sign in with</p>
                   <div className='line-seperator'></div>
                 </div>
-                <div className=' mt-2 d-flex align-items-center justify-content-center flex-column mb-1 signin-btn-container'>
+                <div className='d-flex align-items-center justify-content-center flex-column mb-1 signin-btn-container'>
                   <button style={{ backgroundColor: '#D0D0D0' }} className='signin-btn border rounded-5 w-75  fw-bold  bg-transparent hide-on-mobile'><img src="https://img.icons8.com/?size=48&id=17949&format=png" alt="" className='me-3 google-icon' />Continue with Google</button>
-                  <button className='signin-btn border  w-100  fw-bold hide-on-large-screen mt-3'><img src="https://img.icons8.com/?size=48&id=17949&format=png" alt="" className='me-3 google-icon' />Continue with Google</button>
+                  <button className='signin-btn border  w-100  fw-bold hide-on-large-screen  py-2'><img src="https://img.icons8.com/?size=48&id=17949&format=png" alt="" className='me-3 google-icon' /> Google</button>
                   <p className='hide-on-large-screen mt-3 mb-4 ms-3'>By sigining in, you agree to our <span className='text-primary'>Terms of Service </span>and<span className='text-primary'>Privacy policy </span></p>
                   <button style={{ backgroundColor: '#D0D0D0' }} className='border signin-btn rounded-5 w-75 mb-5 fw-bold bg-transparent hide-on-mobile'><img src="https://img.icons8.com/?size=50&id=30840&format=png" alt="" className='me-3 apple-icon' />Continue with Apple</button>
                 </div>
@@ -99,7 +97,7 @@ function SignInPage() {
               <div className='checkout-container'>
                 <div className='d-flex align-items-centre justify-content-between border rounded-3  age-box '>
                   <div className=' age-box-content '>
-                    <p className='fw-bold' style={{ fontSize: '16px' }}>AED 199:</p>
+                    <p className='fw-bold' style={{ fontSize: '16px' }}>QAR 199:</p>
                     <p style={{ fontSize: '12px' }}>Today will start</p>
                   </div>
                   <button className=' rounded-4 ctn-btn border-0 w-50 m-1 fw-bold' style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }}>Checkout</button>

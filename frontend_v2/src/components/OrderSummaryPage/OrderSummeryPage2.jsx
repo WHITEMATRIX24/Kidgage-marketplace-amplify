@@ -10,7 +10,7 @@ function OrderSummeryPage2() {
     }
     return (
         <>
-            <div className=" activity-details-row">
+         <div className=" activity-details-row">
                 <div className="col-md-6">
                     <div className='hide-on-mobile'>
                         <div className='activity-img-container'>
@@ -32,42 +32,42 @@ function OrderSummeryPage2() {
                             </div>
                             <div className='mt-3 mb-3  mx-5 py-3 px-2 d-flex align-items-center justify-content-between input-container border rounded-4'>
                                 <img src="http://www.skipcash-portal.com/img/skipcash-logo.png" alt="" style={{ width: '90px', height: '35px' }} className='order-image' />
-                                <input type="checkbox" className='order-checkbox' style={{ width: '30px', height: '30px' }} />
+                                <input type="radio" name="paymentMethod" className='order-checkbox' style={{ width: '30px', height: '30px' }} />
                             </div>
-                            <div className='mt-3 mb-3 mx-5 py-3 px-2  d-flex align-items-center justify-content-between input-container border rounded-4'>
+                            <div className='mt-3 mb-5 mx-5 py-3 px-2  d-flex align-items-center justify-content-between input-container border rounded-4'>
                                 <img src="https://logos-world.net/wp-content/uploads/2021/03/Stripe-Logo.png" alt="" style={{ width: '60px', height: '30px' }} className='order-image' />
-                                <input type="checkbox" className='order-checkbox' style={{ width: '30px', height: '30px' }} />
+                                <input type="radio" name="paymentMethod" className='order-checkbox' style={{ width: '30px', height: '30px' }} />
                             </div>
 
-
+                            <div className='line-seperator-order-summary'></div>
 
                             <div className='border rounded mt-5 p-1 map-box  '>
-                                <div style={{ lineHeight: '10px' }} className='mx-3 mt-3'>
+                                <div style={{  }} className='mx-3 mt-2'>
                                     <p className='fw-bold' style={{ fontSize: '18px' }}> Order Summery</p>
-                                    <div className='d-flex justify-content-between'>
-                                        <p>1Month Pass</p>
-                                        <p>AED 157.50</p>
+                                    <div className='d-flex justify-content-between ' style={{ fontSize: '18px',lineHeight: '10px' }}>
+                                        <p>1 Month Pass</p>
+                                        <p>QAR 157.50</p>
                                     </div>
-                                    <div className='d-flex justify-content-between'>
+                                    <div className='d-flex justify-content-between' style={{ fontSize: '18px',lineHeight: '8px' }}>
                                         <p>Tax</p>
-                                        <p className='fw-bold'>AED 157.50</p>
+                                        <p className='fw-bold'>QAR 157.50</p>
                                     </div>
 
                                 </div>
                             </div>
 
                             <div className='d-flex align-items-centre justify-content-between border rounded-3  age-box  mt-3 d-none d-md-flex '>
-                                <div className=' age-box-content '>
+                                <div className=' age-box-content  '>
                                     <p className='fw-bold' style={{ fontSize: '16px' }}>Total:199</p>
-                                    <p style={{ fontSize: '12px' }}>Today will start</p>
+                                    <p style={{ fontSize: '13px' }}>Today will start</p>
                                 </div>
-                                <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className=' ctn-btn border-0  m-1 fw-bold' onClick={handleContinue}>Continue</button>
+                                <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className=' ctn-btn border-0  m-1 fw-bold'>Continue</button>
                             </div>
                             <div className='checkout-container'>
                                 <div className='d-flex align-items-centre justify-content-between border rounded-3  age-box '>
                                     <div className=' age-box-content '>
-                                        <p className='fw-bold' style={{ fontSize: '16px' }}>AED 199:</p>
-                                        <p style={{ fontSize: '12px' }}>Today will start</p>
+                                        <p className='fw-bold' style={{ fontSize: '16px' }}>QAR 199:</p>
+                                        <p style={{ fontSize: '13px' }}>Today will start</p>
                                     </div>
                                     <button className=' rounded-4 ctn-btn border-0 w-50 m-1 fw-bold' style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }}>Checkout</button>
                                 </div>

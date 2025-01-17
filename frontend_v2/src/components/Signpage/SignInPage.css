@@ -4,14 +4,11 @@
   height: 2px;
   background-color: #D0D0D0;
 }
-
 .image1 {
   border-radius: 15px;
   max-width: 500px;
   max-height: 500px;
 }
-
-
 /* Button styles (signin and signup) */
 .signin-btn,
 .signup-btn-container {
@@ -54,14 +51,10 @@
   font-weight: 700;
   border: none;
   border-radius: 10px;
-
 }
-
 .signin-btn-container {
   margin-top: 1.85rem;
 }
-
-
 .right-section-signUp {
   max-width: 500px;
   min-height: 589px;
@@ -74,19 +67,16 @@
   /* margin-top: 100px; */
   margin-bottom: 50px;
 }
-
 .sign-up-btn-container {
   margin-right: 1.5rem;
   margin-left: 1.5rem;
 }
-
 .line-seperator-container {
   /* padding-right: 3rem;
   padding-left: 3rem; */
   margin-left: 3.5rem;
   margin-right: 3.5rem;
 }
-
 .checkout-container {
   border-radius: 20px 20px 0px 0px;
   padding: 10px;
@@ -100,7 +90,6 @@
   bottom: 0px;
   left: 0px;
 }
-
 .checkout-container {
   width: 100%;
 }
@@ -110,46 +99,43 @@
   .hide-on-mobile {
     display: none;
   }
-
   .input-container {
     padding: 0rem .8rem .0rem .8rem;
-
   }
-
   .right-section-signUp {
     margin-top: 30px;
   }
-
   .sign-up-btn-container,
   .signin-btn-container {
     margin-right: 0.5rem;
     margin-left: 0.5rem;
   }
-
   .sign-up-btn {
     background-color: black;
   }
-
   .line-seperator-container {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
-
   }
-
   .signin-btn {
     border-radius: 10px;
   }
-
   .line-seperator {
     width: 90px;
   }
-
   .signIn-heading {
     margin-left: 30px;
     margin-bottom: 40px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
   }
-
+  .signIn-heading h2 {
+    font-size: 30px;
+    margin-top: 20px;
+  }
+  
+  .signIn-heading h6 {
+    font-size: 18px;
+  }
   .checkout-container {
     margin-top: -20px;
   }
@@ -166,9 +152,9 @@
 }
 
 @media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
-  .activity-img-container {
-    width: 100%
-  }
+  .activity-img-container{
+    width: 124%;
+}
 
   .line-seperator {
     width: 100px;
@@ -293,13 +279,6 @@
     margin-bottom: 0;
   }
 
-  /* Adjust image size for landscape */
-  .activity-img-container img {
-    width: 121%;
-    height: 443px;
-    margin-top: -37px;
-  }
-
   /* Line separator width in landscape */
   .line-seperator {
     width: 100px;
@@ -316,15 +295,13 @@
     margin-top: 131px;
     width: 121%;
   }
-
   /* Adjust checkout container for landscape */
   .checkout-container {
     margin-top: -30px;
     padding: 15px;
   }
-
   .activity-btn-container {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
   }
 }
 

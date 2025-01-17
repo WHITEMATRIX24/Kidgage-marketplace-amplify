@@ -1,3 +1,15 @@
+
+/* Line separator style */
+.line-seperator-order-summary {
+    width: 180px;
+    height: 2px;
+    background-color: #D0D0D0;
+    margin: auto;
+}
+.age-box-content{
+    margin-top: 13px;
+}
+
 .order-checkbox {
     width: 30px;
     height: 30px;
@@ -24,20 +36,96 @@
     .age-box {
         display: none;
     }
-
     .mx-5 {
-        margin-right: 2rem !important;
-        margin-left: 2rem !important;
+        margin-right: 1rem !important;
+        margin-left: 1rem !important;
     }
-
     .map-box {
-        margin-left: 35px;
-        margin-right: 35px;
+        margin-left: 15px !important;
+        margin-right: 15px !important;
     }
-
-    /* 
     .right-section-signUp {
         height: auto !important;
-    } */
+    }
+    
 
+}
+@media (min-width: 992px) {
+
+    .line-seperator-order-summary {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+    .right-section-signUp {
+        margin-top: -6px !important;
+        margin-left: 0px !important;
+    }
+    .activity-btn-container {
+        width: 122% !important;
+    }
+    .activity-details-row {
+        
+        margin-left: 84px !important;
+    }
+
+}
+
+@media (min-width: 1366px) {
+    .right-section-signUp {
+        margin-left: 27px !important;
+    }
+}
+@media (min-width: 1180px) {
+
+    .activity-btn-container, .right-section-signUp{
+        width: 135% !important;
+    }
+    .activity-details-row {
+        
+        margin-left:0px !important;
+    }
+
+}
+@media (max-width: 1024px) {
+
+    .age-box,.map-box{
+        margin-left: 15px !important;
+        margin-right: 15px !important;
+        margin-bottom: 15px !important;
+    }
+    .mx-5 {
+        margin-right: 1rem !important;
+        margin-left: 1rem !important;
+    }
+    .right-section-signUp {
+        margin-top: 0px !important;
+        margin-left: 0px !important;
+    }
+    .activity-btn-container {
+        width: 121%;
+    }
+
+
+}
+@media (min-width: 820px) {
+    .line-seperator-order-summary {
+        display: none;
+    }
+}
+@media (min-width: 1024px) {
+   
+    .activity-img-container{
+        width: 124%;
+    }
+    .activity-btn-container {
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 766px) {
+    .age-box {
+        width: 100% !important;
+        margin-left: -2px !important;
+    }
 }
