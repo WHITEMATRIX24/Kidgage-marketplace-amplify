@@ -2,8 +2,12 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import './OrderSummeryPage.css'
-
+import { useNavigate } from 'react-router'
 function OrderSummeryPage2() {
+    const navigate = useNavigate();
+    const handleContinue = () => {
+        navigate('/thankyou');
+    }
     return (
         <>
             <div className=" activity-details-row">
@@ -57,7 +61,7 @@ function OrderSummeryPage2() {
                                     <p className='fw-bold' style={{ fontSize: '16px' }}>Total:199</p>
                                     <p style={{ fontSize: '12px' }}>Today will start</p>
                                 </div>
-                                <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className=' ctn-btn border-0  m-1 fw-bold'>Continue</button>
+                                <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className=' ctn-btn border-0  m-1 fw-bold' onClick={handleContinue}>Continue</button>
                             </div>
                             <div className='checkout-container'>
                                 <div className='d-flex align-items-centre justify-content-between border rounded-3  age-box '>

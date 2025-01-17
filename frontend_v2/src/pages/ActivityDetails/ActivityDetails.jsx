@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import './ActivityDetails.css'
+import './ActivityDetails-1.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import ActivityDetailsInnerpage1 from '../../components/ActivityDetailsInnerPage/ActivityDetailsInnerpage1';

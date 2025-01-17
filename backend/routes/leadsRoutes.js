@@ -2,10 +2,12 @@
 const express = require("express");
 const Lead = require("../models/Leads");
 const router = express.Router();
+router.use(express.json());
 const path = require("path");
-const nodemailer = require("nodemailer"); // Include nodemailer
+const nodemailer = require("nodemailer");
+const crypto = require('crypto');
 const Enquiry = require("../models/Enquiry");
-
+let otpStore = {};
 const transporter = nodemailer.createTransport({
   host: "smtp.zoho.com",
   port: 465, // Use 587 for TLS
@@ -15,6 +17,60 @@ const transporter = nodemailer.createTransport({
     pass: "t0zHp1RBgsmX", // Your Zoho Mail password or app password
   },
 });
+// Backend example
+router.post('/send-otp', async (req, res) => {
+  console.log(req.body);
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required.' });
+  }
+
+  try {
+    const otp = crypto.randomInt(1000, 9999); // Generate 6-digit OTP
+    otpStore[email] = { otp, expires: Date.now() + 300000 }; // OTP expires in 5 mins
+    console.log(otpStore)
+    // Send email with OTP
+    const mailOptions = {
+      from: 'hello@kidgage.com',
+      to: email,
+      subject: 'Your OTP Code',
+      text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    // Send successful response
+    return res.status(200).json({ message: 'OTP sent successfully.' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Error sending OTP.', error: err.message });
+  }
+});
+router.post('/verify-otp', (req, res) => {
+  const { otp, email } = req.body;
+  console.log('OTP from request:', otp);
+
+  console.log('Current time:', Date.now());
+  // Check the email in otpStore
+
+  if (!otp || !email) {
+    return res.status(400).json({ message: 'OTP or email is missing.' });
+  }
+
+  // Ensure that email is a string (if it's an object, extract the email string)
+  const emailString = typeof email === 'string' ? email : email?.email;
+  console.log('Stored OTP:', otpStore[emailString].otp);
+  console.log('Expiration time:', otpStore[emailString].expires);
+  if (Number(otpStore[emailString].otp) === Number(otp) && otpStore[emailString].expires > Date.now()) {
+    return res.status(200).json({ message: 'OTP verified' });
+  }
+
+
+  return res.status(400).json({ message: 'Invalid or expired OTP.' });
+});
+
+
 
 router.post("/track", async (req, res) => {
   try {

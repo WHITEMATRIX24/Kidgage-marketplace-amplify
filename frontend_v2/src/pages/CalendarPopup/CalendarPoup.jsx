@@ -118,8 +118,8 @@ const CalendarPopup = ({ isVisible, onClose }) => {
                         ))}
                     </div>
                     <div className="calendar-grid">{renderCalendar()}</div>
-                    <div className="row calendarButtons rounded mt-3 mx-2 py-2">
-                        <div className="col-6 p-1">
+                    <div className="row calendarButtons rounded mt-3 mx-2  px-1">
+                        <div className="timeslotDropdown col-6 col-lg-5 p-1">
                             <select
                                 className="timeSlot p-2 rounded"
                                 value={selectedTimeSlot}
@@ -132,8 +132,9 @@ const CalendarPopup = ({ isVisible, onClose }) => {
                                 <option value="1pm to 3pm">1pm to 3pm</option>
                                 <option value="3pm to 5pm">3pm to 5pm</option>
                             </select>
+                            <span className="dropdown-arrow"><FontAwesomeIcon icon={faAngleUp} /></span> {/* Custom up arrow */}
                         </div>
-                        <div className="col-6 p-1">
+                        <div className="col-6 col-lg-7 p-1">
                             <button className="CalContinueButton">Continue</button>
                         </div>
                     </div>

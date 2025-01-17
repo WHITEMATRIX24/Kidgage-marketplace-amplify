@@ -133,7 +133,7 @@
   }
 }
 
-@media (max-width: 766px) {
+@media (max-width: 566px) {
   .card-container-div {
     margin-left: 20px;
     margin-right: 20px;
@@ -192,7 +192,7 @@
   }
 
   .map-box {
-    margin-bottom: 70px !important;
+    margin-bottom: 100px !important;
   }
 
   .age-box {

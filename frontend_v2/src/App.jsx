@@ -7,6 +7,7 @@ import ActivityDetails1 from "./pages/ActivityDetails/ActivityDetails1";
 import KidgageNews from "./pages/KidgageNews/KidgageNews";
 import Landing from "./pages/landing/landing";
 import SigninSuccess from "./pages/SigninSuccess/SigninSuccess";
+import Thankyou from "./pages/Thankyou/Thankyou";
 import MainLayout from "./utils/mainLayout";
 import { Routes, Route } from "react-router";
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/signin-otp" element={<SignInOtp />} />
           <Route path="/signin-success" element={<SigninSuccess />} />
           <Route path="/order-summary" element={<OrderSummeryPage2 />} />
+          <Route path="/thankyou" element={<Thankyou />} />
         </Route>
       </Routes>
     </>

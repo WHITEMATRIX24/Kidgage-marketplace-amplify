@@ -1,14 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../ActivityDetailsInnerPage/ActivityDetailsInnerpage1.css'
 import './SignInPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router'
+
 function SignInPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
   const handleContinue = () => {
     navigate('/signin-otp');
   }
+  const sendOtp = async () => {
+    if (!email) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    console.log("frontend", email);
+    try {
+      // Send the request to the backend to send the OTP
+      const response = await fetch('http://localhost:5000/api/leads/send-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }), // Sending email in JSON format
+      });
+
+      // Check if the response is successful
+      if (response.ok) {
+        const data = await response.json(); // Parse the response as JSON
+        alert(data.message); // Show success message
+        navigate('/signin-otp', { state: { email } });// Redirect to the OTP verification page
+      } else {
+        // Handle error if response is not successful
+        const errorData = await response.json(); // Parse error response
+        alert(errorData.message || 'Failed to send OTP.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred while sending the OTP.');
+    }
+  };
+
+
   return (
     <>
 
@@ -33,12 +68,13 @@ function SignInPage() {
                 <h6>Enter your email</h6>
               </div>
               <div className='mt-3 mb-3   w-100 d-flex align-items-center justify-content-center input-container'>
-                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 ' style={{ width: '400px', height: '60px' }} ></input>
+                <input type='text' placeholder='example@mail.com' className='form-control fs-5 border rounded-4 ' style={{ width: '400px', height: '60px' }} value={email}
+                  onChange={(e) => setEmail(e.target.value)}></input>
               </div>
 
               <div className='d-flex justify-content-center align-items-center'>
                 <div className=' border rounded-4 d-flex align-items-center justify-content-between sign-up-btn-container' style={{ width: '400px', height: '60px' }}>
-                  <button className=' m-1 fw-bold sign-up-btn'>
+                  <button className=' m-1 fw-bold sign-up-btn' onClick={sendOtp}>
                     Sign Up
                     <FontAwesomeIcon icon={faArrowRight} style={{ color: "#ffff" }} className='ms-3' />
                   </button>
