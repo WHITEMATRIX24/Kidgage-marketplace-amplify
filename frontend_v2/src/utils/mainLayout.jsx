@@ -10,8 +10,7 @@ const MainLayout = () => {
 
   // Exclude footer for the activity details page
   const hideFooterRoutes = [
-    "/activity-details",
-    "/",
+    "/activity-detail/",
     "/signin",
     "/signin-otp",
     "/order-summary",

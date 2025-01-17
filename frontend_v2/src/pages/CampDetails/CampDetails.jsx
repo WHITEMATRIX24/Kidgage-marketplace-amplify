@@ -56,9 +56,9 @@ function CampDetails() {
 
     return (
         <div>
-            <div className="activity-btn-container" onClick={openCampDetailsPopup} style={{ cursor: "pointer" }}>
-                <button className="activity-button" >About This Activity</button>
-                <FontAwesomeIcon className="icon-arrow" icon={faArrowRight} />
+            <div className="activity-btn-container-1" onClick={openCampDetailsPopup} style={{ cursor: "pointer" }}>
+                <button className="activity-button-1" >About This Activity</button>
+                <FontAwesomeIcon className="icon-arrow-1" icon={faArrowRight} />
             </div>
 
 

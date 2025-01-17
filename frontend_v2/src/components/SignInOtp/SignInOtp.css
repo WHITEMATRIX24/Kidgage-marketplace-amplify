@@ -1,6 +1,16 @@
+
 .signIn-Otp-heading {
+  margin-left: 48px;
   margin-bottom: 40px;
-  margin-left: 50px;
+}
+
+.signIn-Otp-heading h2 {
+  font-size: 38px;
+  margin-top: 50px;
+}
+
+.signIn-Otp-heading h6 {
+  font-size: 18px;
 }
 
 .otp-container {
@@ -19,6 +29,9 @@
   /* Change border color if needed */
   /* margin-top: 100px; */
 }
+.line-seperator-container p{
+  font-size: 15px;
+}
 
 @media (max-width: 768px) {
 
@@ -32,7 +45,17 @@
   }
 
   .signIn-Otp-heading {
-    margin-left: 10px;
+    margin-left: 20px;
+  }
+  .signIn-Otp-heading h2 {
+    margin-top: 30px;
+    font-size: 24px;
+  }
+  .right-section-signUp{
+    height: 500px;
+  }
+  .line-seperator-container p{
+    font-size: 15px;
   }
 
 }

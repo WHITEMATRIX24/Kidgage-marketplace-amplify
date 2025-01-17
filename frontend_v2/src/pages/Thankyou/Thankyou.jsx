@@ -114,7 +114,7 @@ function Thankyou() {
                 </div>
 
             </div>
-            <CampDetails />
+            {/* <CampDetails /> */}
 
         </div>
     )
