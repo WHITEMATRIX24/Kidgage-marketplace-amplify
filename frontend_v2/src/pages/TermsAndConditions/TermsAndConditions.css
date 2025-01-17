@@ -6,3 +6,21 @@
     font-family: 18px;
     padding-bottom: 30px;
 }
+
+.tandc-banner-container {
+    margin-top: 50px;
+}
+
+.content-container p {
+    font-size: 16px;
+}
+
+@media(max-width: 590px) {
+    .tandc-banner-container {
+        margin-top: 20px;
+    }
+
+    .content-container p {
+        font-size: 12px;
+    }
+}

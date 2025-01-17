@@ -2,32 +2,33 @@ import React, { useEffect, useState } from 'react'
 import logo from '../../assets/FootballAcademyIcon.png'
 import '../AcademyDetails/FootballAcademyDetails.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowRight, faX } from "@fortawesome/free-solid-svg-icons"
+import { faArrowDown, faArrowRight, faArrowUp, faX } from "@fortawesome/free-solid-svg-icons"
 import { faFacebook, faInstagram, faSquareFacebook, faSquareWhatsapp, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 function FootballAcademyDetails() {
   const [isAcademyDetailsOpen, setIsAcademyDetailsOpen] = useState(false);
   const [position, setPosition] = useState(5); // The initial position of the div
-  const [maxPosition, setMaxPosition] = useState(5)
+  const [maxPosition, setMaxPosition] = useState(2)
+  const [ShowownArrow, setShowDownArrow] = useState(true)
 
   //const maxPosition = -1200; // Maximum top position the content can reach
 
   useEffect(() => {
 
     if (window.innerHeight < 701) {
-      setMaxPosition(-800)
+      setMaxPosition(-400)
 
     }
     else if (window.innerHeight < 741) {
-      setMaxPosition(-600)
+      setMaxPosition(-200)
 
     }
 
     else if (window.innerHeight < 950) {
-      setMaxPosition(-500)
+      setMaxPosition(-100)
     }
     else {
-      setMaxPosition(-350)
+      setMaxPosition(-10)
     }
 
   })
@@ -41,31 +42,48 @@ function FootballAcademyDetails() {
   const closeAcademyDetailsPopup = () => {
     setIsAcademyDetailsOpen(false);
     setPosition(5)
+    setShowDownArrow(true)
 
   };
 
 
   const moveUp = () => {
     if (position > maxPosition) {
-      setPosition((prevPosition) => prevPosition - 30); // Decrease the position (move upward)
+        setPosition((prevPosition) => prevPosition - 40); // Decrease the position (move upward)
     }
-  };
+    if(position <= maxPosition){
+        setShowDownArrow(false)
+        
+    }
+};
+const minPosition = 5
+const moveDown=()=>{
+    if (position < minPosition) {
+        setPosition((prevPosition) => prevPosition + 40); // Decrease the position (move upward)
+    }
+    if(position>=minPosition){
+        setShowDownArrow(true)
+        
+    }
+};
+
   return (
     <div>
       <button onClick={openAcademyDetailsPopup}>Show Popup</button>
 
       {/* Conditional rendering of the popup */}
       {isAcademyDetailsOpen && (
-        <div className="row w-100 popup">
+        <div className="row  popup">
           <div className="col-xl-1 col-xxl-2"></div>
-          <div className="col-xl-10  col-xxl-8 academeyPopup-content p-xxl-3">
-            <div className='row'>
+          <div className="col-xl-10  col-xxl-8 academeyPopup-content p-0" style={{ height: '90%', overflow: 'hidden' }}>
+            <div className='row w-100'  style={{background:'white', zIndex:'5000'}}>
               <div className='text-end'>
                 <button className="close-button" onClick={closeAcademyDetailsPopup}><FontAwesomeIcon icon={faX} /></button>
               </div>
             </div>
-            <div className="navbar">
-              <div className='row w-100'>
+            <div className="navbar ">
+
+              <div className='row w-100 m-3'>
                 <div className='col-3 col-lg-2  pe-md-0  '>
                   <img className='academyLogo ms-xx-5 ' src={logo} alt="" />
                 </div>
@@ -90,7 +108,7 @@ function FootballAcademyDetails() {
 
 
             {/* Content inside the popup */}
-            <div className="content"
+            <div className="content "
               style={{
                 marginTop: `${position}px`,
                 transition: 'margin-top 0.3s ease'
@@ -150,9 +168,13 @@ function FootballAcademyDetails() {
                   <div className="col-md-9"></div>
                 </div>
               </>
-              <div className='row w-100 d-flex align-items-center justify-content-center mt-3 '>
+              {ShowownArrow &&<div className='row w-100 d-flex align-items-center justify-content-center mt-3 '>
                 <button onClick={moveUp} className='btn d-flex align-items-center justify-content-center academyDownArrowButton'><FontAwesomeIcon className='fs-5' icon={faArrowDown} /></button>
-              </div>
+              </div>}
+              {!ShowownArrow &&<div className='row w-100 d-flex align-items-center justify-content-center mt-3 '>
+                                              <button onClick={moveDown} className='btn d-flex align-items-center justify-content-center downArrowButton'><FontAwesomeIcon className='fs-5' icon={faArrowUp} /></button>
+                                          </div>
+                                      }
             </div>
           </div>
           <div className="col-xl-1  col-xxl-2"></div>

@@ -31,7 +31,7 @@ const KidgageNews = () => {
 
     return (
         <div className="justify-content-center w-100">
-            <div>
+            <div className="news-banner-container">
                 <Banner />
             </div>
 
@@ -47,8 +47,8 @@ const KidgageNews = () => {
                     <Row className="custom-row g-4 w-100">
                         {/* Render News Cards */}
                         {newsData.news.map((news, index) => (
-                            <Col key={index} sm={12} md={12} lg={6} xl={6} className="d-flex justify-content-center">
-                                <Card>
+                            <Col key={index} sm={12} md={12} lg={6} xl={6} className="d-flex justify-content-flex-start">
+                                <Card style={{ border: "none" }}>
                                     <div className="news-card-container">
                                         {/* Left: Image */}
                                         <div className="news-img-container">

@@ -1,6 +1,6 @@
-import { faArrowDown, faArrowRight, faX } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowRight, faArrowUp, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import '../CampDetails/CampDetails.css'
 
 
@@ -8,25 +8,28 @@ function CampDetails() {
     const [isCampDetailsOpen, setIsCampDetailsOpen] = useState(false);
     const [position, setPosition] = useState(5); // The initial position of the div
     const [maxPosition, setMaxPosition] = useState(5)
+    const [ShowownArrow, setShowDownArrow] = useState(true)
 
     //const maxPosition = -1200; // Maximum top position the content can reach
 
     useEffect(() => {
 
         if (window.innerHeight < 701) {
-            setMaxPosition(-1800)
+            setMaxPosition(-740)
 
         }
         else if (window.innerHeight < 741) {
-            setMaxPosition(-2000)
+            setMaxPosition(-800)
 
         }
 
         else if (window.innerHeight < 950) {
-            setMaxPosition(-1000)
+            setMaxPosition(-800)
         }
-        else {
-            setMaxPosition(-350)
+        else if  (window.innerHeight > 950)  {
+            setMaxPosition(-200)
+            console.log(maxPosition);
+            
         }
 
     })
@@ -44,21 +47,38 @@ function CampDetails() {
     const closeCampDetailsPopup = () => {
         setIsCampDetailsOpen(false);
         setPosition(5)
+        setShowDownArrow(true)
     };
 
 
+    
 
+      
     const moveUp = () => {
         if (position > maxPosition) {
-            setPosition((prevPosition) => prevPosition - 30); // Decrease the position (move upward)
+            setPosition((prevPosition) => prevPosition - 40); // Decrease the position (move upward)
+        }
+        if(position <= maxPosition){
+            setShowDownArrow(false)
+            
+        }
+    };
+    const minPosition = 5
+    const moveDown=()=>{
+        if (position < minPosition) {
+            setPosition((prevPosition) => prevPosition + 40); // Decrease the position (move upward)
+        }
+        if(position>=minPosition){
+            setShowDownArrow(true)
+            
         }
     };
 
     return (
         <div>
-            <div className="activity-btn-container-1" onClick={openCampDetailsPopup} style={{ cursor: "pointer" }}>
-                <button className="activity-button-1" >About This Activity</button>
-                <FontAwesomeIcon className="icon-arrow-1" icon={faArrowRight} />
+            <div className="activity-btn-container" onClick={openCampDetailsPopup} style={{ cursor: "pointer" }}>
+                <button className="activity-button" >About This Activity</button>
+                <FontAwesomeIcon className="icon-arrow" icon={faArrowRight} />
             </div>
 
 
@@ -67,13 +87,13 @@ function CampDetails() {
             {isCampDetailsOpen && (
                 <div className="row w-100 popup m-0">
                     <div className="col-sm-0 col-md-0 col-lg-1 col-xxl-3"></div>
-                    <div className="col-sm-12 col-md-12 col-lg-10  col-xxl-6 popup-content" style={{ height: '90%', overflow: 'hidden' }}>
-                        <div className='row '>
+                    <div className="col-sm-12 col-md-12 col-lg-10  col-xxl-6 popup-content pt-0" style={{ height: '90%', overflow: 'hidden' }}>
+                        <div className='row w-100 ' style={{background:'white', zIndex:'5000'}}>
                             <div className='text-end'>
                                 <button className="close-button" onClick={closeCampDetailsPopup}><FontAwesomeIcon icon={faX} /></button>
                             </div>
                         </div>
-                        <div className="navbar">
+                        <div className="navbar pt-4">
                             <div className='row w-100 ms-2'>
 
                                 <div className='col-12 navText'>
@@ -93,8 +113,9 @@ function CampDetails() {
                         <div className="content"
                             style={{
                                 marginTop: `${position}px`,
-                                transition: 'margin-top 0.3s ease'
+                                transition: 'margin-top 0.3s ease',
                             }}
+                           
                         >
                             <h4 style={{ color: "black" }}>"Surprise! We’re back with a new location in Dubai</h4>
                             <p className='' style={{ color: "black" }}>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
@@ -144,10 +165,13 @@ function CampDetails() {
                                 </div>
 
                             </div>
-                            <div className='row w-100 d-flex align-items-center justify-content-center mt-3 '>
+                           {ShowownArrow && <div className='row w-100 d-flex align-items-center justify-content-center mt-3 '>
                                 <button onClick={moveUp} className='btn d-flex align-items-center justify-content-center downArrowButton'><FontAwesomeIcon className='fs-5' icon={faArrowDown} /></button>
+                            </div>}
+                             {!ShowownArrow &&<div className='row w-100 d-flex align-items-center justify-content-center mt-3 '>
+                                <button onClick={moveDown} className='btn d-flex align-items-center justify-content-center downArrowButton'><FontAwesomeIcon className='fs-5' icon={faArrowUp} /></button>
                             </div>
-                        </div>
+                        } </div>
                     </div>
                     <div className="col-md-0 col-lg-1  col-xxl-3"></div>
 

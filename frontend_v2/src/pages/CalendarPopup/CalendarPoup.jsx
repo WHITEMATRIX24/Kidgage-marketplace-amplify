@@ -71,7 +71,7 @@ const CalendarPopup = ({ isVisible, onClose }) => {
                             </button>
                         </div>
                     </div>
-                    <div className="calenderHeading m-3">
+                    <div className="calenderHeading mx-3 m-2">
                         <h1>Football Camp</h1>
                         <h3>Age Limit: 06 to 10</h3>
                     </div>
