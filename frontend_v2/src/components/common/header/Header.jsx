@@ -8,8 +8,8 @@ function Header() {
     return (
         <div className="Header-container">
             <Row>
-                <Col md={2} />
-                <Col md={8}>
+                <Col md={1} />
+                <Col md={9}>
                     <div className="header-content">
                         <img
                             src={logo}
@@ -19,7 +19,7 @@ function Header() {
                         <UserDetailsPopup />
                     </div>
                 </Col>
-                <Col md={2} />
+                <Col md={1} />
             </Row>
         </div>
     );

@@ -149,13 +149,19 @@ h4 {
 
 @media only screen and (max-width: 375px) {
   .academeyPopup-content {
-    width: 90%;
-  }
+      width: 90%;
+      height: auto;
+      margin-left: 0px;
+    }
+  
 
   .academyDownArrowButton {
     position: absolute;
-    top: 500px !important;
+    top: 550px !important;
 
+  }
+  .close-button{
+    right: 0;
   }
 }
 
@@ -183,16 +189,17 @@ h4 {
   }
 }
 
-@media only screen and (max-width: 390px) {
+@media only screen and (min-width: 390px) {
   .academyDownArrowButton {
     position: absolute;
-    top: 620px;
+    top: 650px;
   }
 }
 
 @media only screen and (max-width: 430px) {
   .academeyPopup-content {
     width: 90%;
+    height: auto;
   }
 
   .academyDownArrowButton {
@@ -243,6 +250,9 @@ h4 {
     width: 50% !important;
     height: 70% !important;
   }
+}
+@media only screen and (min-height: 850px) {
+  .academyDownArrowButton{display: none !important;}
 }
 
 @media only screen and (min-height: 1000px) {

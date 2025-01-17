@@ -4,8 +4,11 @@
     overflow: hidden;
     flex-wrap: wrap;
     padding-top: 10px;
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 15px;
+
+}
+
+.news-banner-container {
+    margin-top: 50px;
 }
 
 .news-header {
@@ -19,9 +22,11 @@
 }
 
 .news-card-container {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 15px;
     display: flex;
     flex-direction: row;
-    max-width: 520px;
+    /* max-width: 520px; */
     max-height: 230px;
     padding: 0;
     overflow-y: auto;
@@ -79,6 +84,10 @@
     .news-card {
         flex-direction: column;
         /* min-width: 340px; */
+    }
+
+    .news-banner-container {
+        margin-top: 20px;
     }
 
     .news-card-container {

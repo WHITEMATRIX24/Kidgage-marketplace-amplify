@@ -7,8 +7,19 @@ import {
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const handleTermsandCondition = () => {
+    navigate('/terms-condition');
+  }
+  const handlePrivacyPolicy = () => {
+    navigate('/privacy-policy');
+  }
+  const handleContactForm = () => {
+    navigate('/contact-form');
+  }
   return (
     <Row className="footer-section mx-0">
       <Col md={2}></Col>
@@ -22,7 +33,7 @@ const Footer = () => {
             <p className="m-0 ps-3">
               Looking to advertise an activity? We can help.
             </p>
-            <button>List tour academy</button>
+            <button>List your academy</button>
           </div>
           <div className="footer-social-container">
             <FontAwesomeIcon icon={faFacebook} size="2xl" />
@@ -31,9 +42,9 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-row-two">
-          <p>Terms & condition</p>
-          <p>Privacy policy</p>
-          <p>Contact</p>
+          <p onClick={handleTermsandCondition} style={{ cursor: "pointer" }}>Terms & condition</p>
+          <p onClick={handlePrivacyPolicy} style={{ cursor: "pointer" }}>Privacy policy</p>
+          <p onClick={handleContactForm} style={{ cursor: "pointer" }}>Contact</p>
         </div>
       </Col>
       <Col md={2}></Col>
