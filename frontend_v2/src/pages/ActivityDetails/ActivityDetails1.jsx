@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import ActivityDetailsInnerpage1 from "../../components/ActivityDetailsInnerPage/ActivityDetailsInnerpage1";
@@ -6,8 +6,10 @@ import "./ActivityDetails-1.css";
 import CampDetails from "../CampDetails/CampDetails";
 import { useParams } from "react-router";
 import { getActivitydetailsByIdApi } from "../../services/allApis";
+import { SelectedCourseContext } from "../../context/courseContext";
 
 function ActivityDetails1() {
+  const { setSelectedCourseData } = useContext(SelectedCourseContext);
   const { activityId } = useParams();
   const [activityDetails, setActivityDetails] = useState({
     isLoading: true,
@@ -18,6 +20,7 @@ function ActivityDetails1() {
   const getInitialActivityPageData = async () => {
     const data = await getActivitydetailsByIdApi({ activityId });
     if (data) {
+      setSelectedCourseData(data);
       return setActivityDetails({ isLoading: false, activityData: data });
     } else {
       setActivityDetails({ isLoading: false, activityData: null });
@@ -26,7 +29,6 @@ function ActivityDetails1() {
   useEffect(() => {
     if (activityId) getInitialActivityPageData();
   }, [activityId]);
-  console.log(activityDetails);
 
   //   loading check
   if (activityDetails.isLoading) return <p>loading......</p>;

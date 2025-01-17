@@ -15,14 +15,21 @@ import CalendarPopup from "../../pages/CalendarPopup/CalendarPoup";
 import { useNavigate } from "react-router";
 
 function ActivityDetailsInnerpage1({ activityData }) {
-  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const navigate = useNavigate();
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+  const [campDurationSelected, setCampDurationSelected] = useState(null);
 
   const openCalendar = () => setIsCalendarVisible(true);
   const closeCalendar = () => setIsCalendarVisible(false);
   const handleContinue = () => {
     navigate("/signin");
   };
+
+  // camp duration selection
+  const handleSelectCampDuration = (campDuration) => {
+    setCampDurationSelected(campDuration);
+  };
+
   return (
     <>
       <Row>
@@ -58,7 +65,14 @@ function ActivityDetailsInnerpage1({ activityData }) {
                 >
                   Seat Details and More options
                 </Card.Text>
-                <button className="border-0 mb-1 card-btn rounded-3">
+                <button
+                  className={`border-0 mb-1 card-btn rounded-3 ${
+                    campDurationSelected === "1month"
+                      ? "camp-duration-selected-btn"
+                      : ""
+                  }`}
+                  onClick={() => handleSelectCampDuration("1month")}
+                >
                   Select
                 </button>
               </Card.Body>
@@ -74,7 +88,14 @@ function ActivityDetailsInnerpage1({ activityData }) {
                 >
                   Seat Details and More options
                 </Card.Text>
-                <button className="border-0 mb-1 card-btn rounded-3">
+                <button
+                  className={`border-0 mb-1 card-btn rounded-3 ${
+                    campDurationSelected === "6month"
+                      ? "camp-duration-selected-btn"
+                      : ""
+                  }`}
+                  onClick={() => handleSelectCampDuration("6month")}
+                >
                   Select
                 </button>
               </Card.Body>
@@ -121,7 +142,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                 <div style={{ lineHeight: "1px" }} className="flex-column mt-3">
                   <p className="fw-bold" style={{ fontSize: "18px" }}>
                     {" "}
-                    {activityData.name}
+                    {activityData.providerDetails.fullName}
                   </p>
                   <p style={{ fontSize: "12px" }}>
                     {activityData.providerDetails.address}

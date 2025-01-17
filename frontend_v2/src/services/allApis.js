@@ -106,8 +106,6 @@ export const getActivitydetailsByIdApi = async ({ activityId }) => {
       apiEndPoint: `/courses/course/${activityId}`,
       apiMethod: "GET",
     });
-    console.log(response);
-
     if (response.status != 200) return console.log(response.data);
     return response.data;
   } catch (error) {

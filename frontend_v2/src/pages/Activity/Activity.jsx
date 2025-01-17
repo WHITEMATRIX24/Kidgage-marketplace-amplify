@@ -21,7 +21,6 @@ function ActivityPage() {
       getActivityInitialData();
     }
   }, [category]);
-  console.log(activitesBasedonCategory);
 
   return (
     <div className="d-flex flex-column gap-5 pb-5">

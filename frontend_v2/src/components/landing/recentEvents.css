@@ -13,19 +13,21 @@
 }
 .recentEvents-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 190px);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 190px));
   gap: 1rem;
   width: 100%;
 }
 .recentEvents-tile {
-  width: 190px;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 .recentEvents-tile img {
   border-radius: 15px;
 }
 
 @media (max-width: 1300px) {
-  .recentEvents-tile {
-    flex: 0 1 calc(190px - 2rem);
+  .recentEvents-grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 }

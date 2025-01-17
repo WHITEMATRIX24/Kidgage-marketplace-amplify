@@ -1,7 +1,6 @@
 .card-container-div {
   margin-left: 45px;
   margin-right: 45px;
-
 }
 
 .share-text {
@@ -9,7 +8,7 @@
 }
 
 .share-container {
-  background-color: #F5A691;
+  background-color: #f5a691;
   /* Correct syntax */
 }
 
@@ -57,14 +56,13 @@
 }
 
 .map-btn {
-  background-color: #ACC29E;
+  background-color: #acc29e;
   color: #ffff;
   border-radius: 10px;
   padding-left: 20px;
 
   max-width: 500px;
   height: 50px;
-
 }
 
 .map-arrow {
@@ -72,13 +70,13 @@
 }
 
 .card-btn {
-  background-color: #ACC29E;
+  background-color: #acc29e;
   color: #ffff;
   border-radius: 10px;
 }
 
 .ctn-btn {
-  background-color: #D0D0D0;
+  background-color: #d0d0d0;
   border-radius: 10px;
 }
 
@@ -89,9 +87,6 @@
   height: 40px;
   margin-top: 5px;
 }
-
-
-
 
 .age-box-content {
   line-height: 0.3;
@@ -108,8 +103,6 @@
   margin-top: 18px;
   margin-left: 10px;
 }
-
-
 
 .card-container {
   margin: 0rem 2rem 0rem 2rem;
@@ -188,7 +181,6 @@
     transform: rotate(-38deg);
     /* Rotate the right arrow to up */
     margin-top: 20px;
-
   }
 
   .map-box {
@@ -213,7 +205,6 @@
     border-radius: 20px 20px 0px 0px;
     padding: 10px;
     width: 100% !important;
-    ;
     border: solid 1px black;
     z-index: 10;
     margin-left: -2px;
@@ -240,10 +231,7 @@
   .map-arrow {
     margin-top: 9px;
   }
-
 }
-
-
 
 /* @media (max-width: 1024px) and (min-width: 768px) {
     .activity-heading h2{
@@ -279,3 +267,9 @@
     margin: 0rem 1rem 3rem 1rem;
 }
   } */
+
+/* state classes */
+.camp-duration-selected-btn {
+  background-color: #d0d0d0;
+  color: black;
+}

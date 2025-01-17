@@ -10,7 +10,7 @@ const MainLayout = () => {
 
   // Exclude footer for the activity details page
   const hideFooterRoutes = [
-    "/activity-detail/",
+    "/activity-detail",
     "/signin",
     "/signin-otp",
     "/order-summary",
@@ -27,7 +27,9 @@ const MainLayout = () => {
         </Col>
         <Col md={1} />
       </Row>
-      {!hideFooterRoutes.includes(location.pathname) && <Footer />}
+      {!hideFooterRoutes.some((route) =>
+        location.pathname.startsWith(route)
+      ) && <Footer />}
     </>
   );
 };

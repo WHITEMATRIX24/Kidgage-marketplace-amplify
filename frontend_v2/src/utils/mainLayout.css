@@ -1,6 +1,7 @@
 .content-layout {
   padding: 0px 20px;
   margin: 0 auto;
+  min-height: 60vh;
 }
 
 /* mobile */

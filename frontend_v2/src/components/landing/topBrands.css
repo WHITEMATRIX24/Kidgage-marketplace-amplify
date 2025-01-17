@@ -25,12 +25,15 @@
 }
 .topBarands-content-container {
   padding: 1rem 0px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(124px, 143px));
   gap: 1.5rem;
-  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .topBrands-brand {
-  flex: 1 1 calc(20% - 1.5rem);
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .topBrands-brand img {
   width: 100%;
@@ -44,9 +47,7 @@
   }
   .topBarands-content-container {
     padding: 5% 0px;
+    grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
     /* justify-content: space-around; */
-  }
-  .topBrands-brand {
-    flex: 0 1 calc(140px - 1.5rem);
   }
 }

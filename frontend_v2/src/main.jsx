@@ -4,11 +4,14 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
+import CourseContext from "./context/courseContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <CourseContext>
+        <App />
+      </CourseContext>
     </BrowserRouter>
   </StrictMode>
 );
