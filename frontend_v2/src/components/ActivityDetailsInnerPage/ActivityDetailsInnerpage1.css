@@ -272,4 +272,11 @@
 .camp-duration-selected-btn {
   background-color: #d0d0d0;
   color: black;
+  border: none;
+  width: 120px;
+  height: 40px;
+  margin-top: 5px;
+}
+.activate-continue-btn {
+  background-image: linear-gradient(to right, #fdd687, #f5a691);
 }

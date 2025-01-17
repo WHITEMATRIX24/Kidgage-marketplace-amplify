@@ -22,6 +22,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
   const openCalendar = () => setIsCalendarVisible(true);
   const closeCalendar = () => setIsCalendarVisible(false);
   const handleContinue = () => {
+    if (campDurationSelected === null) return;
     navigate("/signin");
   };
 
@@ -66,14 +67,14 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   Seat Details and More options
                 </Card.Text>
                 <button
-                  className={`border-0 mb-1 card-btn rounded-3 ${
+                  className={`border-0 mb-1 rounded-3 ${
                     campDurationSelected === "1month"
                       ? "camp-duration-selected-btn"
-                      : ""
+                      : "card-btn"
                   }`}
                   onClick={() => handleSelectCampDuration("1month")}
                 >
-                  Select
+                  {campDurationSelected === "1month" ? "Selected" : "Select"}
                 </button>
               </Card.Body>
             </Card>
@@ -89,14 +90,14 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   Seat Details and More options
                 </Card.Text>
                 <button
-                  className={`border-0 mb-1 card-btn rounded-3 ${
+                  className={`border-0 mb-1 rounded-3 ${
                     campDurationSelected === "6month"
                       ? "camp-duration-selected-btn"
-                      : ""
+                      : "card-btn"
                   }`}
                   onClick={() => handleSelectCampDuration("6month")}
                 >
-                  Select
+                  {campDurationSelected === "6month" ? "Selected" : "Select"}
                 </button>
               </Card.Body>
             </Card>
@@ -166,7 +167,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <p style={{ fontSize: "12px" }}>06 to 10</p>
                 </div>
                 <button
-                  className=" ctn-btn border-0 w-50 m-1 fw-bold"
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
+                    campDurationSelected ? "activate-continue-btn" : ""
+                  }`}
                   onClick={handleContinue}
                 >
                   Continue
