@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./news.css";
 import { Link } from "react-router";
+import { getlandingNewsApi } from "../../services/allApis";
 
 const News = () => {
+  const [landingNewsData, setLandingNewsData] = useState([]);
+
+  // initial data fetching
+  const initialLandingNewsData = async () => {
+    const data = await getlandingNewsApi();
+    if (data) {
+      setLandingNewsData(data);
+    }
+  };
+  useEffect(() => {
+    initialLandingNewsData();
+  }, []);
+
   return (
     <div className="landing-news-container">
       <div className="landing-news-header-container">
@@ -15,52 +29,40 @@ const News = () => {
         </div>
       </div>
       <div className="landing-news-content-container">
-        <div className="landing-news-card">
-          <div className="artical-image-container">
-            <img
-              src="https://s3-alpha-sig.figma.com/img/89db/7202/fea4688a1ca00dab3929136e12a4b588?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UnW4FYdXc6x0z78DisdF2jACOO7ZILAd1x4I88n0WSvc9TVr6N6CmJNyv4nbxFlb3sM6L5-B~XKYwcNBAGK~tbP9We46g8n7LLeIZPoCtxwRFlO9s3xKQoJ2VOVAkNn47vkJtMAGAcVvKF2B3aZ8~ruSqmUAi-jZ37x7ZPCvylNP3LiJ7OVkDbILucePrXsoAgFv9WcvL7IdfX-6bEOIAVTERdBewqq8UqCQ5WkhX6SB89SKSADthvdfz9FS6pZ28zo3WLoKblfaIQuc8p~BgQV~7rOjtw8S9ZzVTqMF6y1-~y7mBQQpq9HSREIEU8b3De87RSKlM3JYVZEbv4xkbA__"
-              alt="image"
-            />
-          </div>
-          <div className="artical-container">
-            <div className="artical-header">
-              <h5 className="m-0">Kidgage News</h5>
-              <h6 className="m-0">Fun that shapes the future.</h6>
+        {/* 1st */}
+        {landingNewsData[0] && (
+          <div className="landing-news-card">
+            <div className="artical-image-container">
+              <img src={landingNewsData[0].image} alt="image" />
             </div>
-            <div className="artical-content">
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Voluptatem, similique ratione eligendi iusto aliquid distinctio
-                dicta? Necessitatibus eveniet laboriosam quis reiciendis, qui
-                perspiciatis ab corrupti veritatis ratione aperiam, amet
-                repellat.
-              </p>
+            <div className="artical-container">
+              <div className="artical-header">
+                <h5 className="m-0">{landingNewsData[0].title}</h5>
+                <h6 className="m-0">Fun that shapes the future.</h6>
+              </div>
+              <div className="artical-content">
+                <p>{landingNewsData[0].description}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="landing-news-card">
-          <div className="artical-image-container">
-            <img
-              src="https://s3-alpha-sig.figma.com/img/89db/7202/fea4688a1ca00dab3929136e12a4b588?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UnW4FYdXc6x0z78DisdF2jACOO7ZILAd1x4I88n0WSvc9TVr6N6CmJNyv4nbxFlb3sM6L5-B~XKYwcNBAGK~tbP9We46g8n7LLeIZPoCtxwRFlO9s3xKQoJ2VOVAkNn47vkJtMAGAcVvKF2B3aZ8~ruSqmUAi-jZ37x7ZPCvylNP3LiJ7OVkDbILucePrXsoAgFv9WcvL7IdfX-6bEOIAVTERdBewqq8UqCQ5WkhX6SB89SKSADthvdfz9FS6pZ28zo3WLoKblfaIQuc8p~BgQV~7rOjtw8S9ZzVTqMF6y1-~y7mBQQpq9HSREIEU8b3De87RSKlM3JYVZEbv4xkbA__"
-              alt="image"
-            />
-          </div>
-          <div className="artical-container">
-            <div className="artical-header">
-              <h5 className="m-0">Kidgage News</h5>
-              <h6 className="m-0">Fun that shapes the future.</h6>
+        )}
+        {/* 2nd */}
+        {landingNewsData[1] && (
+          <div className="landing-news-card">
+            <div className="artical-image-container">
+              <img src={landingNewsData[1].image} alt="image" />
             </div>
-            <div className="artical-content">
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Voluptatem, similique ratione eligendi iusto aliquid distinctio
-                dicta? Necessitatibus eveniet laboriosam quis reiciendis, qui
-                perspiciatis ab corrupti veritatis ratione aperiam, amet
-                repellat.
-              </p>
+            <div className="artical-container">
+              <div className="artical-header">
+                <h5 className="m-0">{landingNewsData[1].title}</h5>
+                <h6 className="m-0">Fun that shapes the future.</h6>
+              </div>
+              <div className="artical-content">
+                <p>{landingNewsData[1].description}</p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

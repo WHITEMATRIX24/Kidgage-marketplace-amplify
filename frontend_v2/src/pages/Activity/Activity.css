@@ -1,38 +1,47 @@
 .activitypage-container {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .activity-grid-container {
-    display: grid;
-    gap: 24px;
+  display: grid;
+  gap: 24px;
 
-    /* justify-content: center; */
+  /* justify-content: center; */
+}
+
+.activity-tile img {
+  width: 190px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 15px;
+}
+.activity-tile h6 {
+  font-size: 18px;
+}
+.activity-tile p {
+  font-size: 13px;
 }
 
 @media (min-width: 2000px) {
-    .activity-grid-container {
-        grid-template-columns: repeat(6, 20%);
-
-    }
+  .activity-grid-container {
+    grid-template-columns: repeat(6, 20%);
+  }
 }
 
 @media (min-width: 1366px) and (max-width: 2000px) {
-    .activity-grid-container {
-        grid-template-columns: repeat(5, 18%);
-
-    }
+  .activity-grid-container {
+    grid-template-columns: repeat(5, 18%);
+  }
 }
 
 @media (min-width: 766px) and (max-width: 1365px) {
-    .activity-grid-container {
-        grid-template-columns: repeat(3, 30%);
-
-    }
+  .activity-grid-container {
+    grid-template-columns: repeat(3, 30%);
+  }
 }
 
 @media (max-width: 765px) {
-    .activity-grid-container {
-        grid-template-columns: repeat(2, 45%);
-
-    }
+  .activity-grid-container {
+    grid-template-columns: repeat(2, 45%);
+  }
 }

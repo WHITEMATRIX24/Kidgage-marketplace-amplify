@@ -1,15 +1,24 @@
+.recent-events-heading {
+  font-size: 38px;
+  font-weight: 700;
+}
+.recent-events-subheading {
+  font-size: 18px;
+  font-weight: 500;
+}
 .recentEvents-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 .recentEvents-grid-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 190px);
   gap: 1rem;
+  width: 100%;
 }
 .recentEvents-tile {
-  flex: 1;
+  width: 190px;
 }
 .recentEvents-tile img {
   border-radius: 15px;

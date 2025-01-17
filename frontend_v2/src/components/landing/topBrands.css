@@ -1,3 +1,11 @@
+.top-brands-heading {
+  font-size: 38px;
+  font-weight: 700;
+}
+.top-brands-subheading {
+  font-size: 18px;
+  font-weight: 500;
+}
 .topBrands-container {
   display: flex;
   flex-direction: column;

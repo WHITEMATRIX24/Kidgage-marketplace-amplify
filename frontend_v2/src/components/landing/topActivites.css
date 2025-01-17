@@ -1,3 +1,11 @@
+.top-activites-header {
+  font-size: 38px;
+  font-weight: 700;
+}
+.top-activites-subheader {
+  font-size: 18px;
+  font-weight: 500;
+}
 .cards-container {
   display: flex;
   width: 100%;

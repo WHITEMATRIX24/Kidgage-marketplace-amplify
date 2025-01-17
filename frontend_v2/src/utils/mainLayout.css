@@ -1,3 +1,11 @@
 .content-layout {
   padding: 0px 20px;
+  margin: 0 auto;
+}
+
+/* mobile */
+@media (max-width: 390px) {
+  .content-layout {
+    padding: 0px 10px;
+  }
 }

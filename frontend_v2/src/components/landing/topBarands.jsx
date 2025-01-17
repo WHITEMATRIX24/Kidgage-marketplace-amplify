@@ -19,8 +19,10 @@ const TopBarands = () => {
   return (
     <div className="topBrands-container">
       <div className="topBrands-header">
-        <h5 className="m-0">Top Brands</h5>
-        <h6 className="m-0">Fun that shapes the future</h6>
+        <h5 className="m-0 top-brands-heading">Top Brands</h5>
+        <h6 className="m-0 top-brands-subheading">
+          Fun that shapes the future
+        </h6>
       </div>
       <div className="topBarands-content-container">
         {topBrands.length > 0 ? (

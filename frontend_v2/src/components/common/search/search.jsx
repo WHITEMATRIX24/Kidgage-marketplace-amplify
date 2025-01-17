@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "./search.css";
 
 const Search = () => {
@@ -37,7 +39,7 @@ const Search = () => {
         </div>
         <div className="search-btn-container">
           <h6>Search your kid activities</h6>
-          arrow
+          <FontAwesomeIcon icon={faArrowRight} size="xl" />
         </div>
       </div>
     </div>

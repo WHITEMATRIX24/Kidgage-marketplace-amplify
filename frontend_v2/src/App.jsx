@@ -15,13 +15,17 @@ function App() {
     <>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<ActivityDetails1 />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/kidgage-news" element={<KidgageNews />} />
           <Route path="/activites/:category" element={<ActivityPage />} />
+          <Route
+            path="/activity-detail/:activityId"
+            element={<ActivityDetails1 />}
+          />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/signin-otp" element={<SignInOtp />} />
-          <Route path='/signin-success' element={<SigninSuccess />} />
-          <Route path='/order-summary' element={<OrderSummeryPage2 />} />
+          <Route path="/signin-success" element={<SigninSuccess />} />
+          <Route path="/order-summary" element={<OrderSummeryPage2 />} />
         </Route>
       </Routes>
     </>

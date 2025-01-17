@@ -20,8 +20,10 @@ const TopActivites = () => {
   return (
     <div className="d-flex flex-column gap-4">
       <div className="d-flex flex-column gap-1">
-        <h6 className="m-0 fs-3 fw-bold">Top Activites</h6>
-        <p className="m-0 fw-medium">Fun that shapes the future</p>
+        <h6 className="m-0 top-activites-header">Top Activites</h6>
+        <p className="m-0 top-activites-subheader">
+          Fun that shapes the future
+        </p>
       </div>
       <div className="cards-container">
         <div className="cards-content-wrapper">
