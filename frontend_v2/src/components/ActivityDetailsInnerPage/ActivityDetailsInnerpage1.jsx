@@ -54,7 +54,12 @@ function ActivityDetailsInnerpage1({ activityData }) {
           <div className="activity-heading fw-bold mt-4">
             <h2 className="fw-bold">{activityData.name}</h2>
             <h6>Organised by </h6>
-            <h6 onClick={openAcademyDetails}>  {activityData.providerDetails.fullName}</h6>
+            <h6 onClick={openAcademyDetails}>
+              {" "}
+              {activityData.name === "Evening Football Camp"
+                ? "ASPIRE SPORTS ACADEMY"
+                : activityData.providerDetails.fullName}
+            </h6>
           </div>
         </Col>
       </Row>
@@ -71,10 +76,11 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   Seat Details and More options
                 </Card.Text>
                 <button
-                  className={`border-0 mb-1 rounded-3 ${campDurationSelected === "1month"
-                    ? "camp-duration-selected-btn"
-                    : "card-btn"
-                    }`}
+                  className={`border-0 mb-1 rounded-3 ${
+                    campDurationSelected === "1month"
+                      ? "camp-duration-selected-btn"
+                      : "card-btn"
+                  }`}
                   onClick={() => handleSelectCampDuration("1month")}
                 >
                   {campDurationSelected === "1month" ? "Selected" : "Select"}
@@ -93,10 +99,11 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   Seat Details and More options
                 </Card.Text>
                 <button
-                  className={`border-0 mb-1 rounded-3 ${campDurationSelected === "6month"
-                    ? "camp-duration-selected-btn"
-                    : "card-btn"
-                    }`}
+                  className={`border-0 mb-1 rounded-3 ${
+                    campDurationSelected === "6month"
+                      ? "camp-duration-selected-btn"
+                      : "card-btn"
+                  }`}
                   onClick={() => handleSelectCampDuration("6month")}
                 >
                   {campDurationSelected === "6month" ? "Selected" : "Select"}
@@ -145,10 +152,14 @@ function ActivityDetailsInnerpage1({ activityData }) {
                 <div style={{ lineHeight: "1px" }} className="flex-column mt-3">
                   <p className="fw-bold" style={{ fontSize: "18px" }}>
                     {" "}
-                    {activityData.providerDetails.fullName}
+                    {activityData.name === "Evening Football Camp"
+                      ? "ASPIRE SPORTS ACADEMY"
+                      : activityData.providerDetails.fullName}
                   </p>
                   <p style={{ fontSize: "12px" }}>
-                    {activityData.providerDetails.location}
+                    {activityData.name === "Evening Football Camp"
+                      ? "Doha"
+                      : activityData.providerDetails.location}
                   </p>
                 </div>
               </div>
@@ -169,8 +180,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <p style={{ fontSize: "12px" }}>06 to 10</p>
                 </div>
                 <button
-                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${campDurationSelected ? "activate-continue-btn" : ""
-                    }`}
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
+                    campDurationSelected ? "activate-continue-btn" : ""
+                  }`}
                   onClick={handleContinue}
                 >
                   Continue

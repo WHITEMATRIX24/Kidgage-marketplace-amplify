@@ -5,6 +5,7 @@ import { getAllActivityByCategoryApi } from "../../services/allApis";
 import { Link, useParams } from "react-router";
 import "./Activity.css";
 import { fromAndToDateFormatter } from "../../utils/dateFormater";
+import activityImage from "../../assets/Activity1.png";
 
 function ActivityPage() {
   const { category } = useParams();
@@ -33,12 +34,20 @@ function ActivityPage() {
           {activitesBasedonCategory.length > 0 ? (
             activitesBasedonCategory.map((activity) => (
               <Link
-                to={`/activity-detail/${activity._id}`}
+                to={
+                  activity.name === "Evening Football Camp"
+                    ? `/activity-detail/${activity._id}`
+                    : ""
+                }
                 className="activity-tile text-decoration-none text-black"
                 key={activity._id}
               >
                 <img
-                  src={activity.images[0]}
+                  src={
+                    activity.name === "Evening Football Camp"
+                      ? activityImage
+                      : activity.images[0]
+                  }
                   className="img-fluid"
                   alt="Image 1"
                 />

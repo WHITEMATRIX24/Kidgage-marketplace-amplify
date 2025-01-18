@@ -27,12 +27,11 @@
 }
 
 .landing-news-header-btn {
-  /* background-color: #acc29e; */
+  background-color: #acc29e;
   width: 100px;
   height: 50px;
   border-radius: 0px 15px 0px 15px;
   overflow: hidden;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .landing-news-header-btn a {
@@ -42,7 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
+  color: white;
 }
 
 .landing-news-content-container {
