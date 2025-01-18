@@ -56,6 +56,7 @@ router.get("/course/:id", async (req, res) => {
                 fullName: 1,
                 description: 1,
                 address: 1,
+                location: 1,
                 website: 1,
                 academyImg: 1,
                 logo: 1,

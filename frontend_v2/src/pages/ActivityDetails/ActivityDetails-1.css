@@ -209,6 +209,10 @@ border-radius: 15px;
         justify-self: center;
     }
 
+    .activity-details-right-1 {
+        max-width: 500px;
+    }
+
     .activity-image-1 {
         min-width: 350px;
         min-height: 350px;
@@ -219,18 +223,10 @@ border-radius: 15px;
 
     .activity-btn-container-1,
     .activity-button-1 {
-        background-color: rgba(208, 208, 208, 1);
         justify-self: center;
-        color: white;
-        border: none;
         width: 500px;
     }
 
-    .icon-arrow-1 {
-        color: #ffffff;
-        font-size: 18px;
-        transform: rotate(314.16deg);
-    }
 
 
     .activity-content-1 {
@@ -245,8 +241,14 @@ border-radius: 15px;
         width: 100%;
     }
 
-    .activity-btn-container-1 {
+    .activity-btn-container-1,
+    .activity-button-1 {
         max-width: 100%;
+        background-color: rgba(208, 208, 208, 1);
+        justify-self: center;
+        color: white;
+        border: none;
+
     }
 
     .activity-button-1 {
@@ -254,7 +256,8 @@ border-radius: 15px;
     }
 
     .activity-content-1 {
-        min-width: 350px;
+        min-width: 330px;
+        max-width: 350px;
     }
 
     .activity-image-1 {
@@ -262,7 +265,9 @@ border-radius: 15px;
     }
 
     .icon-arrow-1 {
-        font-size: 1rem;
+        color: #ffffff;
+        font-size: 18px;
+        transform: rotate(314.16deg);
     }
 }
 

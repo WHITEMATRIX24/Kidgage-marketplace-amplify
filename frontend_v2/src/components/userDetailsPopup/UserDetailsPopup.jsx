@@ -37,8 +37,8 @@ function UserDetailsPopup() {
                                         />
                                     </div>
                                     <div className="profile-info">
-                                        <p className="profile-name">FahadPgd</p>
-                                        <p className='profile-email'>Fahadpgd@gmail.com</p>
+                                        <p className="profile-name">Suhail Iqbal</p>
+                                        <p className='profile-email'>suhailIgbal28@gmail.com</p>
 
                                     </div>
                                 </div>

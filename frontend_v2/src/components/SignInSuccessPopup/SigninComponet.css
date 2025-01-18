@@ -1,0 +1,4 @@
+.custom-border-radius {
+    border-radius: 20px; /* Change this value as needed */
+    box-shadow: inset;
+  }

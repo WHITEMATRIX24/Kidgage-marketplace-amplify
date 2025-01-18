@@ -14,21 +14,21 @@ function SigninSuccess() {
     return (
         <>
 
-            <div className="signInSuccessactivity-details-row  row d-flex align-items-center justify-content-center">
-                <div className="signinSuccessactivity-details-left  col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
-                    <div className="signinSuccessactivity-img-container">
+            <div className="activity-details-row-1">
+                <div className="signinSuccessactivity-details-left">
+                    <div className="activity-img-container-1">
                         <img
-                            className="activity-image signinSuccessactivity-image"
+                            className="activity-image-1"
                             src="https://s3-alpha-sig.figma.com/img/805d/1f6b/b81629c19ca3ebeb8dc7604d3083c71e?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwvGJXWfoANxMwH~BIlADVx5EXYX9w03x8wf6yE4BXnaqNKFmBA3O0t0rFxCZGih-K7spSlcNcHlB9Z5Q6jK0wSw3QkAw0uLtyLnBsYlgJ0-yoapBpG7b-enzj-3x0kaWHVpluj2u6K5CD~c3gfa9P9TbJVUDlC7-D8cnFbYPP-fes89dtRUVLy0OroGlEBaB8d19ihEMkG7p4MbG74fBfCxSweJZ8BYrokowK2aYG1G0UBW67ChIn8bbBYS1Qm8Sp54v02zSHR2FW3ttFamqNNP7NrW7dfiL8zMLOVOdcnJOloSSNDgMTZKmPvMa2fWWOkp95S7zuo57PcTi6bCuA__"
                             alt="Activity"
                         />
                     </div>
-                    <div className="signinSuccessactivity-btn-container">
-                        <button className="signinSuccessactivity-button">About This Activity </button>
-                        <FontAwesomeIcon className="icon-arrow" icon={faArrowRight} />
+                    <div className="activity-btn-container-1">
+                        <button className="activity-button-1">About This Activity </button>
+                        <FontAwesomeIcon className="icon-arrow-1" icon={faArrowRight} />
                     </div>
                 </div>
-                <div className="signinSuccessactivity-details-right col-12 col-md-10 col-lg-8 col-xl-8 m-0 m-xl-5 m-xxl-0 col-xxl-6">
+                <div className="activity-details-right-1 ">
                     <div
                         className="signinSuccessshare-container float-end px-4"
                         style={{
@@ -98,18 +98,28 @@ function SigninSuccess() {
                     </div>
 
                 </div>
-                <div className="col-lg-10 col-xl-4"></div>
-                <div className='signinSuccessFinalDetailsMobileView  mt-3 '>
-                    <div className='row FinalDetailsMobileViewInnerBox  border rounded'>
-                        <div className="col-6">
-                            <h3 className='orderMobile fw-5'>QAR 199</h3>
-                            <p className='pMobile'>Today will start</p>
+                {/* <div className="col-lg-10 col-xl-4"></div> */}
+                <div className="checkout-container">
+                    <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
+                        <div className=" age-box-content ">
+                            <p className="fw-bold" style={{ fontSize: "16px" }}>
+                                QAR 199:
+                            </p>
+                            <p style={{ fontSize: "12px" }}>Today will start</p>
                         </div>
-                        <div className="col-6 d-flex align-items-center justify-content-center">
-                            <button className='signinSuccessContinueButtonMobile  ' onClick={handleContinue}>Checkout</button>
-                        </div>
+                        <button
+                            className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"
+                            style={{
+                                backgroundImage:
+                                    "linear-gradient(to right,#FDD687, #F5A691)",
+                                width: "230px",
+                                height: "50px",
+                            }}
+                            onClick={handleContinue}
+                        >
+                            Checkout
+                        </button>
                     </div>
-
                 </div>
             </div>
 

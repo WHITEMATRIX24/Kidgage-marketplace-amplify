@@ -5,15 +5,16 @@ import '../Signpage/SignInPage.css'
 import '../../pages/ActivityDetails/ActivityDetails.css'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, useLocation } from 'react-router'
+import SigninComponent from '../SignInSuccessPopup/SigninComponent'
 function SignInOtp() {
   const [otp, setOtp] = useState(["", "", "", ""]); // 4 digit OTP
   const [timer, setTimer] = useState(300); // 5 minutes in seconds
   const [otpExpired, setOtpExpired] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
-  const handleContinue = () => {
-    navigate("/signin-success")
-  }
+  // const handleContinue = () => {
+  //   navigate("/signin-success")
+  // }
   const email = state?.email;
   const emailObject = { email };
   useEffect(() => {
@@ -30,6 +31,19 @@ function SignInOtp() {
     const newOtp = [...otp];
     newOtp[index] = e.target.value;
     setOtp(newOtp);
+  };
+  const [success, setSuccess] = useState(false);
+
+  const handleContinue = () => {
+    // Simulate successful sign-in logic
+    setSuccess(true);
+    navigate('/signin-success');
+  };
+
+  const handlePopupClose = () => {
+    // Navigate to the "order-summary" page after the popup is confirmed
+
+    setSuccess(false)
   };
   // const handleContinue = async () => {
   //   const enteredOtp = otp.join(""); // Join the OTP array to form a single string
@@ -60,23 +74,23 @@ function SignInOtp() {
 
   return (
     <>
-      <div className="activity-details-row">
-        <div className="col-md-6 col-sm-12 col-lg-6 ">
+      <div className="activity-details-row-1">
+        <div className="activity-details-left-1 ">
           <div className='hide-on-mobile'>
-            <div className='activity-img-container'>
-              <img className='activity-image' src="https://s3-alpha-sig.figma.com/img/805d/1f6b/b81629c19ca3ebeb8dc7604d3083c71e?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwvGJXWfoANxMwH~BIlADVx5EXYX9w03x8wf6yE4BXnaqNKFmBA3O0t0rFxCZGih-K7spSlcNcHlB9Z5Q6jK0wSw3QkAw0uLtyLnBsYlgJ0-yoapBpG7b-enzj-3x0kaWHVpluj2u6K5CD~c3gfa9P9TbJVUDlC7-D8cnFbYPP-fes89dtRUVLy0OroGlEBaB8d19ihEMkG7p4MbG74fBfCxSweJZ8BYrokowK2aYG1G0UBW67ChIn8bbBYS1Qm8Sp54v02zSHR2FW3ttFamqNNP7NrW7dfiL8zMLOVOdcnJOloSSNDgMTZKmPvMa2fWWOkp95S7zuo57PcTi6bCuA__" alt="" />
+            <div className='activity-img-container-1'>
+              <img className='activity-image-1' src="https://s3-alpha-sig.figma.com/img/805d/1f6b/b81629c19ca3ebeb8dc7604d3083c71e?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwvGJXWfoANxMwH~BIlADVx5EXYX9w03x8wf6yE4BXnaqNKFmBA3O0t0rFxCZGih-K7spSlcNcHlB9Z5Q6jK0wSw3QkAw0uLtyLnBsYlgJ0-yoapBpG7b-enzj-3x0kaWHVpluj2u6K5CD~c3gfa9P9TbJVUDlC7-D8cnFbYPP-fes89dtRUVLy0OroGlEBaB8d19ihEMkG7p4MbG74fBfCxSweJZ8BYrokowK2aYG1G0UBW67ChIn8bbBYS1Qm8Sp54v02zSHR2FW3ttFamqNNP7NrW7dfiL8zMLOVOdcnJOloSSNDgMTZKmPvMa2fWWOkp95S7zuo57PcTi6bCuA__" alt="" />
             </div>
-            <div className='activity-btn-container'>
-              <button className='text-start activity-button' >About This Activities</button>
-              <FontAwesomeIcon className='icon-arrow' icon={faArrowRight} />
+            <div className='activity-btn-container-1'>
+              <button className='text-start activity-button-1' >About This Activities</button>
+              <FontAwesomeIcon className='icon-arrow-1' icon={faArrowRight} />
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-sm-12 col-lg-6 ">
-          <div className='rounded-4 right-section-signUp ' >
+        <div className="activity-details-right-1 ">
+          <div className='rounded-4 activity-content-1 ' >
             <div className='mt-4'>
               <div className='signIn-Otp-heading fw-bold '>
-                <h2>Sign In</h2>
+                <h2 className='fw-bold'>Sign In</h2>
                 <h6>Enter the OTP</h6>
               </div>
 
@@ -133,12 +147,19 @@ function SignInOtp() {
                     <p className='fw-bold' style={{ fontSize: '16px' }}>AED 199:</p>
                     <p style={{ fontSize: '12px' }}>Today will start</p>
                   </div>
-                  <button className=' rounded-4 ctn-btn border-0 w-50 m-1 fw-bold' style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }}>Checkout</button>
+                  <button className=' rounded-4 ctn-btn border-0 w-50 m-1 fw-bold' style={{
+                    // backgroundImage:
+                    //   "linear-gradient(to right,#FDD687, #F5A691)",
+                    backgroundColor: "rgba(208, 208, 208, 1)",
+                    width: "230px",
+                    height: "50px",
+                  }}>Checkout</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <SigninComponent success={success} onPopupClose={handlePopupClose} />
       </div>
     </>
   )

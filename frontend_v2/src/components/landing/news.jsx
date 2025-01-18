@@ -21,8 +21,8 @@ const News = () => {
     <div className="landing-news-container">
       <div className="landing-news-header-container">
         <div className="landing-news-headings">
-          <h5 className="m-0">Kidgage News</h5>
-          <h6 className="m-0">Fun that shapes the future.</h6>
+          <h5 className="m-0">Our Blogs</h5>
+          <h6 className="m-0">The Latest for Kids and Parents</h6>
         </div>
         <div className="landing-news-header-btn">
           <Link to="/kidgage-news">MORE</Link>
@@ -38,7 +38,7 @@ const News = () => {
             <div className="artical-container">
               <div className="artical-header">
                 <h5 className="m-0">{landingNewsData[0].title}</h5>
-                <h6 className="m-0">Fun that shapes the future.</h6>
+                {/* <h6 className="m-0">Fun that shapes the future.</h6> */}
               </div>
               <div className="artical-content">
                 <p>{landingNewsData[0].description}</p>
@@ -55,7 +55,7 @@ const News = () => {
             <div className="artical-container">
               <div className="artical-header">
                 <h5 className="m-0">{landingNewsData[1].title}</h5>
-                <h6 className="m-0">Fun that shapes the future.</h6>
+                {/* <h6 className="m-0">Fun that shapes the future.</h6> */}
               </div>
               <div className="artical-content">
                 <p>{landingNewsData[1].description}</p>

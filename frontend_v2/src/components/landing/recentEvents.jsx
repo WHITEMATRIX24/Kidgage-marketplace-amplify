@@ -23,7 +23,7 @@ const RecentEvents = () => {
           Recent Events
         </h1>
         <h6 className="mb-0 recent-events-subheading">
-          Fun that shapes the future
+          Fresh Updates, Just for You
         </h6>
       </div>
       <div className="recentEvents-grid-container">
