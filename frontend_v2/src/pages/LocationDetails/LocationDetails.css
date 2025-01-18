@@ -37,7 +37,7 @@
    height: 690px !important;
  }
 
- .mapBorder {
+ .mapViewBorder {
    border-radius: 15px;
    margin-left: 10px;
    padding: 5px;
@@ -81,3 +81,25 @@
      margin-top: 16px;
    }
  }
+
+
+ @media (max-height:932px){
+  .mapPopup-content{
+    height: 80% !important;
+    width:  90% !important;
+  }
+  .mapViewBorder{
+    height: 100%;
+  }
+  .mapView{
+    height: 100%;
+  }
+ }
+ @media(min-width:1000px){
+  .mapPopup-content{
+    width: 60% !important;
+  }
+ }
+
+ 
+ 

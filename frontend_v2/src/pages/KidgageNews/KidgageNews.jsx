@@ -37,8 +37,8 @@ const KidgageNews = () => {
 
             {/* Main Content */}
             <Container className="text-left px-0 w-100">
-                <h1 className="news-header">Kidgage News</h1>
-                <p className="tagline mb-4">Fun that shapes the future.</p>
+                <h1 className="news-header">Our Blogs</h1>
+                <p className="tagline mb-4">Latest for kids and parents.</p>
 
                 {/* Check Loading State */}
                 {newsData.isLoading ? (

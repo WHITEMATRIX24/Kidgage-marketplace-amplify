@@ -13,14 +13,18 @@ import { Col, Row } from "react-bootstrap";
 import LocationDetails from "../../pages/LocationDetails/LocationDetails";
 import CalendarPopup from "../../pages/CalendarPopup/CalendarPoup";
 import { useNavigate } from "react-router";
+import AcademyDetails from "../../pages/AcademyDetails/FootballAcademyDetails";
 
 function ActivityDetailsInnerpage1({ activityData }) {
   const navigate = useNavigate();
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [campDurationSelected, setCampDurationSelected] = useState(null);
+  const [isAcademyVisible, setAcademyVisible] = useState(false);
 
   const openCalendar = () => setIsCalendarVisible(true);
   const closeCalendar = () => setIsCalendarVisible(false);
+  const openAcademyDetails = () => setAcademyVisible(true);
+  const closeAcademyDetails = () => setAcademyVisible(false);
   const handleContinue = () => {
     if (campDurationSelected === null) return;
     navigate("/signin");
@@ -48,9 +52,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
             <FontAwesomeIcon className="share-icon" icon={faShareNodes} />
           </div>
           <div className="activity-heading fw-bold mt-4">
-            <h2>{activityData.name}</h2>
+            <h2 className="fw-bold">{activityData.name}</h2>
             <h6>Organised by </h6>
-            <h6>{activityData.providerDetails.fullName}</h6>
+            <h6 onClick={openAcademyDetails}>  {activityData.providerDetails.fullName}</h6>
           </div>
         </Col>
       </Row>
@@ -67,11 +71,10 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   Seat Details and More options
                 </Card.Text>
                 <button
-                  className={`border-0 mb-1 rounded-3 ${
-                    campDurationSelected === "1month"
-                      ? "camp-duration-selected-btn"
-                      : "card-btn"
-                  }`}
+                  className={`border-0 mb-1 rounded-3 ${campDurationSelected === "1month"
+                    ? "camp-duration-selected-btn"
+                    : "card-btn"
+                    }`}
                   onClick={() => handleSelectCampDuration("1month")}
                 >
                   {campDurationSelected === "1month" ? "Selected" : "Select"}
@@ -90,11 +93,10 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   Seat Details and More options
                 </Card.Text>
                 <button
-                  className={`border-0 mb-1 rounded-3 ${
-                    campDurationSelected === "6month"
-                      ? "camp-duration-selected-btn"
-                      : "card-btn"
-                  }`}
+                  className={`border-0 mb-1 rounded-3 ${campDurationSelected === "6month"
+                    ? "camp-duration-selected-btn"
+                    : "card-btn"
+                    }`}
                   onClick={() => handleSelectCampDuration("6month")}
                 >
                   {campDurationSelected === "6month" ? "Selected" : "Select"}
@@ -146,7 +148,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     {activityData.providerDetails.fullName}
                   </p>
                   <p style={{ fontSize: "12px" }}>
-                    {activityData.providerDetails.address}
+                    {activityData.providerDetails.location}
                   </p>
                 </div>
               </div>
@@ -167,9 +169,8 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <p style={{ fontSize: "12px" }}>06 to 10</p>
                 </div>
                 <button
-                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
-                    campDurationSelected ? "activate-continue-btn" : ""
-                  }`}
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${campDurationSelected ? "activate-continue-btn" : ""
+                    }`}
                   onClick={handleContinue}
                 >
                   Continue
@@ -182,6 +183,12 @@ function ActivityDetailsInnerpage1({ activityData }) {
           <CalendarPopup
             isVisible={isCalendarVisible}
             onClose={closeCalendar}
+          />
+        )}
+        {isAcademyVisible && (
+          <AcademyDetails
+            isVisible={isAcademyVisible}
+            onClose={closeAcademyDetails}
           />
         )}
       </div>

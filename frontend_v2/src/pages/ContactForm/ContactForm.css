@@ -60,6 +60,7 @@
     .contact-form-container {
         flex-direction: column;
         margin-top: 50px;
+        align-items: center;
     }
 
     .contact-form-image-container {
