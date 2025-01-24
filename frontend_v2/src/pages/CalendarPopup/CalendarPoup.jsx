@@ -8,8 +8,11 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 
-const CalendarPopup = ({ isVisible, onClose }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+const CalendarPopup = ({ isVisible, onClose, data }) => {
+  const daysData = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const [currentDate, setCurrentDate] = useState(
+    new Date(data.courseStartDate)
+  );
   const [selectedDates, setSelectedDates] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
@@ -17,23 +20,65 @@ const CalendarPopup = ({ isVisible, onClose }) => {
   const changeMonth = (direction) => {
     const newDate = new Date(currentDate);
     newDate.setMonth(currentDate.getMonth() + direction);
-    setCurrentDate(newDate);
-  };
 
-  const toggleDateSelection = (date) => {
-    const selectedDateString = date.toDateString();
-    if (selectedDates.includes(selectedDateString)) {
-      setSelectedDates(selectedDates.filter((d) => d !== selectedDateString));
-    } else {
-      setSelectedDates([...selectedDates, selectedDateString]);
+    const startDate = new Date(data.courseStartDate);
+    const endDate = new Date(data.courseEndDate);
+
+    if (
+      newDate.getMonth() >= startDate.getMonth() &&
+      newDate.getMonth() <= endDate.getMonth()
+    ) {
+      setCurrentDate(newDate);
     }
   };
 
+  const toggleDateSelection = (date) => {
+    // const selectedDateString = date.toDateString();
+    // if (selectedDates.includes(selectedDateString)) {
+    //   setSelectedDates(selectedDates.filter((d) => d !== selectedDateString));
+    // }
+
+    let newSelectedDates = [];
+    let count = 0;
+    let selectedDate = new Date(date);
+    const courseDurationDate = new Date(selectedDate);
+    courseDurationDate.setDate(selectedDate.getDate() + 30);
+
+    // while (count < 30 && selectedDate <= new Date(data.courseEndDate)) {
+    //   const currentDayOfWeek = selectedDate.getDay();
+    //   const isActiveDate = data?.totalActivityDays.includes(
+    //     daysData[currentDayOfWeek]
+    //   );
+
+    //   if (isActiveDate) {
+    //     newSelectedDates.push(selectedDate.toDateString());
+    //     count++;
+    //   }
+    //   selectedDate.setDate(selectedDate.getDate() + 1);
+    // }
+
+    for (
+      let day = selectedDate;
+      day < courseDurationDate;
+      day.setDate(day.getDate() + 1)
+    ) {
+      const currentDayOfWeek = selectedDate.getDay();
+
+      if (data?.totalActivityDays.includes(daysData[currentDayOfWeek])) {
+        newSelectedDates.push(day.toDateString());
+      }
+    }
+
+    setSelectedDates(newSelectedDates);
+  };
+
   const renderCalendar = () => {
-    const month = currentDate.getMonth();
-    const year = currentDate.getFullYear();
-    const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
+    // date range
+    const courseStartMonth = currentDate.getMonth();
+    const courseStartYear = currentDate.getFullYear();
+
+    const firstDayOfMonth = new Date(courseStartYear, courseStartMonth, 1);
+    const lastDayOfMonth = new Date(courseStartYear, courseStartMonth + 1, 0);
 
     const daysInMonth = lastDayOfMonth.getDate();
     const startDay = firstDayOfMonth.getDay();
@@ -44,18 +89,18 @@ const CalendarPopup = ({ isVisible, onClose }) => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-      const currentDay = new Date(year, month, day);
+      const currentDay = new Date(courseStartYear, courseStartMonth, day);
       const dayOfWeek = currentDay.getDay();
-      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+      const isOffDays = !data?.totalActivityDays.includes(daysData[dayOfWeek]);
       const selected = selectedDates.includes(currentDay.toDateString());
 
       daysArray.push(
         <div
-          className={`calendar-day ${isWeekend ? "disabled" : ""} ${
+          className={`calendar-day ${isOffDays ? "disabled" : ""} ${
             selected ? "selected" : ""
           }`}
           key={`day-${day}`}
-          onClick={isWeekend ? null : () => toggleDateSelection(currentDay)}
+          onClick={isOffDays ? null : () => toggleDateSelection(currentDay)}
         >
           {day}
         </div>

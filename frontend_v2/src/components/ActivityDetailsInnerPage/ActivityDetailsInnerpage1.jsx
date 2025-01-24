@@ -20,6 +20,12 @@ function ActivityDetailsInnerpage1({ activityData }) {
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [campDurationSelected, setCampDurationSelected] = useState(null);
   const [isAcademyVisible, setAcademyVisible] = useState(false);
+  const [calenderActivityData, setCalenderActivityData] = useState({
+    totalActivityDays: null,
+    maxAvailableDays: null,
+    courseStartDate: null,
+    courseEndDate: null,
+  });
 
   const openCalendar = () => setIsCalendarVisible(true);
   const closeCalendar = () => setIsCalendarVisible(false);
@@ -31,8 +37,20 @@ function ActivityDetailsInnerpage1({ activityData }) {
   };
 
   // camp duration selection
-  const handleSelectCampDuration = (campDuration) => {
+  const handleSelectCoursePackeage = (
+    campDuration,
+    activityDays,
+    courseStartDate,
+    courseEndDate
+  ) => {
     setCampDurationSelected(campDuration);
+    setCalenderActivityData({
+      totalActivityDays: activityDays,
+      maxAvailableDays: 5 * activityDays.length,
+      courseStartDate,
+      courseEndDate,
+    });
+    openCalendar();
   };
 
   return (
@@ -81,7 +99,14 @@ function ActivityDetailsInnerpage1({ activityData }) {
                       ? "camp-duration-selected-btn"
                       : "card-btn"
                   }`}
-                  onClick={() => handleSelectCampDuration("1month")}
+                  onClick={() =>
+                    handleSelectCoursePackeage(
+                      "1month",
+                      activityData?.days,
+                      activityData?.startDate,
+                      activityData?.endDate
+                    )
+                  }
                 >
                   {campDurationSelected === "1month" ? "Selected" : "Select"}
                 </button>
@@ -104,7 +129,14 @@ function ActivityDetailsInnerpage1({ activityData }) {
                       ? "camp-duration-selected-btn"
                       : "card-btn"
                   }`}
-                  onClick={() => handleSelectCampDuration("6month")}
+                  onClick={() =>
+                    handleSelectCoursePackeage(
+                      "6month",
+                      activityData?.days,
+                      activityData?.startDate,
+                      activityData?.endDate
+                    )
+                  }
                 >
                   {campDurationSelected === "6month" ? "Selected" : "Select"}
                 </button>
@@ -191,12 +223,17 @@ function ActivityDetailsInnerpage1({ activityData }) {
             </Col>
           </Row>
         </div>
-        {isCalendarVisible && (
-          <CalendarPopup
-            isVisible={isCalendarVisible}
-            onClose={closeCalendar}
-          />
-        )}
+        {isCalendarVisible &&
+          calenderActivityData.totalActivityDays &&
+          calenderActivityData.maxAvailableDays &&
+          calenderActivityData.courseStartDate &&
+          calenderActivityData.courseEndDate && (
+            <CalendarPopup
+              isVisible={isCalendarVisible}
+              onClose={closeCalendar}
+              data={calenderActivityData}
+            />
+          )}
         {isAcademyVisible && (
           <AcademyDetails
             isVisible={isAcademyVisible}

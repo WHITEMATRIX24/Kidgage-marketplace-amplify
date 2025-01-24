@@ -7,6 +7,7 @@ import ActivityDetails1 from "./pages/ActivityDetails/ActivityDetails1";
 import ContactForm from "./pages/ContactForm/ContactForm";
 import KidgageNews from "./pages/KidgageNews/KidgageNews";
 import Landing from "./pages/landing/landing";
+import SearchResults from "./pages/SearchResults/searchResults";
 import SigninSuccess from "./pages/SigninSuccess/SigninSuccess";
 import PrivacyPolicy from "./pages/TermsAndConditions/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions/TermsAndConditions";
@@ -34,6 +35,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-condition" element={<TermsAndConditions />} />
           <Route path="/contact-form" element={<ContactForm />} />
+          <Route path="/search" element={<SearchResults />} />
         </Route>
       </Routes>
     </>

@@ -26,3 +26,7 @@ yarn-error.log*
 
 # versions
 frontend
+
+# version 2 build
+/frontend_v2/dist
+/frontend_v2/dev-dist

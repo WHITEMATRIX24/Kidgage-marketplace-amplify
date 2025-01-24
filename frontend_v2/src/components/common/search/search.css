@@ -61,6 +61,8 @@
   padding: 0.9rem 1rem;
   background-color: #fdd687;
   border-radius: 0.6rem;
+  outline: none;
+  border: none;
 }
 .search-btn-container h6 {
   font-size: 1.5rem;

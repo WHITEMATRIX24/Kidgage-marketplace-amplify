@@ -3,15 +3,65 @@ const router = express.Router();
 const Course = require("../models/Course");
 const mongoose = require("mongoose");
 
-// Route to search for a course by name
+// Route to search for a course
 router.get("/search", async (req, res) => {
   try {
-    const { name } = req.query;
+    const { location, gender, age } = req.query;
 
-    // Find course by name (case-insensitive search)
-    const course = await Course.findOne({
-      name: { $regex: new RegExp(name, "i") },
-    });
+    let courseAggregationPipeline = [];
+    let filteredCourse = [];
+    // if location available
+    if (location) {
+      courseAggregationPipeline.push({
+        $match: {
+          location: {
+            $elemMatch: {
+              city: location,
+            },
+          },
+        },
+      });
+    }
+    // if gender available
+    if (gender && gender !== "Any") {
+      courseAggregationPipeline.push({
+        $match: {
+          preferredGender: gender,
+        },
+      });
+    }
+
+    // if age available
+    if (age) {
+      const parsedAge = JSON.parse(age);
+      const { startAge, endAge } = parsedAge;
+
+      const currentDate = new Date();
+      const startAgeDate = new Date();
+      startAgeDate.setFullYear(
+        currentDate.getFullYear() - parseInt(startAge, 10)
+      );
+      startAgeDate.setHours(0, 0, 0, 0);
+      const endAgeDate = new Date();
+      endAgeDate.setFullYear(currentDate.getFullYear() - parseInt(endAge, 10));
+      endAgeDate.setHours(0, 0, 0, 0);
+
+      if (startAge && endAge) {
+        courseAggregationPipeline.push({
+          $match: {
+            ageGroup: {
+              $elemMatch: {
+                ageStart: { $lte: startAgeDate },
+                ageEnd: { $gte: endAgeDate },
+              },
+            },
+          },
+        });
+      }
+    }
+    const course = await Course.aggregate(
+      courseAggregationPipeline.length > 0 ? courseAggregationPipeline : [{}]
+    );
 
     if (!course) {
       return res.status(404).json({ message: "Course not found" });
@@ -19,6 +69,8 @@ router.get("/search", async (req, res) => {
 
     res.status(200).json(course);
   } catch (error) {
+    console.log(error);
+
     res.status(500).json({ message: "Server error", error });
   }
 });

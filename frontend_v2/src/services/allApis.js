@@ -1,5 +1,22 @@
 import { serverApiConfig } from "./api_config";
 
+// common
+export const getSearchedActivitesApi = async ({ location, gender, age }) => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `/courses/search?location=${location}&gender=${gender}&age=${age}`,
+      apiMethod: "GET",
+    });
+
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(
+      `error in fetching activites in search component or page, error: ${error}`
+    );
+  }
+};
+
 // landing page
 export const getAllActivitesApi = async () => {
   try {

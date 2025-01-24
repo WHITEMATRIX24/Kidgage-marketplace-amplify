@@ -28,7 +28,7 @@ const TopActivites = () => {
       <div className="cards-container">
         <div className="cards-content-wrapper">
           {activitesData.length > 0 ? (
-            activitesData.slice(0, 5).map((activity) => (
+            activitesData.map((activity) => (
               <Link
                 to={{ pathname: `/activites/${activity.name}` }}
                 key={activity._id}

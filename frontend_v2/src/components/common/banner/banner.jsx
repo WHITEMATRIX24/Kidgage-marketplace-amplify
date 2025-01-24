@@ -7,6 +7,21 @@ const Banner = () => {
     isLoading: true,
     banners: [],
   });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // auto moving slider
+  useEffect(() => {
+    if (bannerData.banners.length === 0) return;
+
+    const bannerDataLength = bannerData.banners.length;
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevValue) => (prevValue + 1) % bannerDataLength);
+    }, 5000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [bannerData]);
 
   // initial data fetching
   const getBannerInitialData = async () => {
@@ -25,7 +40,7 @@ const Banner = () => {
       {bannerData.isLoading ? (
         <p>Loading....</p>
       ) : bannerData.banners.length > 0 ? (
-        <img src={bannerData.banners[0].imageUrl} alt="" />
+        <img src={bannerData.banners[currentIndex].imageUrl} alt="" />
       ) : (
         <p>no Banner</p>
       )}
