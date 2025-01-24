@@ -15,7 +15,7 @@ const leadsRoutes = require('./routes/leadsRoutes');
 const desktopBannerRoutes = require('./routes/desktopBanner');
 const mobileBannerRoutes = require('./routes/mobileBanner');
 const newsRoutes = require('./routes/newsRoute');
-
+const customerRoutes = require('./routes/customerRoutes');
 
 const app = express();
 const PORT = 5000;
@@ -41,7 +41,7 @@ app.use('/api/leads', leadsRoutes);
 app.use('/api/desktop-banners', desktopBannerRoutes);
 app.use('/api/mobile-banners', mobileBannerRoutes);
 app.use('/api/news', newsRoutes);
-
+app.use('/api/customers', customerRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

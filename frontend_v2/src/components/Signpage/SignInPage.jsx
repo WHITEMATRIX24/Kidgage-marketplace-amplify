@@ -24,23 +24,28 @@ function SignInPage() {
     console.log("frontend", email);
     try {
       // Send the request to the backend to send the OTP
-      const response = await fetch("http://localhost:5000/api/leads/send-otp", {
+      const response = await fetch("http://localhost:5000/api/customers/send-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }), // Sending email in JSON format
       });
-
+      const data = await response.json();
       // Check if the response is successful
       if (response.ok) {
-        const data = await response.json(); // Parse the response as JSON
-        alert(data.message); // Show success message
-        navigate("/signin-otp", { state: { email } }); // Redirect to the OTP verification page
+        if (data.alreadyRegistered) {
+          // Show alert if user is already registered
+          const proceed = window.confirm("You are already registered. Click OK to continue.");
+          if (proceed) {
+            navigate("/signin-success", { state: { email } });
+          }
+        } else {
+          alert(data.message); // Show success message
+          navigate("/signin-otp", { state: { email } });
+        }
       } else {
-        // Handle error if response is not successful
-        const errorData = await response.json(); // Parse error response
-        alert(errorData.message || "Failed to send OTP.");
+        alert(data.message || "Failed to send OTP.");
       }
     } catch (err) {
       console.error(err);
@@ -84,6 +89,8 @@ function SignInPage() {
                   placeholder="example@mail.com"
                   className="form-control fs-5 border rounded-4 "
                   style={{ width: "400px", height: "60px" }}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 ></input>
               </div>
 
@@ -98,6 +105,7 @@ function SignInPage() {
                       icon={faArrowRight}
                       style={{ color: "#ffff" }}
                       className="ms-3"
+                      onClick={sendOtp}
                     />
                   </button>
                   <button
