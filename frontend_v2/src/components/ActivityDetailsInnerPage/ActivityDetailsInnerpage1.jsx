@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./ActivityDetailsInnerpage1.css";
@@ -14,18 +14,27 @@ import LocationDetails from "../../pages/LocationDetails/LocationDetails";
 import CalendarPopup from "../../pages/CalendarPopup/CalendarPoup";
 import { useNavigate } from "react-router";
 import AcademyDetails from "../../pages/AcademyDetails/FootballAcademyDetails";
+import { BookingCourseContext } from "../../context/bookingContext";
 
 function ActivityDetailsInnerpage1({ activityData }) {
   const navigate = useNavigate();
+  const { bookingCourseData, setCourseBookingData } =
+    useContext(BookingCourseContext);
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
-  const [campDurationSelected, setCampDurationSelected] = useState(null);
+  const [campDurationSelected, setCampDurationSelected] = useState(
+    bookingCourseData
+      ? `${bookingCourseData.courseDuration.duration}${bookingCourseData.courseDuration.durationUnit}`
+      : null
+  );
   const [isAcademyVisible, setAcademyVisible] = useState(false);
   const [calenderActivityData, setCalenderActivityData] = useState({
-    totalActivityDays: null,
-    maxAvailableDays: null,
-    courseStartDate: null,
-    courseEndDate: null,
+    startDate: null,
+    endDate: null,
+    duration: null,
+    durationUnit: null,
   });
+  const [coustomData, setCoustomData] = useState([]);
+  const [courseAvailableDays, setCourseAvailableDays] = useState([]);
 
   const openCalendar = () => setIsCalendarVisible(true);
   const closeCalendar = () => setIsCalendarVisible(false);
@@ -33,23 +42,36 @@ function ActivityDetailsInnerpage1({ activityData }) {
   const closeAcademyDetails = () => setAcademyVisible(false);
   const handleContinue = () => {
     if (campDurationSelected === null) return;
+    setCourseBookingData({
+      ...bookingCourseData,
+      courseName: activityData.name,
+      providedAcademy: activityData.providerDetails.fullName,
+    });
     navigate("/signin");
   };
+  console.log(bookingCourseData);
+  console.log(campDurationSelected);
 
   // camp duration selection
   const handleSelectCoursePackeage = (
-    campDuration,
     activityDays,
     courseStartDate,
-    courseEndDate
+    courseEndDate,
+    courseDuration,
+    courseUnit,
+    coustomData
   ) => {
-    setCampDurationSelected(campDuration);
-    setCalenderActivityData({
-      totalActivityDays: activityDays,
-      maxAvailableDays: 5 * activityDays.length,
-      courseStartDate,
-      courseEndDate,
-    });
+    if (courseDuration && courseEndDate && courseStartDate && courseUnit) {
+      setCalenderActivityData({
+        startDate: courseStartDate,
+        endDate: courseEndDate,
+        duration: courseDuration,
+        durationUnit: courseUnit,
+      });
+    } else setCalenderActivityData(null);
+
+    setCourseAvailableDays(activityDays);
+    coustomData && setCoustomData(coustomData);
     openCalendar();
   };
 
@@ -83,94 +105,92 @@ function ActivityDetailsInnerpage1({ activityData }) {
       </Row>
       <div className="">
         <Row className="card-container-div g-1">
-          <Col xs={6} sm={4} md={4} lg={4} className="d-flex  mt-2">
-            <Card className="d-flex card1 rounded-4">
-              <Card.Body className="d-flex align-items-center justify-content-center flex-column">
-                <Card.Title>1 Month</Card.Title>
-                <Card.Text
-                  className="text-center card-fnt-wt"
-                  style={{ fontSize: "12px" }}
-                >
-                  Seat Details and More options
-                </Card.Text>
-                <button
-                  className={`border-0 mb-1 rounded-3 ${
-                    campDurationSelected === "1month"
-                      ? "camp-duration-selected-btn"
-                      : "card-btn"
-                  }`}
-                  onClick={() =>
-                    handleSelectCoursePackeage(
-                      "1month",
-                      activityData?.days,
-                      activityData?.startDate,
-                      activityData?.endDate
-                    )
-                  }
-                >
-                  {campDurationSelected === "1month" ? "Selected" : "Select"}
-                </button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={6} sm={4} md={4} lg={4} className="d-flex  mt-2">
-            <Card className="d-flex card2 rounded-4 ">
-              <Card.Body className="d-flex align-items-center justify-content-center flex-column">
-                <Card.Title>6 Month</Card.Title>
-                <Card.Text
-                  className="text-center card-fnt-wt"
-                  style={{ fontSize: "12px" }}
-                >
-                  Seat Details and More options
-                </Card.Text>
-                <button
-                  className={`border-0 mb-1 rounded-3 ${
-                    campDurationSelected === "6month"
-                      ? "camp-duration-selected-btn"
-                      : "card-btn"
-                  }`}
-                  onClick={() =>
-                    handleSelectCoursePackeage(
-                      "6month",
-                      activityData?.days,
-                      activityData?.startDate,
-                      activityData?.endDate
-                    )
-                  }
-                >
-                  {campDurationSelected === "6month" ? "Selected" : "Select"}
-                </button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} sm={4} md={4} lg={4} className="d-flex  mt-2">
-            <Card className="d-flex card3 rounded-4" onClick={openCalendar}>
-              <Card.Body
-                className=" d-flex align-items-center justify-content-center flex-column border rounded-4 px-3  m-1 custom-btn"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to bottom,#FDD687, #F5A691)",
-                }}
+          {activityData?.courseDuration.slice(0, 2).map((courseType) => (
+            <Col
+              xs={6}
+              sm={4}
+              md={4}
+              lg={4}
+              className="d-flex  mt-2"
+              key={courseType._id}
+            >
+              <Card className="d-flex card1 rounded-4">
+                <Card.Body className="d-flex align-items-center justify-content-center flex-column">
+                  <Card.Title>{`${courseType.duration} ${courseType.durationUnit}`}</Card.Title>
+                  <Card.Text
+                    className="text-center card-fnt-wt"
+                    style={{ fontSize: "12px" }}
+                  >
+                    Seat Details and More options
+                  </Card.Text>
+                  <button
+                    className={`border-0 mb-1 rounded-3 ${
+                      campDurationSelected ===
+                      `${courseType.duration}${courseType.durationUnit}`
+                        ? "camp-duration-selected-btn"
+                        : "card-btn"
+                    }`}
+                    onClick={() =>
+                      handleSelectCoursePackeage(
+                        activityData?.days,
+                        courseType?.startDate,
+                        courseType?.endDate,
+                        courseType.duration,
+                        courseType.durationUnit
+                      )
+                    }
+                  >
+                    {campDurationSelected ===
+                    `${courseType.duration}${courseType.durationUnit}`
+                      ? "Selected"
+                      : "Select"}
+                  </button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+          {activityData.courseDuration.length >= 3 && (
+            <Col xs={12} sm={4} md={4} lg={4} className="d-flex  mt-2">
+              <Card
+                className="d-flex card3 rounded-4"
+                onClick={() =>
+                  handleSelectCoursePackeage(
+                    activityData.days,
+                    null,
+                    null,
+                    null,
+                    null,
+                    activityData.courseDuration.slice(-2)
+                  )
+                }
               >
-                <div className="custom-btn">
-                  <div className=" d-flex-coloum">
-                    <Card.Title>Custom</Card.Title>
-                    <Card.Text
-                      className="text-center card-fnt-wt"
-                      style={{ fontSize: "10px" }}
-                    >
-                      Seat Details and More options
-                    </Card.Text>
+                <Card.Body
+                  className=" d-flex align-items-center justify-content-center flex-column border rounded-4 px-3  m-1 custom-btn"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to bottom,#FDD687, #F5A691)",
+                  }}
+                >
+                  <div className="custom-btn">
+                    <div className=" d-flex-coloum">
+                      <Card.Title>Custom</Card.Title>
+                      <Card.Text
+                        className="text-center card-fnt-wt"
+                        style={{ fontSize: "10px" }}
+                      >
+                        Seat Details and More options
+                      </Card.Text>
+                    </div>
+                    <FontAwesomeIcon
+                      icon={faArrowRight}
+                      style={{ color: "#000000" }}
+                      className="fs-5 ms-4 cutom-arrow"
+                    />
                   </div>
-                  <FontAwesomeIcon
-                    icon={faArrowRight}
-                    style={{ color: "#000000" }}
-                    className="fs-5 ms-4 cutom-arrow"
-                  />
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
+                </Card.Body>
+              </Card>
+            </Col>
+          )}
         </Row>
         <Row className="">
           <Col sm={12} md={4} lg={4} className="w-100">
@@ -223,17 +243,16 @@ function ActivityDetailsInnerpage1({ activityData }) {
             </Col>
           </Row>
         </div>
-        {isCalendarVisible &&
-          calenderActivityData.totalActivityDays &&
-          calenderActivityData.maxAvailableDays &&
-          calenderActivityData.courseStartDate &&
-          calenderActivityData.courseEndDate && (
-            <CalendarPopup
-              isVisible={isCalendarVisible}
-              onClose={closeCalendar}
-              data={calenderActivityData}
-            />
-          )}
+        {isCalendarVisible && (
+          <CalendarPopup
+            isVisible={isCalendarVisible}
+            onClose={closeCalendar}
+            data={calenderActivityData || null}
+            courseAvailableDays={courseAvailableDays}
+            select_cnf_btn={setCampDurationSelected}
+            coustomData={coustomData}
+          />
+        )}
         {isAcademyVisible && (
           <AcademyDetails
             isVisible={isAcademyVisible}
