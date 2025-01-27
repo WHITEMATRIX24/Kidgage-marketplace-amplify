@@ -131,39 +131,3 @@ export const getActivitydetailsByIdApi = async ({ activityId }) => {
     );
   }
 };
-
-//Get user Details of user who use "Signin with Google" button
-export const getUserSignindetailsByGoogleSigninApi = async (data) => {
-  console.log(data);
-
-  try {
-    const response = await serverApiConfig({
-      apiEndPoint: "customers/get-google-user",
-      apiMethod: "POST",
-      data: data,
-    });
-
-    if (response.status != 200) return console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.log(`133 error in Fetching User Details, error: ${error}`);
-  }
-};
-
-//api o check whether user exist
-export const getExistingUserDetailsAPi = async (data) => {
-  console.log(data);
-
-  try {
-    const response = await serverApiConfig({
-      apiEndPoint: "customers/get-existing-user",
-      apiMethod: "POST",
-      data: data,
-    });
-
-    if (response.status != 200) return console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.log(`133 error in Fetching User Details, error: ${error}`);
-  }
-};

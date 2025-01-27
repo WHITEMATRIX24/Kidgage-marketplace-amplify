@@ -1,42 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import './UserDetailsPopup.css';
 import '../common/header/Header.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 import profileIcon from '../../assets/icon/Group.png';
-import { userDataContext } from "../../context/LoginUserContext";
 
 
 function UserDetailsPopup() {
-    const {userData} = useContext(userDataContext)
     const [show, setShow] = useState(false);
-    const [user,setUser] = useState({})
-    
-
-    const [isLogin,setIsLogin] = useState(false)
 
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
-    useEffect(()=>{
-        if(sessionStorage.getItem("user")){
-            setUser({})
-            setIsLogin(true)
-            const currentUser = JSON.parse(sessionStorage.getItem("user"))
-            console.log(currentUser);
-            setUser(currentUser)
-            console.log(user);
-            
-           
-
-        }
-
-    },[userData])
     return (
         <>
-            {!isLogin &&<h4 className="header-login" onClick={handleShow}>Login</h4>}
-            {isLogin &&<h4 onClick={handleShow}><FontAwesomeIcon className="text-light fs-2" icon={faBars} /></h4>}
+            <h4 className="header-login" onClick={handleShow}>Login</h4>
 
             {/* Popup Modal */}
             {show && (
@@ -58,8 +37,8 @@ function UserDetailsPopup() {
                                         />
                                     </div>
                                     <div className="profile-info">
-                                        <p className="profile-name">{user.name}</p>
-                                        <p className='profile-email'>{user.email}</p>
+                                        <p className="profile-name">Suhail Iqbal</p>
+                                        <p className='profile-email'>suhailIgbal28@gmail.com</p>
 
                                     </div>
                                 </div>

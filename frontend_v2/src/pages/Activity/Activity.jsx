@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../../components/common/banner/banner";
 import Search from "../../components/common/search/search";
 import { getAllActivityByCategoryApi } from "../../services/allApis";
 import { Link, useParams } from "react-router";
 import "./Activity.css";
 import { fromAndToDateFormatter } from "../../utils/dateFormater";
-import { BookingCourseContext } from "../../context/bookingContext";
 
 function ActivityPage() {
-  const { setCourseBookingData } = useContext(BookingCourseContext);
   const { category } = useParams();
   const [activitesBasedonCategory, setActivitesBasedonCategory] = useState([]);
 
@@ -19,11 +17,11 @@ function ActivityPage() {
   };
 
   useEffect(() => {
-    setCourseBookingData(null);
     if (category) {
       getActivityInitialData();
     }
   }, [category]);
+  console.log(activitesBasedonCategory);
 
   return (
     <div className="d-flex flex-column gap-5 pb-5">

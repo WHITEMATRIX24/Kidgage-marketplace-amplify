@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./CalendarPopup.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,71 +7,28 @@ import {
   faArrowRight,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
-import { BookingCourseContext } from "../../context/bookingContext";
-import {
-  getSelectedDatedBasedOnPackageName,
-  getTheinitialSelectedPackage,
-} from "../../utils/bookingCalenderhelper";
 
-const CalendarPopup = ({
-  isVisible,
-  onClose,
-  data,
-  select_cnf_btn,
-  coustomData,
-  courseAvailableDays,
-}) => {
+const CalendarPopup = ({ isVisible, onClose, data }) => {
   const daysData = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
-  const { setCourseBookingData, bookingCourseData } =
-    useContext(BookingCourseContext);
-
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDates, setSelectedDates] = useState([]);
-  const [selectedPackage, setSelectedPackage] = useState(
-    getTheinitialSelectedPackage({
-      data,
-      existingData: bookingCourseData?.courseDuration,
-      coustomData,
-    })
+  const [currentDate, setCurrentDate] = useState(
+    new Date(data.courseStartDate)
   );
+  const [selectedDates, setSelectedDates] = useState([]);
+  const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
 
   const changeMonth = (direction) => {
     const newDate = new Date(currentDate);
     newDate.setMonth(currentDate.getMonth() + direction);
 
-    const startDate = new Date(selectedPackage.startDate);
-    const endDate = new Date(selectedPackage.endDate);
+    const startDate = new Date(data.courseStartDate);
+    const endDate = new Date(data.courseEndDate);
 
     if (
       newDate.getMonth() >= startDate.getMonth() &&
       newDate.getMonth() <= endDate.getMonth()
     ) {
       setCurrentDate(newDate);
-    }
-  };
-
-  // for coustom package selection
-  const selectCoustomPackage = (e) => {
-    const compareValue = e.target.value;
-    const selectedData = coustomData.find(
-      (val) => compareValue === `${val.duration}${val.durationUnit}`
-    );
-    setCurrentDate(new Date(selectedData.startDate));
-    setSelectedDates([]);
-    setSelectedPackage({ ...selectedData });
-  };
-
-  // calculate days based on duration unit
-  const calculateDaysBasedUnit = (courseDate, unitValue) => {
-    switch (unitValue) {
-      case "months":
-        return 30 * courseDate;
-      case "weeks":
-        return 7 * courseDate;
-      default:
-        break;
     }
   };
 
@@ -82,15 +39,23 @@ const CalendarPopup = ({
     // }
 
     let newSelectedDates = [];
+    let count = 0;
     let selectedDate = new Date(date);
     const courseDurationDate = new Date(selectedDate);
-    courseDurationDate.setDate(
-      selectedDate.getDate() +
-        calculateDaysBasedUnit(
-          selectedPackage.duration,
-          selectedPackage.durationUnit
-        )
-    );
+    courseDurationDate.setDate(selectedDate.getDate() + 30);
+
+    // while (count < 30 && selectedDate <= new Date(data.courseEndDate)) {
+    //   const currentDayOfWeek = selectedDate.getDay();
+    //   const isActiveDate = data?.totalActivityDays.includes(
+    //     daysData[currentDayOfWeek]
+    //   );
+
+    //   if (isActiveDate) {
+    //     newSelectedDates.push(selectedDate.toDateString());
+    //     count++;
+    //   }
+    //   selectedDate.setDate(selectedDate.getDate() + 1);
+    // }
 
     for (
       let day = selectedDate;
@@ -99,7 +64,7 @@ const CalendarPopup = ({
     ) {
       const currentDayOfWeek = selectedDate.getDay();
 
-      if (courseAvailableDays.includes(daysData[currentDayOfWeek])) {
+      if (data?.totalActivityDays.includes(daysData[currentDayOfWeek])) {
         newSelectedDates.push(day.toDateString());
       }
     }
@@ -126,7 +91,7 @@ const CalendarPopup = ({
     for (let day = 1; day <= daysInMonth; day++) {
       const currentDay = new Date(courseStartYear, courseStartMonth, day);
       const dayOfWeek = currentDay.getDay();
-      const isOffDays = !courseAvailableDays?.includes(daysData[dayOfWeek]);
+      const isOffDays = !data?.totalActivityDays.includes(daysData[dayOfWeek]);
       const selected = selectedDates.includes(currentDay.toDateString());
 
       daysArray.push(
@@ -145,47 +110,7 @@ const CalendarPopup = ({
     return daysArray;
   };
 
-  // handle continue
-  const handleContinue = () => {
-    const { duration, durationUnit, endDate, startDate } = selectedPackage;
-    if (
-      selectedDates.length <= 0 ||
-      !duration ||
-      !durationUnit ||
-      !startDate ||
-      !endDate
-    )
-      return;
-
-    setCourseBookingData({
-      courseName: null,
-      providedAcademy: null,
-      courseDuration: {
-        duration: duration,
-        durationUnit: durationUnit,
-        startDate: startDate,
-        endDate: endDate,
-        bookedDates: selectedDates,
-      },
-    });
-    select_cnf_btn(`${duration}${durationUnit}`);
-    onClose();
-  };
-
-  useEffect(() => {
-    if (selectedPackage) {
-      setCurrentDate(new Date(selectedPackage.startDate));
-      bookingCourseData &&
-        setSelectedDates(
-          getSelectedDatedBasedOnPackageName({
-            existingData: bookingCourseData.courseDuration,
-            compareData: selectedPackage,
-          })
-        );
-    }
-  }, [selectedPackage]);
-
-  console.log(selectedPackage);
+  const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
   return isVisible ? (
     <div className="PopupCalendar">
@@ -230,25 +155,20 @@ const CalendarPopup = ({
                 </button>
               </div>
             </div>
-            {!data && (
-              <div className="col-6">
-                <select
-                  className="package p-2 rounded"
-                  value={`${selectedPackage.duration}${selectedPackage.durationUnit}`}
-                  onChange={selectCoustomPackage}
-                >
-                  <option value="" disabled>
-                    Package
-                  </option>
-                  {coustomData?.map((coursePackage) => (
-                    <option
-                      value={`${coursePackage.duration}${coursePackage.durationUnit}`}
-                      key={coursePackage._id}
-                    >{`${coursePackage.duration} ${coursePackage.durationUnit}`}</option>
-                  ))}
-                </select>
-              </div>
-            )}
+            <div className="col-6">
+              <select
+                className="package p-2 rounded"
+                value={selectedPackage}
+                onChange={(e) => setSelectedPackage(e.target.value)}
+              >
+                <option value="" disabled>
+                  Package
+                </option>
+                <option value="basic">Basic</option>
+                <option value="standard">Standard</option>
+                <option value="premium">Premium</option>
+              </select>
+            </div>
           </div>
           <div className="calendar-weekdays">
             {weekDays.map((day, index) => (
@@ -278,16 +198,7 @@ const CalendarPopup = ({
               {/* Custom up arrow */}
             </div>
             <div className="col-6 col-lg-7 p-1">
-              <button
-                className={`${
-                  selectedDates.length > 0
-                    ? "CalContinueButton"
-                    : "CalContinueDeselectButton"
-                }`}
-                onClick={handleContinue}
-              >
-                Continue
-              </button>
+              <button className="CalContinueButton">Continue</button>
             </div>
           </div>
         </div>

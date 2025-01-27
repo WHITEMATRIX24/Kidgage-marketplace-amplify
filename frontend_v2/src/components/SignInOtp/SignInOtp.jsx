@@ -1,17 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './SignInOtp.css'
 import '../Signpage/SignInPage.css'
 import '../../pages/ActivityDetails/ActivityDetails.css'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, useLocation } from 'react-router'
 import SigninComponent from '../SignInSuccessPopup/SigninComponent'
-import { userDataContext } from '../../context/LoginUserContext'
 function SignInOtp() {
   const [otp, setOtp] = useState(["", "", "", ""]); // 4 digit OTP
   const [timer, setTimer] = useState(300); // 5 minutes in seconds
   const [otpExpired, setOtpExpired] = useState(false);
-  const {setUserData} = useContext(userDataContext)
   const navigate = useNavigate();
   const { state } = useLocation();
   // const handleContinue = () => {
@@ -36,46 +34,43 @@ function SignInOtp() {
   };
   const [success, setSuccess] = useState(false);
 
-  // const handleContinue = () => {
-  //   // Simulate successful sign-in logic
-  //   setSuccess(true);
-  //   navigate('/signin-success');
-  // };
+  const handleContinue = () => {
+    // Simulate successful sign-in logic
+    setSuccess(true);
+    navigate('/signin-success');
+  };
 
   const handlePopupClose = () => {
     // Navigate to the "order-summary" page after the popup is confirmed
 
     setSuccess(false)
   };
-  const handleContinue = async () => {
-    const enteredOtp = otp.join(""); // Join the OTP array to form a single string
-    const email = emailObject; // Get the email as a string
+  // const handleContinue = async () => {
+  //   const enteredOtp = otp.join(""); // Join the OTP array to form a single string
+  //   const email = emailObject; // Get the email as a string
 
-    if (enteredOtp.length === 4 && !otpExpired) {
-      // Call the API to verify OTP with the email
-      const response = await fetch('http://localhost:5000/api/customers/verify-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ otp: enteredOtp, email: email }), // Send email as string
-      });
+  //   if (enteredOtp.length === 4 && !otpExpired) {
+  //     // Call the API to verify OTP with the email
+  //     const response = await fetch('http://localhost:5000/api/leads/verify-otp', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ otp: enteredOtp, email: email }), // Send email as string
+  //     });
 
-      const data = await response.json();
-      if (response.ok) {
-        sessionStorage.setItem("user", JSON.stringify(data.customer))
-        alert(data.message);
-        setUserData(!userData)
-        navigate('/signin-success')// Navigate to the sign-in success page
-      } else {
-        alert('Invalid OTP');
-      }
-    } else if (otpExpired) {
-      alert('OTP has expired. Please request a new OTP.');
-    } else {
-      alert('Please enter the complete OTP.');
-    }
-  };
+  //     const data = await response.json();
+  //     if (data.message === 'OTP verified') {
+  //       navigate('/signin-success'); // Navigate to the sign-in success page
+  //     } else {
+  //       alert('Invalid OTP');
+  //     }
+  //   } else if (otpExpired) {
+  //     alert('OTP has expired. Please request a new OTP.');
+  //   } else {
+  //     alert('Please enter the complete OTP.');
+  //   }
+  // };
 
   return (
     <>
