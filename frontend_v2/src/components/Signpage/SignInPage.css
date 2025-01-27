@@ -292,11 +292,11 @@
 @media (max-width: 1024px) and (orientation: landscape) {
 
   /* Ensure the columns are displayed side by side */
-  .col-md-6 {
-    width: 50% !important;
-    /* Adjust to 50% so they stay side by side */
-    margin-bottom: 0;
-  }
+  /* .col-md-6 {
+    width: 50% !important; */
+  /* Adjust to 50% so they stay side by side */
+  /* margin-bottom: 0; */
+  /* } */
 
   /* Line separator width in landscape */
   .line-seperator {

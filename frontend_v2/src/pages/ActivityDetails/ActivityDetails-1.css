@@ -168,9 +168,20 @@ border-radius: 15px;
     border: 1px solid #000;
     min-width: 500px;
     height: 600px;
+    overflow-y: scroll;
     align-items: center;
     justify-content: center;
 }
+
+.activity-content-1::-webkit-scrollbar {
+    visibility: hidden;
+    width: 0px;
+    /* Width of the vertical scrollbar */
+}
+
+
+
+
 
 /* Responsive Design */
 

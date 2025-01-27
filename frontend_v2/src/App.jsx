@@ -5,6 +5,7 @@ import SignInPage from "./components/Signpage/SignInPage";
 import ActivityPage from "./pages/Activity/Activity";
 import ActivityDetails1 from "./pages/ActivityDetails/ActivityDetails1";
 import ContactForm from "./pages/ContactForm/ContactForm";
+import EventDetails from "./pages/EventDetails/EventDetails";
 import KidgageNews from "./pages/KidgageNews/KidgageNews";
 import Landing from "./pages/landing/landing";
 import SearchResults from "./pages/SearchResults/searchResults";
@@ -36,6 +37,7 @@ function App() {
           <Route path="/terms-condition" element={<TermsAndConditions />} />
           <Route path="/contact-form" element={<ContactForm />} />
           <Route path="/search" element={<SearchResults />} />
+          <Route path="/event-details" element={<EventDetails />} />
         </Route>
       </Routes>
     </>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./recentEvents.css";
 import { getAllRecentEventsApi } from "../../services/allApis";
 import { dateFormater } from "../../utils/dateFormater";
-
+import { useNavigate } from "react-router";
 const RecentEvents = () => {
   const [recentEvents, setRecentEvents] = useState([]);
 
@@ -14,6 +14,10 @@ const RecentEvents = () => {
   useEffect(() => {
     getRecentEventsInitialData();
   }, []);
+  const navigate = useNavigate();
+  const eventdetails = () => {
+    navigate("/event-details");
+  }
 
   return (
     <div className="recentEvents-container w-100">
@@ -34,6 +38,7 @@ const RecentEvents = () => {
                 src={recentEvent.image}
                 className="img-fluid"
                 alt="event image"
+                onClick={eventdetails}
               />
               <h6 className="fw-bold pt-3 text-align-left">
                 {recentEvent.name}

@@ -15,6 +15,7 @@ const MainLayout = () => {
     "/signin-otp",
     "/order-summary",
     "/signin-success",
+    "/event-details"
   ];
 
   return (
