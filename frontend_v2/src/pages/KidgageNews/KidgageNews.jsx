@@ -5,12 +5,14 @@ import "./KidgageNews.css";
 import { getKidgageNewsApi } from "../../services/allApis";
 import demoImg2 from "../../assets/Screenshot 2024-11-10 at 10.14.51 PM 10 (1).png";
 import demoImg1 from "../../assets/newsimg.png";
-
+import { Link } from "react-router";
+import { useNavigate } from "react-router";
 const KidgageNews = () => {
   const [newsData, setNewsData] = useState({
     isLoading: true,
     news: [],
   });
+  const navigate = useNavigate();
 
   // for demo pourpose
   const demoNews = [
@@ -41,6 +43,9 @@ const KidgageNews = () => {
       console.error("Error fetching news:", error);
       setNewsData({ isLoading: false, news: [...demoNews] });
     }
+  };
+  const navigateToDetailedNews = (newsId) => {
+    navigate(`/detailed-blog/${newsId}`);
   };
 
   useEffect(() => {
@@ -74,9 +79,12 @@ const KidgageNews = () => {
                 className="d-flex justify-content-flex-start"
               >
                 <Card style={{ border: "none" }}>
-                  <div className="news-card-container">
+
+                  <div className="news-card-container" onClick={() => navigateToDetailedNews(news._id)}>
+
                     {/* Left: Image */}
                     <div className="news-img-container">
+
                       <img
                         src={news.image} // Dynamically use the image URL
                         alt={news.title}
@@ -91,12 +99,19 @@ const KidgageNews = () => {
                         {/* Dynamic Title */}
                       </Card.Title>
                       <Card.Text
-                        style={{ fontSize: "14px", textAlign: "justify" }}
+                        style={{
+                          fontSize: "14px", textAlign: "justify", display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                          WebkitLineClamp: 5, // Change this number to adjust the number of visible lines
+                          overflow: "hidden",
+                        }}
                       >
                         {news.description} {/* Dynamic Description */}
                       </Card.Text>
                     </Card.Body>
+
                   </div>
+
                 </Card>
               </Col>
             ))}

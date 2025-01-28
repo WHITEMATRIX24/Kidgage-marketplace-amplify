@@ -29,7 +29,7 @@
     /* max-width: 520px; */
     max-height: 230px;
     padding: 0;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
     scrollbar-width: none;
     /* Hide scrollbar for Firefox */

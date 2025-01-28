@@ -225,8 +225,8 @@ border-radius: 15px;
     }
 
     .activity-image-1 {
-        min-width: 350px;
-        min-height: 350px;
+        /* min-width: 350px;
+        min-height: 350px; */
         object-fit: cover;
         /* Ensures the image covers the entire container while maintaining aspect ratio */
         border-radius: 15px;

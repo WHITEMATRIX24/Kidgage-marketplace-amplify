@@ -16,8 +16,9 @@
 
 .event-details-description {
     padding-left: 45px;
-    padding-right: 20px;
+    padding-right: 40px;
     overflow-y: hidden;
+    text-align: justify;
 }
 
 .event-details-btn-container {

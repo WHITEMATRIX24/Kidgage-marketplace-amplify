@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 });
 
 // Route to fetch a specific poster by ID
-router.get('/:id', async (req, res) => {
+router.get('/poster/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -40,5 +40,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: 'Internal server error. Please try again later.' });
   }
 });
+
 
 module.exports = router;

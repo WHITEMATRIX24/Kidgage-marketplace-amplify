@@ -167,3 +167,47 @@ export const getExistingUserDetailsAPi = async (data) => {
     console.log(`133 error in Fetching User Details, error: ${error}`);
   }
 };
+export const getEventDetailsByIdApi = async ({ eventId }) => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `/posters/poster/${eventId}`,
+      apiMethod: "GET",
+    });
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(
+      `error in event details, error: ${error}`
+    );
+  }
+};
+export const getNewsDetailsByIdApi = async ({ newsId }) => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `/news/${newsId}`,
+      apiMethod: "GET",
+    });
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(
+      `error in news details, error: ${error}`
+    );
+  }
+};
+
+
+export const getOtherNewsDetailsApi = async ({ newsId }) => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `/news/kidgage-news/${newsId}`,
+      apiMethod: "GET",
+    });
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(
+      `error in other news details, error: ${error}`
+    );
+  }
+};

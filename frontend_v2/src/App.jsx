@@ -38,8 +38,8 @@ function App() {
           <Route path="/terms-condition" element={<TermsAndConditions />} />
           <Route path="/contact-form" element={<ContactForm />} />
           <Route path="/search" element={<SearchResults />} />
-          <Route path="/event-details" element={<EventDetails />} />
-          <Route path="/detailed-blog" element={<Detailedblog />} />
+          <Route path="/event-details/:eventId" element={<EventDetails />} />
+          <Route path="/detailed-blog/:newsId" element={<Detailedblog />} />
         </Route>
       </Routes>
     </>
