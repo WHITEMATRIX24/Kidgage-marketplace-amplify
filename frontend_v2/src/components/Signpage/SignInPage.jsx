@@ -9,6 +9,7 @@ import CampDetails from "../../pages/CampDetails/CampDetails";
 import { useGoogleLogin } from '@react-oauth/google';
 import { getExistingUserDetailsAPi, getUserSignindetailsByGoogleSigninApi } from "../../services/allApis";
 import { userDataContext } from "../../context/LoginUserContext";
+import Swal from "sweetalert2";
 
 function SignInPage() {
   const { selectedCourseData } = useContext(SelectedCourseContext);
@@ -29,6 +30,16 @@ function SignInPage() {
     if(result.code == '200'){
       sessionStorage.setItem("user", JSON.stringify(result.customer))
       setUserData(!userData)
+      Swal.fire({
+        title: 'Signin Success!',
+        text: 'Congrats! You have successfully signed in',
+        icon: 'success',
+        confirmButtonColor: '#ACC29E',
+        customClass: {
+          popup: 'custom-border-radius',
+        },
+      })
+
       navigate("/signin-success")
     }
     else{
@@ -69,6 +80,7 @@ function SignInPage() {
 
             navigate("/signin-success", { state: { email } });
           }
+
         } else {
           alert(data.message); // Show success message
           navigate("/signin-otp", { state: { email } });
@@ -92,7 +104,6 @@ function SignInPage() {
   const login = useGoogleLogin({
     onSuccess: async tokenResponse => {
       sessionStorage.removeItem("user")
-      alert('Login Success')
       let access_token = (tokenResponse.access_token);
 
       console.log(access_token);
@@ -104,6 +115,15 @@ function SignInPage() {
       //sessionStorage.removeItem("user")
      sessionStorage.setItem("user", JSON.stringify(userInfo.customer))
      setUserData(!userData)
+     Swal.fire({
+             title: 'Signin Success!',
+             text: 'Congrats! You have successfully signed in',
+             icon: 'success',
+             confirmButtonColor: '#ACC29E',
+             customClass: {
+               popup: 'custom-border-radius',
+             },
+           })
       navigate('/signin-success')
 
     },

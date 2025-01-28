@@ -76,12 +76,11 @@ function SignInOtp() {
       }
 
       sessionStorage.setItem("user", JSON.stringify(data.customer));
-      alert(data.message);
-      setUserData(!userData)
+     alert(data.message);
+       setUserData(!userData)
       setSuccess(true);
       // navigate('/signin-success');
       navigateToSuccess();
-
     } catch (error) {
       alert(error.message || 'Something went wrong. Please try again.');
     }

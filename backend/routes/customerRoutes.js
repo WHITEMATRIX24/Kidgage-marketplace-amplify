@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+require('dotenv').config() // add environments variable to prcess.env
+const {google} = require('googleapis');
 const Customer = require("../models/Customer"); // Import the Customer model
 const crypto = require("crypto");
 let otpStore = {};
@@ -98,7 +100,7 @@ router.post("/verify-otp", async (req, res) => {
       // OTP verification successful
       return res
         .status(200)
-        .json({ message: "OTP verified, email registered" });
+        .json({ message: "OTP verified, email registered", customer:customer });
     } catch (error) {
       console.error("Error inserting customer:", error);
       return res.status(500).json({ message: "Server error" });
