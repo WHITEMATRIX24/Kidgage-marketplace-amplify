@@ -6,49 +6,49 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 import { SelectedCourseContext } from "../../context/courseContext";
 import CampDetails from "../../pages/CampDetails/CampDetails";
-import { useGoogleLogin } from '@react-oauth/google';
-import { getExistingUserDetailsAPi, getUserSignindetailsByGoogleSigninApi } from "../../services/allApis";
+import { useGoogleLogin } from "@react-oauth/google";
+import {
+  getExistingUserDetailsAPi,
+  getUserSignindetailsByGoogleSigninApi,
+} from "../../services/allApis";
 import { userDataContext } from "../../context/LoginUserContext";
 import Swal from "sweetalert2";
 
 function SignInPage() {
   const { selectedCourseData } = useContext(SelectedCourseContext);
-  const {userData,setUserData} = useContext(userDataContext)
+  const { userData, setUserData } = useContext(userDataContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
 
-   useEffect(()=>{
-    sessionStorage.removeItem("user")
-  }) 
-  
+  useEffect(() => {
+    sessionStorage.removeItem("user");
+  });
 
-  const handleContinue =async () => {
-    sessionStorage.removeItem("user")
+  const handleContinue = async () => {
+    sessionStorage.removeItem("user");
 
-    if(email){const result = await getExistingUserDetailsAPi({"email":email})
-    if(result.code == '200'){
-      sessionStorage.setItem("user", JSON.stringify(result.customer))
-      setUserData(!userData)
-      Swal.fire({
-        title: 'Signin Success!',
-        text: 'Congrats! You have successfully signed in',
-        icon: 'success',
-        confirmButtonColor: '#ACC29E',
-        customClass: {
-          popup: 'custom-border-radius',
-        },
-      })
+    if (email) {
+      const result = await getExistingUserDetailsAPi({ email: email });
+      if (result.code == "200") {
+        sessionStorage.setItem("user", JSON.stringify(result.customer));
+        setUserData(!userData);
+        Swal.fire({
+          title: "Signin Success!",
+          text: "Congrats! You have successfully signed in",
+          icon: "success",
+          confirmButtonColor: "#ACC29E",
+          customClass: {
+            popup: "custom-border-radius",
+          },
+        });
 
-      navigate("/signin-success")
-    }
-    else{
-      alert("Email Id is Not registered")
-    }
-  }
-
-    else{
-      alert("Please enter a valid email address.")
+        navigate("/signin-success");
+      } else {
+        alert("Email Id is Not registered");
+      }
+    } else {
+      alert("Please enter a valid email address.");
     }
   };
   const sendOtp = async () => {
@@ -61,26 +61,29 @@ function SignInPage() {
       //sessionStorage.removeItem("user")
 
       // Send the request to the backend to send the OTP
-      const response = await fetch("http://localhost:5000/api/customers/send-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }), // Sending email in JSON format
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/customers/send-otp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }), // Sending email in JSON format
+        }
+      );
       const data = await response.json();
       // Check if the response is successful
       if (response.ok) {
         if (data.alreadyRegistered) {
-         
           // Show alert if user is already registered
-          const proceed = window.confirm("You are already registered. Click OK to continue.");
+          const proceed = window.confirm(
+            "You are already registered. Click OK to continue."
+          );
           if (proceed) {
-            sessionStorage.setItem("user", JSON.stringify(data.customer))
+            sessionStorage.setItem("user", JSON.stringify(data.customer));
 
             navigate("/signin-success", { state: { email } });
           }
-
         } else {
           alert(data.message); // Show success message
           navigate("/signin-otp", { state: { email } });
@@ -95,43 +98,42 @@ function SignInPage() {
   };
   /* Google Login Function */
 
-  
   const handleLoginFailure = (error) => {
     // Handle the error if the login fails
-    console.error('Login failed:', error);
+    console.error("Login failed:", error);
   };
-  
+
   const login = useGoogleLogin({
-    onSuccess: async tokenResponse => {
-      sessionStorage.removeItem("user")
-      let access_token = (tokenResponse.access_token);
+    onSuccess: async (tokenResponse) => {
+      sessionStorage.removeItem("user");
+      let access_token = tokenResponse.access_token;
 
       console.log(access_token);
-      
-      const userInfo = await getUserSignindetailsByGoogleSigninApi(tokenResponse)
-    
+
+      const userInfo = await getUserSignindetailsByGoogleSigninApi(
+        tokenResponse
+      );
+
       console.log(userInfo);
-      
+
       //sessionStorage.removeItem("user")
-     sessionStorage.setItem("user", JSON.stringify(userInfo.customer))
-     setUserData(!userData)
-     Swal.fire({
-             title: 'Signin Success!',
-             text: 'Congrats! You have successfully signed in',
-             icon: 'success',
-             confirmButtonColor: '#ACC29E',
-             customClass: {
-               popup: 'custom-border-radius',
-             },
-           })
-      navigate('/signin-success')
-
+      sessionStorage.setItem("user", JSON.stringify(userInfo.customer));
+      setUserData(!userData);
+      Swal.fire({
+        title: "Signin Success!",
+        text: "Congrats! You have successfully signed in",
+        icon: "success",
+        confirmButtonColor: "#ACC29E",
+        customClass: {
+          popup: "custom-border-radius",
+        },
+      });
+      navigate("/signin-success");
     },
-    onError:handleLoginFailure,
+    onError: handleLoginFailure,
 
-    flow: 'explicit', // explicut for retrieving data in backend
+    flow: "explicit", // explicut for retrieving data in backend
   });
- 
 
   return (
     <>
@@ -141,8 +143,8 @@ function SignInPage() {
             <div className="activity-img-container-1">
               <img
                 className="activity-image-1"
-                // src={selectedCourseData?.images[0]}
-                src="https://s3-alpha-sig.figma.com/img/805d/1f6b/b81629c19ca3ebeb8dc7604d3083c71e?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwvGJXWfoANxMwH~BIlADVx5EXYX9w03x8wf6yE4BXnaqNKFmBA3O0t0rFxCZGih-K7spSlcNcHlB9Z5Q6jK0wSw3QkAw0uLtyLnBsYlgJ0-yoapBpG7b-enzj-3x0kaWHVpluj2u6K5CD~c3gfa9P9TbJVUDlC7-D8cnFbYPP-fes89dtRUVLy0OroGlEBaB8d19ihEMkG7p4MbG74fBfCxSweJZ8BYrokowK2aYG1G0UBW67ChIn8bbBYS1Qm8Sp54v02zSHR2FW3ttFamqNNP7NrW7dfiL8zMLOVOdcnJOloSSNDgMTZKmPvMa2fWWOkp95S7zuo57PcTi6bCuA__"
+                src={selectedCourseData?.images[0]}
+                // src="https://s3-alpha-sig.figma.com/img/805d/1f6b/b81629c19ca3ebeb8dc7604d3083c71e?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwvGJXWfoANxMwH~BIlADVx5EXYX9w03x8wf6yE4BXnaqNKFmBA3O0t0rFxCZGih-K7spSlcNcHlB9Z5Q6jK0wSw3QkAw0uLtyLnBsYlgJ0-yoapBpG7b-enzj-3x0kaWHVpluj2u6K5CD~c3gfa9P9TbJVUDlC7-D8cnFbYPP-fes89dtRUVLy0OroGlEBaB8d19ihEMkG7p4MbG74fBfCxSweJZ8BYrokowK2aYG1G0UBW67ChIn8bbBYS1Qm8Sp54v02zSHR2FW3ttFamqNNP7NrW7dfiL8zMLOVOdcnJOloSSNDgMTZKmPvMa2fWWOkp95S7zuo57PcTi6bCuA__"
                 alt=""
               />
             </div>
@@ -223,7 +225,10 @@ function SignInPage() {
                     />
                     Continue with Google
                   </button>
-                  <button onClick={() => login()} className="signin-btn border  w-100  fw-bold hide-on-large-screen  py-2">
+                  <button
+                    onClick={() => login()}
+                    className="signin-btn border  w-100  fw-bold hide-on-large-screen  py-2"
+                  >
                     <img
                       src="https://img.icons8.com/?size=48&id=17949&format=png"
                       alt=""

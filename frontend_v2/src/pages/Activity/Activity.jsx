@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Banner from "../../components/common/banner/banner";
 import Search from "../../components/common/search/search";
 import { getAllActivityByCategoryApi } from "../../services/allApis";
 import { Link, useParams } from "react-router";
 import "./Activity.css";
 import { fromAndToDateFormatter } from "../../utils/dateFormater";
+import { BookingCourseContext } from "../../context/bookingContext";
 
 function ActivityPage() {
+  const { setCourseBookingData } = useContext(BookingCourseContext);
+  setCourseBookingData(null);
   const { category } = useParams();
   const [activitesBasedonCategory, setActivitesBasedonCategory] = useState([]);
 
@@ -43,15 +46,15 @@ function ActivityPage() {
                   className="img-fluid"
                   alt="Image 1"
                 />
-                <h6 className="fw-bold pt-3 text-align-left">
+                <h6 className="fw-bold pt-3 text-align-left m-0">
                   {activity.name}
                 </h6>
                 <p className="text-align-left" style={{ marginBottom: "0" }}>
                   Location: City, Country
                 </p>
-                <p>
+                {/* <p>
                   {fromAndToDateFormatter(activity.startDate, activity.endDate)}
-                </p>
+                </p> */}
               </Link>
             ))
           ) : (
