@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { BookingCourseContext } from "../../context/bookingContext";
 import {
+  checkTheDatesBeforeOrAfterThePackageDates,
   getSelectedDatedBasedOnPackageName,
   getTheinitialSelectedPackage,
 } from "../../utils/bookingCalenderhelper";
@@ -20,6 +21,7 @@ const CalendarPopup = ({
   select_cnf_btn,
   coustomData,
   courseAvailableDays,
+  timeSlots,
 }) => {
   const daysData = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
@@ -35,7 +37,10 @@ const CalendarPopup = ({
       coustomData,
     })
   );
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(
+    bookingCourseData?.courseDuration?.selectedTimeSlot || ""
+  );
+  const [timeSlotData, setTimeSlotData] = useState(timeSlots || []);
 
   const changeMonth = (direction) => {
     const newDate = new Date(currentDate);
@@ -63,44 +68,39 @@ const CalendarPopup = ({
     setSelectedPackage({ ...selectedData });
   };
 
-  // calculate days based on duration unit
-  const calculateDaysBasedUnit = (courseDate, unitValue) => {
-    switch (unitValue) {
-      case "months":
-        return 30 * courseDate;
-      case "weeks":
-        return 7 * courseDate;
-      default:
-        break;
-    }
+  // calculate total days based on selected date
+  const calculateDaysInMonth = (dateValue) => {
+    const year = dateValue.getFullYear();
+    const month = dateValue.getMonth();
+
+    const lastDayOfMonth = new Date(year, month + 1, 1);
+    return lastDayOfMonth;
   };
 
   const toggleDateSelection = (date) => {
-    // const selectedDateString = date.toDateString();
-    // if (selectedDates.includes(selectedDateString)) {
-    //   setSelectedDates(selectedDates.filter((d) => d !== selectedDateString));
-    // }
-
     let newSelectedDates = [];
     let selectedDate = new Date(date);
-    const courseDurationDate = new Date(selectedDate);
-    courseDurationDate.setDate(
-      selectedDate.getDate() +
-        calculateDaysBasedUnit(
-          selectedPackage.duration,
-          selectedPackage.durationUnit
-        )
-    );
+    const courseDurationDate = calculateDaysInMonth(selectedDate);
+    let countOfSelectedDays = 0;
 
     for (
       let day = selectedDate;
-      day < courseDurationDate;
+      day <= courseDurationDate;
       day.setDate(day.getDate() + 1)
     ) {
-      const currentDayOfWeek = selectedDate.getDay();
+      // checking if the selected dates exceeds the session count
+      if (countOfSelectedDays >= selectedPackage.noOfSessions) break;
+      // checking if the selected dates exceeds package end date
+      if (
+        countOfSelectedDays < selectedPackage.noOfSessions &&
+        day > new Date(selectedPackage.endDate)
+      )
+        return alert("Dates Out of Package");
 
+      const currentDayOfWeek = selectedDate.getDay();
       if (courseAvailableDays.includes(daysData[currentDayOfWeek])) {
         newSelectedDates.push(day.toDateString());
+        countOfSelectedDays++;
       }
     }
 
@@ -126,7 +126,14 @@ const CalendarPopup = ({
     for (let day = 1; day <= daysInMonth; day++) {
       const currentDay = new Date(courseStartYear, courseStartMonth, day);
       const dayOfWeek = currentDay.getDay();
-      const isOffDays = !courseAvailableDays?.includes(daysData[dayOfWeek]);
+      const isOffDays =
+        !courseAvailableDays?.includes(daysData[dayOfWeek]) ||
+        checkTheDatesBeforeOrAfterThePackageDates({
+          currentDay,
+          startDate: selectedPackage?.startDate,
+          endDate: selectedPackage?.endDate,
+        });
+
       const selected = selectedDates.includes(currentDay.toDateString());
 
       daysArray.push(
@@ -147,13 +154,16 @@ const CalendarPopup = ({
 
   // handle continue
   const handleContinue = () => {
-    const { duration, durationUnit, endDate, startDate } = selectedPackage;
+    const { duration, durationUnit, endDate, startDate, noOfSessions } =
+      selectedPackage;
     if (
       selectedDates.length <= 0 ||
       !duration ||
       !durationUnit ||
       !startDate ||
-      !endDate
+      !endDate ||
+      !noOfSessions ||
+      !selectedTimeSlot
     )
       return;
 
@@ -166,11 +176,14 @@ const CalendarPopup = ({
         startDate: startDate,
         endDate: endDate,
         bookedDates: selectedDates,
+        noOfSessions,
+        selectedTimeSlot,
       },
     });
     select_cnf_btn(`${duration}${durationUnit}`);
     onClose();
   };
+  console.log(selectedTimeSlot);
 
   useEffect(() => {
     if (selectedPackage) {
@@ -266,9 +279,11 @@ const CalendarPopup = ({
                 <option value="" disabled>
                   Select Time Slot
                 </option>
-                <option value="11am to 1pm">11am to 1pm</option>
-                <option value="1pm to 3pm">1pm to 3pm</option>
-                <option value="3pm to 5pm">3pm to 5pm</option>
+                {timeSlotData.map((time) => (
+                  <option value={`${time.from}-${time.to}`} key={time._id}>
+                    {`${time.from} - ${time.to}`}
+                  </option>
+                ))}
               </select>
               <span className="dropdown-arrow">
                 <FontAwesomeIcon icon={faAngleUp} />

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { dateFormater } from "../../utils/dateFormater";
-import { getNewsDetailsByIdApi, getOtherNewsDetailsApi } from "../../services/allApis";
+import {
+  getNewsDetailsByIdApi,
+  getOtherNewsDetailsApi,
+} from "../../services/allApis";
 import "./detailedBlog.css";
+import { handleShare } from "../../utils/share";
 
 const Detailedblog = () => {
   const [newsDetails, setNewsDetails] = useState(null);
@@ -11,9 +15,9 @@ const Detailedblog = () => {
   console.log("newsId:", newsId);
   const fetchNewsDetails = async () => {
     try {
-      console.log({ newsId })
+      console.log({ newsId });
       const data = await getNewsDetailsByIdApi({ newsId });
-      console.log("Fetched data:", data);  // Log the fetched data
+      console.log("Fetched data:", data); // Log the fetched data
       if (data) {
         setNewsDetails(data);
       } else {
@@ -51,10 +55,7 @@ const Detailedblog = () => {
     <div className="detailedblog-layout">
       <div className="detailedblog-left-container">
         <div className="detailed-blog-image">
-          <img
-            src={newsDetails.image}
-            alt=""
-          />
+          <img src={newsDetails.image} alt="" />
         </div>
         {/* on small screen */}
         <div className="detailedblog-right-container-onSmallscreen">
@@ -144,7 +145,16 @@ const Detailedblog = () => {
       </div>
       <div className="detailedblog-right-container">
         <div className="detailedblog-share-btn">
-          <button>share</button>
+          <button
+            onClick={() =>
+              handleShare({
+                courseName: newsDetails.title,
+                courseDesc: newsDetails.description,
+              })
+            }
+          >
+            share
+          </button>
         </div>
         <div className="detailedblog-content-header">
           <h3>{newsDetails.title}</h3>

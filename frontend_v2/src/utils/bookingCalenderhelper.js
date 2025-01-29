@@ -40,3 +40,35 @@ export const getSelectedDatedBasedOnPackageName = ({
     else return [];
   } else return [];
 };
+
+// check wether the date is before or after the package dates
+export const checkTheDatesBeforeOrAfterThePackageDates = ({
+  currentDay,
+  startDate,
+  endDate,
+}) => {
+  const newStartDate = new Date(startDate);
+  newStartDate.setHours(0, 0, 0, 0);
+  const newEndDate = new Date(endDate);
+  newEndDate.setHours(0, 0, 0, 0);
+  const newCurrentDate = new Date(currentDay);
+  newCurrentDate.setHours(0, 0, 0, 0);
+
+  // todays date
+  const todaysDate = new Date();
+  todaysDate.setHours(0, 0, 0, 0);
+
+  // console.log(
+  //   `newCurrentDate: ${newCurrentDate} < todaysDate: ${todaysDate} is ${
+  //     newCurrentDate < todaysDate
+  //   }`
+  // );
+
+  if (
+    newCurrentDate < newStartDate ||
+    newCurrentDate > newEndDate ||
+    newCurrentDate < todaysDate
+  )
+    return true;
+  else return false;
+};

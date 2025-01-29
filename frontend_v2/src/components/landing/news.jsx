@@ -32,48 +32,6 @@ const News = () => {
       </div>
       <div className="landing-news-content-container">
         {/* 1st */}
-        <div className="landing-news-card">
-          <div className="artical-image-container">
-            <img src={demoImg1} alt="image" />
-          </div>
-          <div className="artical-container">
-            <div className="artical-header">
-              <h5 className="m-0">Kidgage News</h5>
-              {/* <h6 className="m-0">Fun that shapes the future.</h6> */}
-            </div>
-            <div className="artical-content">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum
-                consectetur iste nobis, unde corrupti modi soluta commodi porro
-                repellat quis facere at repellendus necessitatibus dignissimos
-                consequatur. Illum debitis reiciendis deleniti.
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* 2nd */}
-        <div className="landing-news-card">
-          <div className="artical-image-container">
-            <img src={demoImg2} alt="image" />
-          </div>
-          <div className="artical-container">
-            <div className="artical-header">
-              <h5 className="m-0">Kidgage News</h5>
-              {/* <h6 className="m-0">Fun that shapes the future.</h6> */}
-            </div>
-            <div className="artical-content">
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Blanditiis fugit, facere architecto tenetur sint tempora
-                veritatis magnam! Repellat repudiandae reprehenderit voluptates
-                dolore est expedita nemo ut animi ducimus temporibus? Vel!
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* <div className="landing-news-content-container">
-        1st
         {landingNewsData[0] && (
           <div className="landing-news-card">
             <div className="artical-image-container">
@@ -90,7 +48,7 @@ const News = () => {
             </div>
           </div>
         )}
-        2nd
+        {/* 2nd */}
         {landingNewsData[1] && (
           <div className="landing-news-card">
             <div className="artical-image-container">
@@ -107,7 +65,7 @@ const News = () => {
             </div>
           </div>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };

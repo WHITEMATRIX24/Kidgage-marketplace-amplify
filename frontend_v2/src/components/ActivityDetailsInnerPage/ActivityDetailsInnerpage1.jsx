@@ -15,6 +15,7 @@ import CalendarPopup from "../../pages/CalendarPopup/CalendarPoup";
 import { useNavigate } from "react-router";
 import AcademyDetails from "../../pages/AcademyDetails/FootballAcademyDetails";
 import { BookingCourseContext } from "../../context/bookingContext";
+import { handleShare } from "../../utils/share";
 
 function ActivityDetailsInnerpage1({ activityData }) {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
     endDate: null,
     duration: null,
     durationUnit: null,
+    noOfSessions: null,
   });
   const [coustomData, setCoustomData] = useState([]);
   const [courseAvailableDays, setCourseAvailableDays] = useState([]);
@@ -57,14 +59,22 @@ function ActivityDetailsInnerpage1({ activityData }) {
     courseEndDate,
     courseDuration,
     courseUnit,
-    coustomData
+    coustomData,
+    noOfSessions
   ) => {
-    if (courseDuration && courseEndDate && courseStartDate && courseUnit) {
+    if (
+      courseDuration &&
+      courseEndDate &&
+      courseStartDate &&
+      courseUnit &&
+      noOfSessions
+    ) {
       setCalenderActivityData({
         startDate: courseStartDate,
         endDate: courseEndDate,
         duration: courseDuration,
         durationUnit: courseUnit,
+        noOfSessions,
       });
     } else setCalenderActivityData(null);
 
@@ -86,7 +96,17 @@ function ActivityDetailsInnerpage1({ activityData }) {
               borderBottomRightRadius: "0px",
             }}
           >
-            <span className="share-text">share</span>
+            <span
+              onClick={() =>
+                handleShare({
+                  courseName: activityData.name,
+                  courseDesc: activityData.description,
+                })
+              }
+              className="share-text"
+            >
+              share
+            </span>
             <FontAwesomeIcon className="share-icon" icon={faShareNodes} />
           </div>
           <div className="activity-heading fw-bold mt-4">
@@ -133,8 +153,10 @@ function ActivityDetailsInnerpage1({ activityData }) {
                         activityData?.days,
                         courseType?.startDate,
                         courseType?.endDate,
-                        courseType.duration,
-                        courseType.durationUnit
+                        courseType?.duration,
+                        courseType?.durationUnit,
+                        null,
+                        courseType?.noOfSessions
                       )
                     }
                   >
@@ -249,6 +271,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
             courseAvailableDays={courseAvailableDays}
             select_cnf_btn={setCampDurationSelected}
             coustomData={coustomData}
+            timeSlots={activityData.timeSlots}
           />
         )}
         {isAcademyVisible && (
