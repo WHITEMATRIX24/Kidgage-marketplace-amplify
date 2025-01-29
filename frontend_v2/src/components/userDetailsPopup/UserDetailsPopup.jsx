@@ -6,18 +6,40 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import profileIcon from '../../assets/icon/Group.png';
 import { userDataContext } from "../../context/LoginUserContext";
+import { useNavigate } from "react-router";
+import SigninPopup from "../SigninPopup/SigninPopup";
 
 
 function UserDetailsPopup() {
     const {userData} = useContext(userDataContext)
     const [show, setShow] = useState(false);
+    const [showSigninPopup, setShowSigninPopup] = useState(false);
+
     const [user,setUser] = useState({})
-    
+    const navigate = useNavigate()
+
 
     const [isLogin,setIsLogin] = useState(false)
 
-    const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(!show);
+    const handleClose = () => {
+        setShow(false)
+        setShowSigninPopup(false)
+    };
+    const handleCloseSigninPopup =()=>{
+        setShowSigninPopup(false)
+
+    }
+    const handleSignUp = () =>{
+        setShow(false)
+        setShowSigninPopup(true)
+    }
+
+    const handleLogout = ()=>{
+        setShow(false)
+        sessionStorage.removeItem("user")
+        setIsLogin(false)
+    }
 
     useEffect(()=>{
         if(sessionStorage.getItem("user")){
@@ -28,15 +50,17 @@ function UserDetailsPopup() {
             setUser(currentUser)
             console.log(user);
             
-           
-
         }
 
     },[userData])
+    const handleGetStarted =()=>{
+        handleClose()
+        navigate('/provider-joining-form')
+    }
     return (
         <>
             {!isLogin &&<h4 className="header-login" onClick={handleShow}>Login</h4>}
-            {isLogin &&<h4 onClick={handleShow}><FontAwesomeIcon className="text-light fs-2" icon={faBars} /></h4>}
+            {isLogin &&<h4 className="ms-auto" onClick={handleShow}><FontAwesomeIcon className="text-light fs-2" icon={faBars} /></h4>}
 
             {/* Popup Modal */}
             {show && (
@@ -44,39 +68,70 @@ function UserDetailsPopup() {
                     <div className="header-popup-container"></div>
                     <div className="header-popup-content">
                         <div className="profile-container">
-                            <div className='row'>
-                                <div className='header-h2'><h2>Profile</h2></div>
-                                <div className='text-end'>
-                                    <button className="close-button" onClick={handleClose}><FontAwesomeIcon icon={faX} /></button>
+                           <div className="customerProfile">
+                                <div className='row'>
+                                     <div className='header-h2'><h2>Profile</h2></div>
+                                    <div className='text-end'>
+                                        <button className="close-button" onClick={handleClose}><FontAwesomeIcon icon={faX} /></button>
+                                    </div>
                                 </div>
+                               {isLogin && <div className="row">
+                                    <div className="profile-details">
+                                        <div className='profile-icon'>
+                                            <img
+                                                src={profileIcon}
+                                            />
+                                        </div>
+                                        <div className="profile-info">
+                                            <p className="profile-name">{user.name}</p>
+                                            <p className='profile-email'>{user.email}</p>
+    
+                                        </div>
+                                    </div>
+                                    <div className="booking-details">
+                                        <div className='profile-icon'>
+                                            <img
+                                                src={profileIcon}
+                                            />
+                                        </div>
+                                        <div >
+                                            <p className="my-booking">My Bookings</p>
+    
+                                        </div>
+                                    </div>
+                                    {/* <div className="booking-details" onClick={handleLogout}>
+                                        <div className='profile-icon'>
+                                            <img
+                                                src={profileIcon}
+                                            />
+                                        </div>
+                                        <div >
+                                            <p className="my-booking">LogOut</p>
+    
+                                        </div>
+                                    </div> */}
+    
+                                </div>}
+                                {!isLogin &&<div className=" d-flex align-items-center ">
+                               <div className="bussiness-header-h2 mt-3" onClick={handleSignUp} >
+                                <p className="text-light profile-email">Login to Kidgage.com </p>
+                                <div className="booking-details mt-2">
+                                        <div className='profile-icon'>
+                                            <img
+                                                src={profileIcon}
+                                            />
+                                        </div>
+                                        <div >
+                                            <p className="my-booking">Sign In</p>
+    
+                                        </div>
+                                    </div>
+                                </div>
+
+                                </div>}
                             </div>
-                            <div className="row">
-                                <div className="profile-details">
-                                    <div className='profile-icon'>
-                                        <img
-                                            src={profileIcon}
-                                        />
-                                    </div>
-                                    <div className="profile-info">
-                                        <p className="profile-name">{user.name}</p>
-                                        <p className='profile-email'>{user.email}</p>
-
-                                    </div>
-                                </div>
-                                <div className="booking-details">
-                                    <div className='profile-icon'>
-                                        <img
-                                            src={profileIcon}
-                                        />
-                                    </div>
-                                    <div >
-                                        <p className="my-booking">My Bookings</p>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div className="row">
+                            
+                            <div className="row px-4">
                                 <div className="bussiness-header-h2"><h2>Bussiness</h2></div>
                                 <div className="profile-details">
                                     <div className='profile-icon'>
@@ -99,7 +154,7 @@ function UserDetailsPopup() {
                                             src={profileIcon}
                                         />
                                     </div>
-                                    <div className="profile-info">
+                                    <div className="profile-info" onClick={handleGetStarted}>
                                         <p className="profile-name">Get Started</p>
                                         <p className='profile-email'>The pass for your order has<br />
                                             been created.</p>
@@ -114,6 +169,8 @@ function UserDetailsPopup() {
                 </div>
             )
             }
+            {showSigninPopup&& <SigninPopup setShowSigninPopup={setShowSigninPopup}/>}
+
         </>
     );
 

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../CampDetails/CampDetails.css'
 
 
-function CampDetails() {
+function CampDetails({activityData}) {
     const [isCampDetailsOpen, setIsCampDetailsOpen] = useState(false);
     const [position, setPosition] = useState(5); // The initial position of the div
 
@@ -23,6 +23,33 @@ function CampDetails() {
     const closeCampDetailsPopup = () => {
         setIsCampDetailsOpen(false);
     };
+
+    const [startAge, setStartAge] = useState(0)
+    const [endAge, setendAge] = useState(0)
+
+    //function to calucuate age limit
+    const calculateAge = () => {
+        const satrtDate = new Date(activityData.ageGroup[0].ageStart);
+        const endDate = new Date(activityData.ageGroup[0].ageEnd);
+        console.log(satrtDate);
+        
+
+        const currentDate = new Date();
+    
+        let calculatedAge1 = currentDate.getFullYear() - satrtDate.getFullYear();
+        let calculatedAge2 = currentDate.getFullYear() - endDate.getFullYear();
+        setStartAge(calculatedAge2)
+        setendAge(calculatedAge1)
+        console.log(calculatedAge1);
+        
+      };
+      useEffect(()=>{
+        calculateAge();
+        console.log(activityData);
+        
+      })
+    
+
 
 
 
@@ -77,10 +104,10 @@ function CampDetails() {
 
                                 <div className='col-12 navText'>
                                     <div className='row  ps-0'>
-                                        <h1 className='text-start' style={{ color: "black" }}>Football camp</h1>
+                                        <h1 className='text-start' style={{ color: "black" }}>{activityData.name}</h1>
                                     </div>
                                     <div className="row d-flex w-100">
-                                        <div > <h3 className='text-start ' style={{ color: "black" }}>Agre Limt: 06 to 10</h3></div>
+                                        <div > <h3 className='text-start ' style={{ color: "black" }}>Agre Limt: {startAge} to {endAge}</h3></div>
                                     </div>
                                 </div>
 
@@ -98,10 +125,9 @@ function CampDetails() {
                             ref={popupRef}
                         >
                             <h4 style={{ color: "black" }}>"Surprise! We’re back with a new location in Dubai</h4>
-                            <p className='' style={{ color: "black" }}>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
-                                Working in association with BFC Soccer Schools, our coaching philosophy targets the holistic development of the child while incorporating a true lifelong passion for the game. Our best players even get a chance win scholarships and scouted by the famous Bengaluru Football Club.</p>
-                            <p style={{ color: "black" }}>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
-                                Working in association with BFC Soccer Schools, our coaching philosophy targets the holistic development of the child while incorporating a true lifelong passion for the game. Our best players even get a chance win scholarships and scouted by the famous Bengaluru Football Club.</p>
+                            <p className='' style={{ color: "black" }}>{activityData.description}</p>
+                            {/* <p style={{ color: "black" }}>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
+                                Working in association with BFC Soccer Schools, our coaching philosophy targets the holistic development of the child while incorporating a true lifelong passion for the game. Our best players even get a chance win scholarships and scouted by the famous Bengaluru Football Club.</p> */}
                             {/* things to keep in mind section */}
                             <>
                                 <h5 className='mb-3' style={{ color: "black" }}>Things to keep in mind:</h5>
@@ -118,16 +144,13 @@ function CampDetails() {
                             <div className='FAQ'>
                                 <h3 className='mt-2' style={{ color: "black" }}>FAQs</h3>
                                 <div className='row  '>
-                                    <div className="col-md-6 mt-3">
-                                        <p style={{ color: "black" }}>Does the registration guarantee my spot?</p>
-                                        <h6 style={{ color: "black" }}>Yes, whoever is registering will be given a spot. </h6>
-                                    </div>
-                                    <div className="col-md-6 mt-3">
-                                        <p style={{ color: "black" }}>Does the registration guarantee my spot?</p>
-                                        <h6 style={{ color: "black" }}>Yes, whoever is registering will be given a spot. </h6>
-                                    </div>
+                                {activityData.faq?.map((item)=>(<div className="col-md-6 mt-3">
+                                        <p style={{ color: "black" }}>{item.question}</p>
+                                        <h6 style={{ color: "black" }}>{item.answer} </h6>
+                                    </div>))}
+                                    
                                 </div>
-                                <div className='row  '>
+                                {/* <div className='row  '>
                                     <div className="col-md-6 mt-3">
                                         <p style={{ color: "black" }}>Does the registration guarantee my spot?</p>
                                         <h6 style={{ color: "black" }}>Yes, whoever is registering will be given a spot. </h6>
@@ -136,7 +159,7 @@ function CampDetails() {
                                         <p style={{ color: "black" }}>Does the registration guarantee my spot?</p>
                                         <h6 style={{ color: "black" }}>Yes, whoever is registering will be given a spot. </h6>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             {/* Maps section */}
                             <div className='map row w-100 mt-5' >
