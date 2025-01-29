@@ -31,6 +31,7 @@ router.post("/send-otp", async (req, res) => {
       return res.status(200).json({
         message: "You are already registered. Click Continue.",
         alreadyRegistered: true,
+        customer:existingCustomer
       });
     }
 

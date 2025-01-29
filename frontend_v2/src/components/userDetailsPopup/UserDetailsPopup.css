@@ -64,12 +64,15 @@ z-index: 1000; */
  */
 
 .profile-container {
+   
+}
+.customerProfile{
     margin: 5px;
     height: 180px;
     padding: 20px;
     background-color: #181818;
-    border-radius: 15px;
-}
+    border-radius: 15px;    
+   }
 
 .header-h2 h2 {
     font-size: 24px;
@@ -106,7 +109,7 @@ z-index: 1000; */
     font-size: 24px;
     font-weight: bold;
     color: white;
-    margin: 30px;
+    margin: 5px 30px;
 }
 
 .hr-popup {
