@@ -176,9 +176,7 @@ export const getEventDetailsByIdApi = async ({ eventId }) => {
     if (response.status != 200) return console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(
-      `error in event details, error: ${error}`
-    );
+    console.log(`error in event details, error: ${error}`);
   }
 };
 export const getNewsDetailsByIdApi = async ({ newsId }) => {
@@ -190,9 +188,7 @@ export const getNewsDetailsByIdApi = async ({ newsId }) => {
     if (response.status != 200) return console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(
-      `error in news details, error: ${error}`
-    );
+    console.log(`error in news details, error: ${error}`);
   }
 };
 
@@ -201,14 +197,11 @@ export const getProviderDetailsApi = async ({ providerId }) => {
     const response = await serverApiConfig({
       apiEndPoint: `/users/provider/${providerId}`,
       apiMethod: "GET",
-
     });
     if (response.status != 200) return console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(
-      `error in fetching provider details: ${error}`
-    );
+    console.log(`error in fetching provider details: ${error}`);
   }
 };
 export const getOtherNewsDetailsApi = async ({ newsId }) => {
@@ -220,8 +213,21 @@ export const getOtherNewsDetailsApi = async ({ newsId }) => {
     if (response.status != 200) return console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(
-      `error in other news details, error: ${error}`
-    );
+    console.log(`error in other news details, error: ${error}`);
+  }
+};
+
+// booking api
+export const addBokkingApi = async ({ userId, bookingDetails }) => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `/customers/book-course/${userId}`,
+      apiMethod: "POST",
+      data: bookingDetails,
+    });
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(`error in booking courses, error: ${error}`);
   }
 };

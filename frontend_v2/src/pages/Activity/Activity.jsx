@@ -9,7 +9,6 @@ import { BookingCourseContext } from "../../context/bookingContext";
 
 function ActivityPage() {
   const { setCourseBookingData } = useContext(BookingCourseContext);
-  setCourseBookingData(null);
   const { category } = useParams();
   const [activitesBasedonCategory, setActivitesBasedonCategory] = useState([]);
 
@@ -23,8 +22,8 @@ function ActivityPage() {
     if (category) {
       getActivityInitialData();
     }
+    return () => setCourseBookingData(null);
   }, [category]);
-  console.log(activitesBasedonCategory);
 
   return (
     <div className="d-flex flex-column gap-5 pb-5">

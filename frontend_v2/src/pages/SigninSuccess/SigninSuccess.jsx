@@ -122,8 +122,8 @@ function SigninSuccess() {
             <div className="signinSuccessFinalDetails ms-0 ms-xl-3 mt-3 mb-4">
               <div className="row">
                 <div className="col-6">
-                  <h3 className="total">{`Total ${totalFees}`}</h3>
-                  <p className="font12">Today will start</p>
+                  <h3 className="total m-0">{`Total ${totalFees} QAR`}</h3>
+                  <p className="font12 m-0">Today will start</p>
                 </div>
                 <div className="col-6 d-flex align-items-center justify-content-center">
                   <button

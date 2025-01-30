@@ -28,14 +28,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
       : null
   );
   const [isAcademyVisible, setAcademyVisible] = useState(false);
-  const [calenderActivityData, setCalenderActivityData] = useState({
-    startDate: null,
-    endDate: null,
-    duration: null,
-    durationUnit: null,
-    noOfSessions: null,
-    fee: null,
-  });
+  const [calenderActivityData, setCalenderActivityData] = useState({});
   const [coustomData, setCoustomData] = useState([]);
   const [courseAvailableDays, setCourseAvailableDays] = useState([]);
   const [selectedProviderId, setSelectedProviderId] = useState(null);
@@ -63,30 +56,11 @@ function ActivityDetailsInnerpage1({ activityData }) {
   // camp duration selection
   const handleSelectCoursePackeage = (
     activityDays,
-    courseStartDate,
-    courseEndDate,
-    courseDuration,
-    courseUnit,
-    coustomData,
-    noOfSessions,
-    fee
+    courseData,
+    coustomData
   ) => {
-    if (
-      courseDuration &&
-      courseEndDate &&
-      courseStartDate &&
-      courseUnit &&
-      noOfSessions &&
-      fee
-    ) {
-      setCalenderActivityData({
-        startDate: courseStartDate,
-        endDate: courseEndDate,
-        duration: courseDuration,
-        durationUnit: courseUnit,
-        noOfSessions,
-        fee,
-      });
+    if (courseData) {
+      setCalenderActivityData(courseData);
     } else setCalenderActivityData(null);
 
     setCourseAvailableDays(activityDays);
@@ -153,26 +127,22 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     Seat Details and More options
                   </Card.Text>
                   <button
-                    className={`border-0 mb-1 rounded-3 ${campDurationSelected ===
-                        `${courseType.duration}${courseType.durationUnit}`
+                    className={`border-0 mb-1 rounded-3 ${
+                      campDurationSelected ===
+                      `${courseType.duration}${courseType.durationUnit}`
                         ? "camp-duration-selected-btn"
                         : "card-btn"
-                      }`}
+                    }`}
                     onClick={() =>
                       handleSelectCoursePackeage(
                         activityData?.days,
-                        courseType?.startDate,
-                        courseType?.endDate,
-                        courseType?.duration,
-                        courseType?.durationUnit,
-                        [courseType],
-                        courseType?.noOfSessions,
-                        courseType?.fee
+                        courseType,
+                        [courseType]
                       )
                     }
                   >
                     {campDurationSelected ===
-                      `${courseType.duration}${courseType.durationUnit}`
+                    `${courseType.duration}${courseType.durationUnit}`
                       ? "Selected"
                       : "Select"}
                   </button>
@@ -188,11 +158,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   handleSelectCoursePackeage(
                     activityData.days,
                     null,
-                    null,
-                    null,
-                    null,
-                    activityData.courseDuration.slice(-2),
-                    null
+                    activityData.courseDuration.slice(-2)
                   )
                 }
               >
@@ -264,8 +230,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <p style={{ fontSize: "12px" }}>06 to 10</p>
                 </div>
                 <button
-                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${campDurationSelected ? "activate-continue-btn" : ""
-                    }`}
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
+                    campDurationSelected ? "activate-continue-btn" : ""
+                  }`}
                   onClick={handleContinue}
                 >
                   Continue

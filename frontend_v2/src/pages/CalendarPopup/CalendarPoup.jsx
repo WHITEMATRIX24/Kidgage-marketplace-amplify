@@ -156,6 +156,8 @@ const CalendarPopup = ({
   const handleContinue = () => {
     const { duration, durationUnit, endDate, startDate, noOfSessions, fee } =
       selectedPackage;
+    console.log(selectedPackage);
+
     if (
       selectedDates.length <= 0 ||
       !duration ||

@@ -53,7 +53,7 @@ function ActivityDetails1() {
 
             {/* <button className="activity-button">About This Activity</button> */}
 
-            <CampDetails activityData={activityDetails.activityData}  />
+            <CampDetails activityData={activityDetails.activityData} />
           </div>
           <div className="activity-details-right-1">
             <div className="activity-content-1">

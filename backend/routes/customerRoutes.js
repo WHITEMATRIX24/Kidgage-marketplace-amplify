@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-require('dotenv').config() // add environments variable to prcess.env
-const {google} = require('googleapis');
+require("dotenv").config(); // add environments variable to prcess.env
+const { google } = require("googleapis");
 const Customer = require("../models/Customer"); // Import the Customer model
 const crypto = require("crypto");
-let otpStore = {};
 const nodemailer = require("nodemailer");
+
+let otpStore = {};
 const transporter = nodemailer.createTransport({
   host: "smtp.zoho.com",
   port: 465, // Use 587 for TLS
@@ -15,6 +16,7 @@ const transporter = nodemailer.createTransport({
     pass: "t0zHp1RBgsmX", // Your Zoho Mail password or app password
   },
 });
+
 router.post("/send-otp", async (req, res) => {
   console.log(req.body);
   const { email } = req.body;
@@ -31,7 +33,7 @@ router.post("/send-otp", async (req, res) => {
       return res.status(200).json({
         message: "You are already registered. Click Continue.",
         alreadyRegistered: true,
-        customer:existingCustomer
+        customer: existingCustomer,
       });
     }
 
@@ -99,9 +101,10 @@ router.post("/verify-otp", async (req, res) => {
       }
 
       // OTP verification successful
-      return res
-        .status(200)
-        .json({ message: "OTP verified, email registered", customer:customer });
+      return res.status(200).json({
+        message: "OTP verified, email registered",
+        customer: customer,
+      });
     } catch (error) {
       console.error("Error inserting customer:", error);
       return res.status(500).json({ message: "Server error" });
@@ -159,19 +162,46 @@ router.post("/get-existing-user", async (req, res) => {
     let customer = await Customer.findOne({ email: email });
 
     if (customer) {
-      res
-        .status(200)
-        .json({
-          code: "200",
-          message: "Login Successfull.",
-          customer: customer,
-        });
+      res.status(200).json({
+        code: "200",
+        message: "Login Successfull.",
+        customer: customer,
+      });
     } else {
       res.status(205).json({ code: "205", message: "User does not exist" });
     }
   } catch (error) {
     console.error("Error inserting customer:", error);
     return res.status(500).json({ message: "Server error" });
+  }
+});
+
+// booking controller
+router.post("/book-course/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const bookingData = req.body;
+
+    const { nanoid } = await import("nanoid");
+    const bookingId = nanoid(5);
+
+    const finalBookingData = {
+      bookingId,
+      ...bookingData,
+      status: false,
+    };
+
+    const savedBookingData = await Customer.findByIdAndUpdate(
+      userId,
+      {
+        $push: { bookings: finalBookingData },
+      },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Booked sucessfully", finalBookingData });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error });
   }
 });
 

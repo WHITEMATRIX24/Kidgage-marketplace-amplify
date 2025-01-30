@@ -21,10 +21,6 @@ function SignInPage() {
 
   const [email, setEmail] = useState("");
 
-  useEffect(() => {
-    sessionStorage.removeItem("user");
-  });
-
   const handleContinue = async () => {
     sessionStorage.removeItem("user");
 

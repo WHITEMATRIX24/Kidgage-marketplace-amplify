@@ -5,10 +5,12 @@ import "./OrderSummeryPage.css";
 import { useNavigate } from "react-router";
 import { SelectedCourseContext } from "../../context/courseContext";
 import { BookingCourseContext } from "../../context/bookingContext";
+import { addBokkingApi } from "../../services/allApis";
 function OrderSummeryPage2() {
   const navigate = useNavigate();
   const { selectedCourseData } = useContext(SelectedCourseContext);
-  const { bookingCourseData } = useContext(BookingCourseContext);
+  const { bookingCourseData, setCourseBookingData } =
+    useContext(BookingCourseContext);
   const [selectedCourse, setSelectedCourse] = useState(
     selectedCourseData || {}
   );
@@ -20,13 +22,27 @@ function OrderSummeryPage2() {
 
   //   payment method check
   const handleCheckPaymentMethod = (e) => {
-    if (e.target.value === selectedPaymentMethod) {
-      return setSelectedPaymentMethod("");
-    }
     setSelectedPaymentMethod(e.target.value);
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
+    const userData = JSON.parse(sessionStorage.getItem("user"));
+
+    const finalBookingData = {
+      bookingDate: new Date().toLocaleString(),
+      paymentDetails: {
+        isPaid: false,
+        paymentMethod: selectedPaymentMethod,
+      },
+      ...bookingData,
+    };
+
+    const response = await addBokkingApi({
+      userId: userData?._id,
+      bookingDetails: finalBookingData,
+    });
+
+    if (response) setCourseBookingData(response.finalBookingData);
     navigate("/thankyou");
   };
 
@@ -58,7 +74,7 @@ function OrderSummeryPage2() {
                 <h2 className="fw-bold">{bookingData.courseName}</h2>
                 <h6>{bookingData.providedAcademy}</h6>
               </div>
-              {/* <div className="mt-2 mb-2  mx-5 py-1 px-2 d-flex align-items-center justify-content-between input-container border rounded-4">
+              <div className="mt-2 mb-2  mx-5 py-1 px-2 d-flex align-items-center justify-content-between input-container border rounded-4">
                 <img
                   src="http://www.skipcash-portal.com/img/skipcash-logo.png"
                   alt=""
@@ -67,9 +83,10 @@ function OrderSummeryPage2() {
                 />
                 <input
                   type="radio"
-                  name="paymentMethod"
+                  name="payment-method"
                   className="order-checkbox"
                   style={{ width: "20px", height: "20px" }}
+                  disabled
                 />
               </div>
               <div className="mt-2 mb-2 mx-5 py-1 px-2  d-flex align-items-center justify-content-between input-container border rounded-4">
@@ -84,8 +101,9 @@ function OrderSummeryPage2() {
                 </div>
                 <input
                   type="radio"
-                  name="paymentMethod"
+                  name="payment-method"
                   className="order-checkbox"
+                  disabled
                   style={{ width: "20px", height: "20px" }}
                 />
               </div>
@@ -101,11 +119,12 @@ function OrderSummeryPage2() {
                 </div>
                 <input
                   type="radio"
-                  name="paymentMethod"
+                  name="payment-method"
                   className="order-checkbox"
+                  disabled
                   style={{ width: "20px", height: "20px" }}
                 />
-              </div> */}
+              </div>
               <div className="mt-2 mb-3 mx-5 py-1 px-2  d-flex align-items-center justify-content-between input-container border rounded-4">
                 <div>
                   <img
@@ -118,8 +137,9 @@ function OrderSummeryPage2() {
                 </div>
                 <input
                   type="radio"
+                  name="payment-method"
                   value="cash-on-pay"
-                  onClick={handleCheckPaymentMethod}
+                  onChange={handleCheckPaymentMethod}
                   checked={selectedPaymentMethod === "cash-on-pay"}
                   className="order-checkbox"
                   style={{ width: "20px", height: "20px" }}
