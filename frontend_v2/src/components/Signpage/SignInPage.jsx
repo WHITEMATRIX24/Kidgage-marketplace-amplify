@@ -99,7 +99,7 @@ function SignInPage() {
     console.error("Login failed:", error);
   };
 
-  const login = useGoogleLogin({
+  const loginUsingGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       sessionStorage.removeItem("user");
       let access_token = tokenResponse.access_token;
@@ -130,6 +130,13 @@ function SignInPage() {
 
     flow: "explicit", // explicut for retrieving data in backend
   });
+
+  const handleGooglelogin = () => {
+    const isUserLoggedIn = JSON.parse(sessionStorage.getItem("user"));
+
+    if (isUserLoggedIn) navigate("/signin-success");
+    else loginUsingGoogle();
+  };
 
   return (
     <>
@@ -210,7 +217,7 @@ function SignInPage() {
                 </div>
                 <div className="d-flex align-items-center justify-content-center flex-column mb-1 signin-btn-container">
                   <button
-                    onClick={() => login()}
+                    onClick={() => handleGooglelogin()}
                     style={{ backgroundColor: "#D0D0D0" }}
                     className="signin-btn border rounded-5 w-75  fw-bold  bg-transparent hide-on-mobile"
                   >
