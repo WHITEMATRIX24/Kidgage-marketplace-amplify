@@ -2,6 +2,7 @@ import "./App.css";
 import OrderSummeryPage2 from "./components/OrderSummaryPage/OrderSummeryPage2";
 import SignInOtp from "./components/SignInOtp/SignInOtp";
 import SignInPage from "./components/Signpage/SignInPage";
+import MyBooking from "./pages/AcademyDetails/MyBookingsPage/MyBookings";
 import ActivityPage from "./pages/Activity/Activity";
 import ActivityDetails1 from "./pages/ActivityDetails/ActivityDetails1";
 import ContactForm from "./pages/ContactForm/ContactForm";
@@ -9,6 +10,7 @@ import Detailedblog from "./pages/DetailedBlog/detailedblog";
 import EventDetails from "./pages/EventDetails/EventDetails";
 import KidgageNews from "./pages/KidgageNews/KidgageNews";
 import Landing from "./pages/landing/landing";
+
 import SearchResults from "./pages/SearchResults/searchResults";
 import SigninSuccess from "./pages/SigninSuccess/SigninSuccess";
 import PrivacyPolicy from "./pages/TermsAndConditions/PrivacyPolicy";

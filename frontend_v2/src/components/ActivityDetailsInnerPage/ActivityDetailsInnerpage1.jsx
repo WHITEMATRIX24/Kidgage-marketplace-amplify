@@ -38,10 +38,16 @@ function ActivityDetailsInnerpage1({ activityData }) {
   });
   const [coustomData, setCoustomData] = useState([]);
   const [courseAvailableDays, setCourseAvailableDays] = useState([]);
-
+  const [selectedProviderId, setSelectedProviderId] = useState(null);
   const openCalendar = () => setIsCalendarVisible(true);
   const closeCalendar = () => setIsCalendarVisible(false);
-  const openAcademyDetails = () => setAcademyVisible(true);
+  const openAcademyDetails = () => {
+    setSelectedProviderId(activityData?.providerDetails?._id);
+    // Store providerId
+    setAcademyVisible(true);
+    console.log("id pased", selectedProviderId);
+  };
+
   const closeAcademyDetails = () => setAcademyVisible(false);
   const handleContinue = () => {
     if (campDurationSelected === null) return;
@@ -147,12 +153,11 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     Seat Details and More options
                   </Card.Text>
                   <button
-                    className={`border-0 mb-1 rounded-3 ${
-                      campDurationSelected ===
-                      `${courseType.duration}${courseType.durationUnit}`
+                    className={`border-0 mb-1 rounded-3 ${campDurationSelected ===
+                        `${courseType.duration}${courseType.durationUnit}`
                         ? "camp-duration-selected-btn"
                         : "card-btn"
-                    }`}
+                      }`}
                     onClick={() =>
                       handleSelectCoursePackeage(
                         activityData?.days,
@@ -167,7 +172,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     }
                   >
                     {campDurationSelected ===
-                    `${courseType.duration}${courseType.durationUnit}`
+                      `${courseType.duration}${courseType.durationUnit}`
                       ? "Selected"
                       : "Select"}
                   </button>
@@ -259,9 +264,8 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <p style={{ fontSize: "12px" }}>06 to 10</p>
                 </div>
                 <button
-                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
-                    campDurationSelected ? "activate-continue-btn" : ""
-                  }`}
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${campDurationSelected ? "activate-continue-btn" : ""
+                    }`}
                   onClick={handleContinue}
                 >
                   Continue
@@ -285,6 +289,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
           <AcademyDetails
             isVisible={isAcademyVisible}
             onClose={closeAcademyDetails}
+            providerId={selectedProviderId} // Pass providerId
           />
         )}
       </div>

@@ -1,21 +1,26 @@
 /* Style the scrollbar of the popup container */
 .content::-webkit-scrollbar {
-  width: 4px; /* Width of the vertical scrollbar */
+  width: 4px;
+  /* Width of the vertical scrollbar */
 }
+
 .popup-container::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Light gray track */
+  background: #f1f1f1;
+  /* Light gray track */
   border-radius: 10px;
 }
 
 /* Style the scrollbar thumb (the draggable part) */
 .content::-webkit-scrollbar-thumb {
-  background: #888; /* Gray thumb */
+  background: #888;
+  /* Gray thumb */
   border-radius: 10px;
 }
 
 /* Style the scrollbar thumb when it's hovered */
 .content::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Darker gray when hovered */
+  background: #555;
+  /* Darker gray when hovered */
 }
 
 
@@ -49,10 +54,11 @@ h4 {
 
 .academeyPopup-content {
   background-color: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  height: 600px;
 
 }
 
@@ -83,12 +89,15 @@ h4 {
 
 .content {
   padding: 20px;
+  height: 500px;
 }
 
 .blackImage {
   background-color: black;
   border-radius: 10px;
   display: flex;
+  width: 20px;
+  height: 20px;
   align-items: center;
   justify-content: center;
 }
@@ -98,7 +107,18 @@ h4 {
   border-radius: 10px;
   height: 100px;
   width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
+
+.certificateImage {
+  height: 100px;
+  width: 100px;
+  object-fit: fill;
+}
+
 
 .academyDownArrowButton {
   position: fixed;
@@ -134,10 +154,10 @@ h4 {
 .close-button:hover {
   color: #ff0000;
 }
+
 @media only screen and (max-width: 912px) {
   .academeyPopup-content {
-      width: 90%;
-      height: 90%;
+    width: 90%;
   }
 }
 
@@ -182,25 +202,60 @@ h4 {
 
 @media only screen and (max-width: 375px) {
   .academeyPopup-content {
-      width: 90%;
-      height: auto;
-      margin-left: 0px;
-    }
-  
+    width: 90%;
+    margin-left: 0px;
+  }
 
-  
-  .close-button{
+
+
+  .close-button {
     right: 0;
   }
+}
+
+@media only screen and (max-width: 430px) {
+  .academeyPopup-content {
+    width: 90%;
+    margin-left: 0px;
+  }
+
+  .content {
+    height: 450px !important;
+  }
+
+
+
+
+}
+
+@media only screen and (max-width: 360px) {
+  .academeyPopup-content {
+    height: 710px;
+  }
+
+  .content {
+    height: 550px !important;
+  }
+
+
 }
 
 
 
 @media only screen and (max-width: 1024px) and (min-width:1000px) {
-  
+
 
   .navbar h3 {
     font-size: 16px;
+  }
+
+  .academeyPopup-content {
+    height: 530px;
+    width: 60%;
+  }
+
+  .content {
+    height: 380px !important;
   }
 }
 
@@ -212,24 +267,30 @@ h4 {
 }
 
 @media only screen and (max-height: 740px) {
-  .academyDownArrowButton{
+  .academyDownArrowButton {
     bottom: 35px;
-  
+
   }
-  
+
 }
 
-@media only screen and (min-height: 1000px) {
- 
+@media only screen and (min-height: 1000px) and (max-height:1020px) {
+
   .academeyPopup-content {
-    height: auto;
     width: 60%;
   }
+
+  .content {
+    height: 460px !important;
+  }
 }
 
-@media only screen and (min-height: 500px)  and (max-height:720px){
-  
-  .content{
-    height: 450Px !important;
+@media only screen and (min-height: 710px) and (max-height:720px) {
+  .academeyPopup-content {
+    height: 650px;
+  }
+
+  .content {
+    height: 500Px !important;
   }
 }

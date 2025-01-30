@@ -196,7 +196,21 @@ export const getNewsDetailsByIdApi = async ({ newsId }) => {
   }
 };
 
+export const getProviderDetailsApi = async ({ providerId }) => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `/users/provider/${providerId}`,
+      apiMethod: "GET",
 
+    });
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(
+      `error in fetching provider details: ${error}`
+    );
+  }
+};
 export const getOtherNewsDetailsApi = async ({ newsId }) => {
   try {
     const response = await serverApiConfig({

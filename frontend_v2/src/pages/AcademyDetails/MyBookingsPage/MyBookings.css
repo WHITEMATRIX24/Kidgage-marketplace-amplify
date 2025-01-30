@@ -1,0 +1,94 @@
+.my-booking-container {
+    margin-top: 58px;
+}
+
+.my-booking-heading {
+    margin-bottom: 30px;
+}
+
+.my-booking-heading h1 {
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.my-booking-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+.booking-box {
+    min-width: 450px;
+    max-width: 500px;
+    height: 100px;
+    border: 1px solid rgba(208, 208, 208, 1);
+    border-radius: 15px;
+}
+
+.booking-content {
+    padding: 20px;
+}
+
+.booking-top-content {
+    color: rgba(208, 208, 208, 1);
+    margin-bottom: 0;
+}
+
+.booking-status-text {
+    color: green;
+}
+
+.booking-button-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.booking-button-btn {
+    width: 100px;
+    height: 36px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(253, 214, 135, 1);
+
+}
+
+.booking-text-content h3 {
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+}
+
+.booking-text-span {
+    font-weight: 900;
+}
+
+@media(max-width: 500px) {
+    .my-booking-container {
+        margin-top: 20px;
+    }
+
+    .my-booking-heading h1 {
+        font-size: 24px;
+    }
+
+    .my-booking-heading {
+        margin-bottom: 15px;
+    }
+
+    .booking-box {
+        max-width: 450px;
+        min-width: 350px;
+    }
+
+    .booking-text-content h3 {
+        font-weight: 500;
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .booking-text-span {
+        font-weight: 900;
+    }
+
+}

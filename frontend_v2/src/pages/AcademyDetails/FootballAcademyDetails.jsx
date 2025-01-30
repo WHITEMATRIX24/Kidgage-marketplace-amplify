@@ -4,14 +4,28 @@ import '../AcademyDetails/FootballAcademyDetails.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowRight, faArrowUp, faX } from "@fortawesome/free-solid-svg-icons"
 import { faFacebook, faInstagram, faSquareFacebook, faSquareWhatsapp, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { getProviderDetailsApi } from '../../services/allApis';
 
-function AcademyDetails({ isVisible, onClose }) {
+function AcademyDetails({ isVisible, onClose, providerId }) {
   const [isAcademyDetailsOpen, setIsAcademyDetailsOpen] = useState(false);
   const [position, setPosition] = useState(5); // The initial position of the div
   const [maxPosition, setMaxPosition] = useState(2)
+  const popupRef = useRef(null);
   const [ShowownArrow, setShowDownArrow] = useState(true)
-
+  const [provider, setProvider] = useState(null);
   //const maxPosition = -1200; // Maximum top position the content can reach
+  const getProviderInitialData = async () => {
+    console.log("Fetching provider details..."); // Debug log
+    try {
+      const data = await getProviderDetailsApi({ providerId });
+      console.log("API response:", data);
+      if (data) {
+        setProvider(data);
+      }
+    } catch (error) {
+      console.error("Error fetching provider data:", error);
+    }
+  };
 
   useEffect(() => {
 
@@ -45,7 +59,11 @@ function AcademyDetails({ isVisible, onClose }) {
     setShowDownArrow(true)
 
   };
-
+  useEffect(() => {
+    if (providerId) {
+      getProviderInitialData();
+    }
+  }, [isVisible, providerId]);
 
   const moveUp = () => {
     if (position > maxPosition) {
@@ -67,7 +85,7 @@ function AcademyDetails({ isVisible, onClose }) {
     }
   };
 
-  const popupRef = useRef(null); // Reference to the popup container
+  // Reference to the popup container
   const [downArrow, setDownArrow] = useState(true)
   const [upArrow, setUpArrow] = useState(false)
 
@@ -104,15 +122,15 @@ function AcademyDetails({ isVisible, onClose }) {
 
             <div className='row w-100 m-3'>
               <div className='col-3 col-lg-2  pe-md-0  '>
-                <img className='academyLogo ms-xx-5 ' src={logo} alt="" />
+                <img className='academyLogo ms-xx-5 ' src={provider?.logo || logo} alt="" />
               </div>
               <div className='col-9 col-lg-10 navText'>
                 <div className='row  ps-0'>
-                  <h1 className='text-start'>One football</h1>
+                  <h1 className='text-start'>{provider?.fullName}</h1>
                 </div>
 
                 <div className="row d-flex w-100">
-                  <div className='col-lg-6'> <h3 className='text-start '>Sports Organising LLP</h3></div>
+                  <div className='col-lg-6'> <h3 className='text-start '></h3></div>
                   <div className='socialMediaIcon col-lg-6'><div className='text-end'>
                     <button className='btn'><FontAwesomeIcon className='text-dark fs-xl' icon={faFacebook} /></button>
                     <button className='btn'><FontAwesomeIcon className='text-dark fs-xl' icon={faWhatsapp} /></button>
@@ -131,62 +149,53 @@ function AcademyDetails({ isVisible, onClose }) {
             style={{
               marginTop: `${position}px`,
               transition: 'margin-top 0.3s ease',
-              height: '600px', overflowY: 'scroll'
+              height: '440px', overflowY: 'scroll'
             }}
             ref={popupRef}
 
           >
-            <h3>Address:</h3>
-            <p className=''>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.</p>
+            <h3>About:</h3>
+            <p className=''>{provider?.description}</p>
             {/* highlights section */}
             <>
-              <h3 className='mb-3'>Highlights</h3>
-              <div className='row mt-2'>
-                <div className='col-2 '>
-                  <div className="blackImage px-2 py-3">
-                    <FontAwesomeIcon className='highlightIcon text-light' icon={faSquareFacebook} size="2xl" />
+              <h3 className='mb-3'>Amenities</h3>
+              {provider?.amenities && provider.amenities.length > 0 ? (
+                provider.amenities.map((amenity, index) => (
+                  <div className='row mt-2' key={index}>
+                    <div className='col-2'>
+                      <div className="blackImage">
+                        <FontAwesomeIcon className='highlightIcon text-light' icon={faFacebook} size="12px" />
+                      </div>
+                    </div>
+                    <div className="col-10">
+                      <h4>{amenity}</h4>
+                      <p>{amenity.description}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="col-10">
-                  <h4>Things to keep in mind</h4>
-                  <p>The stage is open for all forms of performative arts: Singing, Comedy, Storytelling, Poetry, etc.
-                    You will get 6 minutes to perform on stage.</p>
-                </div>
-              </div>
+                ))
+              ) : (
+                <p>No amenities available</p>
+              )}
               <div className='row mt-2'>
-                <div className='col-2'>
-                  <div className="blackImage px-2 py-3">
-                    <FontAwesomeIcon className='highlightIcon text-light' icon={faSquareFacebook} size="2xl" />
-                  </div>
-                </div>
-                <div className="col-10">
-                  <h4>Things to keep in mind</h4>
-                  <p>The stage is open for all forms of performative arts: Singing, Comedy, Storytelling, Poetry, etc.
-                    You will get 6 minutes to perform on stage.</p>
-                </div>
+
+
               </div>
-              <div className='row mt-2'>
-                <div className='col-2'>
-                  <div className="blackImage px-2 py-3">
-                    <FontAwesomeIcon className='highlightIcon text-light' icon={faSquareFacebook} size="2xl" />
-                  </div>
-                </div>
-                <div className="col-10">
-                  <h4>Things to keep in mind</h4>
-                  <p>The stage is open for all forms of performative arts: Singing, Comedy, Storytelling, Poetry, etc.
-                    You will get 6 minutes to perform on stage.</p>
-                </div>
-              </div>
+
             </>
             {/* certificate section */}
             <>
-              <h3 className='mt-4'>Certificates and license</h3>
-              <div className='row my-3 '>
-                <div className="col-md-1 m-1 certificateBoxes">
-                </div>
-                <div className="col-md-1 m-1 certificateBoxes"></div>
-                <div className="col-md-1 m-1 certificateBoxes"></div>
-                <div className="col-md-9"></div>
+              <h3 className='mt-4'>Certificates and Awards</h3>
+              <div className='row my-3'>
+                {provider?.awards && provider.awards.length > 0 ? (
+                  provider.awards.map((award, index) => (
+                    <div className="col-md-3 m-1 certificateBoxes" key={index}>
+                      <img src={award} alt={award.name} className="certificateImage" />
+                      <p className="text-center mt-2">{award.name}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No certificates available</p>
+                )}
               </div>
             </>
 

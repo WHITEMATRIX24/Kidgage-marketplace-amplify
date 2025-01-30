@@ -7,12 +7,13 @@ import {
 } from "../../services/allApis";
 import "./detailedBlog.css";
 import { handleShare } from "../../utils/share";
-
+import { useNavigate } from "react-router";
 const Detailedblog = () => {
   const [newsDetails, setNewsDetails] = useState(null);
   const { newsId } = useParams();
   const [otherNews, setOtherNews] = useState([]);
   console.log("newsId:", newsId);
+  const navigate = useNavigate();
   const fetchNewsDetails = async () => {
     try {
       console.log({ newsId });
@@ -50,6 +51,9 @@ const Detailedblog = () => {
       console.log("News ID is not available!");
     }
   }, [newsId]);
+  const navigateToDetailedNews = (newsId) => {
+    navigate(`/detailed-blog/${newsId}`);
+  };
   if (!newsDetails) return <p>Loading...</p>;
   return (
     <div className="detailedblog-layout">
@@ -130,7 +134,7 @@ const Detailedblog = () => {
           </div>
           <div className="detailedblog-more-card-container">
             {otherNews.map((news) => (
-              <div className="detailedblog-card" key={news._id}>
+              <div className="detailedblog-card" key={news._id} onClick={() => navigateToDetailedNews(news._id)}>
                 <div className="detailedblog-card-image">
                   <img src={news.image} alt={news.title} />
                 </div>
