@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import '../ProviderForm/ProviderJoining.css'
+import '../ProviderJoiningForm/ProviderJoining.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router';
 
 function ProviderJoiningForm() {
     const [formData, setFormData] = useState({
@@ -256,19 +257,23 @@ function ProviderJoiningForm() {
                         </div>
                         <div className="row w-100 p-2 p-lg-0 buttonDiv d-flex align-items-center justify-content-center" >
                             <div className="col-md-7 d-flex align-items-center justify-content-center">
-                                <div className="checkbox-container mt- d-flex align-items-center justify-content-center">
-                                    <input
-                                        type="checkbox"
-                                        id="terms"
-                                        name="acceptedTerms"
-                                        checked={formData.acceptedTerms}
-                                        onChange={handleChange}
-                                    />
-                                    <label className='ms-2 termsText' htmlFor="terms">I agree that all provided information is correct for administrators' verification.</label>
+                                <div className="checkbox-container  d-flex align-items-center justify-content-center flex-column">
+                                   <div className='d-flex align-items-center justify-content-center'>
+                                        <input
+                                            type="checkbox"
+                                            id="terms"
+                                            name="acceptedTerms"
+                                            checked={formData.acceptedTerms}
+                                            onChange={handleChange}
+                                        />
+                                        <label className='ms-2 termsText' htmlFor="terms">I agree that all provided information is correct for administrators' verification.</label>
+                                   </div>
+                                    
+                                    <Link className='termsText' to={'privacy-policy'}>View Privacy Policy</Link>
                                 </div>
                             </div>
-                            <div className="col-md-5 px-0   d-flex align-items-center justify-content-center">
-                                <button onClick={handleSubmit} className='continueButton '>Continue</button>
+                            <div className="col-md-5 px-0 d-flex " style={{height:'60px'}}>
+                                <button onClick={handleSubmit} className='continueButton mb-1'>Continue</button>
                             </div>
 
                         </div>
