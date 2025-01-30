@@ -1,107 +1,206 @@
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import './OrderSummeryPage.css'
-import { useNavigate } from 'react-router'
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useState } from "react";
+import "./OrderSummeryPage.css";
+import { useNavigate } from "react-router";
+import { SelectedCourseContext } from "../../context/courseContext";
+import { BookingCourseContext } from "../../context/bookingContext";
 function OrderSummeryPage2() {
-    const navigate = useNavigate();
-    const handleContinue = () => {
-        navigate('/thankyou');
+  const navigate = useNavigate();
+  const { selectedCourseData } = useContext(SelectedCourseContext);
+  const { bookingCourseData } = useContext(BookingCourseContext);
+  const [selectedCourse, setSelectedCourse] = useState(
+    selectedCourseData || {}
+  );
+  const [bookingData, setBookingData] = useState(bookingCourseData || {});
+  const [totalFee, setTotalFee] = useState(
+    bookingData.courseDuration.fee || ""
+  );
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+
+  //   payment method check
+  const handleCheckPaymentMethod = (e) => {
+    if (e.target.value === selectedPaymentMethod) {
+      return setSelectedPaymentMethod("");
     }
-    return (
-        <>
-            <div className=" activity-details-row-1">
-                <div className="activity-details-left-1">
-                    <div className='hide-on-mobile'>
-                        <div className='activity-img-container-1'>
-                            <img className='activity-image-1' src="https://s3-alpha-sig.figma.com/img/805d/1f6b/b81629c19ca3ebeb8dc7604d3083c71e?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwvGJXWfoANxMwH~BIlADVx5EXYX9w03x8wf6yE4BXnaqNKFmBA3O0t0rFxCZGih-K7spSlcNcHlB9Z5Q6jK0wSw3QkAw0uLtyLnBsYlgJ0-yoapBpG7b-enzj-3x0kaWHVpluj2u6K5CD~c3gfa9P9TbJVUDlC7-D8cnFbYPP-fes89dtRUVLy0OroGlEBaB8d19ihEMkG7p4MbG74fBfCxSweJZ8BYrokowK2aYG1G0UBW67ChIn8bbBYS1Qm8Sp54v02zSHR2FW3ttFamqNNP7NrW7dfiL8zMLOVOdcnJOloSSNDgMTZKmPvMa2fWWOkp95S7zuo57PcTi6bCuA__" alt="" />
-                        </div>
-                        <div className='activity-btn-container-1'>
-                            {/* <button className='w-100 activity-button text-start rounded-4' >About This Activities</button>        */}
-                            <button className='text-start activity-button-1' >About This Activities</button>
-                            <FontAwesomeIcon className='icon-arrow-1' icon={faArrowRight} />
-                        </div>
-                    </div>
-                </div>
-                <div className="activity-details-rigth-1">
-                    <div className='rounded-4 activity-content-1 ' >
-                        <div className=' w-100'>
-                            <div className='signIn-heading fw-bold'>
-                                <h2 className='fw-bold'>Football Camp</h2>
-                                <h6>Organised by Aspire Academy</h6>
+    setSelectedPaymentMethod(e.target.value);
+  };
 
-                            </div>
-                            <div className='mt-2 mb-2  mx-5 py-1 px-2 d-flex align-items-center justify-content-between input-container border rounded-4'>
-                                <img src="http://www.skipcash-portal.com/img/skipcash-logo.png" alt="" style={{ width: '80px', height: '30px' }} className='order-image' />
-                                <input type="radio" name="paymentMethod" className='order-checkbox' style={{ width: '20px', height: '20px' }} />
-                            </div>
-                            <div className='mt-2 mb-2 mx-5 py-1 px-2  d-flex align-items-center justify-content-between input-container border rounded-4'>
-                                <div>
-                                    <img src="https://www.pngmart.com/files/22/Debit-Card-PNG-Transparent.png" alt="" style={{ width: '60px', height: '30px' }} className='order-image me-3' />
-                                    Debit Card
-                                </div>
-                                <input type="radio" name="paymentMethod" className='order-checkbox' style={{ width: '20px', height: '20px' }} />
-                            </div>
-                            <div className='mt-2 mb-2 mx-5 py-1 px-2  d-flex align-items-center justify-content-between input-container border rounded-4'>
-                                <div>
-                                    <img src="https://www.pngplay.com/wp-content/uploads/7/Debit-Card-No-Background.png" alt="" style={{ width: '60px', height: '30px' }} className='order-image me-3' />
-                                    Credit Card
-                                </div>
-                                <input type="radio" name="paymentMethod" className='order-checkbox' style={{ width: '20px', height: '20px' }} />
-                            </div>
-                            <div className='mt-2 mb-3 mx-5 py-1 px-2  d-flex align-items-center justify-content-between input-container border rounded-4'>
-                                <div>
-                                    <img src="http://clipart-library.com/images_k/cash-icon-transparent/cash-icon-transparent-19.png" alt="" style={{ width: '49px', height: '34px' }} className='order-image me-4' />
-                                    Cash on pay
-                                </div>
-                                <input type="radio" name="paymentMethod" className='order-checkbox' style={{ width: '20px', height: '20px' }} />
-                            </div>
+  const handleContinue = () => {
+    navigate("/thankyou");
+  };
 
-
-
-                            <div className='line-seperator-order-summary my-5'></div>
-
-                            <div className='border rounded mt-2 p-1 map-box  '>
-                                <div style={{}} className='mx-3 mt-2'>
-                                    <p className='fw-bold' style={{ fontSize: '18px' }}> Order Summary</p>
-                                    <div className='d-flex justify-content-between ' style={{ fontSize: '18px', lineHeight: '10px' }}>
-                                        <p>1 Month Pass</p>
-                                        <p>QAR 157.50</p>
-                                    </div>
-                                    <div className='d-flex justify-content-between' style={{ fontSize: '18px', lineHeight: '8px' }}>
-                                        <p>Tax</p>
-                                        <p className='fw-bold'>QAR 157.50</p>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div className='d-flex align-items-centre justify-content-between border rounded-3  age-box  mt-3 d-none d-md-flex '>
-                                <div className=' age-box-content  '>
-                                    <p className='fw-bold' style={{ fontSize: '16px' }}>Total:199</p>
-                                    <p style={{ fontSize: '13px' }}>Today will start</p>
-                                </div>
-                                <button style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} className=' ctn-btn border-0  m-1 fw-bold' onClick={handleContinue}>Continue</button>
-                            </div>
-                            <div className='checkout-container'>
-                                <div className='d-flex align-items-centre justify-content-between border rounded-3  age-box '>
-                                    <div className=' age-box-content '>
-                                        <p className='fw-bold' style={{ fontSize: '16px' }}>QAR 199:</p>
-                                        <p style={{ fontSize: '13px' }}>Today will start</p>
-                                    </div>
-                                    <button className=' rounded-4 ctn-btn border-0 w-50 m-1 fw-bold' style={{ backgroundImage: 'linear-gradient(to right,#FDD687, #F5A691)', width: '230px', height: '50px' }} onClick={handleContinue}>Checkout</button>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
+  return (
+    <>
+      <div className=" activity-details-row-1">
+        <div className="activity-details-left-1">
+          <div className="hide-on-mobile">
+            <div className="activity-img-container-1">
+              <img
+                className="activity-image-1"
+                src={selectedCourse.images[0]}
+                alt=""
+              />
             </div>
+            <div className="activity-btn-container-1">
+              {/* <button className='w-100 activity-button text-start rounded-4' >About This Activities</button>        */}
+              <button className="text-start activity-button-1">
+                About This Activities
+              </button>
+              <FontAwesomeIcon className="icon-arrow-1" icon={faArrowRight} />
+            </div>
+          </div>
+        </div>
+        <div className="activity-details-rigth-1">
+          <div className="rounded-4 activity-content-1 ">
+            <div className=" w-100">
+              <div className="signIn-heading fw-bold">
+                <h2 className="fw-bold">{bookingData.courseName}</h2>
+                <h6>{bookingData.providedAcademy}</h6>
+              </div>
+              {/* <div className="mt-2 mb-2  mx-5 py-1 px-2 d-flex align-items-center justify-content-between input-container border rounded-4">
+                <img
+                  src="http://www.skipcash-portal.com/img/skipcash-logo.png"
+                  alt=""
+                  style={{ width: "80px", height: "30px" }}
+                  className="order-image"
+                />
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  className="order-checkbox"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </div>
+              <div className="mt-2 mb-2 mx-5 py-1 px-2  d-flex align-items-center justify-content-between input-container border rounded-4">
+                <div>
+                  <img
+                    src="https://www.pngmart.com/files/22/Debit-Card-PNG-Transparent.png"
+                    alt=""
+                    style={{ width: "60px", height: "30px" }}
+                    className="order-image me-3"
+                  />
+                  Debit Card
+                </div>
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  className="order-checkbox"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </div>
+              <div className="mt-2 mb-2 mx-5 py-1 px-2  d-flex align-items-center justify-content-between input-container border rounded-4">
+                <div>
+                  <img
+                    src="https://www.pngplay.com/wp-content/uploads/7/Debit-Card-No-Background.png"
+                    alt=""
+                    style={{ width: "60px", height: "30px" }}
+                    className="order-image me-3"
+                  />
+                  Credit Card
+                </div>
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  className="order-checkbox"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </div> */}
+              <div className="mt-2 mb-3 mx-5 py-1 px-2  d-flex align-items-center justify-content-between input-container border rounded-4">
+                <div>
+                  <img
+                    src="http://clipart-library.com/images_k/cash-icon-transparent/cash-icon-transparent-19.png"
+                    alt=""
+                    style={{ width: "49px", height: "34px" }}
+                    className="order-image me-4"
+                  />
+                  Cash on pay
+                </div>
+                <input
+                  type="radio"
+                  value="cash-on-pay"
+                  onClick={handleCheckPaymentMethod}
+                  checked={selectedPaymentMethod === "cash-on-pay"}
+                  className="order-checkbox"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </div>
 
-        </>
-    )
+              <div className="line-seperator-order-summary my-5"></div>
+
+              <div className="border rounded mt-2 p-1 map-box  ">
+                <div style={{}} className="mx-3 mt-2">
+                  <p className="fw-bold" style={{ fontSize: "18px" }}>
+                    {" "}
+                    Order Summary
+                  </p>
+                  <div
+                    className="d-flex justify-content-between "
+                    style={{ fontSize: "18px", lineHeight: "10px" }}
+                  >
+                    <p>{`${bookingData.courseDuration.duration} ${bookingData.courseDuration.durationUnit} Pass`}</p>
+                    <p className="fw-bold">{`QAR ${bookingData.courseDuration.fee}`}</p>
+                  </div>
+                  <div
+                    className="d-flex justify-content-between"
+                    style={{ fontSize: "18px", lineHeight: "8px" }}
+                  >
+                    <p>Tax</p>
+                    <p className="fw-bold">QAR 00.00</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box  mt-3 d-none d-md-flex ">
+                <div className=" age-box-content  ">
+                  <p className="fw-bold" style={{ fontSize: "16px" }}>
+                    {`Total:${totalFee} QAR`}
+                  </p>
+                  <p style={{ fontSize: "13px" }}>Today will start</p>
+                </div>
+                <button
+                  style={{
+                    backgroundImage: selectedPaymentMethod
+                      ? "linear-gradient(to right, #FDD687, #F5A691)"
+                      : "none",
+                    backgroundColor: selectedPaymentMethod ? "none" : "#D0D0D0",
+                    width: "230px",
+                    height: "50px",
+                  }}
+                  className=" ctn-btn border-0  m-1 fw-bold"
+                  onClick={handleContinue}
+                >
+                  Continue
+                </button>
+              </div>
+              <div className="checkout-container">
+                <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
+                  <div className=" age-box-content ">
+                    <p className="fw-bold" style={{ fontSize: "16px" }}>
+                      QAR 199:
+                    </p>
+                    <p style={{ fontSize: "13px" }}>Today will start</p>
+                  </div>
+                  <button
+                    className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right,#FDD687, #F5A691)",
+                      width: "230px",
+                      height: "50px",
+                    }}
+                    onClick={handleContinue}
+                  >
+                    Checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default OrderSummeryPage2
+export default OrderSummeryPage2;

@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 // import ActivityDetailsInnerpage1 from '../../components/ActivityDetailsInnerPage/ActivityDetailsInnerpage1';
 import "./SigninSuccess.css";
 import { Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { BookingCourseContext } from "../../context/bookingContext";
+import { SelectedCourseContext } from "../../context/courseContext";
+import { findFirstDate, formatTimeToString } from "../../utils/dateFormater";
+import { ageFormatter } from "../../utils/ageFormatter";
 
 function SigninSuccess() {
   const navigate = useNavigate();
+  const { bookingCourseData } = useContext(BookingCourseContext);
+  const { selectedCourseData } = useContext(SelectedCourseContext);
+
+  const [selectedCourse, setSelectedCourse] = useState(
+    selectedCourseData || {}
+  );
+  const [bookingDetails, setBBookingDetails] = useState(
+    bookingCourseData || {}
+  );
+  const [totalFees, setTotalFees] = useState(bookingDetails.courseDuration.fee);
+  console.log(selectedCourse);
+  console.log(bookingDetails);
+
   const handleContinue = () => {
     navigate("/order-summary");
   };
@@ -18,7 +35,7 @@ function SigninSuccess() {
           <div className="activity-img-container-1">
             <img
               className="activity-image-1"
-              src="https://s3-alpha-sig.figma.com/img/805d/1f6b/b81629c19ca3ebeb8dc7604d3083c71e?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwvGJXWfoANxMwH~BIlADVx5EXYX9w03x8wf6yE4BXnaqNKFmBA3O0t0rFxCZGih-K7spSlcNcHlB9Z5Q6jK0wSw3QkAw0uLtyLnBsYlgJ0-yoapBpG7b-enzj-3x0kaWHVpluj2u6K5CD~c3gfa9P9TbJVUDlC7-D8cnFbYPP-fes89dtRUVLy0OroGlEBaB8d19ihEMkG7p4MbG74fBfCxSweJZ8BYrokowK2aYG1G0UBW67ChIn8bbBYS1Qm8Sp54v02zSHR2FW3ttFamqNNP7NrW7dfiL8zMLOVOdcnJOloSSNDgMTZKmPvMa2fWWOkp95S7zuo57PcTi6bCuA__"
+              src={selectedCourse.images[0]}
               alt="Activity"
             />
           </div>
@@ -43,22 +60,32 @@ function SigninSuccess() {
             <Row>
               <Col sm={12} md={6} lg={4} className="w-100">
                 <div className="signinSuccessactivity-heading fw-bold mt-3 mt-xl-0 mt-xl-3">
-                  <h2 className="campTitle">Evening Football Camp</h2>
+                  <h2 className="campTitle">{bookingDetails.courseName}</h2>
                   <h6 className="campSubTitle">
-                    Organised by ASPIRE SPORTS ACADEMY
+                    {`Organised by ${bookingDetails.providedAcademy}`}
                   </h6>
                 </div>
               </Col>
             </Row>
             <div className="row signinSuccessCampDetails ms-0 ms-xl-3">
-              <h3 className="campTitle3">1 Month pass </h3>
-              <p>
-                Economy, premium economy, business, and first class are the main
-                seat classes. Economy is the most common and, Economy, premium
-                economy,
+              <h3 className="campTitle3">{`${bookingDetails.courseDuration.duration} ${bookingDetails.courseDuration.durationUnit} pass `}</h3>
+              <p className="m-0">
+                {`Working days: ${selectedCourse?.days?.map(
+                  (day) => ` ${day} `
+                )}`}
               </p>
-              <h4>Time: 9:00am to 11:00am</h4>
-              <p>Age Limt: 06 to 10</p>
+              <p>{`Starting day: ${findFirstDate(
+                bookingDetails.courseDuration.bookedDates
+              )}`}</p>
+              <h4>{`Time: ${formatTimeToString(
+                bookingDetails.courseDuration.selectedTimeSlot || "06:00-07:00"
+              )}`}</h4>
+              <p>{`Age Limt: ${selectedCourse.ageGroup.map((ages) =>
+                ageFormatter({
+                  rawStartAge: ages.ageStart,
+                  rawEndAge: ages.ageEnd,
+                })
+              )}`}</p>
             </div>
             <div className="row signinSuccessPromoCodeDetails ms-0 ms-xl-3 mt-3">
               <div className="signinSuccessInputBoxContainer ">
@@ -66,6 +93,7 @@ function SigninSuccess() {
                   className="form-control signinSuccessPromoCode"
                   placeholder="Promo Code"
                   type="text"
+                  disabled
                 />
                 <button className="applyButton">Appy</button>
               </div>
@@ -74,10 +102,10 @@ function SigninSuccess() {
               <h3 className="orderTitle">Order Summary</h3>
               <div className="row mt-1 mt-md-0">
                 <div className="col-6">
-                  <h5 className="order">1 Month pass</h5>
+                  <h5 className="order">{`${bookingDetails.courseDuration.duration} ${bookingDetails.courseDuration.durationUnit} pass `}</h5>
                 </div>
                 <div className="col-6 text-end">
-                  <h5 className="order">QAR 157.50</h5>
+                  <h5 className="order">{` ${bookingDetails.courseDuration.fee}`}</h5>
                 </div>
               </div>
               <div className="row mt-1 mt-md-0">
@@ -86,7 +114,7 @@ function SigninSuccess() {
                 </div>
                 <div className="col-6 text-end">
                   <h4 className="order">
-                    <b>QAR 15.50</b>
+                    <b>QAR 00.00</b>
                   </h4>
                 </div>
               </div>
@@ -94,7 +122,7 @@ function SigninSuccess() {
             <div className="signinSuccessFinalDetails ms-0 ms-xl-3 mt-3 mb-4">
               <div className="row">
                 <div className="col-6">
-                  <h3 className="total">Total 199</h3>
+                  <h3 className="total">{`Total ${totalFees}`}</h3>
                   <p className="font12">Today will start</p>
                 </div>
                 <div className="col-6 d-flex align-items-center justify-content-center">

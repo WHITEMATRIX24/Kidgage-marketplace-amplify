@@ -34,6 +34,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
     duration: null,
     durationUnit: null,
     noOfSessions: null,
+    fee: null,
   });
   const [coustomData, setCoustomData] = useState([]);
   const [courseAvailableDays, setCourseAvailableDays] = useState([]);
@@ -48,6 +49,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
       ...bookingCourseData,
       courseName: activityData.name,
       providedAcademy: activityData.providerDetails.fullName,
+      courseId: activityData._id,
     });
     navigate("/signin");
   };
@@ -60,14 +62,16 @@ function ActivityDetailsInnerpage1({ activityData }) {
     courseDuration,
     courseUnit,
     coustomData,
-    noOfSessions
+    noOfSessions,
+    fee
   ) => {
     if (
       courseDuration &&
       courseEndDate &&
       courseStartDate &&
       courseUnit &&
-      noOfSessions
+      noOfSessions &&
+      fee
     ) {
       setCalenderActivityData({
         startDate: courseStartDate,
@@ -75,6 +79,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
         duration: courseDuration,
         durationUnit: courseUnit,
         noOfSessions,
+        fee,
       });
     } else setCalenderActivityData(null);
 
@@ -155,8 +160,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
                         courseType?.endDate,
                         courseType?.duration,
                         courseType?.durationUnit,
-                        null,
-                        courseType?.noOfSessions
+                        [courseType],
+                        courseType?.noOfSessions,
+                        courseType?.fee
                       )
                     }
                   >
@@ -180,7 +186,8 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     null,
                     null,
                     null,
-                    activityData.courseDuration.slice(-2)
+                    activityData.courseDuration.slice(-2),
+                    null
                   )
                 }
               >

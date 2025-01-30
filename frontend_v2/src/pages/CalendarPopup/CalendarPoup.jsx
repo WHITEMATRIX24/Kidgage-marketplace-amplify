@@ -154,7 +154,7 @@ const CalendarPopup = ({
 
   // handle continue
   const handleContinue = () => {
-    const { duration, durationUnit, endDate, startDate, noOfSessions } =
+    const { duration, durationUnit, endDate, startDate, noOfSessions, fee } =
       selectedPackage;
     if (
       selectedDates.length <= 0 ||
@@ -163,7 +163,7 @@ const CalendarPopup = ({
       !startDate ||
       !endDate ||
       !noOfSessions ||
-      !selectedTimeSlot
+      !fee
     )
       return;
 
@@ -178,12 +178,12 @@ const CalendarPopup = ({
         bookedDates: selectedDates,
         noOfSessions,
         selectedTimeSlot,
+        fee,
       },
     });
     select_cnf_btn(`${duration}${durationUnit}`);
     onClose();
   };
-  console.log(selectedTimeSlot);
 
   useEffect(() => {
     if (selectedPackage) {
@@ -241,25 +241,25 @@ const CalendarPopup = ({
                 </button>
               </div>
             </div>
-            {!data && (
-              <div className="col-6">
-                <select
-                  className="package p-2 rounded"
-                  value={`${selectedPackage.duration}${selectedPackage.durationUnit}`}
-                  onChange={selectCoustomPackage}
-                >
-                  <option value="" disabled>
-                    Package
-                  </option>
-                  {coustomData?.map((coursePackage) => (
-                    <option
-                      value={`${coursePackage.duration}${coursePackage.durationUnit}`}
-                      key={coursePackage._id}
-                    >{`${coursePackage.duration} ${coursePackage.durationUnit}`}</option>
-                  ))}
-                </select>
-              </div>
-            )}
+            {/* {!data && ( */}
+            <div className="col-6">
+              <select
+                className="package p-2 rounded"
+                value={`${selectedPackage.duration}${selectedPackage.durationUnit}`}
+                onChange={selectCoustomPackage}
+              >
+                <option value="" disabled>
+                  Package
+                </option>
+                {coustomData?.map((coursePackage) => (
+                  <option
+                    value={`${coursePackage.duration}${coursePackage.durationUnit}`}
+                    key={coursePackage._id}
+                  >{`${coursePackage.duration} ${coursePackage.durationUnit}`}</option>
+                ))}
+              </select>
+            </div>
+            {/* )} */}
           </div>
           <div className="calendar-weekdays">
             {weekDays.map((day, index) => (
@@ -270,8 +270,8 @@ const CalendarPopup = ({
           </div>
           <div className="calendar-grid">{renderCalendar()}</div>
           <div className="row calendarButtons rounded mt-3 mx-2  px-1">
-            <div className="timeslotDropdown col-6 col-lg-5 p-1">
-              <select
+            <div className="timeslotDropdown col-6 col-lg-5 p-1 ps-2">
+              {/* <select
                 className="timeSlot p-2 rounded"
                 value={selectedTimeSlot}
                 onChange={(e) => setSelectedTimeSlot(e.target.value)}
@@ -287,8 +287,12 @@ const CalendarPopup = ({
               </select>
               <span className="dropdown-arrow">
                 <FontAwesomeIcon icon={faAngleUp} />
-              </span>{" "}
+              </span>{" "} */}
               {/* Custom up arrow */}
+              <h6 className="m-0 fw-bold fs-5">{`QRA ${
+                selectedPackage?.fee || ""
+              }`}</h6>
+              <p className="m-0">{`${selectedPackage?.noOfSessions} Sessions`}</p>
             </div>
             <div className="col-6 col-lg-7 p-1">
               <button
