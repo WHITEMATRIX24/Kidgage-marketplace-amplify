@@ -138,37 +138,36 @@ function CampDetails({ activityData }) {
               }}
               ref={popupRef}
             >
-              <h4 style={{ color: "black" }}>
+              <h4 style={{ color: "black", textAlign:'start' }}>
                 "Surprise! We’re back with a new location in Dubai
               </h4>
-              <p className="" style={{ color: "black" }}>
+              <p className="" style={{ color: "black", textAlign:'start'  }}>
                 {activityData.description}
               </p>
               {/* <p style={{ color: "black" }}>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
                                 Working in association with BFC Soccer Schools, our coaching philosophy targets the holistic development of the child while incorporating a true lifelong passion for the game. Our best players even get a chance win scholarships and scouted by the famous Bengaluru Football Club.</p> */}
               {/* things to keep in mind section */}
               <>
-                <h5 className="mb-3" style={{ color: "black" }}>
-                  Things to keep in mind:
-                </h5>
-                <div className="listWithHiphen ">
-                  <ul className="ps-0">
-                    {items.map((item, index) => (
-                      <li key={index}>- {item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </>
+                                <h5 className='mb-3' style={{ color: "black", textAlign:'start' }}>Things to keep in mind:</h5>
+                                <div className='listWithHiphen '>
+                                    <ul className='ps-0 text-start' >
+                                        {activityData?.thingstokeepinmind?.map((item, index) => (
+                                            <li key={index}>- {item.desc}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                            </>
               {/* FAQ's section */}
               <div className="FAQ">
-                <h3 className="mt-2" style={{ color: "black" }}>
+                <h5 className="mt-2 " style={{ color: "black",  textAlign:'start' }}>
                   FAQs
-                </h3>
+                </h5>
                 <div className="row  ">
                   {activityData.faq?.map((item) => (
                     <div className="col-md-6 mt-3">
-                      <p style={{ color: "black" }}>{item.question}</p>
-                      <h6 style={{ color: "black" }}>{item.answer} </h6>
+                      <p style={{ color: "black", textAlign:'start' }}>{item.question}</p>
+                      <h6 style={{ color: "black", textAlign:'start'  }}>{item.answer} </h6>
                     </div>
                   ))}
                 </div>

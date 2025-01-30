@@ -11,8 +11,10 @@ import CampDetails from "../CampDetails/CampDetails";
 import { BookingCourseContext } from "../../context/bookingContext";
 import { findFirstDate } from "../../utils/dateFormater";
 import { useNavigate } from "react-router";
+import { SelectedCourseContext } from "../../context/courseContext";
 
 function Thankyou() {
+  const { selectedCourseData } = useContext(SelectedCourseContext);
   const navigate = useNavigate();
   const { bookingCourseData } = useContext(BookingCourseContext);
   console.log(bookingCourseData);
@@ -81,12 +83,13 @@ function Thankyou() {
             </div>
           </div>
         </div>
-        <div className="thanksLeftAbout  mt-4 px-5">
+        {/* <div className="thanksLeftAbout  mt-4 px-5">
           <button className="arrowButton">
             <span className="ms-auto w-75">About This Activities</span>
           </button>
           <FontAwesomeIcon className="arrow" icon={faArrowRight} />
-        </div>
+        </div> */}
+        <CampDetails activityData={selectedCourseData}/>
       </div>
       <div className="activity-details-right-1">
         <div className="rightDivContent mt-4 mt-xl-0  ps-md-4 ">

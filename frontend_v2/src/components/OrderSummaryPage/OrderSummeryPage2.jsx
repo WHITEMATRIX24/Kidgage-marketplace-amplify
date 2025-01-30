@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { SelectedCourseContext } from "../../context/courseContext";
 import { BookingCourseContext } from "../../context/bookingContext";
 import { addBokkingApi } from "../../services/allApis";
+import CampDetails from "../../pages/CampDetails/CampDetails";
 function OrderSummeryPage2() {
   const navigate = useNavigate();
   const { selectedCourseData } = useContext(SelectedCourseContext);
@@ -58,13 +59,13 @@ function OrderSummeryPage2() {
                 alt=""
               />
             </div>
-            <div className="activity-btn-container-1">
-              {/* <button className='w-100 activity-button text-start rounded-4' >About This Activities</button>        */}
+            {/* <div className="activity-btn-container-1">
               <button className="text-start activity-button-1">
                 About This Activities
               </button>
               <FontAwesomeIcon className="icon-arrow-1" icon={faArrowRight} />
-            </div>
+            </div> */}
+            <CampDetails activityData={selectedCourse}/>
           </div>
         </div>
         <div className="activity-details-rigth-1">

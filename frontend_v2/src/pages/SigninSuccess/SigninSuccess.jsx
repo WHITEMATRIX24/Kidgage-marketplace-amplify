@@ -9,6 +9,7 @@ import { BookingCourseContext } from "../../context/bookingContext";
 import { SelectedCourseContext } from "../../context/courseContext";
 import { findFirstDate, formatTimeToString } from "../../utils/dateFormater";
 import { ageFormatter } from "../../utils/ageFormatter";
+import CampDetails from "../CampDetails/CampDetails";
 
 function SigninSuccess() {
   const navigate = useNavigate();
@@ -39,10 +40,11 @@ function SigninSuccess() {
               alt="Activity"
             />
           </div>
-          <div className="activity-btn-container-1">
+          {/* <div className="activity-btn-container-1">
             <button className="activity-button-1">About This Activity </button>
             <FontAwesomeIcon className="icon-arrow-1" icon={faArrowRight} />
-          </div>
+          </div> */}
+          <CampDetails activityData={selectedCourse}/>
         </div>
         <div className="activity-details-right-1 ">
           <div

@@ -10,6 +10,7 @@ import Detailedblog from "./pages/DetailedBlog/detailedblog";
 import EventDetails from "./pages/EventDetails/EventDetails";
 import KidgageNews from "./pages/KidgageNews/KidgageNews";
 import Landing from "./pages/landing/landing";
+import ProviderJoiningForm from "./pages/ProviderJoiningForm/ProviderJoiningForm";
 
 import SearchResults from "./pages/SearchResults/searchResults";
 import SigninSuccess from "./pages/SigninSuccess/SigninSuccess";
@@ -42,6 +43,9 @@ function App() {
           <Route path="/search" element={<SearchResults />} />
           <Route path="/event-details/:eventId" element={<EventDetails />} />
           <Route path="/detailed-blog/:newsId" element={<Detailedblog />} />
+          <Route path="/mybooking" element={<MyBooking />} />
+          <Route path="/provider-joining-form" element={<ProviderJoiningForm/>}/>
+
         </Route>
       </Routes>
     </>

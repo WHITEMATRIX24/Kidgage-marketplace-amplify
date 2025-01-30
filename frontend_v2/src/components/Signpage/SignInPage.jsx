@@ -158,7 +158,7 @@ function SignInPage() {
               </button>
               <FontAwesomeIcon className="icon-arrow" icon={faArrowRight} />
             </div> */}
-            <CampDetails />
+            <CampDetails activityData={selectedCourseData} />
           </div>
         </div>
         <div className="activity-details-right-1">
@@ -184,13 +184,13 @@ function SignInPage() {
                   className=" border rounded-4 d-flex align-items-center justify-content-between sign-up-btn-container"
                   style={{ width: "400px", height: "60px" }}
                 >
-                  <button className=" m-1 fw-bold sign-up-btn">
+                  <button className=" m-1 fw-bold sign-up-btn"  onClick={sendOtp}>
                     Sign Up
                     <FontAwesomeIcon
                       icon={faArrowRight}
                       style={{ color: "#ffff" }}
                       className="ms-3"
-                      onClick={sendOtp}
+                     
                     />
                   </button>
                   <button
