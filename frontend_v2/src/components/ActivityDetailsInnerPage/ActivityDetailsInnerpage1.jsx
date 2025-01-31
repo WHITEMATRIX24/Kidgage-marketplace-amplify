@@ -65,6 +65,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
       courseName: activityData.name,
       providedAcademy: activityData.providerDetails.fullName,
       courseId: activityData._id,
+      providerId: activityData.providerId,
     });
 
     setCourseAvailableDays(activityDays);

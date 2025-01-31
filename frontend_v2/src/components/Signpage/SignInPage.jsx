@@ -13,11 +13,15 @@ import {
 } from "../../services/allApis";
 import { userDataContext } from "../../context/LoginUserContext";
 import Swal from "sweetalert2";
+import useRefreshAlert from "../../hooks/useRefreshAlert";
 
 function SignInPage() {
+  useRefreshAlert();
   const { selectedCourseData } = useContext(SelectedCourseContext);
   const { userData, setUserData } = useContext(userDataContext);
   const navigate = useNavigate();
+  // if not data redirect
+  if (!selectedCourseData) return window.location.replace("/");
 
   const [email, setEmail] = useState("");
 
@@ -184,13 +188,15 @@ function SignInPage() {
                   className=" border rounded-4 d-flex align-items-center justify-content-between sign-up-btn-container"
                   style={{ width: "400px", height: "60px" }}
                 >
-                  <button className=" m-1 fw-bold sign-up-btn"  onClick={sendOtp}>
+                  <button
+                    className=" m-1 fw-bold sign-up-btn"
+                    onClick={sendOtp}
+                  >
                     Sign Up
                     <FontAwesomeIcon
                       icon={faArrowRight}
                       style={{ color: "#ffff" }}
                       className="ms-3"
-                     
                     />
                   </button>
                   <button

@@ -10,11 +10,17 @@ import { SelectedCourseContext } from "../../context/courseContext";
 import { findFirstDate, formatTimeToString } from "../../utils/dateFormater";
 import { ageFormatter } from "../../utils/ageFormatter";
 import CampDetails from "../CampDetails/CampDetails";
+import useRefreshAlert from "../../hooks/useRefreshAlert";
 
 function SigninSuccess() {
+  useRefreshAlert();
   const navigate = useNavigate();
   const { bookingCourseData } = useContext(BookingCourseContext);
   const { selectedCourseData } = useContext(SelectedCourseContext);
+
+  // if not data redirect
+  if (!bookingCourseData || !selectedCourseData)
+    return window.location.replace("/");
 
   const [selectedCourse, setSelectedCourse] = useState(
     selectedCourseData || {}
@@ -22,9 +28,9 @@ function SigninSuccess() {
   const [bookingDetails, setBBookingDetails] = useState(
     bookingCourseData || {}
   );
-  const [totalFees, setTotalFees] = useState(bookingDetails.courseDuration.fee);
-  console.log(selectedCourse);
-  console.log(bookingDetails);
+  const [totalFees, setTotalFees] = useState(
+    bookingDetails.courseDuration.fee || ""
+  );
 
   const handleContinue = () => {
     navigate("/order-summary");
@@ -44,7 +50,7 @@ function SigninSuccess() {
             <button className="activity-button-1">About This Activity </button>
             <FontAwesomeIcon className="icon-arrow-1" icon={faArrowRight} />
           </div> */}
-          <CampDetails activityData={selectedCourse}/>
+          <CampDetails activityData={selectedCourse} />
         </div>
         <div className="activity-details-right-1 ">
           <div

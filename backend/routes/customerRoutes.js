@@ -188,7 +188,7 @@ router.post("/book-course/:userId", async (req, res) => {
     const finalBookingData = {
       bookingId,
       ...bookingData,
-      status: false,
+      status: true,
     };
 
     const savedBookingData = await Customer.findByIdAndUpdate(
@@ -199,8 +199,41 @@ router.post("/book-course/:userId", async (req, res) => {
       { new: true }
     );
 
+    const providerData = await User.findById(finalBookingData.providerId);
+
+    // emailing
+    const customerMailOptions = {
+      from: "hello@kidgage.com",
+      to: savedBookingData.email,
+      subject: "Successfully booked the course",
+      text: `Hi ${savedBookingData.email},
+
+  You have successfully booked the course ${finalBookingData.courseName} provided by
+  ${finalBookingData.providerName} 
+
+  Thank you,  
+  The Kidgage Team`,
+    };
+
+    const providerMailOptions = {
+      from: "hello@kidgage.com",
+      to: providerData.email,
+      subject: "course booked by a kidgage user",
+      text: `Hi ${providerData.email},
+
+  A kidgage user has been successfully booked ${finalBookingData.courseName}
+
+  Thank you,  
+  The Kidgage Team`,
+    };
+
+    // await transporter.sendMail(customerMailOptions);
+    // await transporter.sendMail(providerMailOptions)
+
     res.status(200).json({ message: "Booked sucessfully", finalBookingData });
   } catch (error) {
+    console.log(error);
+
     res.status(500).json({ message: "Server Error", error });
   }
 });
@@ -211,16 +244,15 @@ router.get("/get-user-byid/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
 
-    const userData = await Customer.findOne({_id:userId});
-if(userData){
-  console.log(userData);
-  
-    res.status(200).json({ message: "UserExist", userData });}
-    else{
-      res.status(400).json({ message: "User Doesnot exist" });}
+    const userData = await Customer.findOne({ _id: userId });
+    if (userData) {
+      console.log(userData);
 
+      res.status(200).json({ message: "UserExist", userData });
+    } else {
+      res.status(400).json({ message: "User Doesnot exist" });
     }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({ message: "Server Error", error });
   }
 });

@@ -7,11 +7,20 @@ import { SelectedCourseContext } from "../../context/courseContext";
 import { BookingCourseContext } from "../../context/bookingContext";
 import { addBokkingApi } from "../../services/allApis";
 import CampDetails from "../../pages/CampDetails/CampDetails";
+import useRefreshAlert from "../../hooks/useRefreshAlert";
+import Swal from "sweetalert2";
+
 function OrderSummeryPage2() {
+  useRefreshAlert();
   const navigate = useNavigate();
   const { selectedCourseData } = useContext(SelectedCourseContext);
   const { bookingCourseData, setCourseBookingData } =
     useContext(BookingCourseContext);
+
+  // if not data redirect
+  if (!bookingCourseData || !selectedCourseData)
+    return window.location.replace("/");
+
   const [selectedCourse, setSelectedCourse] = useState(
     selectedCourseData || {}
   );
@@ -27,6 +36,7 @@ function OrderSummeryPage2() {
   };
 
   const handleContinue = async () => {
+    if (!selectedPaymentMethod) return;
     const userData = JSON.parse(sessionStorage.getItem("user"));
 
     const finalBookingData = {
@@ -42,8 +52,20 @@ function OrderSummeryPage2() {
       userId: userData?._id,
       bookingDetails: finalBookingData,
     });
+    console.log(response);
 
     if (response) setCourseBookingData(response.finalBookingData);
+
+    Swal.fire({
+      title: "Booking Success!",
+      text: "Congrats! You have successfully booked",
+      icon: "success",
+      confirmButtonColor: "#ACC29E",
+      customClass: {
+        popup: "custom-border-radius",
+      },
+    });
+
     navigate("/thankyou");
   };
 
@@ -65,7 +87,7 @@ function OrderSummeryPage2() {
               </button>
               <FontAwesomeIcon className="icon-arrow-1" icon={faArrowRight} />
             </div> */}
-            <CampDetails activityData={selectedCourse}/>
+            <CampDetails activityData={selectedCourse} />
           </div>
         </div>
         <div className="activity-details-rigth-1">
@@ -205,8 +227,12 @@ function OrderSummeryPage2() {
                   <button
                     className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"
                     style={{
-                      backgroundImage:
-                        "linear-gradient(to right,#FDD687, #F5A691)",
+                      backgroundImage: selectedPaymentMethod
+                        ? "linear-gradient(to right, #FDD687, #F5A691)"
+                        : "none",
+                      backgroundColor: selectedPaymentMethod
+                        ? "none"
+                        : "#D0D0D0",
                       width: "230px",
                       height: "50px",
                     }}
