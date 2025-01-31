@@ -205,4 +205,23 @@ router.post("/book-course/:userId", async (req, res) => {
   }
 });
 
+// get userBy UserId
+
+router.get("/get-user-byid/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const userData = await Customer.findOne({_id:userId});
+if(userData){
+  console.log(userData);
+  
+    res.status(200).json({ message: "UserExist", userData });}
+    else{
+      res.status(400).json({ message: "User Doesnot exist" });}
+
+    }
+  catch (error) {
+    res.status(500).json({ message: "Server Error", error });
+  }
+});
 module.exports = router;

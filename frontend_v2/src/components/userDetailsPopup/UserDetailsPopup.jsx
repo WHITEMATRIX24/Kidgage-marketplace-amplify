@@ -57,6 +57,11 @@ function UserDetailsPopup() {
         handleClose()
         navigate('/provider-joining-form')
     }
+
+    const handleBookingPageNavigation =()=>{
+        handleClose()
+        navigate('/mybooking')
+    }
     return (
         <>
             {!isLogin &&<h4 className="header-login" onClick={handleShow}>Login</h4>}
@@ -88,7 +93,7 @@ function UserDetailsPopup() {
     
                                         </div>
                                     </div>
-                                    <div className="booking-details">
+                                    <div className="booking-details" onClick={handleBookingPageNavigation}>
                                         <div className='profile-icon'>
                                             <img
                                                 src={profileIcon}
