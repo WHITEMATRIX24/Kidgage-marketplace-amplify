@@ -167,6 +167,22 @@ export const getExistingUserDetailsAPi = async (data) => {
     console.log(`133 error in Fetching User Details, error: ${error}`);
   }
 };
+//api to fetch customer details by id
+export const getExistingUserDetailsByIdAPi = async (data) => {
+  //console.log(data);
+
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `customers/get-user-byid/${data}`,
+      apiMethod: "GET",
+    });
+
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(`133 error in Fetching User Details, error: ${error}`);
+  }
+};
 export const getEventDetailsByIdApi = async ({ eventId }) => {
   try {
     const response = await serverApiConfig({
