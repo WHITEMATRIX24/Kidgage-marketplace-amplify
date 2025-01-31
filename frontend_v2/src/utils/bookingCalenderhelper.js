@@ -29,8 +29,6 @@ export const getSelectedDatedBasedOnPackageName = ({
   compareData,
 }) => {
   if (existingData && compareData) {
-    console.log(existingData);
-
     const { duration, durationUnit } = existingData;
     if (
       `${duration}${durationUnit}` ===

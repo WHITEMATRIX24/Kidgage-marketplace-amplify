@@ -13,6 +13,8 @@ import {
   getSelectedDatedBasedOnPackageName,
   getTheinitialSelectedPackage,
 } from "../../utils/bookingCalenderhelper";
+import { SelectedCourseContext } from "../../context/courseContext";
+import { ageFormatter } from "../../utils/ageFormatter";
 
 const CalendarPopup = ({
   isVisible,
@@ -27,7 +29,7 @@ const CalendarPopup = ({
   const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
   const { setCourseBookingData, bookingCourseData } =
     useContext(BookingCourseContext);
-
+  const { selectedCourseData } = useContext(SelectedCourseContext);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDates, setSelectedDates] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(
@@ -83,6 +85,18 @@ const CalendarPopup = ({
     const courseDurationDate = calculateDaysInMonth(selectedDate);
     let countOfSelectedDays = 0;
 
+    // if selected date already selected scenerio
+    const selectedDateToDateString = selectedDate.toDateString();
+    const isAlredySelectedDate = selectedDates.includes(
+      selectedDateToDateString
+    );
+    if (isAlredySelectedDate) {
+      return setSelectedDates((prevDates) =>
+        prevDates.filter((val) => val != selectedDateToDateString)
+      );
+    }
+
+    // select consicutive session dates
     for (
       let day = selectedDate;
       day <= courseDurationDate;
@@ -156,7 +170,6 @@ const CalendarPopup = ({
   const handleContinue = () => {
     const { duration, durationUnit, endDate, startDate, noOfSessions, fee } =
       selectedPackage;
-    console.log(selectedPackage);
 
     if (
       selectedDates.length <= 0 ||
@@ -170,8 +183,7 @@ const CalendarPopup = ({
       return;
 
     setCourseBookingData({
-      courseName: null,
-      providedAcademy: null,
+      ...bookingCourseData,
       courseDuration: {
         duration: duration,
         durationUnit: durationUnit,
@@ -212,8 +224,11 @@ const CalendarPopup = ({
             </div>
           </div>
           <div className="calenderHeading mx-3 m-2">
-            <h1>Football Camp</h1>
-            <h3>Age Limit: 06 to 10</h3>
+            <h2 className="fw-bold">{selectedCourseData.name}</h2>
+            <h3>{`Age Limit: ${ageFormatter({
+              rawStartAge: selectedCourseData.ageGroup[0].ageStart,
+              rawEndAge: selectedCourseData.ageGroup[0].ageEnd,
+            })}`}</h3>
           </div>
           <div className="row d-flex align-items-center justify-content-center p-3">
             <div className="col-6">

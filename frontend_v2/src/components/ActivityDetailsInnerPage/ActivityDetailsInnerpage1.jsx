@@ -16,6 +16,7 @@ import { useNavigate } from "react-router";
 import AcademyDetails from "../../pages/AcademyDetails/FootballAcademyDetails";
 import { BookingCourseContext } from "../../context/bookingContext";
 import { handleShare } from "../../utils/share";
+import { ageFormatter } from "../../utils/ageFormatter";
 
 function ActivityDetailsInnerpage1({ activityData }) {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
     useContext(BookingCourseContext);
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [campDurationSelected, setCampDurationSelected] = useState(
-    bookingCourseData
+    bookingCourseData?.courseDuration
       ? `${bookingCourseData.courseDuration.duration}${bookingCourseData.courseDuration.durationUnit}`
       : null
   );
@@ -44,13 +45,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
   const closeAcademyDetails = () => setAcademyVisible(false);
   const handleContinue = () => {
     if (campDurationSelected === null) return;
-    setCourseBookingData({
-      ...bookingCourseData,
-      courseName: activityData.name,
-      providedAcademy: activityData.providerDetails.fullName,
-      courseId: activityData._id,
-    });
-    navigate("/signin");
+    const ifUserLogged = JSON.parse(sessionStorage.getItem("user"));
+    if (ifUserLogged) return navigate("/signin-success");
+    else return navigate("/signin");
   };
 
   // camp duration selection
@@ -62,6 +59,13 @@ function ActivityDetailsInnerpage1({ activityData }) {
     if (courseData) {
       setCalenderActivityData(courseData);
     } else setCalenderActivityData(null);
+
+    setCourseBookingData({
+      ...bookingCourseData,
+      courseName: activityData.name,
+      providedAcademy: activityData.providerDetails.fullName,
+      courseId: activityData._id,
+    });
 
     setCourseAvailableDays(activityDays);
     coustomData && setCoustomData(coustomData);
@@ -127,11 +131,12 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     Seat Details and More options
                   </Card.Text>
                   <button
-                    className={`border-0 mb-1 rounded-3 ${campDurationSelected ===
-                        `${courseType.duration}${courseType.durationUnit}`
+                    className={`border-0 mb-1 rounded-3 ${
+                      campDurationSelected ===
+                      `${courseType.duration}${courseType.durationUnit}`
                         ? "camp-duration-selected-btn"
                         : "card-btn"
-                      }`}
+                    }`}
                     onClick={() =>
                       handleSelectCoursePackeage(
                         activityData?.days,
@@ -141,7 +146,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     }
                   >
                     {campDurationSelected ===
-                      `${courseType.duration}${courseType.durationUnit}`
+                    `${courseType.duration}${courseType.durationUnit}`
                       ? "Selected"
                       : "Select"}
                   </button>
@@ -149,45 +154,43 @@ function ActivityDetailsInnerpage1({ activityData }) {
               </Card>
             </Col>
           ))}
-          {activityData.courseDuration.length >= 3 && (
-            <Col xs={12} sm={4} md={4} lg={4} className="d-flex  mt-2">
-              <Card
-                className="d-flex card3 rounded-4"
-                onClick={() =>
-                  handleSelectCoursePackeage(
-                    activityData.days,
-                    null,
-                    activityData.courseDuration.slice(-2)
-                  )
-                }
+          <Col xs={12} sm={4} md={4} lg={4} className="d-flex  mt-2">
+            <Card
+              className="d-flex card3 rounded-4"
+              onClick={() =>
+                handleSelectCoursePackeage(
+                  activityData.days,
+                  null,
+                  activityData.courseDuration
+                )
+              }
+            >
+              <Card.Body
+                className=" d-flex align-items-center justify-content-center flex-column border rounded-4 px-3  m-1 custom-btn"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to bottom,#FDD687, #F5A691)",
+                }}
               >
-                <Card.Body
-                  className=" d-flex align-items-center justify-content-center flex-column border rounded-4 px-3  m-1 custom-btn"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to bottom,#FDD687, #F5A691)",
-                  }}
-                >
-                  <div className="custom-btn">
-                    <div className=" d-flex-coloum">
-                      <Card.Title>Custom</Card.Title>
-                      <Card.Text
-                        className="text-center card-fnt-wt"
-                        style={{ fontSize: "10px" }}
-                      >
-                        Seat Details and More options
-                      </Card.Text>
-                    </div>
-                    <FontAwesomeIcon
-                      icon={faArrowRight}
-                      style={{ color: "#000000" }}
-                      className="fs-5 ms-4 cutom-arrow"
-                    />
+                <div className="custom-btn">
+                  <div className=" d-flex-coloum">
+                    <Card.Title>Custom</Card.Title>
+                    <Card.Text
+                      className="text-center card-fnt-wt"
+                      style={{ fontSize: "10px" }}
+                    >
+                      Seat Details and More options
+                    </Card.Text>
                   </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          )}
+                  <FontAwesomeIcon
+                    icon={faArrowRight}
+                    style={{ color: "#000000" }}
+                    className="fs-5 ms-4 cutom-arrow"
+                  />
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
         <Row className="">
           <Col sm={12} md={4} lg={4} className="w-100">
@@ -205,13 +208,13 @@ function ActivityDetailsInnerpage1({ activityData }) {
                       ? "ASPIRE SPORTS ACADEMY"
                       : activityData.providerDetails.fullName}
                   </p>
-                  <p style={{ fontSize: "12px", marginTop: "30px" }}>
-
-                  </p>
+                  <p style={{ fontSize: "12px", marginTop: "30px" }}></p>
                 </div>
               </div>
 
-              <LocationDetails providerId={activityData?.providerDetails?._id} />
+              <LocationDetails
+                providerId={activityData?.providerDetails?._id}
+              />
             </div>
           </Col>
         </Row>
@@ -224,11 +227,17 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <p className="fw-bold" style={{ fontSize: "16px" }}>
                     Age Limit:
                   </p>
-                  <p style={{ fontSize: "12px" }}>06 to 10</p>
+                  <p style={{ fontSize: "12px" }}>
+                    {ageFormatter({
+                      rawStartAge: activityData.ageGroup[0].ageStart,
+                      rawEndAge: activityData.ageGroup[0].ageEnd,
+                    })}
+                  </p>
                 </div>
                 <button
-                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${campDurationSelected ? "activate-continue-btn" : ""
-                    }`}
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
+                    campDurationSelected ? "activate-continue-btn" : ""
+                  }`}
                   onClick={handleContinue}
                 >
                   Continue

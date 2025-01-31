@@ -5,7 +5,6 @@ export const ageFormatter = ({ rawStartAge, rawEndAge }) => {
 
   const startAge = todaysDate.getFullYear() - newEndAge.getFullYear();
   const endAge = todaysDate.getFullYear() - newStartAge.getFullYear();
-  console.log(rawEndAge);
 
   return `${startAge} to ${endAge}`;
 };
