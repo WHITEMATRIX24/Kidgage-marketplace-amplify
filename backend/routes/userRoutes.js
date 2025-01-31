@@ -34,12 +34,12 @@ router.post(
         fullName,
         designation,
         description,
-        location,
         website,
         instaId,
-        licenseNo,
         address,
+        licenseNo,
         agreeTerms,
+        locations // Expecting an array of locations
       } = req.body;
 
       // Validate description character length on the server-side
@@ -56,6 +56,39 @@ router.post(
         if (files.crFile)
           fileBase64.crFile = files.crFile[0].buffer.toString("base64");
       }
+
+      // Process locations to ensure they are properly formatted as an array of objects
+      let formattedLocations = [];
+
+      if (locations) {
+        try {
+          const parsedLocations = JSON.parse(locations); // Convert string to array if sent as JSON string
+
+          if (Array.isArray(parsedLocations)) {
+            formattedLocations = parsedLocations.map(loc => ({
+              locationName: loc.locationName || "Unnamed Location",
+
+              latitude: parseFloat(loc.latitude) || 0,
+              longitude: parseFloat(loc.longitude) || 0,
+            }));
+          }
+        } catch (err) {
+          return res.status(400).json({
+            message: "Invalid locations format. Must be a valid JSON array.",
+          });
+        }
+      }
+
+      const existingUser = await User.findOne({
+        $or: [{ email }, { phoneNumber }],
+      });
+
+      if (existingUser) {
+        return res.status(400).json({
+          message: "User with this email or phone number already exists.",
+        });
+      }
+
       // Create new user document
       const newUser = new User({
         username,
@@ -64,28 +97,21 @@ router.post(
         fullName,
         designation,
         description,
-        location,
-        website: website || null, // Optional
-        instaId: instaId || null, // Optional
+        locations: formattedLocations, // Store formatted locations array
+        website: website || null,
+        instaId: instaId || null,
+        address,
         crFile: fileBase64.crFile,
         licenseNo,
-        address,
         agreeTerms,
       });
-      const existingUser = await User.findOne({
-        $or: [{ email }, { phoneNumber }],
-      });
-      if (existingUser) {
-        return res.status(400).json({
-          message: "User with this email or phone number already exists.",
-        });
-      }
+
       await newUser.save();
 
       // Send welcome email to the user
       const userMailOptions = {
-        from: "whitematrix2024@gmail.com", // Sender address (your email)
-        to: email, // Receiver's email (the email user provided)
+        from: `"Kidgage Support" <hello@kidgage.com>`,
+        to: email,
         subject: "Welcome to Our Provider List!",
         text: `Dear ${fullName},
 
@@ -98,9 +124,12 @@ Below are your registration details:
 - Phone Number:  ${phoneNumber}
 - Designation:  ${designation}
 - Description:  ${description}
-- Location:  ${location}
 - Website:  ${website ? website : "N/A"}
 - Instagram ID:  ${instaId ? instaId : "N/A"}
+- Locations:
+${formattedLocations.map(
+          (loc, index) => `  ${index + 1}. ${loc.locationName}, ${loc.address} (Lat: ${loc.latitude}, Long: ${loc.longitude})`
+        ).join("\n")}
 
 Your account is under verification.
 
@@ -108,10 +137,10 @@ Please feel free to contact us if you have any questions.
 `,
       };
 
-      // Send notification email to whitematrix2024@gmail.com
+      // Send notification email to admin
       const adminMailOptions = {
-        from: "riyademo23@gmail.com", // Sender address (your email)
-        to: "whitematrix2024@gmail.com", // Admin email
+        from: `"Kidgage Support" <hello@kidgage.com>`,
+        to: "whitematrix2024@gmail.com",
         subject: "New Provider Registration Request Submitted",
         text: `A new provider has submitted a registration request.
 
@@ -121,27 +150,32 @@ Details:
 - Email:  ${email}
 - Phone Number:  ${phoneNumber}
 - Designation:  ${designation}
-- Location:  ${location}
+- Locations:
+${formattedLocations.map(
+          (loc, index) => `  ${index + 1}. ${loc.locationName}, ${loc.address} (Lat: ${loc.latitude}, Long: ${loc.longitude})`
+        ).join("\n")}
 
 Please review the request.`,
       };
 
-      // Send both emails simultaneously using Promise.all
+      // Send both emails simultaneously
       await Promise.all([
-        transporter.sendMail(userMailOptions), // Send email to the user
-        transporter.sendMail(adminMailOptions), // Send notification to the admin
+        transporter.sendMail(userMailOptions),
+        transporter.sendMail(adminMailOptions),
       ]);
 
       // Respond to the user after successful signup
-      res
-        .status(201)
-        .json({ message: "Signed up successfully and emails sent!" });
+      res.status(201).json({
+        message: "Signed up successfully and emails sent!",
+      });
+
     } catch (error) {
       console.error("Error during signup:", error);
       res.status(500).json({ message: "An error occurred during signup." });
     }
   }
 );
+
 
 // Sign-In Route
 router.post("/signin", async (req, res) => {

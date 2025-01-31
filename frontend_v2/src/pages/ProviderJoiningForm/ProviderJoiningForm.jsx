@@ -3,58 +3,126 @@ import '../ProviderJoiningForm/ProviderJoining.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router';
+import axios from 'axios';
 
 function ProviderJoiningForm() {
     const [formData, setFormData] = useState({
         academyName: '',
         academyBio: '',
-        academyPhoneNo:"",
-        academyEmail:"",
-        academyWebsite:"",
-        academyInstaId:"",
-        academyLocation:"",
-        academyAddress:"",
-        academyCRNo:"",
-        fullName:"",
-        designation:"",
+        academyPhoneNo: "",
+        academyEmail: "",
+        academyWebsite: "",
+        academyInstaId: "",
+        academyLocation: "",
+        academyLatitude: "",
+        academyLongitude: "",
+        academyAddress: "",
+        academyCRNo: "",
+        fullName: "",
+        designation: "",
         acceptedTerms: false,
-        academyFile:""
+        academyFile: ""
     });
-
-    const handleChange = (e) => {
-        const { name, value, type, checked, files } = e.target;
-        if (type === 'file') {
-            
-            
-          setFormData((prevData) => ({
-            ...prevData,
-            [name]: files[0], // Store the file object
-          }));
-        } else {
-          setFormData((prevData) => ({
-            ...prevData,
-            [name]: type === 'checkbox' ? checked : value,
-          }));
-        }
-      };
-    
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if(formData.academyName || formData.academyBio || formData.academyEmail || formData.academyPhoneNo || formData.academyAddress || formData.academyLocation || formData.academyCRNo || formData.academyFile || formData.fullName || formData.designation){
-            if (formData.acceptedTerms ) {
-            alert('Form submitted successfully!');
-            console.log(formData);
-            
-            // You can further handle form submission here (e.g., sending data to an API)
-        } else {
-            alert('Please accept the terms and conditions.');
-        }}
-        else{
-            alert('Please Fill the form Completely')
+    const [suggestions, setSuggestions] = useState([]);
+    const fetchLocationSuggestions = async (query) => {
+        if (!query) return setSuggestions([]);
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`);
+            const data = await response.json();
+            setSuggestions(data);
+        } catch (error) {
+            console.error("Error fetching location suggestions:", error);
         }
     };
 
+    const handleLocationChange = (e) => {
+        const value = e.target.value;
+        setFormData((prevData) => ({ ...prevData, academyLocation: value }));
+        fetchLocationSuggestions(value);
+    };
+
+    const handleLocationSelect = (location) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            academyLocation: location.display_name,
+            academyLatitude: location.lat,
+            academyLongitude: location.lon
+        }));
+        setSuggestions([]);
+    };
+    const handleChange = (e) => {
+        const { name, value, type, checked, files } = e.target;
+        if (type === 'file') {
+
+
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: files[0], // Store the file object
+            }));
+        } else {
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: type === 'checkbox' ? checked : value,
+            }));
+        }
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (formData.academyName === "" || formData.academyBio === "" || formData.academyEmail === "" || formData.academyPhoneNo === "" || formData.academyAddress === "" || formData.academyLocation === "" || formData.academyCRNo === "" || formData.academyFile === "" || formData.fullName === "" || formData.designation === "") {
+            alert('Please Fill the form Completely')
+        }
+        else {
+            if (formData.acceptedTerms) {
+                console.log(formData);
+                //handle uploaded content
+                //1) create an object for formdata class
+                const reqBody = new FormData()
+                const locationsArray = [{
+                    locationName: formData.academyLocation,
+                    latitude: formData.academyLatitude,
+                    longitude: formData.academyLongitude
+                }];
+                reqBody.append("locations", JSON.stringify(locationsArray));
+
+                //2) append method is used to add data to the body
+                reqBody.append("username", formData.fullName)
+                reqBody.append("email", formData.academyEmail)
+                reqBody.append("phoneNumber", formData.academyPhoneNo)
+                reqBody.append("fullName", formData.academyName)
+                reqBody.append("designation", formData.designation)
+                reqBody.append("description", formData.academyBio)
+                reqBody.append("website", formData.academyWebsite)
+                reqBody.append("instaId", formData.academyInstaId)
+                reqBody.append("licenseNo", formData.academyCRNo)
+                reqBody.append("address", formData.academyAddress)
+                reqBody.append("agreeTerms", formData.acceptedTerms)
+                reqBody.append("crFile", formData.academyFile)
+
+
+                try {
+                    const response = await axios.post(`http://localhost:5000/api/users/signup`, reqBody, {
+                        headers: { "Content-Type": "multipart/form-data" },
+                    });
+
+                    console.log(response.data.message);
+                    alert(response.data.message)
+                }
+                catch (err) {
+                    console.log(err);
+                    alert(err.response.data.message);
+
+                }
+
+            }
+
+            else {
+                alert('Please accept the terms and conditions.');
+            }
+        }
+
+    };
     return (
         <div className='d-flex align-items-center justify-content-center mt-5'>
             <div className='ProviderJoingFormContainer p-2  p-md-5'>
@@ -154,18 +222,28 @@ function ProviderJoiningForm() {
                     </div>
                     <div className="col-lg-6">
                         <div className="input-container">
-                            <label className='providerJoiningLabel' htmlFor="academyLocation">Location</label>
-                            <button className='ProviderJoiningDownArrow'><FontAwesomeIcon icon={faArrowDown} /></button>
+                            <label className='providerJoiningLabelLocation' htmlFor="academyLocation">Location</label>
+
                             <input
                                 className='providerJoiningInput'
-                                type="text"
-                                id="academyLocation"
-                                name="academyLocation"
+                                type='text'
+                                id='academyLocation'
+                                name='academyLocation'
                                 value={formData.academyLocation}
-                                onChange={handleChange}
+                                onChange={handleLocationChange}
+                                placeholder='Academy Location'
                                 required
-                                placeholder="Academy Location " // Placeholder inside the input field
                             />
+                            {suggestions.length > 0 && (
+                                <ul className='providerJoiningDropDown'>
+                                    {suggestions.slice(0, 5).map((location, index) => (
+                                        <li key={index} onClick={() => handleLocationSelect(location)}>
+                                            {location.display_name}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+
                         </div>
                         <div className="input-container">
                             <textarea
@@ -208,7 +286,7 @@ function ProviderJoiningForm() {
                                         onChange={handleChange}
                                         required
                                     />
-                                     <input
+                                    <input
                                         className='providerJoiningInput'
                                         type="text"
                                         id="academyFile"
@@ -258,7 +336,7 @@ function ProviderJoiningForm() {
                         <div className="row w-100 p-2 p-lg-0 buttonDiv d-flex align-items-center justify-content-center" >
                             <div className="col-md-7 d-flex align-items-center justify-content-center">
                                 <div className="checkbox-container  d-flex align-items-center justify-content-center flex-column">
-                                   <div className='d-flex align-items-center justify-content-center'>
+                                    <div className='d-flex align-items-center justify-content-center'>
                                         <input
                                             type="checkbox"
                                             id="terms"
@@ -267,12 +345,12 @@ function ProviderJoiningForm() {
                                             onChange={handleChange}
                                         />
                                         <label className='ms-2 termsText' htmlFor="terms">I agree that all provided information is correct for administrators' verification.</label>
-                                   </div>
-                                    
+                                    </div>
+
                                     <Link className='termsText' to={'privacy-policy'}>View Privacy Policy</Link>
                                 </div>
                             </div>
-                            <div className="col-md-5 px-0 d-flex " style={{height:'60px'}}>
+                            <div className="col-md-5 px-0 d-flex " style={{ height: '60px' }}>
                                 <button onClick={handleSubmit} className='continueButton mb-1'>Continue</button>
                             </div>
 

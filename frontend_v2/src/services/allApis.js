@@ -231,3 +231,15 @@ export const addBokkingApi = async ({ userId, bookingDetails }) => {
     console.log(`error in booking courses, error: ${error}`);
   }
 };
+export const getMoreCampDetailsByProviderApi = async ({ courseId }) => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `/courses/other/${courseId}`,
+      apiMethod: "GET",
+    });
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(`error in other course details, error: ${error}`);
+  }
+};

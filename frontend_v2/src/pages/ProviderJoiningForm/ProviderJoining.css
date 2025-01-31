@@ -1,101 +1,179 @@
-.ProviderJoingFormContainer{
-    width: 1050px;
-    height: 600px;
+.ProviderJoingFormContainer {
+  width: 1050px;
+  height: 600px;
 
-    border-radius: 15px;
-    border: 1px solid black;
+  border-radius: 15px;
+  border: 1px solid black;
 
 }
-.ProviderJoiningTitle{
-    font-size: 38px;
-    font-weight: 700;
-    line-height: 46px;
-    color: #404040;
+
+.ProviderJoiningTitle {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 46px;
+  color: #404040;
 }
-.ProviderJoiningText{
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 22px;
-    color: #404040;
+
+.ProviderJoiningText {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #404040;
 }
 
 .input-container {
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  
-  .providerJoiningInput{
-    height:50px;
-    border-radius: 10px;
-    border: 1px solid #D0D0D0;
-  }
-  .providerJoiningInput,.providerJoiningTextArea {
-    width: 100%;
-    padding: 12px 16px;
-    font-size: 12px;
-    font-weight: 500;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+  position: relative;
+  margin-bottom: 1rem;
+}
 
-  .providerJoiningInput::placeholder{
-    position: absolute;
-    top: 45%;
-    font-size: 12px;
-    font-weight: 500;
-  }
-  .providerJoiningLabel {
-    position: absolute;
-    top: 40%;
-    left: 25px;
-    transform: translateY(-80%);
-    font-size: 12px;
-    font-weight: 500;
-    color:black;
-    pointer-events: none;
-    transition: all 0.2s ease;
-  }
-  .providerJoiningTextArea::placeholder{
-    position: absolute;
-    top: 20px;
-    font-size: 12px;
-    font-weight: 500;
-  }
-   
-  .providerJoiningTextAreaLabel{
-    position: absolute;
-    top: 20px;
-    left: 25px;
-    transform: translateY(-80%);
-    font-size: 12px;
-    font-weight: 500;
-    color:black;
-    pointer-events: none;
-    transition: all 0.2s ease;
-  
-  }
- 
-  input:focus,
-  textarea:focus {
-    border-color: #4a90e2;
-  }
-  
-  
-  .providerJoiningInput:focus + .providerJoiningLabel
-{
+.providerJoiningInput {
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #D0D0D0;
+}
+
+.providerJoiningInput,
+.providerJoiningTextArea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  padding-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.providerJoiningInput::placeholder {
+  position: absolute;
+  top: 48%;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.providerJoiningLabel {
+  position: absolute;
+  top: 40%;
+  left: 25px;
+  transform: translateY(-88%);
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.providerJoiningLabelLocation {
+  position: absolute;
+  top: 40%;
+  left: 25px;
+  transform: translateY(-88%);
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.providerJoiningTextArea::placeholder {
+  position: absolute;
+  top: 18px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.providerJoiningTextAreaLabel {
+  position: absolute;
+  top: 15px;
+  left: 25px;
+  transform: translateY(-80%);
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  pointer-events: none;
+  transition: all 0.2s ease;
+
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4a90e2;
+}
+
+
+.providerJoiningInput:focus+.providerJoiningLabel {
   top: -10px;
   font-size: 12px;
   color: #4a90e2;
 }
-.ProviderJoiningDownArrow{
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    border: none;
-    background-color: transparent;
+
+.providerJoiningDropDown {
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 200px;
+  /* Limit height for 5 items (adjust as needed) */
+  overflow-y: auto;
+  /* Enables scrolling when more than 5 items */
+  z-index: 1000;
+  /* Ensure it appears above other elements */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  list-style: none;
+  margin-top: 5px;
 }
-.providerJoiningInputFile{
-    width: 100%;
+
+/* Scrollbar Styling */
+.providerJoiningDropDown::-webkit-scrollbar {
+  width: 6px;
+  /* Adjust width */
+}
+
+.providerJoiningDropDown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Light gray background */
+  border-radius: 5px;
+}
+
+.providerJoiningDropDown::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Darker scrollbar */
+  border-radius: 5px;
+}
+
+.providerJoiningDropDown::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Darker shade on hover */
+}
+
+
+.providerJoiningDropDown li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.providerJoiningDropDown li:hover {
+  background-color: #f1f1f1;
+}
+
+/* Ensures dropdown is properly positioned */
+.input-container {
+  position: relative;
+}
+
+
+.ProviderJoiningDownArrow {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  border: none;
+  background-color: transparent;
+}
+
+.providerJoiningInputFile {
+  width: 100%;
   padding: 12px 16px;
   font-size: 12px;
   border: 1px solid #ccc;
@@ -103,113 +181,128 @@
   outline: none;
   box-sizing: border-box;
   cursor: pointer;
- opacity: 0;
- position: absolute;
- 
+  opacity: 0;
+  position: absolute;
+
 }
 
-.providerJoiningFileLabel{
-    position: absolute;
-    top: 20px;
-    left: 25px;
-    transform: translateY(-80%);
-    font-size: 12px;
-    font-weight: 500;
-    color:black;
-    pointer-events: none;
-    transition: all 0.2s ;
+.providerJoiningFileLabel {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  transform: translateY(-80%);
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  pointer-events: none;
+  transition: all 0.2s;
 }
 
-.buttonDiv{
-    border: 1px solid #D0D0D0;
-    border-radius: 15px;
-    margin: 0px 0px 0px 8px;
-    height: 60px;
+.buttonDiv {
+  border: 1px solid #D0D0D0;
+  border-radius: 15px;
+  margin: 0px 0px 0px 8px;
+  height: 60px;
 }
-.termsText{
-    font-size: 10px;
-    font-weight: 500;
+
+.termsText {
+  font-size: 10px;
+  font-weight: 500;
 }
-#terms{
-    height: 30px;
-    width: 40px;
+
+#terms {
+  height: 30px;
+  width: 40px;
 }
-#academyAddress{
-    height: 110px;
+
+#academyAddress {
+  height: 110px;
 }
-#academyBio{
-    height: 180px;
+
+#academyBio {
+  height: 180px;
 }
-.continueButton{
-    background-image: linear-gradient(to right, #FDD687, #F5A691);
-    font-size: 18px;
-    line-height: 21px;
-    padding: 10px;
+
+.continueButton {
+  background-image: linear-gradient(to right, #FDD687, #F5A691);
+  font-size: 18px;
+  line-height: 21px;
+  padding: 10px;
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  color: black;
+  width: 190px;
+  height: 50px;
+
+}
+
+.checkbox-container {
+  margin-bottom: 1rem;
+}
+
+
+@media (max-width: 1000px) {
+  .ProviderJoingFormContainer {
+    height: auto;
+  }
+
+  .ProviderJoiningTitle {
+    font-size: 24px;
     font-weight: 700;
-    border-radius: 10px;
-    border: none;
-    width: 100%;
-    color: black;
-    width: 190px;
-    height: 50px;
+    line-height: 25px;
+    margin-top: 10px;
+  }
 
+  .ProviderJoiningText {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .buttonDiv {
+    height: 100px;
+    margin: auto;
+  }
+
+  .continueButton {
+    height: 48px;
+  }
 }
-  
-  .checkbox-container {
-    margin-bottom: 1rem;
-  }
-  
- 
-  @media (max-width: 1000px) {
-    .ProviderJoingFormContainer{
-        height: auto;
-    }
-    .ProviderJoiningTitle{
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 25px;
-        margin-top: 10px;
-    }
-    
-    .ProviderJoiningText{
-        font-size: 14px;
-        font-weight: 500;
-    }
-    .buttonDiv{
-        height: 100px;
-        margin: auto;
-    }
-    .continueButton{
-        height: 48px;
-    }
+
+@media(max-width:766px) {
+  .pEnd {
+    padding-right: 10px !important;
   }
 
-  @media(max-width:540px){
-    .pEnd{
-        padding-right: 10px !important;
-    }
-    .pStart{
-        padding-left: 10px !important;
-    }
-    .providerJoiningLabel{
-        left: 30px;
-    }
-    .providerJoiningTextAreaLabel{
-        left: 30px;
-    }
-    #academyAddress{
-        height: 150px;
-    }
-    #academyBio{
-        height: 220px;
-    }
-    .continueButton{
-        width: 100%;
-        height: auto;
-
-    }
-    .buttonDiv{
-        margin: 10px;
-        width: 95% !important;
-    }
+  .pStart {
+    padding-left: 10px !important;
   }
+
+  .providerJoiningLabel {
+    left: 30px;
+  }
+
+  .providerJoiningTextAreaLabel {
+    left: 30px;
+  }
+
+  #academyAddress {
+    height: 150px;
+  }
+
+  #academyBio {
+    height: 220px;
+  }
+
+  .continueButton {
+    width: 100%;
+    height: auto;
+
+  }
+
+  .buttonDiv {
+    margin: 10px;
+    width: 95% !important;
+  }
+}

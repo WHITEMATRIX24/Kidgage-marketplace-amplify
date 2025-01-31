@@ -127,12 +127,11 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     Seat Details and More options
                   </Card.Text>
                   <button
-                    className={`border-0 mb-1 rounded-3 ${
-                      campDurationSelected ===
-                      `${courseType.duration}${courseType.durationUnit}`
+                    className={`border-0 mb-1 rounded-3 ${campDurationSelected ===
+                        `${courseType.duration}${courseType.durationUnit}`
                         ? "camp-duration-selected-btn"
                         : "card-btn"
-                    }`}
+                      }`}
                     onClick={() =>
                       handleSelectCoursePackeage(
                         activityData?.days,
@@ -142,7 +141,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     }
                   >
                     {campDurationSelected ===
-                    `${courseType.duration}${courseType.durationUnit}`
+                      `${courseType.duration}${courseType.durationUnit}`
                       ? "Selected"
                       : "Select"}
                   </button>
@@ -206,15 +205,13 @@ function ActivityDetailsInnerpage1({ activityData }) {
                       ? "ASPIRE SPORTS ACADEMY"
                       : activityData.providerDetails.fullName}
                   </p>
-                  <p style={{ fontSize: "12px" }}>
-                    {activityData.name === "Evening Football Camp"
-                      ? "Doha"
-                      : activityData.providerDetails.location}
+                  <p style={{ fontSize: "12px", marginTop: "30px" }}>
+
                   </p>
                 </div>
               </div>
 
-              <LocationDetails />
+              <LocationDetails providerId={activityData?.providerDetails?._id} />
             </div>
           </Col>
         </Row>
@@ -230,9 +227,8 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <p style={{ fontSize: "12px" }}>06 to 10</p>
                 </div>
                 <button
-                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
-                    campDurationSelected ? "activate-continue-btn" : ""
-                  }`}
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${campDurationSelected ? "activate-continue-btn" : ""
+                    }`}
                   onClick={handleContinue}
                 >
                   Continue

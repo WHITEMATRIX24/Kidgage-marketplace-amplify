@@ -44,7 +44,7 @@ function App() {
           <Route path="/event-details/:eventId" element={<EventDetails />} />
           <Route path="/detailed-blog/:newsId" element={<Detailedblog />} />
           <Route path="/mybooking" element={<MyBooking />} />
-          <Route path="/provider-joining-form" element={<ProviderJoiningForm/>}/>
+          <Route path="/provider-joining-form" element={<ProviderJoiningForm />} />
 
         </Route>
       </Routes>

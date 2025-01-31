@@ -166,5 +166,27 @@ router.get("/lowest-fee/:category", async (req, res) => {
     res.status(500).json({ message: "Error fetching lowest fee", error });
   }
 });
+router.get("/other/:courseId", async (req, res) => {
+  try {
+    const { courseId } = req.params;
 
+    // Find the current course to get the providerId
+    const currentCourse = await Course.findById(courseId);
+    console.log(currentCourse)
+    if (!currentCourse) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    // Fetch other courses by the same provider excluding the current course
+    const otherCourses = await Course.find({
+      // providerId: currentCourse.providerId,
+      _id: { $ne: courseId }, // Exclude the current course
+    });
+
+    res.status(200).json(otherCourses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 module.exports = router;
