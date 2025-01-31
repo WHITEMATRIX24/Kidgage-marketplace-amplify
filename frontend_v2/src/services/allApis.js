@@ -237,9 +237,17 @@ export const getMoreCampDetailsByProviderApi = async ({ courseId }) => {
       apiEndPoint: `/courses/other/${courseId}`,
       apiMethod: "GET",
     });
-    if (response.status != 200) return console.log(response.data);
+    console.log("API Response:", response); // Log full response
+
+    if (response.status !== 200) {
+      console.log("Unexpected status code:", response.status, response.data);
+      return null;
+    }
+
+    console.log("Other Courses Data:", response.data); // Log data
     return response.data;
   } catch (error) {
-    console.log(`error in other course details, error: ${error}`);
+    console.log(`Error fetching other course details:`, error);
+    return null;
   }
 };

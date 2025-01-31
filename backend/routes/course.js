@@ -169,19 +169,19 @@ router.get("/lowest-fee/:category", async (req, res) => {
 router.get("/other/:courseId", async (req, res) => {
   try {
     const { courseId } = req.params;
-
+    console.log("from bacend corse id", courseId)
     // Find the current course to get the providerId
     const currentCourse = await Course.findById(courseId);
-    console.log(currentCourse)
     if (!currentCourse) {
       return res.status(404).json({ message: "Course not found" });
     }
 
     // Fetch other courses by the same provider excluding the current course
     const otherCourses = await Course.find({
-      // providerId: currentCourse.providerId,
+      providerId: currentCourse.providerId,
       _id: { $ne: courseId }, // Exclude the current course
     });
+    console.log(otherCourses);
 
     res.status(200).json(otherCourses);
   } catch (error) {

@@ -145,6 +145,12 @@
 
 .tileImageContainer {
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Two tiles per row */
+    gap: 16px;
+    /* Adjust spacing between tiles */
+    width: 100%;
 }
 
 .tittle {
@@ -176,6 +182,7 @@
 
 .tileImage {
     height: 180px;
+    border-radius: 15px;
 }
 
 @media only screen and (max-width: 600px) {

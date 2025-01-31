@@ -262,6 +262,10 @@ border-radius: 15px;
 
     }
 
+    .activity-details-right-1 {
+        max-width: 350px;
+    }
+
     .activity-button-1 {
         font-size: 0.9rem;
     }

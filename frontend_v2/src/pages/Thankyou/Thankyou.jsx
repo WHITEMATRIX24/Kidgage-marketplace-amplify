@@ -1,24 +1,78 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "./Thankyou.css";
-import tileImage1 from "../../assets/ThanksPageImage1.png";
-import tileImage4 from "../../assets/ThanksPageImage2.png";
-import tileImage3 from "../../assets/ThanksPageImage3.png";
-import tileImage2 from "../../assets/ThanksPageImage4.png";
-import FootballAcademyDetails from "../AcademyDetails/FootballAcademyDetails";
 import CampDetails from "../CampDetails/CampDetails";
 import { BookingCourseContext } from "../../context/bookingContext";
 import { findFirstDate } from "../../utils/dateFormater";
 import { useNavigate } from "react-router";
 import { SelectedCourseContext } from "../../context/courseContext";
+import { getActivitydetailsByIdApi, getMoreCampDetailsByProviderApi } from "../../services/allApis";
+import AcademyDetails from "../AcademyDetails/FootballAcademyDetails";
 
 function Thankyou() {
   const { selectedCourseData } = useContext(SelectedCourseContext);
   const navigate = useNavigate();
   const { bookingCourseData } = useContext(BookingCourseContext);
+  const [otherCourses, setOtherCourses] = useState([]);
+  const [providerName, setProviderName] = useState("");
+  const [providerId, setProviderId] = useState("");
+  const [isAcademyVisible, setAcademyVisible] = useState(false);
+  const openAcademyDetails = () => {
+    setAcademyVisible(true);
+  };
+  const closeAcademyDetails = () => setAcademyVisible(false);
   console.log(bookingCourseData);
+  useEffect(() => {
+    if (selectedCourseData?._id) {
+      fetchCourseDetails(selectedCourseData._id);
+      fetchOtherCourses(selectedCourseData._id);
+    }
+  }, [selectedCourseData]);
+  const fetchCourseDetails = async (courseId) => {
+    try {
+      const response = await getActivitydetailsByIdApi({ activityId: courseId });
+      console.log("course", response)
+      if (response && response.providerDetails?.fullName) {
+        setProviderName(response.providerDetails.fullName);
+        setProviderId(response.providerDetails?._id);
+      }
+    } catch (error) {
+      console.error("Error fetching course details:", error);
+    }
+  };
+  // useEffect(() => {
+  //   console.log("coursedata", selectedCourseData);
+  //   if (selectedCourseData?._id) {
+  //     fetchOtherCourses(selectedCourseData._id);
 
+  //   }
+  // }, [selectedCourseData]);
+  const fetchOtherCourses = async (courseId) => {
+    try {
+      console.log("Fetching other courses...");
+      const response = await getMoreCampDetailsByProviderApi({ courseId });
+
+
+      console.log("Response received in fetchOtherCourses:", response); // Check structure
+
+      if (Array.isArray(response)) {
+        setOtherCourses(response);
+      } else {
+        console.warn("Unexpected response format, setting empty array");
+        setOtherCourses([]);
+      }
+    } catch (error) {
+      console.error("Error fetching other courses:", error);
+      setOtherCourses([]);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Updated otherCourses:", otherCourses);
+    console.log("provider Name", providerName);
+    console.log("provider ID", providerId)
+  }, [otherCourses]);
   //   prevent from going back
   useEffect(() => {
     const handlePopState = () => {
@@ -41,11 +95,11 @@ function Thankyou() {
           <h1 className="">Thanks for order!</h1>
           <h6>{`Your order number is ${bookingCourseData.bookingId}`}</h6>
           <h6 className="mt-3">
-            The pass for your order has been created. Please check the 
+            The pass for your order has been created. Please check the
             <span className="myTickets">
               <u>‘My Tickets’</u>
             </span>
-             page or email shortly.
+            page or email shortly.
           </h6>
           <div className="eventAttending mt-4">
             <h6>You are attending</h6>
@@ -83,84 +137,104 @@ function Thankyou() {
             </div>
           </div>
         </div>
-        {/* <div className="thanksLeftAbout  mt-4 px-5">
-          <button className="arrowButton">
-            <span className="ms-auto w-75">About This Activities</span>
-          </button>
-          <FontAwesomeIcon className="arrow" icon={faArrowRight} />
-        </div> */}
-        <CampDetails activityData={selectedCourseData}/>
+
+        <CampDetails activityData={selectedCourseData} />
       </div>
       <div className="activity-details-right-1">
         <div className="rightDivContent mt-4 mt-xl-0  ps-md-4 ">
           <h1 className="tittle">More camp</h1>
           <h3 className="subTitle mb-3">
-            Organised by <u>One football</u>
+            Organised by <u onClick={openAcademyDetails}>{providerName || "Unknown Provider"}</u>
           </h3>
           <div className="tileImageContainer">
-            <div className="row ">
-              <div className="eventTiles col-6">
-                <div className="w-100">
-                  <img className="tileImage w-100" src={tileImage1} alt="" />
-                  <div className="eventDetails">
-                    <h4 className="EventTitle">This camp Name</h4>
-                    <div className="eventDetailsText d-flex justify-content-between">
-                      <p>Dubai,1 main rode</p>
-                      <p>6.2Km</p>
-                    </div>
-                    <p>Camp Days: SUD to FRI</p>
+
+            {otherCourses?.slice(0, 4).map((course) => (
+              <div key={course._id} className="eventTiles">
+                <img className="tileImage w-100" src={course.images[0]} alt="" />
+                <div className="eventDetails">
+                  <h4>{course.name}</h4>
+                  <div className="eventDetailsText d-flex justify-content-between">
+                    <p>{course.location?.[0]?.address || "No address available"}</p>
+
                   </div>
+                  <p>Days: {course.days?.join(", ") || "No days specified"}</p>
                 </div>
               </div>
-              <div className="eventTiles col-6">
-                <div className="w-100">
-                  <img className="tileImage w-100" src={tileImage2} alt="" />
-                  <div className="eventDetails">
-                    <h4 className="EventTitle">This camp Name</h4>
-                    <div className="eventDetailsText d-flex justify-content-between">
-                      <p>Dubai,1 main rode</p>
-                      <p>6.2Km</p>
-                    </div>
-                    <p>Camp Days: SUD to FRI</p>
+            )) ?? <p>No other courses available.</p>}
+
+          </div>
+        </div>
+        {/* <div className="tileImageContainer">
+          <div className="row ">
+            <div className="eventTiles col-6">
+              <div className="w-100">
+                <img className="tileImage w-100" src={tileImage1} alt="" />
+                <div className="eventDetails">
+                  <h4 className="EventTitle">This camp Name</h4>
+                  <div className="eventDetailsText d-flex justify-content-between">
+                    <p>Dubai,1 main rode</p>
+                    <p>6.2Km</p>
                   </div>
+                  <p>Camp Days: SUD to FRI</p>
                 </div>
               </div>
             </div>
-            <div className="row mt-3">
-              <div className="eventTiles col-6">
-                <div className="w-100">
-                  <img className="tileImage w-100" src={tileImage3} alt="" />
-                  <div className="eventDetails">
-                    <h4>This camp Name</h4>
-                    <div className="d-flex justify-content-between">
-                      <p>Dubai,1 main rode</p>
-                      <p>6.2Km</p>
-                    </div>
-                    <p>Camp Days: SUD to FRI</p>
+            <div className="eventTiles col-6">
+              <div className="w-100">
+                <img className="tileImage w-100" src={tileImage2} alt="" />
+                <div className="eventDetails">
+                  <h4 className="EventTitle">This camp Name</h4>
+                  <div className="eventDetailsText d-flex justify-content-between">
+                    <p>Dubai,1 main rode</p>
+                    <p>6.2Km</p>
                   </div>
-                </div>
-              </div>
-              <div className="eventTiles col-6">
-                <div className="w-100">
-                  <img className="tileImage w-100" src={tileImage4} alt="" />
-                  <div className="eventDetails">
-                    <h4>This camp Name</h4>
-                    <div className="d-flex justify-content-between">
-                      <p>Dubai,1 main rode</p>
-                      <p>6.2Km</p>
-                    </div>
-                    <p>Camp Days: SUD to FRI</p>
-                  </div>
+                  <p>Camp Days: SUD to FRI</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+          <div className="row mt-3">
+            <div className="eventTiles col-6">
+              <div className="w-100">
+                <img className="tileImage w-100" src={tileImage3} alt="" />
+                <div className="eventDetails">
+                  <h4>This camp Name</h4>
+                  <div className="d-flex justify-content-between">
+                    <p>Dubai,1 main rode</p>
+                    <p>6.2Km</p>
+                  </div>
+                  <p>Camp Days: SUD to FRI</p>
+                </div>
+              </div>
+            </div>
+            <div className="eventTiles col-6">
+              <div className="w-100">
+                <img className="tileImage w-100" src={tileImage4} alt="" />
+                <div className="eventDetails">
+                  <h4>This camp Name</h4>
+                  <div className="d-flex justify-content-between">
+                    <p>Dubai,1 main rode</p>
+                    <p>6.2Km</p>
+                  </div>
+                  <p>Camp Days: SUD to FRI</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */}
+        {isAcademyVisible && (
+          <AcademyDetails
+            isVisible={isAcademyVisible}
+            onClose={closeAcademyDetails}
+            providerId={providerId} // Pass providerId
+          />
+        )}
       </div>
 
-      {/* </div> */}
-      {/* <CampDetails /> */}
-    </div>
+
+
+
+    </div >
   );
 }
 
