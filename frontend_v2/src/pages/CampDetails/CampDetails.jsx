@@ -8,18 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import "../CampDetails/CampDetails.css";
 import { ageFormatter } from "../../utils/ageFormatter";
+import '../LocationDetails/LocationDetails.css'
+import L from "leaflet";
 
 function CampDetails({ activityData }) {
   const [isCampDetailsOpen, setIsCampDetailsOpen] = useState(false);
   const [position, setPosition] = useState(5); // The initial position of the div
 
-  const items = [
-    " The stage is open for all forms of performative arts: Singing, Comedy, Storytelling, Poetry, etc.",
-    " You will get 6 minutes to perform on stage",
-    " You will get 6 minutes to perform on stage",
-    "You own all rights to your work and performance; Kasa Kai Mumbai holds the right to photograph or shoot the performance for global sharing via social media sites, blog posts and video sharing platforms",
-    "You are required to reach the event 20 minutes before the event starts and check-in with the organizer at the venue.",
-  ];
 
   // Function to open the popup
   const openCampDetailsPopup = () => {
@@ -30,34 +25,6 @@ function CampDetails({ activityData }) {
   const closeCampDetailsPopup = () => {
     setIsCampDetailsOpen(false);
   };
-
-  const [startAge, setStartAge] = useState(0);
-  const [endAge, setendAge] = useState(0);
-
-  //function to calucuate age limit
-  // const calculateAge = () => {
-  //     const satrtDate = new Date(activityData.ageGroup[0].ageStart);
-  //     const endDate = new Date(activityData.ageGroup[0].ageEnd);
-  //     console.log(satrtDate);
-
-  //     const currentDate = new Date();
-
-  //     let calculatedAge1 = currentDate.getFullYear() - satrtDate.getFullYear();
-  //     let calculatedAge2 = currentDate.getFullYear() - endDate.getFullYear();
-  //     setStartAge(calculatedAge2)
-  //     setendAge(calculatedAge1)
-  //     console.log(calculatedAge1);
-
-  //   };
-  useEffect(() => {
-    if (activityData) {
-      ageFormatter({
-        rawStartAge: activityData?.ageGroup[0]?.ageStart,
-        rawEndAge: activityData?.ageGroup[0]?.ageEnd,
-      });
-      console.log(activityData);
-    }
-  }, [activityData]);
 
   const popupRef = useRef(null); // Reference to the popup container
   const [downArrow, setDownArrow] = useState(true);
@@ -77,6 +44,47 @@ function CampDetails({ activityData }) {
       setUpArrow(true);
     }
   };
+  useEffect(() => {
+    if (activityData?.location?.length > 0) {
+      const locations = activityData.location;
+
+      setTimeout(() => {
+        const existingMap = document.getElementById("map")?._leaflet_id;
+        if (!existingMap) {
+          const map = L.map("map");
+
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+          }).addTo(map);
+
+          const customIcon = L.icon({
+            iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+            shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+          });
+
+          const bounds = [];
+
+          locations.forEach((loc) => {
+            const marker = L.marker([loc.lat, loc.lon], { icon: customIcon })
+              .addTo(map)
+              .bindPopup(`<b>${activityData.name}</b><br>${loc.address}`);
+            bounds.push([loc.lat, loc.lon]);
+          });
+
+          if (bounds.length > 1) {
+            map.fitBounds(bounds);
+          } else {
+            map.setView(bounds[0], 14);
+          }
+        }
+      }, 200);
+    }
+  }, []);
+
+
 
   return (
     <div>
@@ -119,7 +127,10 @@ function CampDetails({ activityData }) {
                     <div>
                       {" "}
                       <h3 className="text-start " style={{ color: "black" }}>
-                        Agre Limt: {startAge} to {endAge}
+                        {`Age Limit: ${ageFormatter({
+                          rawStartAge: activityData.ageGroup[0].ageStart,
+                          rawEndAge: activityData.ageGroup[0].ageEnd,
+                        })}`}
                       </h3>
                     </div>
                   </div>
@@ -138,36 +149,36 @@ function CampDetails({ activityData }) {
               }}
               ref={popupRef}
             >
-              <h4 style={{ color: "black", textAlign:'start' }}>
-                "Surprise! We’re back with a new location in Dubai
+              <h4 style={{ color: "black", textAlign: 'start' }}>
+                Surprise! We’re back with a new activity for your Kids!
               </h4>
-              <p className="" style={{ color: "black", textAlign:'start'  }}>
+              <p className="" style={{ color: "black", textAlign: 'start' }}>
                 {activityData.description}
               </p>
               {/* <p style={{ color: "black" }}>Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
                                 Working in association with BFC Soccer Schools, our coaching philosophy targets the holistic development of the child while incorporating a true lifelong passion for the game. Our best players even get a chance win scholarships and scouted by the famous Bengaluru Football Club.</p> */}
               {/* things to keep in mind section */}
               <>
-                                <h5 className='mb-3' style={{ color: "black", textAlign:'start' }}>Things to keep in mind:</h5>
-                                <div className='listWithHiphen '>
-                                    <ul className='ps-0 text-start' >
-                                        {activityData?.thingstokeepinmind?.map((item, index) => (
-                                            <li key={index}>- {item.desc}</li>
-                                        ))}
-                                    </ul>
-                                </div>
+                <h5 className='mb-3' style={{ color: "black", textAlign: 'start' }}>Things to keep in mind:</h5>
+                <div className='listWithHiphen '>
+                  <ul className='ps-0 text-start' >
+                    {activityData?.thingstokeepinmind?.map((item, index) => (
+                      <li key={index}>- {item.desc}</li>
+                    ))}
+                  </ul>
+                </div>
 
-                            </>
+              </>
               {/* FAQ's section */}
               <div className="FAQ">
-                <h5 className="mt-2 " style={{ color: "black",  textAlign:'start' }}>
+                <h5 className="mt-2 " style={{ color: "black", textAlign: 'start' }}>
                   FAQs
                 </h5>
                 <div className="row  ">
                   {activityData.faq?.map((item) => (
                     <div className="col-md-6 mt-3">
-                      <p style={{ color: "black", textAlign:'start' }}>{item.question}</p>
-                      <h6 style={{ color: "black", textAlign:'start'  }}>{item.answer} </h6>
+                      <p style={{ color: "black", textAlign: 'start' }}>{item.question}</p>
+                      <h6 style={{ color: "black", textAlign: 'start' }}>{item.answer} </h6>
                     </div>
                   ))}
                 </div>
@@ -185,7 +196,7 @@ function CampDetails({ activityData }) {
               {/* Maps section */}
               <div className="map row w-100 mt-5">
                 <div className="col-md-12">
-                  <iframe
+                  {/* <iframe
                     className="mapBorder"
                     src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d57677.950265607025!2d51.44753078695325!3d25.37560966510168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1slulu%20quater!5e0!3m2!1sen!2sin!4v1736492770639!5m2!1sen!2sin"
                     width="100%"
@@ -194,7 +205,9 @@ function CampDetails({ activityData }) {
                     allowFullScreen=""
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
+                  ></iframe> */}
+                  <div id="map" className="map" style={{ width: "100%", height: "400px" }}></div>
+
                 </div>
               </div>
             </div>
