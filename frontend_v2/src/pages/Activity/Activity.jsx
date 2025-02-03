@@ -49,7 +49,7 @@ function ActivityPage() {
                   {activity.name}
                 </h6>
                 <p className="text-align-left" style={{ marginBottom: "0" }}>
-                  Location: City, Country
+                  {activity.location[0].city}
                 </p>
                 {/* <p>
                   {fromAndToDateFormatter(activity.startDate, activity.endDate)}

@@ -100,6 +100,9 @@ function Thankyou() {
     console.log("provider Name", providerName);
     console.log("provider ID", providerId);
   }, [otherCourses]);
+  const handleBookingPageNavigation = () => {
+    navigate('/mybooking')
+  }
   //   prevent from going back
   useEffect(() => {
     const handlePopState = () => {
@@ -123,8 +126,8 @@ function Thankyou() {
           <h6>{`Your order number is ${bookingCourseData.bookingId}`}</h6>
           <h6 className="mt-3">
             The pass for your order has been created. Please check the
-            <span className="myTickets">
-              <u>‘My Tickets’</u>
+            <span className="myTickets" onClick={handleBookingPageNavigation} >
+              <u> ‘My Bookings’ </u>
             </span>
             page or email shortly.
           </h6>
@@ -193,7 +196,7 @@ function Thankyou() {
                   <h4>{course.name}</h4>
                   <div className="eventDetailsText d-flex justify-content-between">
                     <p>
-                      {course.location?.[0]?.address || "No address available"}
+                      {course.location?.[0]?.city || "No address available"}
                     </p>
                   </div>
                   <p>Days: {course.days?.join(", ") || "No days specified"}</p>

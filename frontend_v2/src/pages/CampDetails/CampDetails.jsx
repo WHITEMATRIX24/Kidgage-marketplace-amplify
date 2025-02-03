@@ -45,44 +45,46 @@ function CampDetails({ activityData }) {
     }
   };
   useEffect(() => {
-    if (activityData?.location?.length > 0) {
+    if (isCampDetailsOpen && activityData?.location?.length > 0) {
+      const mapContainer = document.getElementById("map");
+
+      if (!mapContainer) return; // Ensure the map container exists
+
+      // Remove any existing map instance before creating a new one
+      if (mapContainer._leaflet_id) {
+        mapContainer.innerHTML = "";
+      }
+
       const locations = activityData.location;
+      const map = L.map("map");
 
-      setTimeout(() => {
-        const existingMap = document.getElementById("map")?._leaflet_id;
-        if (!existingMap) {
-          const map = L.map("map");
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
 
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: "&copy; OpenStreetMap contributors",
-          }).addTo(map);
+      const customIcon = L.icon({
+        iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+      });
 
-          const customIcon = L.icon({
-            iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-            shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-          });
+      const bounds = locations.map((loc) => {
+        const marker = L.marker([loc.lat, loc.lon], { icon: customIcon })
+          .addTo(map)
+          .bindPopup(`<b>${activityData.name}</b><br>${loc.address}`);
+        return [loc.lat, loc.lon];
+      });
 
-          const bounds = [];
-
-          locations.forEach((loc) => {
-            const marker = L.marker([loc.lat, loc.lon], { icon: customIcon })
-              .addTo(map)
-              .bindPopup(`<b>${activityData.name}</b><br>${loc.address}`);
-            bounds.push([loc.lat, loc.lon]);
-          });
-
-          if (bounds.length > 1) {
-            map.fitBounds(bounds);
-          } else {
-            map.setView(bounds[0], 14);
-          }
-        }
-      }, 200);
+      if (bounds.length > 1) {
+        map.fitBounds(bounds);
+      } else {
+        map.setView(bounds[0], 14);
+      }
     }
-  }, []);
+  }, [isCampDetailsOpen]); // Run effect when popup opens or closes
+
 
 
 

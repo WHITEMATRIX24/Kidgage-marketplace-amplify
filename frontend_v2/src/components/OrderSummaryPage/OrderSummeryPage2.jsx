@@ -199,7 +199,7 @@ function OrderSummeryPage2() {
                   <p className="fw-bold" style={{ fontSize: "16px" }}>
                     {`Total:${totalFee} QAR`}
                   </p>
-                  <p style={{ fontSize: "13px" }}>Today will start</p>
+                  {/* <p style={{ fontSize: "13px" }}>Today will start</p> */}
                 </div>
                 <button
                   style={{
