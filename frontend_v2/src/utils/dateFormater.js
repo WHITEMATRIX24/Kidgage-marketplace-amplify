@@ -26,6 +26,23 @@ export const findFirstDate = (dateArray) => {
   }
   return firstDate.toLocaleDateString();
 };
+export const findLastDate = (dateArray) => {
+  if (dateArray.length === 0) return null;
+
+  let lastDate = new Date(dateArray[0]);
+  lastDate.setHours(0, 0, 0, 0);
+
+  let count = 1;
+  while (count < dateArray.length) {
+    const newDate = new Date(dateArray[count]);
+    newDate.setHours(0, 0, 0, 0);
+
+    if (newDate > lastDate) lastDate = newDate;
+    count++;
+  }
+  return lastDate.toLocaleDateString();
+};
+
 
 // time formater
 export const formatTimeToString = (rawTime) => {

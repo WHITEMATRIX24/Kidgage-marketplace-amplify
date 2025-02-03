@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { jsPDF } from 'jspdf';
 
 import './MyBookings.css'
-import logo from '../../../assets/logo.png';
-import { getExistingUserDetailsByIdAPi } from "../../../services/allApis";
+import logo from '../../../assets/KIDGAGE.png';
+import { getExistingUserDetailsByIdAPi, getProviderDetailsApi } from "../../../services/allApis";
+import { findFirstDate, findLastDate } from "../../../utils/dateFormater";
 
 function MyBooking() {
     const [load,setLoading] = useState(false)
     const [user,setUser] = useState({})
     const [bookings, setBookings] = useState([])
-//function to generate pdf
 /* const [bookingData, setBookingData] = useState({
     bookingId: '12345',
     customerName: 'John Doe',
@@ -41,28 +41,39 @@ useEffect(()=>{
 const getUserData = async(id)=>{
     
     const result = await getExistingUserDetailsByIdAPi(id)
-        //console.log(result);
+        console.log(result);
         setBookings(result.userData.bookings)
 }
-  const generatePDF = (bookingData) => {
+
+//function to generate pdf
+
+  const generatePDF = async (bookingData) => {
+console.log(bookingData);
+
+    const result = await getProviderDetailsApi(bookingData)
+    //console.log(result);
+    const startDate = findFirstDate(bookingData.courseDuration.bookedDates)
+    
+    const lastDate = findLastDate(bookingData.courseDuration.bookedDates)
 
     const doc = new jsPDF();
      // Set light green background color for the logo and company name area
      doc.setFillColor( '#ACC29E'); // RGB color for light green
-     doc.rect(0, 0, 210, 40, 'F');  // Draw filled rectangle covering the header area (A4 page width is 210mm)
+     doc.rect(0, 0, 210, 30, 'F');  // Draw filled rectangle covering the header area (A4 page width is 210mm)
 
     // Add logo (positioning and size may need adjustment)
-    const logoImage = logo;  // Path to your logo image
-    doc.addImage(logoImage, 'PNG', 60, 5, 100, 30); // x, y, width, height
+    /* const logoImage = logo;  // Path to your logo image
+    doc.addImage(logoImage, 'PNG', 55, 5, 20, 20); // x, y, width, height */
 
-    /* // Add company name
-    doc.setFontSize(20);
+    // Add company name
+    doc.setFontSize(24);
+    doc.setFont('helvetica', 'bold');  
     doc.setTextColor('white')
-    doc.text('Kidgage.com', 80, 20);
-     */
+    doc.text('Kidgage', 80, 18);
+     
     doc.setFontSize(14);
     doc.setTextColor('black')
-
+    doc.setFont('helvetica', 'normal');  
     doc.text(`Thankyou ${user.email} For Your Booking. `, 20, 50);
     doc.setFontSize(16);
     doc.setTextColor('#ACC29E')
@@ -83,17 +94,20 @@ const getUserData = async(id)=>{
     doc.setFontSize(12);
     doc.text(`Booking ID:  #${bookingData.bookingId}`, 20, 85);
     doc.text(`Email: ${user.email}`, 20, 95);
-    doc.text(`Event Name: ${bookingData.courseName}`, 20, 105);
-    doc.text(`Booking Date: ${bookingData.bookingDate.slice(0,10)}`, 20, 115);
-    doc.text(`Course Duration: ${bookingData.courseDuration.duration} ${bookingData.courseDuration.durationUnit} `, 20, 125);
-    doc.text(`Start Date: ${bookingData.courseDuration.startDate.slice(0,10)}`, 20, 135);
-    doc.text(`End Date: ${bookingData.courseDuration.endDate.slice(0,10)}`, 20, 145);
-    doc.text(`Total No of Sessions: ${bookingData.courseDuration.noOfSessions}`, 20, 155);
+    doc.text(`Academy Name: ${result.username}`, 20, 105);
 
+    doc.text(`Event Name: ${bookingData.courseName}`, 20, 115);
+    doc.text(`Booking Date: ${bookingData.bookingDate.slice(0,9)}`, 20, 125);
+    doc.text(`Course Duration: ${bookingData.courseDuration.duration} ${bookingData.courseDuration.durationUnit} `, 20, 135);
+    doc.text(`Start Date: ${startDate.slice(0,10)}`, 20, 145);
+    doc.text(`End Date: ${lastDate.slice(0,10)}`, 20, 155);
+    doc.text(`Total No of Sessions: ${bookingData.courseDuration.noOfSessions}`, 20, 165);
+
+    
     doc.setFontSize(14);
-    doc.text(`Payment Details`, 20, 170);
+    doc.text(`Payment Details`, 20, 175);
     // Add payment details table header
-    const startY = 175;
+    const startY = 185;
     // Draw the table headers with borders
     const cellPadding = 5;
     const columnWidths = [60, 50, 60]; // Widths for each column
@@ -115,7 +129,10 @@ const getUserData = async(id)=>{
       const rowY = startY + (0 + 1) * 10;
 
       // Draw cells with text and borders
-      doc.text(bookingData.paymentDetails.paymentMethod, 20 + cellPadding, rowY + cellPadding);
+      doc.text((bookingData.paymentDetails.paymentMethod.replace(/-/g, ' ').split(' ') // Split the string into words
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize first letter of each word
+      .join(' ') // Join the words back together with spaces
+    ), 20 + cellPadding, rowY + cellPadding);
       doc.rect(20, rowY, columnWidths[0], 10);  // Payment Method cell
       doc.text(`QAR ${(bookingData.courseDuration.fee)}`, 20 + columnWidths[0] + cellPadding, rowY + cellPadding);
       doc.rect(20 + columnWidths[0], rowY, columnWidths[1], 10);  // Amount cell
@@ -146,7 +163,7 @@ const getUserData = async(id)=>{
                     <h1>My Bookings</h1>
                 </div>
                 <div className="row">
-                    {bookings.map((item)=>(<div className="col-md-6 m-0 mt-4">
+                    {bookings.map((item)=>(<div className="col-xl-6 m-0 mt-4">
 
                     <div key={item.bookingId} className="booking-box">
                             <div className="booking-content">
