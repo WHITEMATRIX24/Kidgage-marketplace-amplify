@@ -9,6 +9,7 @@ const nodemailer = require("nodemailer");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
+const { findFirstDate, calculateNextDate } = require("../helpers/dateHelpers");
 
 let otpStore = {};
 const transporter = nodemailer.createTransport({
@@ -527,10 +528,6 @@ router.post("/mark-event-on-calender/:userId/:bookingId", async (req, res) => {
       (val) => val.bookingId === bookingId
     );
 
-    // setting the end date
-    let endDate = new Date(courseDetails.courseDuration.startDate);
-    endDate.setDate(endDate.getDate() + 1);
-
     const calender = google.calendar({ version: "v3", auth: oauth2Client });
 
     const event = {
@@ -541,12 +538,12 @@ router.post("/mark-event-on-calender/:userId/:bookingId", async (req, res) => {
       }
        starts on ${courseDetails.courseDuration.startDate.toDateString()}`,
       start: {
-        date: courseDetails.courseDuration.startDate
-          .toISOString()
-          .split("T")[0],
+        date: findFirstDate(courseDetails.courseDuration.bookedDates),
       },
       end: {
-        date: endDate.toISOString().split("T")[0],
+        date: calculateNextDate(
+          findFirstDate(courseDetails.courseDuration.bookedDates)
+        ),
       },
       // attendees: [{ email: "example@example.com" }],
     };
