@@ -176,7 +176,7 @@ function CampDetails({ activityData }) {
                 </h5>
                 <div className="row  ">
                   {activityData.faq?.map((item) => (
-                    <div className="col-md-6 mt-3">
+                    <div className=" mt-3">
                       <p style={{ color: "black", textAlign: 'start' }}>{item.question}</p>
                       <h6 style={{ color: "black", textAlign: 'start' }}>{item.answer} </h6>
                     </div>
