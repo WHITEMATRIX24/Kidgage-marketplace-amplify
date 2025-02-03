@@ -7,8 +7,13 @@ import { BookingCourseContext } from "../../context/bookingContext";
 import { findFirstDate } from "../../utils/dateFormater";
 import { useNavigate } from "react-router";
 import { SelectedCourseContext } from "../../context/courseContext";
-import { getActivitydetailsByIdApi, getMoreCampDetailsByProviderApi } from "../../services/allApis";
+import {
+  addEventToCalenderApi,
+  getActivitydetailsByIdApi,
+  getMoreCampDetailsByProviderApi,
+} from "../../services/allApis";
 import AcademyDetails from "../AcademyDetails/FootballAcademyDetails";
+import Swal from "sweetalert2";
 
 function Thankyou() {
   const { selectedCourseData } = useContext(SelectedCourseContext);
@@ -22,7 +27,7 @@ function Thankyou() {
     setAcademyVisible(true);
   };
   const closeAcademyDetails = () => setAcademyVisible(false);
-  console.log(bookingCourseData);
+
   useEffect(() => {
     if (selectedCourseData?._id) {
       fetchCourseDetails(selectedCourseData._id);
@@ -31,8 +36,10 @@ function Thankyou() {
   }, [selectedCourseData]);
   const fetchCourseDetails = async (courseId) => {
     try {
-      const response = await getActivitydetailsByIdApi({ activityId: courseId });
-      console.log("course", response)
+      const response = await getActivitydetailsByIdApi({
+        activityId: courseId,
+      });
+      console.log("course", response);
       if (response && response.providerDetails?.fullName) {
         setProviderName(response.providerDetails.fullName);
         setProviderId(response.providerDetails?._id);
@@ -53,7 +60,6 @@ function Thankyou() {
       console.log("Fetching other courses...");
       const response = await getMoreCampDetailsByProviderApi({ courseId });
 
-
       console.log("Response received in fetchOtherCourses:", response); // Check structure
 
       if (Array.isArray(response)) {
@@ -68,10 +74,31 @@ function Thankyou() {
     }
   };
 
+  // create event in calender handler
+  const handleCreateCalenderEvent = async () => {
+    const userData = JSON.parse(sessionStorage.getItem("user"));
+
+    const response = await addEventToCalenderApi({
+      userId: userData._id,
+      bookingId: bookingCourseData.bookingId,
+    });
+    if (!response) return alert("something went wrong on adding to calender");
+
+    Swal.fire({
+      title: "Added successfully",
+      text: "Congrats! You have successfully added the event on google calender",
+      icon: "success",
+      confirmButtonColor: "#ACC29E",
+      customClass: {
+        popup: "custom-border-radius",
+      },
+    });
+  };
+
   useEffect(() => {
     console.log("Updated otherCourses:", otherCourses);
     console.log("provider Name", providerName);
-    console.log("provider ID", providerId)
+    console.log("provider ID", providerId);
   }, [otherCourses]);
   //   prevent from going back
   useEffect(() => {
@@ -133,7 +160,12 @@ function Thankyou() {
                 type="text"
                 readOnly
               />
-              <button className="addToCalenderButton">Add to Calender</button>
+              <button
+                className="addToCalenderButton"
+                onClick={handleCreateCalenderEvent}
+              >
+                Add to Calender
+              </button>
             </div>
           </div>
         </div>
@@ -144,24 +176,30 @@ function Thankyou() {
         <div className="rightDivContent mt-4 mt-xl-0  ps-md-4 ">
           <h1 className="tittle">More camp</h1>
           <h3 className="subTitle mb-3">
-            Organised by <u onClick={openAcademyDetails}>{providerName || "Unknown Provider"}</u>
+            Organised by{" "}
+            <u onClick={openAcademyDetails}>
+              {providerName || "Unknown Provider"}
+            </u>
           </h3>
           <div className="tileImageContainer">
-
             {otherCourses?.slice(0, 4).map((course) => (
               <div key={course._id} className="eventTiles">
-                <img className="tileImage w-100" src={course.images[0]} alt="" />
+                <img
+                  className="tileImage w-100"
+                  src={course.images[0]}
+                  alt=""
+                />
                 <div className="eventDetails">
                   <h4>{course.name}</h4>
                   <div className="eventDetailsText d-flex justify-content-between">
-                    <p>{course.location?.[0]?.address || "No address available"}</p>
-
+                    <p>
+                      {course.location?.[0]?.address || "No address available"}
+                    </p>
                   </div>
                   <p>Days: {course.days?.join(", ") || "No days specified"}</p>
                 </div>
               </div>
             )) ?? <p>No other courses available.</p>}
-
           </div>
         </div>
         {/* <div className="tileImageContainer">
@@ -230,11 +268,7 @@ function Thankyou() {
           />
         )}
       </div>
-
-
-
-
-    </div >
+    </div>
   );
 }
 

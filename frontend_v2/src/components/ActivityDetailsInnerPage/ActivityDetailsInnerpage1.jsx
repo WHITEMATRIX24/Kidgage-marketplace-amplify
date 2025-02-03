@@ -102,12 +102,12 @@ function ActivityDetailsInnerpage1({ activityData }) {
           <div className="activity-heading fw-bold mt-4">
             <h2 className="fw-bold">{activityData.name}</h2>
             <h6>Organised by </h6>
-            <h6 onClick={openAcademyDetails}>
-              {" "}
-              {activityData.name === "Evening Football Camp"
-                ? "ASPIRE SPORTS ACADEMY"
-                : activityData.providerDetails.fullName}
-            </h6>
+            <h5
+              className="activity-providerpopup-text"
+              onClick={openAcademyDetails}
+            >
+              {activityData.providerDetails.fullName}
+            </h5>
           </div>
         </Col>
       </Row>
@@ -204,10 +204,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                 />
                 <div style={{ lineHeight: "1px" }} className="flex-column mt-3">
                   <p className="fw-bold" style={{ fontSize: "18px" }}>
-                    {" "}
-                    {activityData.name === "Evening Football Camp"
-                      ? "ASPIRE SPORTS ACADEMY"
-                      : activityData.providerDetails.fullName}
+                    {activityData.providerDetails.fullName}
                   </p>
                   <p style={{ fontSize: "12px", marginTop: "30px" }}></p>
                 </div>

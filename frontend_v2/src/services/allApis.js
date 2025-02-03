@@ -267,3 +267,18 @@ export const getMoreCampDetailsByProviderApi = async ({ courseId }) => {
     return null;
   }
 };
+
+// calender event adding api
+export const addEventToCalenderApi = async ({ userId, bookingId }) => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: `/customers/mark-event-on-calender/${userId}/${bookingId}`,
+      apiMethod: "POST",
+    });
+
+    if (response.status != 200) return console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(`error in booking courses, error: ${error}`);
+  }
+};

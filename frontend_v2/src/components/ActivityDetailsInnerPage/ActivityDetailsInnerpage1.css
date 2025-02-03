@@ -119,6 +119,13 @@
   height: 150px;
 }
 
+.activity-providerpopup-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #acc29e;
+  cursor: pointer;
+}
+
 @media (max-width: 1366px) {
   .card-container-div {
     margin-left: 20px;
@@ -130,7 +137,6 @@
   .card-container-div {
     margin-left: 20px;
     margin-right: 20px;
-
   }
 
   .share-text {
@@ -204,9 +210,7 @@
 
   .camp-duration-selected-btn {
     margin-top: 20px !important;
-
   }
-
 
   .age-container {
     border-radius: 20px 20px 0px 0px;

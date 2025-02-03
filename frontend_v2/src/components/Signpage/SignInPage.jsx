@@ -131,7 +131,7 @@ function SignInPage() {
       navigate("/signin-success");
     },
     onError: handleLoginFailure,
-
+    scope: "https://www.googleapis.com/auth/calendar.events",
     flow: "explicit", // explicut for retrieving data in backend
   });
 

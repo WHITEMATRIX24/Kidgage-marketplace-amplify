@@ -46,18 +46,17 @@ router.get("/search", async (req, res) => {
       endAgeDate.setFullYear(currentDate.getFullYear() - parseInt(endAge, 10));
       endAgeDate.setHours(0, 0, 0, 0);
 
-      if (startAge && endAge) {
-        courseAggregationPipeline.push({
-          $match: {
-            ageGroup: {
-              $elemMatch: {
-                ageStart: { $lte: startAgeDate },
-                ageEnd: { $gte: endAgeDate },
-              },
+      // pipline
+      courseAggregationPipeline.push({
+        $match: {
+          ageGroup: {
+            $elemMatch: {
+              ageStart: { $lte: startAgeDate },
+              ageEnd: { $gte: endAgeDate },
             },
           },
-        });
-      }
+        },
+      });
     }
     const course = await Course.aggregate(
       courseAggregationPipeline.length > 0 ? courseAggregationPipeline : [{}]
@@ -169,7 +168,7 @@ router.get("/lowest-fee/:category", async (req, res) => {
 router.get("/other/:courseId", async (req, res) => {
   try {
     const { courseId } = req.params;
-    console.log("from bacend corse id", courseId)
+    console.log("from bacend corse id", courseId);
     // Find the current course to get the providerId
     const currentCourse = await Course.findById(courseId);
     if (!currentCourse) {

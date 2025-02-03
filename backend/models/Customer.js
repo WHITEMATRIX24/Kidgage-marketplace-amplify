@@ -31,6 +31,10 @@ const CustomerSchema = new mongoose.Schema(
   {
     name: { type: String },
     email: { type: String, required: true, unique: true },
+    gToken: {
+      access_token: { type: String },
+      refresh_token: { type: String },
+    },
     bookings: [BookingSchema],
   },
   { timestamps: true }
