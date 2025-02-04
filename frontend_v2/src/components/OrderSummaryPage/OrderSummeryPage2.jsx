@@ -34,8 +34,9 @@ function OrderSummeryPage2() {
   const handleCheckPaymentMethod = (e) => {
     setSelectedPaymentMethod(e.target.value);
   };
-
+const [disableContinue, setDisableContinue] = useState(true)
   const handleContinue = async () => {
+    setDisableContinue(false)
     if (!selectedPaymentMethod) return;
     const userData = JSON.parse(sessionStorage.getItem("user"));
 
@@ -54,7 +55,9 @@ function OrderSummeryPage2() {
     });
     console.log(response);
 
-    if (response) setCourseBookingData(response.finalBookingData);
+    if (response){ setCourseBookingData(response.finalBookingData);
+      setDisableContinue(true)
+    }
 
     Swal.fire({
       title: "Booking Success!",
@@ -92,7 +95,7 @@ function OrderSummeryPage2() {
         </div>
         <div className="activity-details-rigth-1">
           <div className="rounded-4 activity-content-1 ">
-            <div className=" w-100">
+            <div className=" w-100 order-content" style={{marginTop:'-30px'}}>
               <div className="signIn-heading fw-bold">
                 <h2 className="fw-bold">{bookingData.courseName}</h2>
                 <h6>{bookingData.providedAcademy}</h6>
@@ -195,13 +198,13 @@ function OrderSummeryPage2() {
               </div>
 
               <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box  mt-3 d-none d-md-flex ">
-                <div className=" age-box-content  ">
+                <div className=" age-box-content d-flex align-items-center justify-content-center ">
                   <p className="fw-bold" style={{ fontSize: "16px" }}>
                     {`Total:${totalFee} QAR`}
                   </p>
                   {/* <p style={{ fontSize: "13px" }}>Today will start</p> */}
                 </div>
-                <button
+                <button disabled={!disableContinue || !selectedPaymentMethod}
                   style={{
                     backgroundImage: selectedPaymentMethod
                       ? "linear-gradient(to right, #FDD687, #F5A691)"
@@ -218,11 +221,11 @@ function OrderSummeryPage2() {
               </div>
               <div className="checkout-container">
                 <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
-                  <div className=" age-box-content ">
+                  <div className=" age-box-content d-flex align-items-center justify-content-center ">
                     <p className="fw-bold" style={{ fontSize: "16px" }}>
-                      QAR 199:
+                    {`${totalFee} QAR`}
                     </p>
-                    <p style={{ fontSize: "13px" }}>Today will start</p>
+                    {/* <p style={{ fontSize: "13px" }}>Today will start</p> */}
                   </div>
                   <button
                     className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"

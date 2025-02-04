@@ -12,6 +12,7 @@
 
 .age-box {
     margin-bottom: 35px;
+    height: 60px;
 }
 
 .order-checkbox {
@@ -37,6 +38,9 @@
 }
 
 @media (max-width: 768px) {
+    .order-content{
+        margin-top: 0px !important;
+    }
     .age-box {
         display: none;
     }
