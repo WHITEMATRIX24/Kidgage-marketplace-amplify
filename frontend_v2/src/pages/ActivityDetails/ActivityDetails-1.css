@@ -291,6 +291,7 @@ border-radius: 15px;
     .activity-content-1 {
         min-width: 330px;
         max-width: 350px;
+        margin-bottom: 100px;
     }
 
     .activity-image-1 {

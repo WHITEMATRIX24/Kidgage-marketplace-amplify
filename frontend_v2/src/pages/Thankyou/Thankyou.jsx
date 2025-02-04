@@ -5,7 +5,7 @@ import "./Thankyou.css";
 import CampDetails from "../CampDetails/CampDetails";
 import { BookingCourseContext } from "../../context/bookingContext";
 import { findFirstDate } from "../../utils/dateFormater";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { SelectedCourseContext } from "../../context/courseContext";
 import {
   addEventToCalenderApi,
@@ -187,20 +187,26 @@ function Thankyou() {
           <div className="tileImageContainer">
             {otherCourses?.slice(0, 4).map((course) => (
               <div key={course._id} className="eventTiles">
-                <img
-                  className="tileImage w-100"
-                  src={course.images[0]}
-                  alt=""
-                />
-                <div className="eventDetails">
-                  <h4>{course.name}</h4>
-                  <div className="eventDetailsText d-flex justify-content-between">
-                    <p>
-                      {course.location?.[0]?.city || "No address available"}
-                    </p>
+                <Link
+                  to={`/activity-detail/${course._id}`}
+                  className="activity-tile text-decoration-none text-black"
+                  key={course._id}
+                >
+                  <img
+                    className="tileImage w-100"
+                    src={course.images[0]}
+                    alt=""
+                  />
+                  <div className="eventDetails">
+                    <h4>{course.name}</h4>
+                    <div className="eventDetailsText d-flex justify-content-between">
+                      <p>
+                        {course.location?.[0]?.city || "No address available"}
+                      </p>
+                    </div>
+                    <p>Days: {course.days?.join(", ") || "No days specified"}</p>
                   </div>
-                  <p>Days: {course.days?.join(", ") || "No days specified"}</p>
-                </div>
+                </Link>
               </div>
             )) ?? <p>No other courses available.</p>}
           </div>

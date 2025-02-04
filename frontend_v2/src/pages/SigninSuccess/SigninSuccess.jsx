@@ -113,7 +113,7 @@ function SigninSuccess() {
                   <h5 className="order">{`${bookingDetails.courseDuration.duration} ${bookingDetails.courseDuration.durationUnit} pass `}</h5>
                 </div>
                 <div className="col-6 text-end">
-                  <h5 className="order">{` ${bookingDetails.courseDuration.fee}`}</h5>
+                  <h5 className="order">{`QAR ${bookingDetails.courseDuration.fee}`}</h5>
                 </div>
               </div>
               <div className="row mt-1 mt-md-0">
@@ -130,7 +130,7 @@ function SigninSuccess() {
             <div className="signinSuccessFinalDetails ms-0 ms-xl-3 mt-3 mb-4">
               <div className="row">
                 <div className="col-6">
-                  <h3 className="total m-3">{`Total ${totalFees} QAR`}</h3>
+                  <h3 className="total m-3">{`Total: QAR ${totalFees} `}</h3>
                   {/* <p className="font12 m-0">Today will start</p> */}
                 </div>
                 <div className="col-6 d-flex align-items-center justify-content-center">
@@ -150,7 +150,7 @@ function SigninSuccess() {
           <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
             <div className=" age-box-content ">
               <p className="fw-bold" style={{ fontSize: "16px", marginTop: "15px" }}>
-                {`QAR ${bookingDetails.courseDuration.fee}`}
+                {`Total: QAR ${bookingDetails.courseDuration.fee}`}
               </p>
 
             </div>

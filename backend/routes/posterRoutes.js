@@ -7,15 +7,13 @@ const router = express.Router();
 
 // Route to fetch all posters or wishlist posters based on query parameter
 router.get('/', async (req, res) => {
-  const { wishlist } = req.query;
+
 
   try {
-    let posters;
-    if (wishlist === 'true') {
-      posters = await Poster.find({ wishlist: true });
-    } else {
-      posters = await Poster.find();
-    }
+    const posters = await Poster.find(
+      { activeStatus: true }
+
+    );
 
     console.log('Fetched posters:', posters.length); // Logging number of posters fetched
     res.status(200).json(posters);

@@ -63,16 +63,15 @@ z-index: 1000; */
 }
  */
 
-.profile-container {
-   
-}
-.customerProfile{
+.profile-container {}
+
+.customerProfile {
     margin: 5px;
     height: 180px;
     padding: 20px;
     background-color: #181818;
-    border-radius: 15px;    
-   }
+    border-radius: 15px;
+}
 
 .header-h2 h2 {
     font-size: 24px;
@@ -97,6 +96,7 @@ z-index: 1000; */
     font-weight: bold;
     color: white;
     margin: 0;
+    cursor: pointer;
 }
 
 .profile-email {

@@ -72,11 +72,33 @@ function EventDetails() {
                     </div>
                     <div className="event-details-description">
                         <h6>Surprise! We are back with</h6>
-                        <p>{eventDetails.description}</p>
+                        <p style={{ fontSize: "16px" }}>{eventDetails.description}</p>
                     </div>
                 </div>
             </div>
-        </div>
+            <div className="checkout-container">
+                <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
+                    <div className=" age-box-content ">
+                        <p className="fw-bold" style={{ fontSize: "10px", marginTop: "15px" }}>
+                            {formatEventDate(eventDetails.startDate, eventDetails.endDate)}
+                        </p>
+
+                    </div>
+                    <button
+                        className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"
+                        style={{
+                            backgroundImage: "linear-gradient(to right,#FDD687, #F5A691)",
+                            width: "230px",
+                            height: "50px",
+                        }}
+                        onClick={handleBookingClick}
+
+                    >
+                        Booking
+                    </button>
+                </div>
+            </div>
+        </div >
     );
 }
 

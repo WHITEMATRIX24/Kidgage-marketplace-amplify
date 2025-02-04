@@ -333,7 +333,7 @@ function ProviderJoiningForm() {
                             </div>
 
                         </div>
-                        <div className="row w-100 p-2 p-lg-0 buttonDiv d-flex align-items-center justify-content-center" >
+                        <div className="row w-100 buttonDiv d-flex align-items-center justify-content-center" >
                             <div className="col-md-7 d-flex align-items-center justify-content-center">
                                 <div className="checkbox-container  d-flex align-items-center justify-content-center flex-column">
                                     <div className='d-flex align-items-center justify-content-center'>
@@ -347,7 +347,7 @@ function ProviderJoiningForm() {
                                         <label className='ms-2 termsText' htmlFor="terms">I agree that all provided information is correct for administrators' verification.</label>
                                     </div>
 
-                                    <Link className='termsText' to={'privacy-policy'}>View Privacy Policy</Link>
+                                    {/* <Link className='termsText' to={'privacy-policy'}>View Privacy Policy</Link> */}
                                 </div>
                             </div>
                             <div className="col-md-5 px-0 d-flex " style={{ height: '60px' }}>
