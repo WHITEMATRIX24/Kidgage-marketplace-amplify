@@ -113,6 +113,7 @@ function SigninPopup({setShowSigninPopup}) {
   /* Google Login Function */
 
   const handleLoginFailure = (error) => {
+    alert('Something Went Wrong')
     // Handle the error if the login fails
     console.error("Login failed:", error);
   };
@@ -124,9 +125,7 @@ function SigninPopup({setShowSigninPopup}) {
 
       console.log(access_token);
 
-      const userInfo = await getUserSignindetailsByGoogleSigninApi(
-        tokenResponse
-      );
+      const userInfo = await getUserSignindetailsByGoogleSigninApi(tokenResponse);
 
       console.log(userInfo);
 
@@ -145,7 +144,7 @@ function SigninPopup({setShowSigninPopup}) {
       setshowSigninPopup(false)
     },
     onError: handleLoginFailure,
-
+    scope: "https://www.googleapis.com/auth/calendar.events",
     flow: "explicit", // explicut for retrieving data in backend
   });
 
