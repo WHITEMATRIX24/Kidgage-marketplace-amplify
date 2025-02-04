@@ -65,7 +65,7 @@ function SigninSuccess() {
             <span className="share-text">Edit</span>
           </div>
           <div className="signinSuccessactivity-content">
-            <Row>
+            <Row className="w-100">
               <Col sm={12} md={6} lg={4} className="w-100">
                 <div className="signinSuccessactivity-heading fw-bold mt-3 mt-xl-0 mt-xl-3">
                   <h2 className="campTitle">{bookingDetails.courseName}</h2>

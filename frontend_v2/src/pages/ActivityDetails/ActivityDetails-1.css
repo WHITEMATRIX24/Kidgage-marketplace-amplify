@@ -67,7 +67,7 @@
     /* Centers items vertically */
     gap: 50px;
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     /* Ensures full viewport height for vertical centering */
 }
 

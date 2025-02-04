@@ -161,13 +161,17 @@ border-radius: 15px;
     border-radius: 15px;
     border: 1px solid #000;
     max-width: 500px;
+    min-height: 600px;
     align-items: center;
     justify-content: center;
-    padding: 0px 35px;
+    padding: 0px 0px 0px 30px;
 }
 
 .signinSuccessshare-container {
     background-color: #F5A691;
+    width: 80px;
+    height: 30px;
+    border-radius: 0px 15px 0px 15px;
 }
 
 .signinSuccessactivity-heading {
@@ -331,7 +335,9 @@ border-radius: 15px;
     .signinSuccessactivity-details-left {
         display: none;
     }
-
+.signinSuccessshare-container {
+    display: none;
+}
     .signinSuccessactivity-details-right {
         width: 100%;
         margin: 12px;
@@ -428,6 +434,9 @@ border-radius: 15px;
     .signinSuccessactivity-btn-container {
         width: 470px;
 
+    }
+    .signinSuccessactivity-content{
+       max-width: 520px;
     }
 }
 
