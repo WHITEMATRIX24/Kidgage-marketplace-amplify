@@ -32,6 +32,7 @@ function Thankyou() {
     if (selectedCourseData?._id) {
       fetchCourseDetails(selectedCourseData._id);
       fetchOtherCourses(selectedCourseData._id);
+      sessionStorage.setItem("selectedCource", JSON.stringify(selectedCourseData));
     }
   }, [selectedCourseData]);
   const fetchCourseDetails = async (courseId) => {
@@ -123,7 +124,7 @@ function Thankyou() {
       <div className="activity-details-right-1">
         <div className="thanksLeftOrder">
           <h1 className="">Thanks for order!</h1>
-          <h6>{`Your order number is ${bookingCourseData.bookingId}`}</h6>
+          <h6>{`Your order number is ${bookingCourseData?.bookingId}`}</h6>
           <h6 className="mt-3">
             The pass for your order has been created. Please check the
             <span className="myTickets" onClick={handleBookingPageNavigation} >
@@ -133,8 +134,8 @@ function Thankyou() {
           </h6>
           <div className="eventAttending mt-4">
             <h6>You are attending</h6>
-            <h1 className="eventName">Football camp</h1>
-            <h6>Event location</h6>
+            <h1 className="eventName">{bookingCourseData?.courseName}</h1>
+            {/* <h6>Event location</h6> */}
           </div>
           <p className="sendWhatsapp mt-4">Send pass via WhatsApp</p>
           <div className="row ">
