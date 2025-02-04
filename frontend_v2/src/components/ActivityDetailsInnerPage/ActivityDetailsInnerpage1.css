@@ -5,11 +5,12 @@
 
 .share-text {
   display: inline-block;
+
 }
 
 .share-container {
   background-color: #f5a691;
-  /* Correct syntax */
+  height: 30px;
 }
 
 .age-container {
@@ -117,6 +118,7 @@
 .card2 {
   width: 130px;
   height: 150px;
+  border-radius: 15px;
 }
 
 .activity-providerpopup-text {

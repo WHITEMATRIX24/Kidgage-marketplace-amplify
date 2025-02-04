@@ -149,10 +149,10 @@ function SigninSuccess() {
         <div className="checkout-container">
           <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
             <div className=" age-box-content ">
-              <p className="fw-bold" style={{ fontSize: "16px" }}>
-                QAR 199:
+              <p className="fw-bold" style={{ fontSize: "16px", marginTop: "15px" }}>
+                {`QAR ${bookingDetails.courseDuration.fee}`}
               </p>
-              <p style={{ fontSize: "12px" }}>Today will start</p>
+
             </div>
             <button
               className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"

@@ -76,9 +76,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
   return (
     <>
       <Row>
-        <Col sm={12} md={6} lg={4} className="w-100">
+        <Col className="w-100">
           <div
-            className="share-container float-end px-4"
+            className="share-container float-end px-4 mr-3"
             style={{
               borderTopLeftRadius: "0px",
               borderBottomLeftRadius: "15px",
@@ -97,7 +97,12 @@ function ActivityDetailsInnerpage1({ activityData }) {
             >
               share
             </span>
-            <FontAwesomeIcon className="share-icon" icon={faShareNodes} />
+            <FontAwesomeIcon className="share-icon" icon={faShareNodes} onClick={() =>
+              handleShare({
+                courseName: activityData.name,
+                courseDesc: activityData.description,
+              })
+            } />
           </div>
           <div className="activity-heading fw-bold mt-4">
             <h2 className="fw-bold">{activityData.name}</h2>
@@ -122,7 +127,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
               className="d-flex  mt-2"
               key={courseType._id}
             >
-              <Card className="d-flex card1 rounded-4">
+              <Card className="d-flex card1 ">
                 <Card.Body className="d-flex align-items-center justify-content-center flex-column">
                   <Card.Title>{`${courseType.duration} ${courseType.durationUnit}`}</Card.Title>
                   <Card.Text
@@ -132,12 +137,11 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     Seat Details and More options
                   </Card.Text>
                   <button
-                    className={`border-0 mb-1 rounded-3 ${
-                      campDurationSelected ===
+                    className={`border-0 mb-1  ${campDurationSelected ===
                       `${courseType.duration}${courseType.durationUnit}`
-                        ? "camp-duration-selected-btn"
-                        : "card-btn"
-                    }`}
+                      ? "camp-duration-selected-btn"
+                      : "card-btn"
+                      }`}
                     onClick={() =>
                       handleSelectCoursePackeage(
                         activityData?.days,
@@ -145,9 +149,10 @@ function ActivityDetailsInnerpage1({ activityData }) {
                         [courseType]
                       )
                     }
+                    style={{ borderRadius: "10px" }}
                   >
                     {campDurationSelected ===
-                    `${courseType.duration}${courseType.durationUnit}`
+                      `${courseType.duration}${courseType.durationUnit}`
                       ? "Selected"
                       : "Select"}
                   </button>
@@ -206,7 +211,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <p className="fw-bold" style={{ fontSize: "18px" }}>
                     {activityData.providerDetails.fullName}
                   </p>
-                  <p style={{ fontSize: "12px", marginTop: "30px" }}></p>
+                  <p style={{ fontSize: "12px", marginTop: "33px" }}></p>
                 </div>
               </div>
 
@@ -233,9 +238,8 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   </p>
                 </div>
                 <button
-                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
-                    campDurationSelected ? "activate-continue-btn" : ""
-                  }`}
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${campDurationSelected ? "activate-continue-btn" : ""
+                    }`}
                   onClick={handleContinue}
                 >
                   Continue

@@ -14,17 +14,24 @@ import {
 import { userDataContext } from "../../context/LoginUserContext";
 import Swal from "sweetalert2";
 import useRefreshAlert from "../../hooks/useRefreshAlert";
+import { BookingCourseContext } from "../../context/bookingContext";
 
 function SignInPage() {
   useRefreshAlert();
   const { selectedCourseData } = useContext(SelectedCourseContext);
+  const { bookingCourseData } = useContext(BookingCourseContext);
   const { userData, setUserData } = useContext(userDataContext);
   const navigate = useNavigate();
   // if not data redirect
   if (!selectedCourseData) return window.location.replace("/");
 
   const [email, setEmail] = useState("");
-
+  const [bookingDetails, setBBookingDetails] = useState(
+    bookingCourseData || {}
+  );
+  const [totalFees, setTotalFees] = useState(
+    bookingDetails.courseDuration.fee || ""
+  );
   const handleContinue = async () => {
     sessionStorage.removeItem("user");
 
@@ -266,10 +273,10 @@ function SignInPage() {
               <div className="checkout-container">
                 <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
                   <div className=" age-box-content ">
-                    <p className="fw-bold" style={{ fontSize: "16px" }}>
-                      QAR 199:
+                    <p className="fw-bold" style={{ fontSize: "16px", marginTop: "15px" }}>
+                      {`QAR ${bookingDetails.courseDuration.fee}`}
                     </p>
-                    <p style={{ fontSize: "12px" }}>Today will start</p>
+
                   </div>
                   <button
                     className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"

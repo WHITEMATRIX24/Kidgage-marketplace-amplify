@@ -152,9 +152,8 @@ const CalendarPopup = ({
 
       daysArray.push(
         <div
-          className={`calendar-day ${isOffDays ? "disabled" : ""} ${
-            selected ? "selected" : ""
-          }`}
+          className={`calendar-day ${isOffDays ? "disabled" : ""} ${selected ? "selected" : ""
+            }`}
           key={`day-${day}`}
           onClick={isOffDays ? null : () => toggleDateSelection(currentDay)}
         >
@@ -230,7 +229,7 @@ const CalendarPopup = ({
               rawEndAge: selectedCourseData.ageGroup[0].ageEnd,
             })}`}</h3>
           </div>
-          <div className="row d-flex align-items-center justify-content-center p-3">
+          <div className="row d-flex align-items-center justify-content-between p-3">
             <div className="col-6">
               <div className="calendar-header bg-dark px-2">
                 <button
@@ -259,7 +258,7 @@ const CalendarPopup = ({
               </div>
             </div>
             {/* {!data && ( */}
-            <div className="col-6">
+            <div className="col-6 d-flex justify-content-end">
               <select
                 className="package p-2 rounded"
                 value={`${selectedPackage.duration}${selectedPackage.durationUnit}`}
@@ -286,7 +285,7 @@ const CalendarPopup = ({
             ))}
           </div>
           <div className="calendar-grid">{renderCalendar()}</div>
-          <div className="row calendarButtons rounded mt-3 mx-2  px-1">
+          <div className="row calendarButtons  mt-3 mx-2  px-1">
             <div className="timeslotDropdown col-6 col-lg-5 p-1 ps-2">
               {/* <select
                 className="timeSlot p-2 rounded"
@@ -306,18 +305,16 @@ const CalendarPopup = ({
                 <FontAwesomeIcon icon={faAngleUp} />
               </span>{" "} */}
               {/* Custom up arrow */}
-              <h6 className="m-0 fw-bold fs-5">{`QRA ${
-                selectedPackage?.fee || ""
-              }`}</h6>
+              <h6 className="m-0 fw-bold fs-5">{`QAR ${selectedPackage?.fee || ""
+                }`}</h6>
               <p className="m-0">{`${selectedPackage?.noOfSessions} Sessions`}</p>
             </div>
-            <div className="col-6 col-lg-7 p-1">
+            <div className="col-6 col-lg-7">
               <button
-                className={`${
-                  selectedDates.length > 0
-                    ? "CalContinueButton"
-                    : "CalContinueDeselectButton"
-                }`}
+                className={`${selectedDates.length > 0
+                  ? "CalContinueButton"
+                  : "CalContinueDeselectButton"
+                  }`}
                 onClick={handleContinue}
               >
                 Continue

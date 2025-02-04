@@ -20,7 +20,7 @@
 .booking-box {
     min-width: 450px;
     max-width: 500px;
-    height: 100px;
+    min-height: 100px;
     border: 1px solid rgba(208, 208, 208, 1);
     border-radius: 15px;
 }

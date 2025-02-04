@@ -175,6 +175,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 15px;
 }
 
 .CalContinueDeselectButton {
@@ -186,7 +187,7 @@
   border-radius: 10px;
   border: none;
   width: 230px;
-  height: 48px;
+  height: 50px;
 }
 
 .CalContinueButton {
@@ -247,6 +248,7 @@
     height: auto;
     z-index: 5000;
   }
+
   .calendar-popup {
     display: block;
     position: absolute;
@@ -259,11 +261,13 @@
     border-radius: 15px;
     width: 92%;
   }
+
   .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 40px);
     grid-gap: 4px;
   }
+
   .monthName {
     font-size: 12px;
     font-weight: 700;
@@ -276,6 +280,7 @@
     font-weight: bold;
     margin-bottom: 5px;
   }
+
   .calendar-popup h1 {
     font-size: 24px;
     font-weight: 700;
@@ -293,6 +298,7 @@
   .calendar-day {
     font-size: 12px;
   }
+
   .calendar-header {
     display: flex;
     align-items: center;
@@ -302,6 +308,7 @@
     width: 140px;
     height: 33px;
   }
+
   .package {
     padding: "15px";
     border-radius: "10px";
@@ -311,11 +318,13 @@
     height: 33px;
     font-weight: 700;
   }
+
   .CalContinueButton,
   .CalContinueDeselectButton {
     font-size: 15px;
     padding: 5px;
   }
+
   .calendarButtons {
     width: 320px;
     height: 60px;
@@ -326,7 +335,7 @@
     border-radius: 10px;
     border: none;
     width: 150px;
-    height: 40px;
+    height: 50px;
   }
 
   .timeSlot {
@@ -362,35 +371,42 @@
     margin-left: -15px !important;
   }
 }
+
 @media only screen and (max-width: 375px) {
   .calendarButtons {
     width: 315px;
     margin-left: -15px !important;
   }
 }
+
 @media only screen and (min-width: 430px) {
   .calendar-popup {
     width: 85%;
   }
+
   .calendarButtons {
     width: 320px;
   }
 }
+
 @media only screen and (min-width: 540px) {
   .calendar-popup {
     width: 70%;
   }
 }
+
 @media only screen and (max-width: 344px) {
   .calendar-popup {
     width: 95%;
   }
 }
+
 @media only screen and (min-height: 600px) and (max-height: 601px) {
   .calendar-popup {
     height: 590px;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .calendar-popup {
     display: block;
@@ -406,21 +422,26 @@
     border-radius: 15px;
     width: 500px;
   }
+
   .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 54px);
     grid-gap: 4px;
   }
+
   .calendar-day {
     font-size: 16px;
   }
+
   .calendar-day.weekday {
     font-size: 16px;
   }
 
   .calendarButtons {
     width: 380px;
+
   }
+
   .timeSlot {
     border-radius: 10px;
     appearance: none;
@@ -430,6 +451,7 @@
     font-size: 14px;
     font-weight: 600;
   }
+
   .dropdown-arrow {
     position: absolute;
     right: 40px;
@@ -438,12 +460,13 @@
     pointer-events: none;
     color: #888;
   }
+
   .CalContinueButton,
   .CalContinueDeselectButton {
     border-radius: 10px;
     border: none;
     width: 180px;
-    height: 40px;
+    height: 50px;
     font-size: 18px;
   }
 }
@@ -452,6 +475,7 @@
   .calendar-popup {
     width: 500px;
   }
+
   .dropdown-arrow {
     position: absolute;
     right: 8px;
@@ -460,16 +484,18 @@
     pointer-events: none;
     color: #888;
   }
+
   .CalContinueButton,
   .CalContinueDeselectButton {
     border-radius: 10px;
     border: none;
     width: 190px;
-    height: 40px;
+    height: 50px;
     font-size: 18px;
     margin-left: 10px;
   }
 }
+
 @media only screen and (min-width: 1500px) {
   .calendar-popup {
     display: block;
@@ -512,16 +538,19 @@
     left: 68%;
   }
 }
+
 @media only screen and (min-width: 1900px) {
   .calendar-popup {
     left: 67%;
   }
 }
+
 @media only screen and (min-width: 2100px) {
   .calendar-popup {
     left: 65.5%;
   }
 }
+
 @media only screen and (min-width: 2300px) {
   .calendar-popup {
     left: 64%;
