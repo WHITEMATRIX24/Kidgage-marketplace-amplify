@@ -37,6 +37,8 @@ function OrderSummeryPage2() {
 const [disableContinue, setDisableContinue] = useState(true)
   const handleContinue = async () => {
     setDisableContinue(false)
+    console.log('inside');
+    
     if (!selectedPaymentMethod) return;
     const userData = JSON.parse(sessionStorage.getItem("user"));
 
@@ -56,7 +58,6 @@ const [disableContinue, setDisableContinue] = useState(true)
     console.log(response);
 
     if (response){ setCourseBookingData(response.finalBookingData);
-      setDisableContinue(true)
     }
 
     Swal.fire({
@@ -227,7 +228,7 @@ const [disableContinue, setDisableContinue] = useState(true)
                     </p>
                     {/* <p style={{ fontSize: "13px" }}>Today will start</p> */}
                   </div>
-                  <button
+                  <button disabled={!disableContinue || !selectedPaymentMethod}
                     className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"
                     style={{
                       backgroundImage: selectedPaymentMethod
