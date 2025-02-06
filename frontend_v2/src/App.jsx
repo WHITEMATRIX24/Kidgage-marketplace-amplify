@@ -6,7 +6,6 @@ import MyBooking from "./pages/AcademyDetails/MyBookingsPage/MyBookings";
 import ActivityPage from "./pages/Activity/Activity";
 import ActivityDetails1 from "./pages/ActivityDetails/ActivityDetails1";
 import ContactForm from "./pages/ContactForm/ContactForm";
-import Detailedblog from "./pages/DetailedBlog/detailedblog";
 import EventDetails from "./pages/EventDetails/EventDetails";
 import FirstLogin from "./pages/FirstLogin/FirstLogin";
 import KidgageNews from "./pages/KidgageNews/KidgageNews";
@@ -21,6 +20,7 @@ import Thankyou from "./pages/Thankyou/Thankyou";
 import MainLayout from "./utils/mainLayout";
 import { Routes, Route } from "react-router";
 import RouteProtector from "./utils/routeProtector";
+import Detailedblog from "./pages/DetailedBlog/detailedBlog";
 
 function App() {
   return (
