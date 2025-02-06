@@ -46,7 +46,7 @@ const News = () => {
             <div className="artical-container">
               <div className="artical-header">
                 <h5 className="m-0">{landingNewsData[0].title}</h5>
-                <h6 className="m-0">Fun that shapes the future.</h6>
+                {/* <h6 className="m-0">Fun that shapes the future.</h6> */}
               </div>
               <div className="artical-content">
                 <p>{landingNewsData[0].description}</p>
@@ -63,7 +63,7 @@ const News = () => {
             <div className="artical-container">
               <div className="artical-header">
                 <h5 className="m-0">{landingNewsData[1].title}</h5>
-                <h6 className="m-0">Fun that shapes the future.</h6>
+                {/* <h6 className="m-0">Fun that shapes the future.</h6> */}
               </div>
               <div className="artical-content">
                 <p>{landingNewsData[1].description}</p>

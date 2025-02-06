@@ -34,11 +34,11 @@ function OrderSummeryPage2() {
   const handleCheckPaymentMethod = (e) => {
     setSelectedPaymentMethod(e.target.value);
   };
-const [disableContinue, setDisableContinue] = useState(true)
+  const [disableContinue, setDisableContinue] = useState(true)
   const handleContinue = async () => {
     setDisableContinue(false)
     console.log('inside');
-    
+
     if (!selectedPaymentMethod) return;
     const userData = JSON.parse(sessionStorage.getItem("user"));
 
@@ -57,7 +57,8 @@ const [disableContinue, setDisableContinue] = useState(true)
     });
     console.log(response);
 
-    if (response){ setCourseBookingData(response.finalBookingData);
+    if (response) {
+      setCourseBookingData(response.finalBookingData);
     }
 
     Swal.fire({
@@ -96,7 +97,7 @@ const [disableContinue, setDisableContinue] = useState(true)
         </div>
         <div className="activity-details-rigth-1">
           <div className="rounded-4 activity-content-1 ">
-            <div className=" w-100 order-content" style={{marginTop:'-30px'}}>
+            <div className=" w-100 order-content" style={{ marginTop: '-30px' }}>
               <div className="signIn-heading fw-bold">
                 <h2 className="fw-bold">{bookingData.courseName}</h2>
                 <h6>{bookingData.providedAcademy}</h6>
@@ -201,7 +202,7 @@ const [disableContinue, setDisableContinue] = useState(true)
               <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box  mt-3 d-none d-md-flex ">
                 <div className=" age-box-content d-flex align-items-center justify-content-center ">
                   <p className="fw-bold" style={{ fontSize: "16px" }}>
-                    {`Total:${totalFee} QAR`}
+                    {`Total: QAR ${totalFee} `}
                   </p>
                   {/* <p style={{ fontSize: "13px" }}>Today will start</p> */}
                 </div>
@@ -224,7 +225,7 @@ const [disableContinue, setDisableContinue] = useState(true)
                 <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
                   <div className=" age-box-content d-flex align-items-center justify-content-center ">
                     <p className="fw-bold" style={{ fontSize: "16px" }}>
-                    {`${totalFee} QAR`}
+                      {`QAR ${totalFee} `}
                     </p>
                     {/* <p style={{ fontSize: "13px" }}>Today will start</p> */}
                   </div>

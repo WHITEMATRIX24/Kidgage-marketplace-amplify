@@ -178,9 +178,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     "linear-gradient(to bottom,#FDD687, #F5A691)",
                 }}
               >
-                <div className="custom-btn">
+                <div className="custom-btn ">
                   <div className=" d-flex-coloum">
-                    <Card.Title>Custom</Card.Title>
+                    <Card.Title className="custom-card-title">Custom</Card.Title>
                     <Card.Text
                       className="text-center card-fnt-wt"
                       style={{ fontSize: "10px" }}
@@ -191,7 +191,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   <FontAwesomeIcon
                     icon={faArrowRight}
                     style={{ color: "#000000" }}
-                    className="fs-5 ms-4 cutom-arrow"
+                    className="fs-5  cutom-arrow"
                   />
                 </div>
               </Card.Body>

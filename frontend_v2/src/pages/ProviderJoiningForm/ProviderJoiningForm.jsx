@@ -152,7 +152,7 @@ function ProviderJoiningForm() {
                                 value={formData.academyBio}
                                 onChange={handleChange}
                                 required
-                                placeholder="Academy Name (As per Company Registration) "
+                                placeholder="About your academy "
                             />
                             <label className='providerJoiningTextAreaLabel' htmlFor="academyBio">Academy Bio</label>
                         </div>
@@ -168,7 +168,7 @@ function ProviderJoiningForm() {
                                         value={formData.academyPhoneNo}
                                         onChange={handleChange}
                                         required
-                                        placeholder="+91 8726 6254 74" // Placeholder inside the input field
+                                        placeholder="+974 025 6254" // Placeholder inside the input field
                                     />
                                 </div>
                             </div>
@@ -199,14 +199,14 @@ function ProviderJoiningForm() {
                                         name="academyWebsite"
                                         value={formData.academyWebsite}
                                         onChange={handleChange}
-                                        placeholder="Enter website" // Placeholder inside the input field
+                                        placeholder="https://www.websitelink.com" // Placeholder inside the input field
                                     />
                                 </div>
 
                             </div>
                             <div className="col-md-5 ps-0 pStart">
                                 <div className="input-container ">
-                                    <label className='providerJoiningLabel' htmlFor="academyInstaId">Instagram ID (Optional)</label>
+                                    <label className='providerJoiningLabel' htmlFor="academyInstaId">Instagram Link(Optional)</label>
                                     <input
                                         className='providerJoiningInput'
                                         type="text"
@@ -214,7 +214,7 @@ function ProviderJoiningForm() {
                                         name="academyInstaId"
                                         value={formData.academyInstaId}
                                         onChange={handleChange}
-                                        placeholder="Enter website" // Placeholder inside the input field
+                                        placeholder="instagram.com/username" // Placeholder inside the input field
                                     />
                                 </div>
                             </div>
@@ -277,7 +277,7 @@ function ProviderJoiningForm() {
                             </div>
                             <div className="col-md-7 ps-0 pStart ">
                                 <div className="input-container ">
-                                    <label className='providerJoiningFileLabel' htmlFor="academyFile">CR Doc[file size upto 1MB in pdf format]</label>
+                                    <label className='providerJoiningFileLabel' htmlFor="academyFile">CR Doc[pdf format]</label>
                                     <input
                                         className='providerJoiningInputFile'
                                         type="file"

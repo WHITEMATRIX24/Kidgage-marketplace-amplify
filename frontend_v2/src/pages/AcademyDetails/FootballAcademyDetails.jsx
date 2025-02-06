@@ -5,7 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowRight, faArrowUp, faGlobe, faX } from "@fortawesome/free-solid-svg-icons"
 import { faFacebook, faInstagram, faSquareFacebook, faSquareWhatsapp, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { getProviderDetailsApi } from '../../services/allApis';
-
+import wifiIcon from '../../assets/icon/wifiIcon.png';
+import parkingIcon from '../../assets/icon/parkingIcon.png';
+import gymIcon from '../../assets/icon/gymIcon.png';
+import lockerIcon from '../../assets/icon/locker-icon.png';
 function AcademyDetails({ isVisible, onClose, providerId }) {
   const [isAcademyDetailsOpen, setIsAcademyDetailsOpen] = useState(false);
   const [position, setPosition] = useState(5); // The initial position of the div
@@ -184,15 +187,28 @@ function AcademyDetails({ isVisible, onClose, providerId }) {
               <h3 className='mb-3'>Amenities</h3>
               {provider?.amenities && provider.amenities.length > 0 ? (
                 provider.amenities.map((amenity, index) => (
-                  <div className='row mt-2' key={index}>
-                    <div className='col-1 ' >
-                      <div className="blackImage" >
-                        <FontAwesomeIcon className='highlightIcon text-light' icon={faFacebook} size="12px" />
+                  <div className='aminities-row' key={index}>
+                    <div className='aminities ' >
+                      <div className="blackImage">
+                        <img
+                          className="highlightIcon"
+                          src={
+                            amenity === "Parking" ? parkingIcon :
+                              amenity === "FreeWifi" ? wifiIcon :
+                                amenity === "LockerRooms" ? lockerIcon :
+                                  amenity === "FitnessCenter" ? gymIcon :
+                                    wifiIcon // Default icon if amenity is unknown
+                          }
+                          alt={amenity}
+                          width="20"
+                          height="20"
+                        />
                       </div>
+
                     </div>
-                    <div className="col-10">
-                      <h4>{amenity}</h4>
-                      <p>{amenity.description}</p>
+                    <div className="aminities-desc">
+                      < h4 style={{ marginTop: "10px" }}>{amenity}</h4>
+                      {/* <p>{amenity.description}</p> */}
                     </div>
                   </div>
                 ))
