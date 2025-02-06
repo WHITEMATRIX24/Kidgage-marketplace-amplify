@@ -32,7 +32,10 @@ function Thankyou() {
     if (selectedCourseData?._id) {
       fetchCourseDetails(selectedCourseData._id);
       fetchOtherCourses(selectedCourseData._id);
-      sessionStorage.setItem("selectedCource", JSON.stringify(selectedCourseData));
+      sessionStorage.setItem(
+        "selectedCource",
+        JSON.stringify(selectedCourseData)
+      );
     }
   }, [selectedCourseData]);
   const fetchCourseDetails = async (courseId) => {
@@ -102,12 +105,12 @@ function Thankyou() {
     console.log("provider ID", providerId);
   }, [otherCourses]);
   const handleBookingPageNavigation = () => {
-    navigate('/mybooking')
-  }
+    navigate("/mybooking");
+  };
   //   prevent from going back
   useEffect(() => {
     const handlePopState = () => {
-      navigate("/", { replace: true });
+      navigate("/home", { replace: true });
     };
 
     window.history.pushState(null, "", window.location.href);
@@ -127,7 +130,7 @@ function Thankyou() {
           <h6>{`Your order number is ${bookingCourseData?.bookingId}`}</h6>
           <h6 className="mt-3">
             The pass for your order has been created. Please check the
-            <span className="myTickets" onClick={handleBookingPageNavigation} >
+            <span className="myTickets" onClick={handleBookingPageNavigation}>
               <u> ‘My Bookings’ </u>
             </span>
             page or email shortly.
@@ -205,7 +208,9 @@ function Thankyou() {
                         {course.location?.[0]?.city || "No address available"}
                       </p>
                     </div>
-                    <p>Days: {course.days?.join(", ") || "No days specified"}</p>
+                    <p>
+                      Days: {course.days?.join(", ") || "No days specified"}
+                    </p>
                   </div>
                 </Link>
               </div>

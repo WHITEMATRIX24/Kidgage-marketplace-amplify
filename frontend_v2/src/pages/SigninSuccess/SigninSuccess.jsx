@@ -20,7 +20,7 @@ function SigninSuccess() {
 
   // if not data redirect
   if (!bookingCourseData || !selectedCourseData)
-    return window.location.replace("/");
+    return window.location.replace("/home");
 
   const [selectedCourse, setSelectedCourse] = useState(
     selectedCourseData || {}
@@ -101,7 +101,6 @@ function SigninSuccess() {
                   className="form-control signinSuccessPromoCode"
                   placeholder="Promo Code"
                   type="text"
-
                 />
                 <button className="applyButton">Appy</button>
               </div>
@@ -149,10 +148,12 @@ function SigninSuccess() {
         <div className="checkout-container">
           <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
             <div className=" age-box-content ">
-              <p className="fw-bold" style={{ fontSize: "16px", marginTop: "15px" }}>
+              <p
+                className="fw-bold"
+                style={{ fontSize: "16px", marginTop: "15px" }}
+              >
                 {`Total: QAR ${bookingDetails.courseDuration.fee}`}
               </p>
-
             </div>
             <button
               className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"

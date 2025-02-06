@@ -27,7 +27,8 @@ const Banner = () => {
   const getBannerInitialData = async () => {
     const data = await getAllBannersApi();
     if (data) {
-      return setBannerData({ banners: data, isLoading: false });
+      const filteredData = data.filter((banner) => banner.status === true);
+      return setBannerData({ banners: filteredData, isLoading: false });
     }
     setBannerData({ isLoading: false, banners: [] });
   };
