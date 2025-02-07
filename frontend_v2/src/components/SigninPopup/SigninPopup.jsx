@@ -1,28 +1,30 @@
-import { faArrowRight, faX } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useContext, useEffect, useState } from 'react'
-import './SigninPopup.css'
-import Swal from 'sweetalert2';
-import { getExistingUserDetailsAPi, getUserSignindetailsByGoogleSigninApi } from '../../services/allApis';
-import { SelectedCourseContext } from '../../context/courseContext';
-import { userDataContext } from '../../context/LoginUserContext';
-import { useNavigate } from 'react-router';
-import { useGoogleLogin } from '@react-oauth/google';
-import SigninOtpPopup from '../SigninOtpPopup/SigninOtpPopup';
+import { faArrowRight, faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useEffect, useState } from "react";
+import "./SigninPopup.css";
+import Swal from "sweetalert2";
+import {
+  getExistingUserDetailsAPi,
+  getUserSignindetailsByGoogleSigninApi,
+} from "../../services/allApis";
+import { SelectedCourseContext } from "../../context/courseContext";
+import { userDataContext } from "../../context/LoginUserContext";
+import { useNavigate } from "react-router";
+import { useGoogleLogin } from "@react-oauth/google";
+import SigninOtpPopup from "../SigninOtpPopup/SigninOtpPopup";
 
-function SigninPopup({setShowSigninPopup}) {
+function SigninPopup({ setShowSigninPopup }) {
   const [email, setEmail] = useState("");
-  const [showOTPPopup, setshowOTPPopup] = useState(false)
-  const [showSigninPopup, setshowSigninPopup] = useState(true)
+  const [showOTPPopup, setshowOTPPopup] = useState(false);
+  const [showSigninPopup, setshowSigninPopup] = useState(true);
 
   const { selectedCourseData } = useContext(SelectedCourseContext);
   const { userData, setUserData } = useContext(userDataContext);
   const navigate = useNavigate();
 
-  const handleClose = ()=>{
-    setShowSigninPopup(false)
-
-  }
+  const handleClose = () => {
+    setShowSigninPopup(false);
+  };
 
   const sendOtp = async () => {
     if (!email) {
@@ -55,25 +57,24 @@ function SigninPopup({setShowSigninPopup}) {
           );
           if (proceed) {
             //console.log(data.customer);
-            
+
             sessionStorage.setItem("user", JSON.stringify(data.customer));
             setUserData(!userData);
-        Swal.fire({
-          title: "Signin Success!",
-          text: "Congrats! You have successfully signed in",
-          icon: "success",
-          confirmButtonColor: "#ACC29E",
-          customClass: {
-            popup: "custom-border-radius",
-          },
-        });
-        setShowSigninPopup(false)
-            
+            Swal.fire({
+              title: "Signin Success!",
+              text: "Congrats! You have successfully signed in",
+              icon: "success",
+              confirmButtonColor: "#ACC29E",
+              customClass: {
+                popup: "custom-border-radius",
+              },
+            });
+            setShowSigninPopup(false);
           }
         } else {
           alert(data.message); // Show success message
-          setshowSigninPopup(false)
-          setshowOTPPopup(true)
+          setshowSigninPopup(false);
+          setshowOTPPopup(true);
         }
       } else {
         alert(data.message || "Failed to send OTP.");
@@ -100,9 +101,8 @@ function SigninPopup({setShowSigninPopup}) {
             popup: "custom-border-radius",
           },
         });
-        setUserData(!userData)
-        setshowSigninPopup(false)
-
+        setUserData(!userData);
+        setshowSigninPopup(false);
       } else {
         alert("Email Id is Not registered");
       }
@@ -113,7 +113,7 @@ function SigninPopup({setShowSigninPopup}) {
   /* Google Login Function */
 
   const handleLoginFailure = (error) => {
-    alert('Something Went Wrong')
+    alert("Something Went Wrong");
     // Handle the error if the login fails
     console.error("Login failed:", error);
   };
@@ -125,7 +125,9 @@ function SigninPopup({setShowSigninPopup}) {
 
       console.log(access_token);
 
-      const userInfo = await getUserSignindetailsByGoogleSigninApi(tokenResponse);
+      const userInfo = await getUserSignindetailsByGoogleSigninApi(
+        tokenResponse
+      );
 
       console.log(userInfo);
 
@@ -141,7 +143,7 @@ function SigninPopup({setShowSigninPopup}) {
           popup: "custom-border-radius",
         },
       });
-      setshowSigninPopup(false)
+      setshowSigninPopup(false);
     },
     onError: handleLoginFailure,
     scope: "https://www.googleapis.com/auth/calendar.events",
@@ -149,19 +151,23 @@ function SigninPopup({setShowSigninPopup}) {
   });
 
   return (
-    <div className=''>
-      {showSigninPopup &&
-        <div className='signinPopup'>
-          <div className="SigninPopupContainer" style={{ background: 'white' }}>
-            <div className="signinPopupContent" style={{position:'relative'}}>
-            <div className=''>
-                    <button className="popupCloseButton" onClick={handleClose}><FontAwesomeIcon icon={faX} /></button>
-                  </div>
+    <div className="">
+      {showSigninPopup && (
+        <div className="signinPopup">
+          <div className="SigninPopupContainer" style={{ background: "white" }}>
+            <div
+              className="signinPopupContent"
+              style={{ position: "relative" }}
+            >
+              <div className="">
+                <button className="popupCloseButton" onClick={handleClose}>
+                  <FontAwesomeIcon icon={faX} />
+                </button>
+              </div>
               <div className="mt-5 w-100 ">
-                <div className="signIn-heading  fw-bold" >
+                <div className="signIn-heading  fw-bold">
                   <h2 className="fw-bold">Sign In</h2>
                   <h6>Enter your email</h6>
-                  
                 </div>
                 <div className="mt-3 mb-3   w-100 d-flex align-items-center justify-content-center input-container">
                   <input
@@ -179,13 +185,15 @@ function SigninPopup({setShowSigninPopup}) {
                     className=" border rounded-4 d-flex align-items-center justify-content-between sign-up-btn-container"
                     style={{ width: "400px", height: "60px" }}
                   >
-                    <button className=" m-1 fw-bold sign-up-btn" onClick={sendOtp} >
+                    <button
+                      className=" m-1 fw-bold sign-up-btn"
+                      onClick={sendOtp}
+                    >
                       Sign Up
                       <FontAwesomeIcon
                         icon={faArrowRight}
                         style={{ color: "#ffff" }}
                         className="ms-3"
-
                       />
                     </button>
                     <button
@@ -224,7 +232,7 @@ function SigninPopup({setShowSigninPopup}) {
                       Continue with Google
                     </button>
                     <button
-                      /* onClick={() => login()} */
+                      onClick={() => login()}
                       className="signin-btn border  w-100  fw-bold hide-on-large-screen  py-2"
                     >
                       <img
@@ -252,15 +260,18 @@ function SigninPopup({setShowSigninPopup}) {
                     </button>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
-        </div>}
-      {showOTPPopup && <div className='popup'><SigninOtpPopup email={email} setshowOTPPopup={setshowOTPPopup} /></div>}
-
+        </div>
+      )}
+      {showOTPPopup && (
+        <div className="popup">
+          <SigninOtpPopup email={email} setshowOTPPopup={setshowOTPPopup} />
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default SigninPopup
+export default SigninPopup;

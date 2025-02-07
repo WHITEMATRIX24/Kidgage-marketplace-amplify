@@ -84,16 +84,13 @@ function SignInPage() {
       //sessionStorage.removeItem("user")
 
       // Send the request to the backend to send the OTP
-      const response = await fetch(
-        `${server_Url}/customers/send-otp`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }), // Sending email in JSON format
-        }
-      );
+      const response = await fetch(`${server_Url}/customers/send-otp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }), // Sending email in JSON format
+      });
       const data = await response.json();
       // Check if the response is successful
       if (response.ok) {
@@ -259,7 +256,7 @@ function SignInPage() {
                     Continue with Google
                   </button>
                   <button
-                    onClick={() => login()}
+                    onClick={() => handleGooglelogin()}
                     className="signin-btn border  w-100  fw-bold hide-on-large-screen  py-2"
                   >
                     <img
@@ -290,10 +287,12 @@ function SignInPage() {
               <div className="checkout-container">
                 <div className="d-flex align-items-centre justify-content-between border rounded-3  age-box ">
                   <div className=" age-box-content ">
-                    <p className="fw-bold" style={{ fontSize: "16px", marginTop: "15px" }}>
+                    <p
+                      className="fw-bold"
+                      style={{ fontSize: "16px", marginTop: "15px" }}
+                    >
                       {`QAR ${bookingDetails.courseDuration.fee}`}
                     </p>
-
                   </div>
                   <button
                     className=" rounded-4 ctn-btn border-0 w-50 m-1 fw-bold"
