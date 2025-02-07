@@ -15,6 +15,7 @@ import { userDataContext } from "../../context/LoginUserContext";
 import Swal from "sweetalert2";
 import useRefreshAlert from "../../hooks/useRefreshAlert";
 import { BookingCourseContext } from "../../context/bookingContext";
+import { server_Url } from "../../services/constants";
 
 function SignInPage() {
   useRefreshAlert();
@@ -35,29 +36,44 @@ function SignInPage() {
   const handleContinue = async () => {
     sessionStorage.removeItem("user");
 
-    if (email) {
-      const result = await getExistingUserDetailsAPi({ email: email });
-      if (result.code == "200") {
+    if (!email) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const result = await getExistingUserDetailsAPi({ email });
+
+      console.log("API Response:", result); // Debugging
+
+      if (!result || !result.code) {
+        throw new Error("Invalid response from server");
+      }
+
+      if (result.code === "200") {
         sessionStorage.setItem("user", JSON.stringify(result.customer));
         setUserData(!userData);
+
         Swal.fire({
           title: "Signin Success!",
           text: "Congrats! You have successfully signed in",
           icon: "success",
           confirmButtonColor: "#ACC29E",
-          customClass: {
-            popup: "custom-border-radius",
-          },
+          customClass: { popup: "custom-border-radius" },
         });
 
         navigate("/signin-success");
+      } else if (result.code === "205") {
+        alert("Email ID is not registered");
       } else {
-        alert("Email Id is Not registered");
+        alert("Unexpected response from server");
       }
-    } else {
-      alert("Please enter a valid email address.");
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert("Something went wrong. Please try again.");
     }
   };
+
   const sendOtp = async () => {
     if (!email) {
       alert("Please enter a valid email address.");
@@ -69,7 +85,7 @@ function SignInPage() {
 
       // Send the request to the backend to send the OTP
       const response = await fetch(
-        "http://localhost:5000/api/customers/send-otp",
+        `${server_Url}/customers/send-otp`,
         {
           method: "POST",
           headers: {
@@ -87,6 +103,7 @@ function SignInPage() {
             "You are already registered. Click OK to continue."
           );
           if (proceed) {
+            console.log(data.customer);
             sessionStorage.setItem("user", JSON.stringify(data.customer));
 
             navigate("/signin-success", { state: { email } });

@@ -66,7 +66,7 @@ function SignInOtp() {
       }
 
       // Call the API to verify OTP with the email
-      const response = await fetch(`http://localhost:5000/api/customers/verify-otp`, {
+      const response = await fetch(`https://kidgage.com/api/customers/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ otp: enteredOtp, email }),

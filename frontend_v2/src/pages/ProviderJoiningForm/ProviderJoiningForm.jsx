@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router';
 import axios from 'axios';
-
+import { server_Url } from '../../services/constants.js';
 function ProviderJoiningForm() {
     const [formData, setFormData] = useState({
         academyName: '',
@@ -102,7 +102,7 @@ function ProviderJoiningForm() {
 
 
                 try {
-                    const response = await axios.post(`http://localhost:5000/api/users/signup`, reqBody, {
+                    const response = await axios.post(`${server_Url}/users/signup`, reqBody, {
                         headers: { "Content-Type": "multipart/form-data" },
                     });
 
