@@ -19,7 +19,7 @@
   display: flex;
   width: 100%;
   overflow-x: scroll;
-  gap: 1rem;
+  gap: 1.15rem;
 }
 .cards-content-wrapper::-webkit-scrollbar {
   display: none;
@@ -71,7 +71,7 @@
   transform: translateY(-50%);
 }
 .card-btn-right {
-  right: -30px;
+  right: -40px;
   top: 50%;
   transform: translateY(-50%);
 }
