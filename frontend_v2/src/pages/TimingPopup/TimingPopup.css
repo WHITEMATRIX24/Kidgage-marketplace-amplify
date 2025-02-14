@@ -1,0 +1,39 @@
+.timing-container {
+    height: 370px;
+    overflow-y: scroll;
+}
+
+.timing-container::-webkit-scrollbar {
+    display: none;
+}
+
+.timing-box {
+    margin-top: 15px;
+    width: 90%;
+    height: 60px;
+    border: 1px solid #D0D0D0;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.timing-slot {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.timing-order-checkbox {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    /* Light gray background */
+    border: 2px solid #ccc;
+    /* Border color */
+    border-radius: 4px;
+    /* Rounded corners */
+    appearance: none;
+    /* Remove default checkbox styling */
+    position: relative;
+    margin-right: 15px;
+}
