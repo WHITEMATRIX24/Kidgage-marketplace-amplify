@@ -17,6 +17,7 @@ import AcademyDetails from "../../pages/AcademyDetails/FootballAcademyDetails";
 import { BookingCourseContext } from "../../context/bookingContext";
 import { handleShare } from "../../utils/share";
 import { ageFormatter } from "../../utils/ageFormatter";
+import TimingPopup from "../../pages/TimingPopup/TimingPopup";
 
 function ActivityDetailsInnerpage1({ activityData }) {
   const navigate = useNavigate();
@@ -33,13 +34,17 @@ function ActivityDetailsInnerpage1({ activityData }) {
   const [coustomData, setCoustomData] = useState([]);
   const [courseAvailableDays, setCourseAvailableDays] = useState([]);
   const [selectedProviderId, setSelectedProviderId] = useState(null);
+  const [isTimeslotOpen, setIsTimeslotOpen] = useState(false);
+
   const openCalendar = () => setIsCalendarVisible(true);
   const closeCalendar = () => setIsCalendarVisible(false);
+  const openTimeslotPopup = () => setIsTimeslotOpen(true);
+  const closeTimeslotPopup = () => setIsTimeslotOpen(false);
   const openAcademyDetails = () => {
     setSelectedProviderId(activityData?.providerDetails?._id);
     // Store providerId
     setAcademyVisible(true);
-    console.log("id pased", selectedProviderId);
+    // console.log("id pased", selectedProviderId);
   };
 
   const closeAcademyDetails = () => setAcademyVisible(false);
@@ -72,6 +77,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
     coustomData && setCoustomData(coustomData);
     openCalendar();
   };
+  console.log(bookingCourseData);
 
   return (
     <>
@@ -97,12 +103,16 @@ function ActivityDetailsInnerpage1({ activityData }) {
             >
               share
             </span>
-            <FontAwesomeIcon className="share-icon" icon={faShareNodes} onClick={() =>
-              handleShare({
-                courseName: activityData.name,
-                courseDesc: activityData.description,
-              })
-            } />
+            <FontAwesomeIcon
+              className="share-icon"
+              icon={faShareNodes}
+              onClick={() =>
+                handleShare({
+                  courseName: activityData.name,
+                  courseDesc: activityData.description,
+                })
+              }
+            />
           </div>
           <div className="activity-heading fw-bold mt-4">
             <h2 className="fw-bold">{activityData.name}</h2>
@@ -137,11 +147,12 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     Seat Details and More options
                   </Card.Text>
                   <button
-                    className={`border-0 mb-1  ${campDurationSelected ===
+                    className={`border-0 mb-1  ${
+                      campDurationSelected ===
                       `${courseType.duration}${courseType.durationUnit}`
-                      ? "camp-duration-selected-btn"
-                      : "card-btn"
-                      }`}
+                        ? "camp-duration-selected-btn"
+                        : "card-btn"
+                    }`}
                     onClick={() =>
                       handleSelectCoursePackeage(
                         activityData?.days,
@@ -152,7 +163,7 @@ function ActivityDetailsInnerpage1({ activityData }) {
                     style={{ borderRadius: "10px" }}
                   >
                     {campDurationSelected ===
-                      `${courseType.duration}${courseType.durationUnit}`
+                    `${courseType.duration}${courseType.durationUnit}`
                       ? "Selected"
                       : "Select"}
                   </button>
@@ -180,7 +191,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
               >
                 <div className="custom-btn ">
                   <div className=" d-flex-coloum">
-                    <Card.Title className="custom-card-title">Custom</Card.Title>
+                    <Card.Title className="custom-card-title">
+                      Custom
+                    </Card.Title>
                     <Card.Text
                       className="text-center card-fnt-wt"
                       style={{ fontSize: "10px" }}
@@ -238,8 +251,9 @@ function ActivityDetailsInnerpage1({ activityData }) {
                   </p>
                 </div>
                 <button
-                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${campDurationSelected ? "activate-continue-btn" : ""
-                    }`}
+                  className={`ctn-btn border-0 w-50 m-1 fw-bold ${
+                    campDurationSelected ? "activate-continue-btn" : ""
+                  }`}
                   onClick={handleContinue}
                 >
                   Continue
@@ -254,9 +268,8 @@ function ActivityDetailsInnerpage1({ activityData }) {
             onClose={closeCalendar}
             data={calenderActivityData || null}
             courseAvailableDays={courseAvailableDays}
-            select_cnf_btn={setCampDurationSelected}
             coustomData={coustomData}
-            timeSlots={activityData.timeSlots}
+            openTimeslotPopupHandler={openTimeslotPopup}
           />
         )}
         {isAcademyVisible && (
@@ -264,6 +277,12 @@ function ActivityDetailsInnerpage1({ activityData }) {
             isVisible={isAcademyVisible}
             onClose={closeAcademyDetails}
             providerId={selectedProviderId} // Pass providerId
+          />
+        )}
+        {isTimeslotOpen && (
+          <TimingPopup
+            closeTimePopup={closeTimeslotPopup}
+            cnfEnableHandler={setCampDurationSelected}
           />
         )}
       </div>

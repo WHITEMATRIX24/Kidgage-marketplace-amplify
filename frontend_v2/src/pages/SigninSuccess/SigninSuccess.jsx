@@ -86,7 +86,8 @@ function SigninSuccess() {
                 bookingDetails.courseDuration.bookedDates
               )}`}</p>
               <h4>{`Time: ${formatTimeToString(
-                bookingDetails.courseDuration.selectedTimeSlot || "06:00-07:00"
+                `${bookingDetails.courseDuration.selectedTimeSlot.from}-${bookingDetails.courseDuration.selectedTimeSlot.to}` ||
+                  ""
               )}`}</h4>
               <p>{`Age Limt: ${selectedCourse.ageGroup.map((ages) =>
                 ageFormatter({

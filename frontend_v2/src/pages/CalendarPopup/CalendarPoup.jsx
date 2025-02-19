@@ -20,10 +20,9 @@ const CalendarPopup = ({
   isVisible,
   onClose,
   data,
-  select_cnf_btn,
   coustomData,
   courseAvailableDays,
-  timeSlots,
+  openTimeslotPopupHandler,
 }) => {
   const daysData = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
@@ -42,7 +41,6 @@ const CalendarPopup = ({
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(
     bookingCourseData?.courseDuration?.selectedTimeSlot || ""
   );
-  const [timeSlotData, setTimeSlotData] = useState(timeSlots || []);
 
   const changeMonth = (direction) => {
     const newDate = new Date(currentDate);
@@ -152,8 +150,9 @@ const CalendarPopup = ({
 
       daysArray.push(
         <div
-          className={`calendar-day ${isOffDays ? "disabled" : ""} ${selected ? "selected" : ""
-            }`}
+          className={`calendar-day ${isOffDays ? "disabled" : ""} ${
+            selected ? "selected" : ""
+          }`}
           key={`day-${day}`}
           onClick={isOffDays ? null : () => toggleDateSelection(currentDay)}
         >
@@ -194,7 +193,7 @@ const CalendarPopup = ({
         fee,
       },
     });
-    select_cnf_btn(`${duration}${durationUnit}`);
+    openTimeslotPopupHandler();
     onClose();
   };
 
@@ -305,16 +304,18 @@ const CalendarPopup = ({
                 <FontAwesomeIcon icon={faAngleUp} />
               </span>{" "} */}
               {/* Custom up arrow */}
-              <h6 className="m-0 fw-bold fs-5">{`QAR ${selectedPackage?.fee || ""
-                }`}</h6>
+              <h6 className="m-0 fw-bold fs-5">{`QAR ${
+                selectedPackage?.fee || ""
+              }`}</h6>
               <p className="m-0">{`${selectedPackage?.noOfSessions} Sessions`}</p>
             </div>
             <div className="col-6 col-lg-7">
               <button
-                className={`${selectedDates.length > 0
-                  ? "CalContinueButton"
-                  : "CalContinueDeselectButton"
-                  }`}
+                className={`${
+                  selectedDates.length > 0
+                    ? "CalContinueButton"
+                    : "CalContinueDeselectButton"
+                }`}
                 onClick={handleContinue}
               >
                 Continue
