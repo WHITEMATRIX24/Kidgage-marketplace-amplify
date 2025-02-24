@@ -7,39 +7,40 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "prompt",
+      registerType: "autoUpdate",
       // devOptions: {
       //   enabled: true,
       // },
-      includeAssests: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
+      includeAssests: [
+        "favicon.ico",
+        "apple-touc-icon.png",
+        "masked-icon.svg",
+        "assets/*",
+      ],
       manifest: {
         name: "Kidgage",
         short_name: "kidgage",
         description: "kidgage",
         icons: [
           {
-            src: "/kidgae-fav.png",
+            src: "/KIDGAGE-24-192.png",
             sizes: "192x192",
             type: "image/png",
-            purpose: "favicon",
           },
           {
-            src: "/kidgae-fav.png",
+            src: "/KIDGAGE-24-512.png",
             sizes: "512x512",
             type: "image/png",
-            purpose: "favicon",
           },
           {
-            src: "/kidgae-fav.png",
+            src: "/KIDGAGE-24-180.png",
             sizes: "180x180",
             type: "image/png",
-            purpose: "apple touch icon",
           },
           {
-            src: "/kidgae-fav.png",
+            src: "/KIDGAGE-24-512.png",
             sizes: "512x512",
             type: "image/png",
-            purpose: "any maskable",
           },
         ],
         background_color: "#ffffff",
@@ -47,6 +48,9 @@ export default defineConfig({
         scope: "/",
         start_url: "/",
         orientation: "portrait",
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,webmanifest}"],
       },
     }),
   ],

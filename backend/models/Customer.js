@@ -19,6 +19,7 @@ const BookingSchema = new mongoose.Schema({
     bookedDates: [{ type: String, required: true }],
     noOfSessions: { type: Number, required: true },
     fee: { type: Number, required: true },
+    selectedTimeSlot: { from: { type: String }, to: { type: String } },
   },
   paymentDetails: {
     isPaid: { type: Boolean, required: true },
