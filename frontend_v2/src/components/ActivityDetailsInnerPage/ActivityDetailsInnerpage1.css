@@ -5,7 +5,6 @@
 
 .share-text {
   display: inline-block;
-
 }
 
 .share-container {
@@ -24,6 +23,7 @@
 .activity-heading {
   margin-left: 50px;
   margin-bottom: 50px;
+  padding-right: 10px;
 }
 
 .activity-heading h2 {

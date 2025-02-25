@@ -46,6 +46,7 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   border-radius: 15px;
+  height: auto;
 }
 
 .calendar-header {
@@ -439,7 +440,6 @@
 
   .calendarButtons {
     width: 380px;
-
   }
 
   .timeSlot {
@@ -511,7 +511,7 @@
     z-index: 1000;
     border-radius: 15px;
     width: 60%;
-    height: 610px;
+    height: auto;
   }
 }
 
@@ -519,7 +519,7 @@
   .calendar-popup {
     display: block;
     position: absolute;
-    top: 120px;
+    top: 70px;
     left: 70%;
     transform: translateX(-50%);
     background-color: white;
@@ -529,7 +529,6 @@
     z-index: 1000;
     border-radius: 15px;
     width: 500px;
-    height: 600px;
   }
 }
 

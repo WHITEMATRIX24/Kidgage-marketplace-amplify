@@ -1,305 +1,289 @@
 .thanksContainer {
-    height: auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .thankYouOuterDiv {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
 }
 
 .myTickets {
-    color: #FDD687;
+  color: #fdd687;
 }
 
 .eventName {
-    line-height: 46px;
+  line-height: 23px;
 }
 
 .thanksLeftOrder {
-    width: 100%;
-    max-width: 500px;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 40px;
-
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 40px;
 }
 
 .thanksLeftOrder h6 {
-    font-size: 18px;
-
+  font-size: 18px;
 }
 
 .thanksLeftOrder h1 {
-    font-size: 38px;
-
+  font-size: 38px;
 }
 
 .eventAttending h1 {
-    line-height: 30px;
+  line-height: 30px;
 }
 
 .sendWhatsapp {
-    font-size: 12px;
-    font-weight: 500;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .inputBoxContainer {
-    position: relative;
-    width: 250px;
-    height: 36px;
+  position: relative;
+  width: 250px;
+  height: 36px;
 }
 
 .whatsAppNoInput {
-    width: 100%;
-    padding: 10px;
-    padding-right: 45px;
-    /* Make space for the button */
-    box-sizing: border-box;
-    font-size: 12px;
-
+  width: 100%;
+  padding: 10px;
+  padding-right: 45px;
+  /* Make space for the button */
+  box-sizing: border-box;
+  font-size: 12px;
 }
 
 .whatsAppNoInput::placeholder {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .thanksSentButton {
-    position: absolute;
-    right: 15px;
-    top: 53%;
-    height: 30px;
-    width: 60px;
-    transform: translateY(-50%);
-    background-color: #FDD687;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    color: black;
-    font-size: 12px;
-    font-weight: 600;
+  position: absolute;
+  right: 15px;
+  top: 53%;
+  height: 30px;
+  width: 60px;
+  transform: translateY(-50%);
+  background-color: #fdd687;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .smallText {
-    font-size: 12px;
-    font-weight: 500;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .thanksEmail {
-    font-weight: 800;
+  font-weight: 800;
 }
 
 .calender::placeholder {
-    font-size: 12px;
-    color: black;
-    font-weight: 600;
+  font-size: 12px;
+  color: black;
+  font-weight: 600;
 }
 
 .addToCalenderButton {
-    position: absolute;
-    right: 15px;
-    top: 53%;
-    height: 30px;
-    transform: translateY(-50%);
-    padding: 7px 15px;
-    background-color: #FDD687;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    color: black;
-    font-size: 12px;
-    font-weight: 600;
+  position: absolute;
+  right: 15px;
+  top: 53%;
+  height: 30px;
+  transform: translateY(-50%);
+  padding: 7px 15px;
+  background-color: #fdd687;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .thanksLeftAbout {
-    width: 100%;
-    border: 1px solid black;
-    border-radius: 15px;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 15px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
 .thanksLeftAbout p {
-    font-size: 18px;
-    font-weight: 500;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .arrowButton {
-    background-color: white;
-    border: none;
-    font-weight: 500;
-    font-size: 18px;
-    padding: 10px;
+  background-color: white;
+  border: none;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 10px;
 }
 
 /* Right Div Styling */
 .thanksRightDiv {
-    /* margin-top: 55px; */
-
+  /* margin-top: 55px; */
 }
-.rightDivContent{
-    min-height: 600px;
+.rightDivContent {
+  min-height: 600px;
 }
 
 .tileImageContainer {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* Two tiles per row */
-    gap: 16px;
-    /* Adjust spacing between tiles */
-    width: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Two tiles per row */
+  gap: 16px;
+  /* Adjust spacing between tiles */
+  width: 100%;
 }
 
 .tittle {
-    font-size: 38px;
-    font-weight: 700;
+  font-size: 38px;
+  font-weight: 700;
 }
 
 .subTitle {
-    font-size: 18px;
-    font-weight: 500;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .eventDetails {
-    height: auto;
-    margin-top: 5px;
-    line-height: 5px;
+  height: auto;
+  margin-top: 5px;
+  line-height: 5px;
 }
 
 .eventDetails h4 {
-    font-size: 22px;
-
+  font-size: 22px;
 }
 
 .eventDetails p {
-    font-size: 14px;
-
+  font-size: 14px;
 }
 
-
 .tileImage {
-    height: 180px;
-    border-radius: 15px;
+  height: 180px;
+  border-radius: 15px;
 }
 
 @media only screen and (max-width: 600px) {
-    .thanksContainer {
-        height: auto;
-        width: 95%;
-        margin: 15px;
-    }
+  .thanksContainer {
+    height: auto;
+    width: 95%;
+    margin: 15px;
+  }
 
-    .thankYouOuterDiv {
-        width: 100%;
-        margin: 1px;
+  .thankYouOuterDiv {
+    width: 100%;
+    margin: 1px;
+  }
 
-    }
+  .thanksLeftOrder {
+    width: 100%;
+    max-width: 330px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 15px;
+  }
 
-    .thanksLeftOrder {
-        width: 100%;
-        max-width: 330px;
-        border: 1px solid black;
-        border-radius: 10px;
-        padding: 15px;
+  .thanksLeftOrder h1 {
+    font-size: 24px;
+    font-weight: 700;
+  }
 
-    }
+  .thanksLeftOrder h6 {
+    font-size: 12px;
+    font-weight: 500;
+  }
 
+  .thanksLeftAbout {
+    padding: 0px;
+  }
 
-    .thanksLeftOrder h1 {
-        font-size: 24px;
-        font-weight: 700;
-    }
+  .thanksLeftAbout p {
+    font-size: 14px;
+    font-weight: 600;
+  }
 
-    .thanksLeftOrder h6 {
-        font-size: 12px;
-        font-weight: 500;
-    }
+  .arrowButton {
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 700px;
+  }
 
+  .arrow {
+    font-size: 14px;
+    font-weight: 700px;
+  }
 
-    .thanksLeftAbout {
-        padding: 0px;
-    }
+  .thanksRightDiv {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+  }
 
-    .thanksLeftAbout p {
-        font-size: 14px;
-        font-weight: 600;
-    }
+  .inputBoxContainer {
+    width: 100%;
+  }
 
-    .arrowButton {
-        margin-top: 2px;
-        font-size: 14px;
-        font-weight: 700px;
-    }
+  .smallText {
+    margin-top: 0px;
+    margin-bottom: 15px;
+  }
 
-    .arrow {
-        font-size: 14px;
-        font-weight: 700px;
+  .thanksSentButton {
+    top: 55%;
+  }
 
-    }
+  .rightDivContent h1 {
+    font-size: 20px;
+  }
 
-    .thanksRightDiv {
-        margin-top: 15px;
-        padding: 10px;
-        width: 100%;
-    }
+  .eventTiles {
+    margin-top: 15px;
+  }
 
-    .inputBoxContainer {
-        width: 100%;
-    }
+  .eventDetails h4 {
+    font-size: 20px;
+  }
 
-    .smallText {
-        margin-top: 0px;
-        margin-bottom: 15px;
-    }
+  .eventDetails p {
+    height: auto;
+    font-size: 11px;
+  }
 
-    .thanksSentButton {
-        top: 55%;
-    }
-
-    .rightDivContent h1 {
-        font-size: 20px;
-    }
-
-    .eventTiles {
-        margin-top: 15px;
-    }
-
-    .eventDetails h4 {
-        font-size: 20px;
-    }
-
-    .eventDetails p {
-        height: auto;
-        font-size: 11px;
-    }
-
-    .tileImage {
-        height: 120px;
-    }
+  .tileImage {
+    height: 120px;
+  }
 }
-
-
 
 @media only screen and (max-width: 400px) {
-    .calender::placeholder {
-        font-size: 9px;
-        color: black;
-        font-weight: 600;
-    }
+  .calender::placeholder {
+    font-size: 9px;
+    color: black;
+    font-weight: 600;
+  }
 }
 
-@media only screen and (min-width: 1024px) and (max-width:1366px) {
-    .tileImage {
-        height: 250px;
-    }
-
+@media only screen and (min-width: 1024px) and (max-width: 1366px) {
+  .tileImage {
+    height: 250px;
+  }
 }
