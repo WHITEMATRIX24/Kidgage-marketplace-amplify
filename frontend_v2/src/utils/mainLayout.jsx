@@ -4,6 +4,7 @@ import "./mainLayout.css";
 import Header from "../components/common/header/Header";
 import Footer from "../components/common/footer/footer";
 import { Outlet, useLocation } from "react-router";
+import FloatingNavbar from "../components/flotingNavbar/floatingNavbar";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -15,7 +16,7 @@ const MainLayout = () => {
     "/signin-otp",
     "/order-summary",
     "/signin-success",
-    "/event-details"
+    "/event-details",
   ];
 
   return (
@@ -31,6 +32,8 @@ const MainLayout = () => {
       {!hideFooterRoutes.some((route) =>
         location.pathname.startsWith(route)
       ) && <Footer />}
+      {/* floating navbar */}
+      <FloatingNavbar />
     </>
   );
 };

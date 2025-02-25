@@ -1,0 +1,21 @@
+.floting-navbar-container {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  height: 3rem;
+  width: 100%;
+  display: none;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.f-nav-btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+@media (max-width: 800px) {
+  .floting-navbar-container {
+    display: flex;
+  }
+}

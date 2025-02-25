@@ -90,7 +90,7 @@ const Search = () => {
   };
 
   return (
-    <div className="search-container">
+    <div className="search-container" id="search-component">
       <div className="search-comp-text-container">
         <h5>Search</h5>
         <p>
