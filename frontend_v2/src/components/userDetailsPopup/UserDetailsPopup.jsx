@@ -150,7 +150,7 @@ function UserDetailsPopup({ viewFromFloatingNav, navBtnHandler }) {
 
               <div className="row px-4">
                 <div className="bussiness-header-h2">
-                  <h2>Bussiness</h2>
+                  <h2>Business</h2>
                 </div>
                 <div className="profile-details">
                   <div className="profile-icon">

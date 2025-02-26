@@ -22,24 +22,24 @@ const courseDurationSchema = new mongoose.Schema({
   duration: { type: Number, required: true },
   durationUnit: {
     type: String,
-    enum: ["days", "weeks", "months", "years"],
+    enum: ["day", "week", "month", "year"],
     required: true,
   },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
-  noOfSessions:{ type: Number, required: true },
-  fee:{type: Number, required: true }
+  noOfSessions: { type: Number, required: true },
+  fee: { type: Number, required: true },
 });
 
 // const courseDurationSchema = new mongoose.Schema(
 //   {
-//     id: { 
+//     id: {
 //       type: Number, // If this is meant to be a custom ID, Number is fine. For more flexibility, consider using String.
-//       required: true, 
+//       required: true,
 //       unique: true // Ensure this ID is unique if required
 //     },
-//     duration: { 
-//       type: Number, 
+//     duration: {
+//       type: Number,
 //       required: true,
 //       min: [1, 'Duration must be at least 1'] // Optional: Ensure duration is at least 1 unit
 //     },
@@ -48,8 +48,8 @@ const courseDurationSchema = new mongoose.Schema({
 //       enum: ["days", "weeks", "months", "years"], // Valid duration units
 //       required: true,
 //     },
-//     startDate: { 
-//       type: Date, 
+//     startDate: {
+//       type: Date,
 //       required: true,
 //       validate: {
 //         validator: function(value) {
@@ -59,8 +59,8 @@ const courseDurationSchema = new mongoose.Schema({
 //         message: 'startDate must be before endDate'
 //       }
 //     },
-//     endDate: { 
-//       type: Date, 
+//     endDate: {
+//       type: Date,
 //       required: true,
 //       validate: {
 //         validator: function(value) {
@@ -75,7 +75,6 @@ const courseDurationSchema = new mongoose.Schema({
 //     timestamps: true // Optional: Automatically adds createdAt and updatedAt fields
 //   }
 // );
-
 
 const courseSchema = new mongoose.Schema({
   providerId: {
@@ -99,7 +98,7 @@ const courseSchema = new mongoose.Schema({
   images: [{ type: String, required: true }],
   ageGroup: { type: [ageGroupSchema], required: true },
   promoted: { type: Boolean, default: false }, // Add this field to track promoted courses
-  active: { type: Boolean, default: true },  // Set the default value for 'active' field
+  active: { type: Boolean, default: true }, // Set the default value for 'active' field
   preferredGender: {
     type: String,
     enum: ["Male", "Female", "Any"],
