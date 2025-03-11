@@ -57,13 +57,13 @@ const Search = () => {
         endAge: 12,
       },
     },
-    {
-      title: "13-17 years",
-      value: {
-        startAge: 13,
-        endAge: 17,
-      },
-    },
+    // {
+    //   title: "13-17 years",
+    //   value: {
+    //     startAge: 13,
+    //     endAge: 17,
+    //   },
+    // },
   ];
 
   // handle search query changes
@@ -120,8 +120,8 @@ const Search = () => {
               <option disabled value="">
                 Gender
               </option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="Boy">Boy</option>
+              <option value="Girl">Girl</option>
               <option value="Any">Any</option>
             </select>
           </div>
