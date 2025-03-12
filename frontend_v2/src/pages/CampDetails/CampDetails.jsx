@@ -179,8 +179,8 @@ function CampDetails({ activityData }) {
                 <div className="row  ">
                   {activityData.faq?.map((item) => (
                     <div className=" mt-3">
-                      <p style={{ color: "black", textAlign: 'start' }}>{item.question}</p>
-                      <h6 style={{ color: "black", textAlign: 'start' }}>{item.answer} </h6>
+                      <h6 style={{ color: "black", textAlign: 'start' }}>{item.question}</h6>
+                      <p style={{ color: "black", textAlign: 'start' }}>{item.answer} </p>
                     </div>
                   ))}
                 </div>

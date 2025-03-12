@@ -4,6 +4,7 @@ import "./footer.css";
 import {
   faFacebook,
   faInstagram,
+  faLinkedin,
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,9 +35,8 @@ const Footer = () => {
             <button>List your academy</button>
           </div>
           <div className="footer-social-container">
-            <FontAwesomeIcon icon={faFacebook} size="2xl" />
-            <FontAwesomeIcon icon={faWhatsapp} size="2xl" />
-            <FontAwesomeIcon icon={faInstagram} size="2xl" />
+            <FontAwesomeIcon icon={faLinkedin} size="2xl" style={{ cursor: "pointer" }} onClick={() => window.open(" https://www.linkedin.com/company/kidgage/", "_blank")} />
+            <FontAwesomeIcon icon={faInstagram} size="2xl" style={{ cursor: "pointer" }} onClick={() => window.open(" https://www.instagram.com/mykidgage/", "_blank")} />
           </div>
         </div>
         <div className="footer-row-two">

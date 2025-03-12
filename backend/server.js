@@ -16,6 +16,8 @@ const desktopBannerRoutes = require('./routes/desktopBanner');
 const mobileBannerRoutes = require('./routes/mobileBanner');
 const newsRoutes = require('./routes/newsRoute');
 const customerRoutes = require('./routes/customerRoutes');
+const termsRoutes = require('./routes/termsRoutes');
+
 
 
 const app = express();
@@ -43,6 +45,7 @@ app.use('/api/desktop-banners', desktopBannerRoutes);
 app.use('/api/mobile-banners', mobileBannerRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/customers', customerRoutes);
+app.use("/api/terms-condition", termsRoutes);
 
 
 app.use((err, req, res, next) => {

@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Banner from "../../components/common/banner/banner";
 import "./TermsAndConditions.css";
+import { getPrivacyPolicyApi } from "../../services/allApis";
 
 const PrivacyPolicy = () => {
+    const [policyData, setPolicyData] = useState([]); // Keep it as an array
+
+    const fetchPolicyData = async () => {
+        try {
+            const result = await getPrivacyPolicyApi();
+            console.log("Fetched Data:", result.data); // Debugging
+            if (result.status === 200 && result.data.length > 0) {
+                setPolicyData(result.data); // Store the entire array
+            }
+        } catch (error) {
+            console.log(`Error fetching Policys: ${error}`);
+        }
+    };
+
+    useEffect(() => {
+        fetchPolicyData();
+    }, []);
     return (
         <div className="terms-container">
 
@@ -14,11 +32,14 @@ const PrivacyPolicy = () => {
             <div className="content-container ">
                 <h1 className="tandc-header text-left fw-bold ">Privacy Policy</h1>
                 <h6 className="tandc-text text-left">Fun that shapes the future.</h6>
-                <p style={{ textAlign: 'justify' }}>
-                    Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
-                    Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.
-                    Sporthood Academy for Football brings the latest in coaching methodologies to take your budding football star from grassroots to greatness. AFC and FIFA licensed coaches impart age-appropriate international curriculum to the kids with the primary aim of moulding them into professional footballers.                </p>
+                {policyData.length > 0 ? (
+                    <div>
 
+                        <p style={{ textAlign: 'justify', whiteSpace: 'pre-line' }}>{policyData[0].policy}</p>
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
             </div>
 
         </div>

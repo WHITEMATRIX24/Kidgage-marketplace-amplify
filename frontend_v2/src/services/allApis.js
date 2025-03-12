@@ -282,3 +282,43 @@ export const addEventToCalenderApi = async ({ userId, bookingId }) => {
     console.log(`error in booking courses, error: ${error}`);
   }
 };
+
+//terms and conditions 
+export const getTermsAndConditionsApi = async () => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: "/terms-condition/term-data",
+      apiMethod: "GET",
+    });
+
+    if (response.status !== 200) {
+      console.log("Error Response Data:", response.data);
+      return null;
+    }
+
+    return response;
+  } catch (error) {
+    console.log(`Error in fetching terms and conditions: ${error}`);
+    return null;
+  }
+};
+
+//privacy policy
+export const getPrivacyPolicyApi = async () => {
+  try {
+    const response = await serverApiConfig({
+      apiEndPoint: "/terms-condition/policy-data",
+      apiMethod: "GET",
+    });
+
+    if (response.status !== 200) {
+      console.log("Error Response Data:", response.data);
+      return null;
+    }
+
+    return response;
+  } catch (error) {
+    console.log(`Error in fetching terms and conditions: ${error}`);
+    return null;
+  }
+};
